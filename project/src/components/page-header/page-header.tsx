@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MainPageHeader(): JSX.Element {
+function PageHeader(): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -32,4 +32,4 @@ function MainPageHeader(): JSX.Element {
   );
 }
 
-export default MainPageHeader;
+export default PageHeader;

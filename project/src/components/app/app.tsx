@@ -1,9 +1,13 @@
 import React from 'react';
 import MainPage from '../main-page/main-page';
 
-function App(): JSX.Element {
+type AppProps = {
+  offersNumber: number;
+}
+
+function App({ offersNumber }: AppProps): JSX.Element {
   return (
-    <MainPage />
+    <MainPage offersNumber={ offersNumber } />
   );
 }
 

@@ -1,12 +1,16 @@
 import React from 'react';
-import MainPageHeader from '../main-page-header/main-page-header';
+import PageHeader from '../page-header/page-header';
 import MainPageMain from '../main-page-main/main-page-main';
 
-function MainPage(): JSX.Element {
+type MainPageProps = {
+  offersNumber: number;
+}
+
+function MainPage({ offersNumber }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <MainPageHeader />
-      <MainPageMain />
+      <PageHeader />
+      <MainPageMain offersNumber={ offersNumber } />
     </div>
   );
 }

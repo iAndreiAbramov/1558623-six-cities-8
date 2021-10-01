@@ -1,6 +1,10 @@
 import React from 'react';
 
-function MainPageMain(): JSX.Element {
+type MainProps = {
+  offersNumber: number;
+}
+
+function MainPageMain({ offersNumber }: MainProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -44,7 +48,7 @@ function MainPageMain(): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{ offersNumber } places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={ 0 }>
@@ -145,7 +149,7 @@ function MainPageMain(): JSX.Element {
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
                     <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;132</b>
+                      <b className="place-card__price-value">&euro;312</b>
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
