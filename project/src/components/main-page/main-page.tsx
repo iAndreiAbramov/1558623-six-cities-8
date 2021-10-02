@@ -1,10 +1,7 @@
-import React from 'react';
-import PageHeader from '../page-header/page-header';
 import MainPageMain from '../main-page-main/main-page-main';
-
-type MainPageProps = {
-  offersNumber: number;
-}
+import { MainPageProps } from '../../types/main-page-types';
+import PageHeader from '../page-header/page-header';
+import React from 'react';
 
 function MainPage({ offersNumber }: MainPageProps): JSX.Element {
   return (

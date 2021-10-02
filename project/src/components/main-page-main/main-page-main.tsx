@@ -1,9 +1,6 @@
-import React from 'react';
+import { MainProps } from '../../types/main-page-types';
 import OfferCard from '../offer-card/offer-card';
-
-type MainProps = {
-  offersNumber: number;
-}
+import React from 'react';
 
 function MainPageMain({ offersNumber }: MainProps): JSX.Element {
   return (

@@ -1,9 +1,6 @@
-import React from 'react';
+import { AppProps } from '../../types/app-types';
 import MainPage from '../main-page/main-page';
-
-type AppProps = {
-  offersNumber: number;
-}
+import React from 'react';
 
 function App({ offersNumber }: AppProps): JSX.Element {
   return (
