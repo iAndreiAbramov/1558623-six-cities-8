@@ -1,12 +1,14 @@
 import { AppProps } from '../../types/app-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import FavoritesPage from '../favorites-page/favorites-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import HomePage from '../home-page/home-page';
-import PageHeader from '../page-header/page-header';
+import OfferPage from '../offer-page/offer-page';
 import React from 'react';
-import RoomPageMain from '../room-page-main/room-page-main';
-import FavoritesPage from '../favorites-page/favorites-page';
+
+//todo Создать enum с адресами
+//todo Добавить редирект для неавторизованных пользователей
 
 function App({ offersNumber }: AppProps): JSX.Element {
   return (
@@ -24,9 +26,8 @@ function App({ offersNumber }: AppProps): JSX.Element {
           <FavoritesPage isEmpty={ false } />
         </Route>
 
-        <Route path="/offer" exact>
-          <PageHeader />
-          <RoomPageMain />
+        <Route path="/offer/:id" exact>
+          <OfferPage />
         </Route>
 
         <Route>
