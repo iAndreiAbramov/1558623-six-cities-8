@@ -11,7 +11,9 @@ function NotFoundPage(): JSX.Element {
       <p className="not-found-message">
         Requested page not found.
       </p>
-      <Link className="not-found-link" to="/">Return to main page</Link>
+      <Link className="not-found-link" to="/">
+        Return to main page
+      </Link>
     </div>
   );
 }
