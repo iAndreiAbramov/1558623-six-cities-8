@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PropertyPageMain(): JSX.Element {
+function RoomPageMain(): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -336,4 +336,4 @@ function PropertyPageMain(): JSX.Element {
   );
 }
 
-export default PropertyPageMain;
+export default RoomPageMain;
