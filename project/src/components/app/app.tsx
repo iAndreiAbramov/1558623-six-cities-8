@@ -18,7 +18,6 @@ function App({ offersNumber }: AppProps): JSX.Element {
         </Route>
 
         <Route path="/login" exact>
-          <PageHeader />
           <LoginPage />
         </Route>
 
