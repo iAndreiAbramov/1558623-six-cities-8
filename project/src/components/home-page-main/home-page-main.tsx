@@ -1,8 +1,8 @@
-import { MainProps } from '../../types/home-page-types';
+import { HomeProps } from '../../types/home-page-types';
 import OfferCard from '../offer-card/offer-card';
 import React from 'react';
 
-function HomePageMain({ offersNumber }: MainProps): JSX.Element {
+function HomePageMain({ offersNumber }: HomeProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

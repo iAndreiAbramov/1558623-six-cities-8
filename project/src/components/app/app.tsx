@@ -1,13 +1,12 @@
 import { AppProps } from '../../types/app-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import HomePage from '../home-page/home-page';
-import React from 'react';
 import LoginPage from '../login-page/login-page';
-import PageHeader from '../page-header/page-header';
-import RoomPageMain from '../room-page-main/room-page-main';
 import NotFoundPage from '../not-found-page/not-found-page';
-import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
-import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
+import HomePage from '../home-page/home-page';
+import PageHeader from '../page-header/page-header';
+import React from 'react';
+import RoomPageMain from '../room-page-main/room-page-main';
+import FavoritesPage from '../favorites-page/favorites-page';
 
 function App({ offersNumber }: AppProps): JSX.Element {
   return (
@@ -22,9 +21,7 @@ function App({ offersNumber }: AppProps): JSX.Element {
         </Route>
 
         <Route path="/favorites" exact>
-          <PageHeader />
-          <FavoritesPageMain />
-          <FavoritesPageFooter />
+          <FavoritesPage isEmpty={ false } />
         </Route>
 
         <Route path="/offer" exact>

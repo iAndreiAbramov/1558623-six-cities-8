@@ -1,7 +1,7 @@
-export type MainPageProps = {
+export type HomePageProps = {
   offersNumber: number;
 }
 
-export type MainProps = {
+export type HomeProps = {
   offersNumber: number;
 }
