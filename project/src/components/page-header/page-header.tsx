@@ -1,5 +1,8 @@
 import React from 'react';
 
+//todo Вынести блок с авторизацией в отдельный компонент
+//todo Клик по email должен вести на страницу Favorites
+
 function PageHeader(): JSX.Element {
   return (
     <header className="header">
