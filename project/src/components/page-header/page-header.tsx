@@ -1,8 +1,6 @@
+import React from 'react';
 import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import PageHeaderUser from '../page-header-user/page-header-user';
-import React from 'react';
-
-//todo Вынести блок с авторизацией в отдельный компонент
 
 function PageHeader(): JSX.Element {
   return (

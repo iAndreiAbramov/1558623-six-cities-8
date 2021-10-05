@@ -1,7 +1,7 @@
+import React from 'react';
 import HomePageMain from '../home-page-main/home-page-main';
 import { HomePageProps } from '../../types/home-page-types';
 import PageHeader from '../page-header/page-header';
-import React from 'react';
 
 function HomePage({ offersNumber }: HomePageProps): JSX.Element {
   return (

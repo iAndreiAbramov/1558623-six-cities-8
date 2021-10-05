@@ -1,5 +1,5 @@
-import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import React from 'react';
+import PageHeaderLogo from '../page-header-logo/page-header-logo';
 
 function LoginPage(): JSX.Element {
   return (

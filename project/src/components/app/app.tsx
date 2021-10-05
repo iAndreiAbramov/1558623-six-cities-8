@@ -1,13 +1,13 @@
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppProps } from '../../types/app-types';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import FavoritesPage from '../favorites-page/favorites-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import HomePage from '../home-page/home-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
-import React from 'react';
 
 function App({ offersNumber }: AppProps): JSX.Element {
   return (

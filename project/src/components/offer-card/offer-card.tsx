@@ -1,6 +1,6 @@
-import { AppRoute } from '../../const';
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function OfferCard(): JSX.Element {
   const ID = 1;

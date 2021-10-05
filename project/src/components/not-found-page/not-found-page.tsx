@@ -1,7 +1,7 @@
-import { AppRoute } from '../../const';
-import { Link } from 'react-router-dom';
-import './not-found-page.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import './not-found-page.css';
 
 function NotFoundPage(): JSX.Element {
   return (
