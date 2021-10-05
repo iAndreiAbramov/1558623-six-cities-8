@@ -9,9 +9,6 @@ import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 import React from 'react';
 
-//todo Добавить редирект для неавторизованных пользователей
-//todo Переход на страницу Favorites осуществляется по клику на email пользователя
-
 function App({ offersNumber }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
@@ -27,7 +24,7 @@ function App({ offersNumber }: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={ AppRoute.Favorites }
-          authorizationStatus={ AuthorizationStatus.Auth }
+          authorizationStatus={ AuthorizationStatus.NoAuth }
           render={ () => <FavoritesPage isEmpty={ false } /> }
         />
 
