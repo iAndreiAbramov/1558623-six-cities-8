@@ -1,6 +1,8 @@
 import React from 'react';
 
-function PropertyPageMain(): JSX.Element {
+//todo Если пользователь не залогинился, то формы с отзывами на странице нет
+
+function OfferPageMain(): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -336,4 +338,4 @@ function PropertyPageMain(): JSX.Element {
   );
 }
 
-export default PropertyPageMain;
+export default OfferPageMain;
