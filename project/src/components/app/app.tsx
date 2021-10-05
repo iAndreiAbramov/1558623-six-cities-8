@@ -28,7 +28,7 @@ function App({ offersNumber }: AppProps): JSX.Element {
           render={ () => <FavoritesPage isEmpty={ false } /> }
         />
 
-        <Route path={ AppRoute.Offer } exact>
+        <Route path={ AppRoute.OfferId } exact>
           <OfferPage />
         </Route>
 

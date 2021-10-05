@@ -1,3 +1,4 @@
+import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
@@ -9,7 +10,7 @@ function OfferCard(): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={ `/offer/${ ID }` }>
+        <Link to={ `${ AppRoute.Offer }/${ ID }` }>
           <img className="place-card__image" src="./img/apartment-01.jpg" width="260" height="200"
             alt="Place image"
           />
@@ -35,7 +36,7 @@ function OfferCard(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={ `/offer/${ ID }` }>Beautiful &amp; luxurious apartment at great location</Link>
+          <Link to={ `${ AppRoute.Offer }/${ ID }` }>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
