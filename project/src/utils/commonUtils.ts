@@ -24,8 +24,8 @@ export const getUniqueId = (digits = 9): number => {
       return id;
     }
     return getUniqueNumber();
-  }
+  };
   return +getUniqueNumber().toString().slice(-digits);
-}
+};
 
 export const getRandomArrayItem = <T>(array: T[]): T => array[getRandomInteger(0, array.length - 1)];

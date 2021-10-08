@@ -1,7 +1,9 @@
+import { OfferDataTypes } from './offer-data-types';
+
 export type HomePageProps = {
-  offersNumber: number;
+  offersData: OfferDataTypes[];
 }
 
-export type HomeProps = {
-  offersNumber: number;
+export type HomeOffersProps = {
+  offersData: OfferDataTypes[];
 }

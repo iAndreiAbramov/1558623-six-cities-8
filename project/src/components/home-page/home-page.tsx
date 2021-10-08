@@ -3,11 +3,14 @@ import HomePageMain from '../home-page-main/home-page-main';
 import { HomePageProps } from '../../types/home-page-types';
 import PageHeader from '../page-header/page-header';
 
-function HomePage({ offersNumber }: HomePageProps): JSX.Element {
+function HomePage(props: HomePageProps): JSX.Element {
+  const { offersData } = props;
   return (
     <div className="page page--gray page--main">
       <PageHeader />
-      <HomePageMain offersNumber={ offersNumber } />
+      <HomePageMain
+        offersData={ offersData }
+      />
     </div>
   );
 }

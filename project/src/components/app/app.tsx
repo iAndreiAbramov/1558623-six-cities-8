@@ -8,15 +8,16 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import HomePage from '../home-page/home-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
-// import { getCommentsData } from '../../mocks/comments';
-// import { getOffersData } from '../../mocks/offers';
 
-function App({ offersNumber }: AppProps): JSX.Element {
+function App(props: AppProps): JSX.Element {
+  const { offersData } = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route path={ AppRoute.Home } exact>
-          <HomePage offersNumber={ offersNumber } />
+          <HomePage
+            offersData={ offersData }
+          />
         </Route>
 
         <Route path={ AppRoute.Login } exact>

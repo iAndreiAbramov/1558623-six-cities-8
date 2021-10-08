@@ -18,7 +18,7 @@ const getComment = (): CommentsDataTypes => ({
     id: getUniqueId(),
     isPro: getRandomBoolean(),
     name: getRandomName(),
-  }
+  },
 });
 
 export const getCommentsData = (): CommentsDataTypes[] => {
@@ -28,4 +28,4 @@ export const getCommentsData = (): CommentsDataTypes[] => {
     comments.push(getComment());
   }
   return comments;
-}
+};

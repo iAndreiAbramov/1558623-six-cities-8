@@ -3,23 +3,23 @@ import { getRandomArrayItem, getRandomBoolean } from './commonUtils';
 const GOODS = ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'];
 
 const IMAGES = [
-  '../../public/img/apartment-01.jpg',
-  '../../public/img/apartment-02.jpg',
-  '../../public/img/apartment-03.jpg',
-  '../../public/img/room.jpg',
-  '../../public/img/studio-01.jpg',
+  './public/img/apartment-01.jpg',
+  './public/img/apartment-02.jpg',
+  './public/img/apartment-03.jpg',
+  './public/img/room.jpg',
+  './public/img/studio-01.jpg',
 ];
 
 const PREVIEW_IMAGES = [
-  '../../public/img/apartment-small-03.jpg',
-  '../../public/img/apartment-small-04.jpg',
-  '../../public/img/room-small.jpg',
-]
+  './img/apartment-small-03.jpg',
+  './img/apartment-small-04.jpg',
+  './img/room-small.jpg',
+];
 
 const AVATARS = [
-  '../../public/img/avatar-angelina.jpg',
-  '../../public/img/avatar-max.jpg',
-]
+  './img/avatar-angelina.jpg',
+  './img/avatar-max.jpg',
+];
 
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 

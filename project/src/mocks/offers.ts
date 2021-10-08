@@ -7,13 +7,12 @@ import {
   getRandomPreviewImage, getRandomRoomType
 } from '../utils/offerSpecificUtils';
 import { OfferDataTypes } from '../types/offer-data-types';
+import { MAX_RATING, MIN_RATING, RATING_DECIMALS } from '../const';
+
+const OFFERS_NUMBER = 10;
 
 const MIN_BEDROOMS = 1;
 const MAX_BEDROOMS = 5;
-
-const MIN_RATING = 1;
-const MAX_RATING = 5;
-const RATING_DECIMALS = 1;
 
 const MIN_ADULTS = 1;
 const MAX_ADULTS = 5;
@@ -56,11 +55,11 @@ const getOffer = (): OfferDataTypes => ({
   type: getRandomRoomType(),
 });
 
-export const getOffersData = (numberOfOffers: number): OfferDataTypes[] => {
+export const getOffersData = (): OfferDataTypes[] => {
   const offers = [];
-  for (let i = 0; i < numberOfOffers; i++) {
+  for (let i = 0; i < OFFERS_NUMBER; i++) {
     offers.push(getOffer());
-  };
+  }
 
   return offers;
 };

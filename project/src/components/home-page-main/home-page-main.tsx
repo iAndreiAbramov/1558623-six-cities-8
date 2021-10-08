@@ -1,8 +1,10 @@
-import { HomeProps } from '../../types/home-page-types';
-import OfferCard from '../offer-card/offer-card';
 import React from 'react';
+import { HomeOffersProps } from '../../types/home-page-types';
+import HomePageList from '../home-page-list/home-page-list';
 
-function HomePageMain({ offersNumber }: HomeProps): JSX.Element {
+function HomePageMain(props: HomeOffersProps): JSX.Element {
+  const { offersData } = props;
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -46,7 +48,7 @@ function HomePageMain({ offersNumber }: HomeProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{ offersNumber } places to stay in Amsterdam</b>
+            <b className="places__found">{ offersData.length } places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={ 0 }>
@@ -62,13 +64,9 @@ function HomePageMain({ offersNumber }: HomeProps): JSX.Element {
                 <li className="places__option" tabIndex={ 0 }>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-            </div>
+            <HomePageList
+              offersData={ offersData }
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map" />
