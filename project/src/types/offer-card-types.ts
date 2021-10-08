@@ -7,5 +7,7 @@ export type OfferCardTypes = {
     title: string;
     previewImage: string;
     type: string;
+    isPremium: boolean;
+    isFavorite: boolean;
   }
 }
