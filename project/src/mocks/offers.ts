@@ -8,8 +8,21 @@ import {
 } from '../utils/offerSpecificUtils';
 import { OfferDataTypes } from '../types/offer-data-types';
 
+const MIN_BEDROOMS = 1;
+const MAX_BEDROOMS = 5;
+
+const MIN_RATING = 1;
+const MAX_RATING = 5;
+const RATING_DECIMALS = 1;
+
+const MIN_ADULTS = 1;
+const MAX_ADULTS = 5;
+
+const MIN_PRICE = 20;
+const MAX_PRICE = 500;
+
 const getOffer = (): OfferDataTypes => ({
-  bedrooms: getRandomInteger(1, 5),
+  bedrooms: getRandomInteger(MIN_BEDROOMS, MAX_BEDROOMS),
   city: {
     location: {
       latitude: 52.370216,
@@ -33,17 +46,17 @@ const getOffer = (): OfferDataTypes => ({
   location: {
     latitude: 52.35514938496378,
     longitude: 4.673877537499948,
-    zoom: 8
+    zoom: 8,
   },
-  maxAdults: getRandomInteger(1, 5),
+  maxAdults: getRandomInteger(MIN_ADULTS, MAX_ADULTS),
   previewImage: getRandomPreviewImage(),
-  price: getRandomInteger(20, 200),
-  rating: getRandomFloat(1, 5, 1),
+  price: getRandomInteger(MIN_PRICE, MAX_PRICE),
+  rating: getRandomFloat(MIN_RATING, MAX_RATING, RATING_DECIMALS),
   title: 'Beautiful & luxurious studio at great location',
   type: getRandomRoomType(),
 });
 
-const getOffersData = (numberOfOffers: number): OfferDataTypes[] => {
+export const getOffersData = (numberOfOffers: number): OfferDataTypes[] => {
   const offers = [];
   for (let i = 0; i < numberOfOffers; i++) {
     offers.push(getOffer());
@@ -51,5 +64,3 @@ const getOffersData = (numberOfOffers: number): OfferDataTypes[] => {
 
   return offers;
 };
-
-export { getOffersData };
