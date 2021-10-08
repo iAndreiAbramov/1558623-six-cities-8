@@ -27,7 +27,7 @@ function App(props: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={ AppRoute.Favorites }
-          authorizationStatus={ AuthorizationStatus.NoAuth }
+          authorizationStatus={ AuthorizationStatus.Auth }
           render={ () => <FavoritesPage isEmpty={ false } /> }
         />
 
