@@ -38,7 +38,9 @@ function App(props: AppProps): JSX.Element {
         />
 
         <Route path={ AppRoute.OfferId } exact>
-          <OfferPage />
+          <OfferPage
+            authorizationStatus={ AuthorizationStatus.Auth }
+          />
         </Route>
 
         <Route>

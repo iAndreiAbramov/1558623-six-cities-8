@@ -1,12 +1,16 @@
 import React from 'react';
 import OfferPageMain from '../offer-page-main/offer-page-main';
 import PageHeader from '../page-header/page-header';
+import { OfferPageTypes } from '../../types/offer-page-types';
 
-function OfferPage(): JSX.Element {
+function OfferPage(props: OfferPageTypes): JSX.Element {
+  const { authorizationStatus } = props;
   return (
     <div className="page">
       <PageHeader />
-      <OfferPageMain />
+      <OfferPageMain
+        authorizationStatus={ authorizationStatus }
+      />
     </div>
   );
 }
