@@ -4,10 +4,11 @@ import OfferPageCommentsList from '../offer-page-comments-list/offer-page-commen
 import OfferPageNewComment from '../offers-page-new-comment/offers-page-new-comment';
 import { OfferPageMainTypes } from '../../types/offer-page-types';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
+import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 
 function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   const { authorizationStatus, pageData } = props;
-  const { isFavorite, isPremium, price, rating, bedrooms, maxAdults, type, images } = pageData;
+  const { isFavorite, isPremium, price, rating, bedrooms, maxAdults, type, images, goods } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
     ? 'property__bookmark-button property__bookmark-button--active button'
@@ -16,9 +17,7 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        <OfferPageGallery
-          images={ images }
-        />
+        { images.length > 0 && <OfferPageGallery images={ images } /> }
         <div className="property__container container">
           <div className="property__wrapper">
             {
@@ -60,41 +59,7 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
               <b className="property__price-value">&euro;{ price }</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
-            <div className="property__inside">
-              <h2 className="property__inside-title">What&apos;s inside</h2>
-              <ul className="property__inside-list">
-                <li className="property__inside-item">
-                  Wi-Fi
-                </li>
-                <li className="property__inside-item">
-                  Washing machine
-                </li>
-                <li className="property__inside-item">
-                  Towels
-                </li>
-                <li className="property__inside-item">
-                  Heating
-                </li>
-                <li className="property__inside-item">
-                  Coffee machine
-                </li>
-                <li className="property__inside-item">
-                  Baby seat
-                </li>
-                <li className="property__inside-item">
-                  Kitchen
-                </li>
-                <li className="property__inside-item">
-                  Dishwasher
-                </li>
-                <li className="property__inside-item">
-                  Cabel TV
-                </li>
-                <li className="property__inside-item">
-                  Fridge
-                </li>
-              </ul>
-            </div>
+            { goods.length > 0 && <OfferPageGoods goods={ goods } /> }
             <div className="property__host">
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">

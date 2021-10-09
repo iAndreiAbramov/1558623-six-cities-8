@@ -16,3 +16,7 @@ export type OfferPageMainTypes = {
 export type OfferPageGalleryTypes = {
   images: string[];
 }
+
+export type OfferPageGoodsTypes = {
+  goods: string[];
+}
