@@ -5,7 +5,7 @@ import { FavoritesCardTypes } from '../../types/favorites-types';
 
 function FavoritesPageCard(props: FavoritesCardTypes) {
   const { data } = props;
-  const { price, rating, id, type, title, previewImage, isFavorite } = data;
+  const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = data;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
   const bookmarkButtonClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
@@ -13,6 +13,10 @@ function FavoritesPageCard(props: FavoritesCardTypes) {
 
   return (
     <article className="favorites__card place-card">
+      { isPremium &&
+      <div className="place-card__mark">
+        <span>Premium</span>
+      </div> }
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={ `${ AppRoute.Offer }/${ id }` }>
           <img className="place-card__image" src={ previewImage } width="150" height="110"
