@@ -1,46 +1,37 @@
 import React from 'react';
+import { getVisualRating } from '../../utils/common-utils';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageNewComment from '../offers-page-new-comment/offers-page-new-comment';
 import { OfferPageMainTypes } from '../../types/offer-page-types';
+import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 
 function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
-  const { authorizationStatus } = props;
+  const { authorizationStatus, pageData } = props;
+  const { isFavorite, isPremium, price, rating, bedrooms, maxAdults, type, images } = pageData;
+  const visualRating = getVisualRating(rating);
+  const bookmarkButtonClass = isFavorite
+    ? 'property__bookmark-button property__bookmark-button--active button'
+    : 'property__bookmark-button button';
 
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/room.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/apartment-01.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/apartment-02.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/apartment-03.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/studio-01.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="./img/apartment-01.jpg" alt="Photo studio" />
-            </div>
-          </div>
-        </div>
+        <OfferPageGallery
+          images={ images }
+        />
         <div className="property__container container">
           <div className="property__wrapper">
-            <div className="property__mark">
-              <span>Premium</span>
-            </div>
+            {
+              isPremium &&
+              <div className="property__mark">
+                <span>Premium</span>
+              </div>
+            }
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <button className="property__bookmark-button button" type="button">
+              <button className={ bookmarkButtonClass } type="button">
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark" />
                 </svg>
@@ -49,24 +40,24 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={ { width: '80%' } } />
+                <span style={ { width: visualRating } } />
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">4.8</span>
+              <span className="property__rating-value rating__value">{ rating }</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
-                Apartment
+                { type }
               </li>
               <li className="property__feature property__feature--bedrooms">
-                3 Bedrooms
+                { bedrooms } Bedrooms
               </li>
               <li className="property__feature property__feature--adults">
-                Max 4 adults
+                Max { maxAdults } adults
               </li>
             </ul>
             <div className="property__price">
-              <b className="property__price-value">&euro;120</b>
+              <b className="property__price-value">&euro;{ price }</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
             <div className="property__inside">

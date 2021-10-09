@@ -1,22 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
+import { AppRoute } from '../../const';
 import { OfferCardTypes } from '../../types/offer-card-types';
+import { getVisualRating } from '../../utils/common-utils';
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
   const { data } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
-  const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
+  const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
 
   return (
     <article className="cities__place-card place-card">
-      { isPremium &&
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div> }
+      {
+        isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={ `${ AppRoute.Offer }/${ id }` }>
           <img className="place-card__image" src={ previewImage } width="260" height="200"

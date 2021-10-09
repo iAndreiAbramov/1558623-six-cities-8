@@ -1,15 +1,16 @@
-import { getRandomArrayItem, getRandomBoolean } from './commonUtils';
+import { getRandomArrayItem, getRandomBoolean } from './common-utils';
 import { OfferDataTypes } from '../types/offer-data-types';
 import { OffersByCitiesTypes } from '../types/favorites-types';
 
 const GOODS = ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'];
 
 const IMAGES = [
-  './public/img/apartment-01.jpg',
-  './public/img/apartment-02.jpg',
-  './public/img/apartment-03.jpg',
-  './public/img/room.jpg',
-  './public/img/studio-01.jpg',
+  './img/apartment-01.jpg',
+  './img/apartment-02.jpg',
+  './img/apartment-03.jpg',
+  './img/room.jpg',
+  './img/studio-01.jpg',
+  './img/apartment-01.jpg',
 ];
 
 const PREVIEW_IMAGES = [
@@ -31,7 +32,7 @@ const ROOM_TYPES = ['Apartment', 'Flat', 'Studio', 'Castle'];
 
 export const getRandomGoods = (): string[] => GOODS.filter(() => getRandomBoolean());
 
-export const getRandomImages = (): string[] => IMAGES.filter(() => getRandomBoolean());
+export const getImages = (): string[] => IMAGES;
 
 export const getRandomPreviewImage = (): string => getRandomArrayItem(PREVIEW_IMAGES);
 

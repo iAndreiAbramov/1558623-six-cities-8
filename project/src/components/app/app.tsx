@@ -10,7 +10,7 @@ import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
 function App(props: AppProps): JSX.Element {
-  const { offersData } = props;
+  const { offersData, commentsData } = props;
   const favoritesData = offersData.filter((item) => item.isFavorite);
 
   return (
@@ -40,6 +40,8 @@ function App(props: AppProps): JSX.Element {
         <Route path={ AppRoute.OfferId } exact>
           <OfferPage
             authorizationStatus={ AuthorizationStatus.Auth }
+            offersData={ offersData }
+            commentsData={ commentsData }
           />
         </Route>
 

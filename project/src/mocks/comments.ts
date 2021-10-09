@@ -1,5 +1,5 @@
-import { getRandomBoolean, getRandomFloat, getRandomInteger, getUniqueId } from '../utils/commonUtils';
-import { getRandomAvatar, getRandomName } from '../utils/offerSpecificUtils';
+import { getRandomBoolean, getRandomFloat, getRandomInteger, getUniqueId } from '../utils/common-utils';
+import { getRandomAvatar, getRandomName } from '../utils/offer-specific-utils';
 import { CommentsDataTypes } from '../types/comments-data-types';
 
 const MIN_NUMBER_OF_COMMENTS = 0;
