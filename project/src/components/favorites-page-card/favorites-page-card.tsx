@@ -6,7 +6,7 @@ import { FavoritesCardTypes } from '../../types/favorites-types';
 function FavoritesPageCard(props: FavoritesCardTypes) {
   const { data } = props;
   const { price, rating, id, type, title, previewImage, isFavorite } = data;
-  const visualRating = rating * PERCENTS_CAP / MAX_RATING;
+  const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
   const bookmarkButtonClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';

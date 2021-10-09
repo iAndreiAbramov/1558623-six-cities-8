@@ -1,4 +1,4 @@
-import { getRandomBoolean, getRandomFloat, getRandomInteger, getUniqueId } from '../utils/commonUtils';
+import { getRandomBoolean, getRandomInteger, getUniqueId } from '../utils/commonUtils';
 import {
   getRandomAvatar,
   getRandomCity,
@@ -7,7 +7,7 @@ import {
   getRandomPreviewImage, getRandomRoomType
 } from '../utils/offerSpecificUtils';
 import { OfferDataTypes } from '../types/offer-data-types';
-import { MAX_RATING, MIN_RATING, RATING_DECIMALS } from '../const';
+import { MAX_RATING, MIN_RATING } from '../const';
 
 const OFFERS_NUMBER = 10;
 
@@ -50,7 +50,7 @@ const getOffer = (): OfferDataTypes => ({
   maxAdults: getRandomInteger(MIN_ADULTS, MAX_ADULTS),
   previewImage: getRandomPreviewImage(),
   price: getRandomInteger(MIN_PRICE, MAX_PRICE),
-  rating: getRandomFloat(MIN_RATING, MAX_RATING, RATING_DECIMALS),
+  rating: getRandomInteger(MIN_RATING, MAX_RATING),
   title: 'Beautiful & luxurious studio at great location',
   type: getRandomRoomType(),
 });

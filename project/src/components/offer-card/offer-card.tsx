@@ -6,7 +6,7 @@ import { OfferCardTypes } from '../../types/offer-card-types';
 function OfferCard(props: OfferCardTypes): JSX.Element {
   const { data } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
-  const visualRating = rating * PERCENTS_CAP / MAX_RATING;
+  const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
   const bookmarkButtonClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
