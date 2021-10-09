@@ -1,4 +1,6 @@
 import { getRandomArrayItem, getRandomBoolean } from './commonUtils';
+import { OfferDataTypes } from '../types/offer-data-types';
+import { OffersByCitiesTypes } from '../types/favorites-types';
 
 const GOODS = ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'];
 
@@ -25,7 +27,7 @@ const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseld
 
 const NAMES = ['Angelina', 'Max'];
 
-const ROOM_TYPES = ['apartment', 'flat', 'studio'];
+const ROOM_TYPES = ['Apartment', 'Flat', 'Studio', 'Castle'];
 
 export const getRandomGoods = (): string[] => GOODS.filter(() => getRandomBoolean());
 
@@ -40,3 +42,18 @@ export const getRandomCity = (): string => getRandomArrayItem(CITIES);
 export const getRandomName = (): string => getRandomArrayItem(NAMES);
 
 export const getRandomRoomType = (): string => getRandomArrayItem(ROOM_TYPES);
+
+export const getOffersByCities = (data: OfferDataTypes[]) => {
+  const offersByCities: OffersByCitiesTypes = {};
+
+  data.forEach((item) => {
+    const city: string = item.city.name;
+    if (city in offersByCities) {
+      offersByCities[city].push(item);
+    } else {
+      offersByCities[city] = [item];
+    }
+  });
+
+  return offersByCities;
+};

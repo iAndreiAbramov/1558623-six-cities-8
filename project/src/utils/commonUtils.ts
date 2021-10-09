@@ -16,7 +16,7 @@ export const getRandomFloat = (min: number, max: number, decimals: number): numb
 
 export const getRandomBoolean = (): boolean => Boolean(Math.round(Math.random()));
 
-export const getUniqueId = (digits = 9): number => {
+export const getUniqueId = (digits = 9): string => {
   const dateNow = Date.now();
   const getUniqueNumber = (): number => {
     const id = Date.now();
@@ -25,7 +25,7 @@ export const getUniqueId = (digits = 9): number => {
     }
     return getUniqueNumber();
   };
-  return +getUniqueNumber().toString().slice(-digits);
+  return getUniqueNumber().toString().slice(-digits);
 };
 
 export const getRandomArrayItem = <T>(array: T[]): T => array[getRandomInteger(0, array.length - 1)];

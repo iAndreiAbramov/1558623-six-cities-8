@@ -12,11 +12,11 @@ export type OfferDataTypes = {
   goods: string[];
   host: {
     avatarUrl: string;
-    id: number;
+    id: string;
     isPro: boolean;
     name: string
   };
-  id: number;
+  id: string;
   images: string[];
   isFavorite: boolean;
   isPremium: boolean;

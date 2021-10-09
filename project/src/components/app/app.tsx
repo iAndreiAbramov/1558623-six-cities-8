@@ -11,6 +11,8 @@ import PrivateRoute from '../private-route/private-route';
 
 function App(props: AppProps): JSX.Element {
   const { offersData } = props;
+  const favoritesData = offersData.filter((item) => item.isFavorite);
+
   return (
     <BrowserRouter>
       <Switch>
@@ -28,7 +30,11 @@ function App(props: AppProps): JSX.Element {
           exact
           path={ AppRoute.Favorites }
           authorizationStatus={ AuthorizationStatus.Auth }
-          render={ () => <FavoritesPage isEmpty={ false } /> }
+          render={ () => (
+            <FavoritesPage
+              favoritesData={ favoritesData }
+            />
+          ) }
         />
 
         <Route path={ AppRoute.OfferId } exact>
