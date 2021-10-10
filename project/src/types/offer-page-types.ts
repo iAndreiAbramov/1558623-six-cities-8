@@ -20,3 +20,12 @@ export type OfferPageGalleryTypes = {
 export type OfferPageGoodsTypes = {
   goods: string[];
 }
+
+export type OfferPageHostTypes = {
+  host: {
+    avatarUrl: string;
+    id: string;
+    isPro: boolean;
+    name: string;
+  };
+}

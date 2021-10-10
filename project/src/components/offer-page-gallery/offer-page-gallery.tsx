@@ -3,8 +3,8 @@ import { OfferPageGalleryTypes } from '../../types/offer-page-types';
 
 function OfferPageGallery(props: OfferPageGalleryTypes): JSX.Element {
   const { images } = props;
-  const imagesGallery = images.map((item) => (
-    <div className="property__image-wrapper" key={ item }>
+  const imagesGallery = images.map((item, index) => (
+    <div className="property__image-wrapper" key={ item + index.toString() }>
       <img className="property__image" src={ item } alt="Interior photo" />
     </div>
   ));
