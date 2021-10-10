@@ -46,7 +46,6 @@ export const getRandomRoomType = (): string => getRandomArrayItem(ROOM_TYPES);
 
 export const getOffersByCities = (data: OfferDataTypes[]) => {
   const offersByCities: OffersByCitiesTypes = {};
-
   data.forEach((item) => {
     const city: string = item.city.name;
     if (city in offersByCities) {

@@ -6,7 +6,7 @@ export type OfferDataTypes = {
       longitude: number;
       zoom: number;
     };
-    name: string
+    name: string;
   };
   description: string;
   goods: string[];

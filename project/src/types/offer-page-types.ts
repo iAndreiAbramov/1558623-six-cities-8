@@ -29,3 +29,8 @@ export type OfferPageHostTypes = {
     name: string;
   };
 }
+
+export type OfferPageNearCardTypes = {
+  key?: string;
+  offerData: OfferDataTypes;
+}
