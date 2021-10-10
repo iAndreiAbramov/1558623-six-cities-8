@@ -33,3 +33,7 @@ export const getUniqueId = (digits = 9): string => {
 export const getRandomArrayItem = <T>(array: T[]): T => array[getRandomInteger(0, array.length - 1)];
 
 export const getVisualRating = (rating: number): string => `${ Math.round(rating) * PERCENTS_CAP / MAX_RATING }%`;
+
+export const getMillisecondsFromDate = (date: string) => (
+  Date.parse(date.split(' ').reverse().join('-'))
+);

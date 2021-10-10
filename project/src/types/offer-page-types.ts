@@ -39,3 +39,12 @@ export type OfferPageNearCardTypes = {
   key?: string;
   pageData: OfferDataTypes;
 }
+
+export type OfferPageCommentsListTypes = {
+  commentsData: CommentsDataTypes[],
+}
+
+export type OfferPageCommentTypes = {
+  key?: string,
+  commentData: CommentsDataTypes,
+}

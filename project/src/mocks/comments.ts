@@ -1,16 +1,25 @@
-import { getRandomBoolean, getRandomFloat, getRandomInteger, getUniqueId } from '../utils/common-utils';
+import {
+  getRandomArrayItem,
+  getRandomBoolean,
+  getRandomFloat,
+  getRandomInteger,
+  getUniqueId
+} from '../utils/common-utils';
 import { getRandomAvatar, getRandomName } from '../utils/offer-specific-utils';
 import { CommentsDataTypes } from '../types/comments-data-types';
 
 const MIN_NUMBER_OF_COMMENTS = 0;
-const MAX_NUMBER_OF_COMMENTS = 5;
+const MAX_NUMBER_OF_COMMENTS = 10;
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 const RATING_DECIMALS = 1;
 
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'August'];
+const YEARS = ['2019', '2020', '2021'];
+
 const getComment = (): CommentsDataTypes => ({
   comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-  date: '2019-05-08T14:13:56.569Z',
+  date: `${ getRandomArrayItem(MONTHS) } ${ getRandomArrayItem(YEARS) }`,
   id: getUniqueId(),
   rating: getRandomFloat(MIN_RATING, MAX_RATING, RATING_DECIMALS),
   user: {

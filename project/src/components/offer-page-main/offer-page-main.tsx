@@ -9,7 +9,7 @@ import { OfferPageMainTypes } from '../../types/offer-page-types';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 
 function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
-  const { authorizationStatus, pageData, nearOffersData } = props;
+  const { authorizationStatus, pageData, nearOffersData, commentsData } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -19,7 +19,9 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
+
         { images.length > 0 && <OfferPageGallery images={ images } /> }
+
         <div className="property__container container">
           <div className="property__wrapper">
             {
@@ -64,7 +66,9 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
             { goods.length > 0 && <OfferPageGoods goods={ goods } /> }
             <OfferPageHost host={ host } />
             <section className="property__reviews reviews">
-              <OfferPageCommentsList />
+              <OfferPageCommentsList
+                commentsData={ commentsData }
+              />
               { authorizationStatus === 'AUTH' ? <OfferPageNewComment /> : null }
             </section>
           </div>
