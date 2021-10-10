@@ -9,7 +9,7 @@ import { OfferPageMainTypes } from '../../types/offer-page-types';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 
 function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
-  const { authorizationStatus, pageData } = props;
+  const { authorizationStatus, pageData, nearOffersData } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -71,7 +71,9 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
         </div>
         <section className="property__map map" />
       </section>
-      <OfferPageNearList />
+      <OfferPageNearList
+        nearOffersData={ nearOffersData }
+      />
     </main>
   );
 }

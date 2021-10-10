@@ -1,20 +1,15 @@
 import React from 'react';
-import { getOffersData } from '../../mocks/offers';
 import OfferPageNearCard from '../offer-page-near-card/offer-page-near-card';
+import { OfferPageNearListTypes } from '../../types/offer-page-types';
 
-const NEAR_OFFERS_NUMBER = 3;
-const nearOffersData = getOffersData(NEAR_OFFERS_NUMBER);
-
-function OfferPageNearList() {
-  const nearCards = nearOffersData.map((cardItem) => {
-    const { id } = cardItem;
-    return (
-      <OfferPageNearCard
-        key={ id }
-        offerData={ cardItem }
-      />
-    );
-  });
+function OfferPageNearList(props: OfferPageNearListTypes): JSX.Element {
+  const { nearOffersData } = props;
+  const nearCards = nearOffersData.map((cardItem) => (
+    <OfferPageNearCard
+      key={ cardItem.id }
+      pageData={ cardItem }
+    />
+  ));
 
   return (
     <div className="container">

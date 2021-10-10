@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { OfferPageNearCardTypes } from '../../types/offer-page-types';
 
 function OfferPageNearCard(props: OfferPageNearCardTypes): JSX.Element {
-  const { offerData } = props;
-  const { price, rating, isFavorite, isPremium, previewImage, type, title, id } = offerData;
+  const { pageData } = props;
+  const { price, rating, isFavorite, isPremium, previewImage, type, title, id } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'

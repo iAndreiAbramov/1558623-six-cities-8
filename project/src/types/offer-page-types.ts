@@ -11,6 +11,7 @@ export type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH',
   pageData: OfferDataTypes,
   commentsData: CommentsDataTypes[],
+  nearOffersData: OfferDataTypes[],
 }
 
 export type OfferPageGalleryTypes = {
@@ -30,7 +31,11 @@ export type OfferPageHostTypes = {
   };
 }
 
+export type OfferPageNearListTypes = {
+  nearOffersData: OfferDataTypes[];
+}
+
 export type OfferPageNearCardTypes = {
   key?: string;
-  offerData: OfferDataTypes;
+  pageData: OfferDataTypes;
 }
