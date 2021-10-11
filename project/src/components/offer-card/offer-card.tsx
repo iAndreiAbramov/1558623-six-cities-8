@@ -5,7 +5,7 @@ import { OfferCardTypes } from '../../types/offer-card-types';
 import { getVisualRating } from '../../utils/common-utils';
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data } = props;
+  const { data, onActiveCardChange } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -13,7 +13,10 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
     : 'place-card__bookmark-button button';
 
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card"
+      onMouseEnter={ () => onActiveCardChange(id) }
+      onMouseLeave={ () => onActiveCardChange('') }
+    >
       {
         isPremium &&
         <div className="place-card__mark">

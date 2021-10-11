@@ -7,3 +7,12 @@ export type HomePageProps = {
 export type HomeOffersProps = {
   offersData: OfferDataTypes[];
 }
+
+export type HomePageListProps = {
+  offersData: OfferDataTypes[];
+  onActiveCardChange: (newId: string) => void;
+}
+
+export type HomePageMapProps = {
+  activeCardId: string;
+}

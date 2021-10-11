@@ -5,6 +5,7 @@ import PageHeader from '../page-header/page-header';
 
 function HomePage(props: HomePageProps): JSX.Element {
   const { offersData } = props;
+
   return (
     <div className="page page--gray page--main">
       <PageHeader />

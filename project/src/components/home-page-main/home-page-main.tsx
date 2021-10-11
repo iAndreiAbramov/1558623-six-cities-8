@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HomeOffersProps } from '../../types/home-page-types';
 import HomePageList from '../home-page-list/home-page-list';
@@ -6,6 +6,7 @@ import HomePageMap from '../home-page-map/home-page-map';
 
 function HomePageMain(props: HomeOffersProps): JSX.Element {
   const { offersData } = props;
+  const [activeCardId, setActiveCardId] = useState('');
 
   return (
     <main className="page__main page__main--index">
@@ -50,8 +51,13 @@ function HomePageMain(props: HomeOffersProps): JSX.Element {
         <div className="cities__places-container container">
           <HomePageList
             offersData={ offersData }
+            onActiveCardChange={ (newId: string): void => (
+              setActiveCardId(newId)
+            ) }
           />
-          <HomePageMap />
+          <HomePageMap
+            activeCardId={ activeCardId }
+          />
         </div>
       </div>
     </main>
