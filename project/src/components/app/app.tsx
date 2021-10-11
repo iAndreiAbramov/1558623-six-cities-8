@@ -3,18 +3,23 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppProps } from '../../types/app-types';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import FavoritesPage from '../favorites-page/favorites-page';
+import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
-import HomePage from '../home-page/home-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
-function App({ offersNumber }: AppProps): JSX.Element {
+function App(props: AppProps): JSX.Element {
+  const { offersData, commentsData } = props;
+  const favoritesData = offersData.filter((item) => item.isFavorite);
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path={ AppRoute.Home } exact>
-          <HomePage offersNumber={ offersNumber } />
+          <HomePage
+            offersData={ offersData }
+          />
         </Route>
 
         <Route path={ AppRoute.Login } exact>
@@ -24,12 +29,20 @@ function App({ offersNumber }: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={ AppRoute.Favorites }
-          authorizationStatus={ AuthorizationStatus.NoAuth }
-          render={ () => <FavoritesPage isEmpty={ false } /> }
+          authorizationStatus={ AuthorizationStatus.Auth }
+          render={ () => (
+            <FavoritesPage
+              favoritesData={ favoritesData }
+            />
+          ) }
         />
 
         <Route path={ AppRoute.OfferId } exact>
-          <OfferPage />
+          <OfferPage
+            authorizationStatus={ AuthorizationStatus.Auth }
+            offersData={ offersData }
+            commentsData={ commentsData }
+          />
         </Route>
 
         <Route>

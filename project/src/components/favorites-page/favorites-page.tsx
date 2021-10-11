@@ -6,9 +6,13 @@ import { FavoritesTypes } from '../../types/favorites-types';
 import PageHeader from '../page-header/page-header';
 
 function FavoritesPage(props: FavoritesTypes): JSX.Element {
-  const { isEmpty } = props;
-  const pageContent: JSX.Element = isEmpty ? <FavoritesPageEmpty /> : <FavoritesPageMain />;
+  const { favoritesData } = props;
+  const isEmpty = favoritesData.length === 0;
   const wrapperClass: string = isEmpty ? 'page page--favorites-empty' : 'page';
+  const pageContent: JSX.Element = isEmpty
+    ? <FavoritesPageEmpty />
+    : <FavoritesPageMain favoritesData={ favoritesData } />;
+
   return (
     <div className={ wrapperClass }>
       <PageHeader />
