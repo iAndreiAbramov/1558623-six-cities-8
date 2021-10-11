@@ -21,7 +21,7 @@ function OfferPageNearCard(props: OfferPageNearCardTypes): JSX.Element {
       }
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <Link to={ `/offer/${ id }` }>
-          <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place view" />
         </Link>
       </div>
       <div className="place-card__info">

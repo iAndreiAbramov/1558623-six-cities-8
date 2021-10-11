@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
 import { FavoritesCardTypes } from '../../types/favorites-types';
 
-function FavoritesPageCard(props: FavoritesCardTypes) {
+function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   const { data } = props;
   const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = data;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
@@ -22,7 +22,7 @@ function FavoritesPageCard(props: FavoritesCardTypes) {
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={ `${ AppRoute.Offer }/${ id }` }>
           <img className="place-card__image" src={ previewImage } width="150" height="110"
-            alt="Place image"
+            alt="Place view"
           />
         </Link>
       </div>

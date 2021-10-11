@@ -34,6 +34,6 @@ export const getRandomArrayItem = <T>(array: T[]): T => array[getRandomInteger(0
 
 export const getVisualRating = (rating: number): string => `${ Math.round(rating) * PERCENTS_CAP / MAX_RATING }%`;
 
-export const getMillisecondsFromDate = (date: string) => (
+export const getMillisecondsFromDate = (date: string): number => (
   Date.parse(date.split(' ').reverse().join('-'))
 );

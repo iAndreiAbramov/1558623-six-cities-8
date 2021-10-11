@@ -10,13 +10,16 @@ function FavoritesPageMain(props: FavoritesTypes): JSX.Element {
     .sort((a, b) => (
       b[0] > a[0] ? -1 : 1
     ))
-    .map((city) => (
-      <FavoritesPageCity
-        key={ city[0] }
-        cityName={ city[0] }
-        data={ city[1] }
-      />
-    ));
+    .map((cityData) => {
+      const [cityName, data] = cityData;
+      return (
+        <FavoritesPageCity
+          key={ cityName }
+          cityName={ cityName }
+          data={ data }
+        />
+      );
+    });
 
   return (
     <main className="page__main page__main--favorites">

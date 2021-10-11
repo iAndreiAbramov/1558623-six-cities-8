@@ -5,7 +5,7 @@ function OfferPageGallery(props: OfferPageGalleryTypes): JSX.Element {
   const { images } = props;
   const imagesGallery = images.map((item, index) => (
     <div className="property__image-wrapper" key={ item + index.toString() }>
-      <img className="property__image" src={ item } alt="Interior photo" />
+      <img className="property__image" src={ item } alt="Interior view" />
     </div>
   ));
 

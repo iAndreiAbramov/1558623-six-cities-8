@@ -14,6 +14,7 @@ function PageHeaderUser(): JSX.Element {
           </Link>
         </li>
         <li className="header__nav-item">
+          {/*todo Разобраться куда ссылка*/}
           <a className="header__nav-link" href="#">
             <span className="header__signout">Sign out</span>
           </a>

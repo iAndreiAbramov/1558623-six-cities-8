@@ -1,8 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
+import { INITIAL_RATING, INITIAL_REVIEW_STATE, MIN_COMMENT_LENGTH, RatingPosition } from '../../const';
 
 function OfferPageNewComment(): JSX.Element {
-  const [rating, setRating] = useState([false, false, false, false, false]);
-  const [review, setReview] = useState('');
+  const [rating, setRating] = useState(INITIAL_RATING);
+  const [review, setReview] = useState(INITIAL_REVIEW_STATE);
+
+  const submitIsDisabled = () => (
+    rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH
+  );
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
     evt.preventDefault();
@@ -11,7 +16,7 @@ function OfferPageNewComment(): JSX.Element {
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(() => {
-      const newRating = [false, false, false, false, false];
+      const newRating = INITIAL_RATING;
       newRating[+evt.target.value - 1] = true;
       return newRating;
     });
@@ -27,7 +32,7 @@ function OfferPageNewComment(): JSX.Element {
           value="5"
           id="5-stars"
           type="radio"
-          checked={ rating[4] }
+          checked={ rating[RatingPosition.Perfect] }
           onChange={ handleRatingChange }
         />
         <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
@@ -42,7 +47,7 @@ function OfferPageNewComment(): JSX.Element {
           value="4"
           id="4-stars"
           type="radio"
-          checked={ rating[3] }
+          checked={ rating[RatingPosition.Good] }
           onChange={ handleRatingChange }
         />
         <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
@@ -57,7 +62,7 @@ function OfferPageNewComment(): JSX.Element {
           value="3"
           id="3-stars"
           type="radio"
-          checked={ rating[2] }
+          checked={ rating[RatingPosition.NotBad] }
           onChange={ handleRatingChange }
         />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
@@ -72,7 +77,7 @@ function OfferPageNewComment(): JSX.Element {
           value="2"
           id="2-stars"
           type="radio"
-          checked={ rating[1] }
+          checked={ rating[RatingPosition.Badly] }
           onChange={ handleRatingChange }
         />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
@@ -87,7 +92,7 @@ function OfferPageNewComment(): JSX.Element {
           value="1"
           id="1-star"
           type="radio"
-          checked={ rating[0] }
+          checked={ rating[RatingPosition.Terribly] }
           onChange={ handleRatingChange }
         />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label"
@@ -113,7 +118,11 @@ function OfferPageNewComment(): JSX.Element {
           and describe your stay with at least
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={ submitIsDisabled() }
+        >
           Submit
         </button>
       </div>
