@@ -4,7 +4,7 @@ import OfferPageCommentsList from '../offer-page-comments-list/offer-page-commen
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
-import OfferPageNewComment from '../offers-page-new-comment/offers-page-new-comment';
+import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import { OfferPageMainTypes } from '../../types/offer-page-types';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 

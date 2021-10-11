@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 function OfferPageNewComment(): JSX.Element {
+  const [review, setReview] = useState('');
+  // const [rating, setRating] = useState('1');
+
+  const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
+    evt.preventDefault();
+    setReview(() => evt.target.value);
+  };
+
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -52,8 +60,13 @@ function OfferPageNewComment(): JSX.Element {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review"
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={ review }
+        onChange={ handleTextAreaChange }
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
