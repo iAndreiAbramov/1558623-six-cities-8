@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HomeOffersProps } from '../../types/home-page-types';
 import HomePageList from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
-function HomePageMain(props: HomeOffersProps): JSX.Element {
+type HomePageMainTypes = {
+  offersData: OfferDataTypes[];
+}
+
+function HomePageMain(props: HomePageMainTypes): JSX.Element {
   const { offersData } = props;
   const [activeCardId, setActiveCardId] = useState('');
 

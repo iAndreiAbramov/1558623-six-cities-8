@@ -1,5 +1,8 @@
 import React from 'react';
-import { OfferPageGalleryTypes } from '../../types/offer-page-types';
+
+type OfferPageGalleryTypes = {
+  images: string[];
+}
 
 function OfferPageGallery(props: OfferPageGalleryTypes): JSX.Element {
   const { images } = props;

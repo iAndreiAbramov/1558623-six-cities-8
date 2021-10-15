@@ -1,9 +1,15 @@
 import React from 'react';
+import { CommentsDataTypes } from '../../types/comments-data-types';
 import OfferPageMain from '../offer-page-main/offer-page-main';
-import PageHeader from '../page-header/page-header';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { OfferPageTypes } from '../../types/offer-page-types';
+import PageHeader from '../page-header/page-header';
 import { useParams } from 'react-router-dom';
+
+type OfferPageTypes = {
+  authorizationStatus: 'AUTH' | 'NO_AUTH',
+  offersData: OfferDataTypes[],
+  commentsData: CommentsDataTypes[],
+}
 
 function OfferPage(props: OfferPageTypes): JSX.Element {
   const { authorizationStatus, offersData, commentsData } = props;

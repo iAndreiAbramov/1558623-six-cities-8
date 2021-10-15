@@ -1,9 +1,13 @@
 import React from 'react';
 import HomePageMain from '../home-page-main/home-page-main';
-import { HomePageProps } from '../../types/home-page-types';
 import PageHeader from '../page-header/page-header';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
-function HomePage(props: HomePageProps): JSX.Element {
+type HomePageTypes = {
+  offersData: OfferDataTypes[];
+}
+
+function HomePage(props: HomePageTypes): JSX.Element {
   const { offersData } = props;
 
   return (

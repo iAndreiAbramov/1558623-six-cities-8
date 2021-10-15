@@ -1,7 +1,11 @@
 import React from 'react';
+import { CommentsDataTypes } from '../../types/comments-data-types';
 import { getMillisecondsFromDate } from '../../utils/common-utils';
 import OfferPageComment from '../offer-page-comment/offer-page-comment';
-import { OfferPageCommentsListTypes } from '../../types/offer-page-types';
+
+export type OfferPageCommentsListTypes = {
+  commentsData: CommentsDataTypes[],
+}
 
 function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
   const { commentsData } = props;

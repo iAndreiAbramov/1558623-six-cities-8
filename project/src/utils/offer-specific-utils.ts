@@ -1,6 +1,6 @@
 import { getRandomArrayItem, getRandomBoolean } from './common-utils';
 import { OfferDataTypes } from '../types/offer-data-types';
-import { OffersByCitiesTypes } from '../types/favorites-types';
+import { OffersByCitiesTypes } from '../types/offer-sprecific-utils-types';
 
 const GOODS = ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'];
 

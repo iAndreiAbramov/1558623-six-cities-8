@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
-import { FavoritesCardTypes } from '../../types/favorites-types';
+import { OfferDataTypes } from '../../types/offer-data-types';
+
+type FavoritesCardTypes = {
+  data: OfferDataTypes,
+}
 
 function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   const { data } = props;

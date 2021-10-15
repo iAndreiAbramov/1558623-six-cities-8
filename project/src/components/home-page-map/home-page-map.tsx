@@ -1,5 +1,8 @@
 import React from 'react';
-import { HomePageMapProps } from '../../types/home-page-types';
+
+type HomePageMapProps = {
+  activeCardId: string;
+}
 
 function HomePageMap(props: HomePageMapProps): JSX.Element {
   const { activeCardId } = props;
