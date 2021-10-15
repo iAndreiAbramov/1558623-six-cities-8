@@ -30,6 +30,13 @@ const NAMES = ['Angelina', 'Max'];
 
 const ROOM_TYPES = ['Apartment', 'Flat', 'Studio', 'Castle'];
 
+const COORDINATES = [
+  [52.3909553943508, 4.85309666406198],
+  [52.369553943508, 4.85309666406198],
+  [52.3909553943508, 4.929309666406198],
+  [52.3809553943508, 4.939309666406198],
+];
+
 export const getRandomGoods = (): string[] => GOODS.filter(() => getRandomBoolean());
 
 export const getImages = (): string[] => IMAGES;
@@ -43,6 +50,14 @@ export const getRandomCity = (): string => getRandomArrayItem(CITIES);
 export const getRandomName = (): string => getRandomArrayItem(NAMES);
 
 export const getRandomRoomType = (): string => getRandomArrayItem(ROOM_TYPES);
+
+export const getCityCoordinates = () => {
+  const cityCoordinates = [0, 0];
+  const sumOfCoordinates = COORDINATES.reduce((acc, cur) => [acc[0] += cur[0], acc[1] += cur[1]], cityCoordinates);
+  return [sumOfCoordinates[0]/COORDINATES.length, sumOfCoordinates[1]/COORDINATES.length];
+};
+
+export const getOfferCoordinates = () => COORDINATES.pop() as [number, number];
 
 export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes => {
   const offersByCities: OffersByCitiesTypes = {};
