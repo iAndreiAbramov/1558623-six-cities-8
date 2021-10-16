@@ -1,13 +1,13 @@
 import React from 'react';
 import { CommentsDataTypes } from '../../types/comments-data-types';
 import { getVisualRating } from '../../utils/common-utils';
+import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
-import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH',

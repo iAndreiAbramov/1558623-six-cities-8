@@ -1,7 +1,7 @@
 import React from 'react';
 
 type OfferPageGoodsTypes = {
-  goods: string[];
+  goods: string[],
 }
 
 function OfferPageGoods(props: OfferPageGoodsTypes): JSX.Element {

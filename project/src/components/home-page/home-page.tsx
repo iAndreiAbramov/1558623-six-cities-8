@@ -4,7 +4,7 @@ import PageHeader from '../page-header/page-header';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type HomePageTypes = {
-  offersData: OfferDataTypes[];
+  offersData: OfferDataTypes[],
 }
 
 function HomePage(props: HomePageTypes): JSX.Element {

@@ -6,7 +6,7 @@ import HomePageMap from '../home-page-map/home-page-map';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type HomePageMainTypes = {
-  offersData: OfferDataTypes[];
+  offersData: OfferDataTypes[],
 }
 
 function HomePageMain(props: HomePageMainTypes): JSX.Element {

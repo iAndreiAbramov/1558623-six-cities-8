@@ -3,8 +3,8 @@ import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type HomePageListTypes = {
-  offersData: OfferDataTypes[];
-  onActiveCardChange: (newId: string) => void;
+  offersData: OfferDataTypes[],
+  onActiveCardChange: (newId: string) => void,
 }
 
 function HomePageList(props: HomePageListTypes): JSX.Element {

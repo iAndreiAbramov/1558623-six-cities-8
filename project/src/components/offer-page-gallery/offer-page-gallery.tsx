@@ -1,7 +1,7 @@
 import React from 'react';
 
 type OfferPageGalleryTypes = {
-  images: string[];
+  images: string[],
 }
 
 function OfferPageGallery(props: OfferPageGalleryTypes): JSX.Element {

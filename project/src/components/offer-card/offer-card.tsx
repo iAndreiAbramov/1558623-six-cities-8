@@ -5,8 +5,8 @@ import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferCardTypes = {
-  data: OfferDataTypes;
-  onActiveCardChange: (newId: string) => void;
+  data: OfferDataTypes,
+  onActiveCardChange: (newId: string) => void,
 }
 
 function OfferCard(props: OfferCardTypes): JSX.Element {

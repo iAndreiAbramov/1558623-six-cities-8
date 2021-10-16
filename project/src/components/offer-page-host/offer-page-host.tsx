@@ -2,11 +2,11 @@ import React from 'react';
 
 type OfferPageHostTypes = {
   host: {
-    avatarUrl: string;
-    id: string;
-    isPro: boolean;
-    name: string;
-  };
+    avatarUrl: string,
+    id: string,
+    isPro: boolean,
+    name: string,
+  },
 }
 
 function OfferPageHost(props: OfferPageHostTypes): JSX.Element {

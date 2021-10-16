@@ -10,12 +10,12 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
-  offersData: OfferDataTypes[];
-  commentsData: CommentsDataTypes[];
+type AppTypes = {
+  offersData: OfferDataTypes[],
+  commentsData: CommentsDataTypes[],
 }
 
-function App(props: AppProps): JSX.Element {
+function App(props: AppTypes): JSX.Element {
   const { offersData, commentsData } = props;
   const favoritesData = offersData.filter((item) => item.isFavorite);
 

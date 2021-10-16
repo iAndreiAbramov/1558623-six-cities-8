@@ -6,9 +6,9 @@ import { DefaultCustomIcon, ActiveCustomIcon } from '../../const';
 import useMap from '../../hooks/useMap';
 
 type HomePageMapProps = {
-  activeCardId: string;
+  activeCardId: string,
   city: City,
-  points: Point[];
+  points: Point[],
 }
 
 function HomePageMap(props: HomePageMapProps): JSX.Element {

@@ -6,7 +6,7 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import PageHeader from '../page-header/page-header';
 
 type FavoritesTypes = {
-  favoritesData: OfferDataTypes[];
+  favoritesData: OfferDataTypes[],
 }
 
 function FavoritesPage(props: FavoritesTypes): JSX.Element {

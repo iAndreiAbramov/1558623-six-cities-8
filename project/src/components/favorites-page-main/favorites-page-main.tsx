@@ -4,7 +4,7 @@ import { getOffersByCities } from '../../utils/offer-specific-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type FavoritesMainTypes = {
-  favoritesData: OfferDataTypes[];
+  favoritesData: OfferDataTypes[],
 }
 
 function FavoritesPageMain(props: FavoritesMainTypes): JSX.Element {

@@ -3,7 +3,7 @@ import OfferPageNearCard from '../offer-page-near-card/offer-page-near-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferPageNearListTypes = {
-  nearOffersData: OfferDataTypes[];
+  nearOffersData: OfferDataTypes[],
 }
 
 function OfferPageNearList(props: OfferPageNearListTypes): JSX.Element {
