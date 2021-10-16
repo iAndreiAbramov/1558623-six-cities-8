@@ -1,5 +1,8 @@
 import React from 'react';
-import { OfferPageGoodsTypes } from '../../types/offer-page-types';
+
+type OfferPageGoodsTypes = {
+  goods: string[],
+}
 
 function OfferPageGoods(props: OfferPageGoodsTypes): JSX.Element {
   const { goods } = props;

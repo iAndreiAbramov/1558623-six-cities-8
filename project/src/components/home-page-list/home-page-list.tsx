@@ -1,8 +1,13 @@
 import React from 'react';
 import OfferCard from '../offer-card/offer-card';
-import { HomePageListProps } from '../../types/home-page-types';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
-function HomePageList(props: HomePageListProps): JSX.Element {
+type HomePageListTypes = {
+  offersData: OfferDataTypes[],
+  onActiveCardChange: (newId: string) => void,
+}
+
+function HomePageList(props: HomePageListTypes): JSX.Element {
   const { offersData, onActiveCardChange } = props;
 
   const offerCards = offersData.map((cardItem) => {

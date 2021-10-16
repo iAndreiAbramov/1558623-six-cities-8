@@ -1,6 +1,11 @@
 import React from 'react';
 import FavoritesPageCard from '../favorites-page-card/favorites-page-card';
-import { FavoritesCityTypes } from '../../types/favorites-types';
+import { OfferDataTypes } from '../../types/offer-data-types';
+
+type FavoritesCityTypes = {
+  cityName: string,
+  data: OfferDataTypes[],
+}
 
 function FavoritesPageCity(props: FavoritesCityTypes): JSX.Element {
   const { cityName, data } = props;

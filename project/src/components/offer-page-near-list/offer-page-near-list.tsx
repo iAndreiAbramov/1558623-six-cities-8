@@ -1,6 +1,10 @@
 import React from 'react';
 import OfferPageNearCard from '../offer-page-near-card/offer-page-near-card';
-import { OfferPageNearListTypes } from '../../types/offer-page-types';
+import { OfferDataTypes } from '../../types/offer-data-types';
+
+type OfferPageNearListTypes = {
+  nearOffersData: OfferDataTypes[],
+}
 
 function OfferPageNearList(props: OfferPageNearListTypes): JSX.Element {
   const { nearOffersData } = props;

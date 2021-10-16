@@ -1,9 +1,13 @@
 import React from 'react';
-import { FavoritesTypes } from '../../types/favorites-types';
 import FavoritesPageCity from '../favorites-page-cities/favorites-page-city';
 import { getOffersByCities } from '../../utils/offer-specific-utils';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
-function FavoritesPageMain(props: FavoritesTypes): JSX.Element {
+type FavoritesMainTypes = {
+  favoritesData: OfferDataTypes[],
+}
+
+function FavoritesPageMain(props: FavoritesMainTypes): JSX.Element {
   const { favoritesData } = props;
   const offersByCities = getOffersByCities(favoritesData);
   const citiesList = Object.entries(offersByCities)

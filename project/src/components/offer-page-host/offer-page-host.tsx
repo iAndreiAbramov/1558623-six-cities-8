@@ -1,5 +1,13 @@
 import React from 'react';
-import { OfferPageHostTypes } from '../../types/offer-page-types';
+
+type OfferPageHostTypes = {
+  host: {
+    avatarUrl: string,
+    id: string,
+    isPro: boolean,
+    name: string,
+  },
+}
 
 function OfferPageHost(props: OfferPageHostTypes): JSX.Element {
   const { host } = props;

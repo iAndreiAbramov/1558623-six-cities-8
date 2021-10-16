@@ -1,7 +1,11 @@
 import React from 'react';
-import { getVisualRating } from '../../utils/common-utils';
 import { Link } from 'react-router-dom';
-import { OfferPageNearCardTypes } from '../../types/offer-page-types';
+import { getVisualRating } from '../../utils/common-utils';
+import { OfferDataTypes } from '../../types/offer-data-types';
+
+export type OfferPageNearCardTypes = {
+  pageData: OfferDataTypes,
+}
 
 function OfferPageNearCard(props: OfferPageNearCardTypes): JSX.Element {
   const { pageData } = props;

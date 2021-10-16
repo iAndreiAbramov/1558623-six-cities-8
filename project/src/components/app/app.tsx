@@ -1,15 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { AppProps } from '../../types/app-types';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { CommentsDataTypes } from '../../types/comments-data-types';
 import FavoritesPage from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
-function App(props: AppProps): JSX.Element {
+type AppTypes = {
+  offersData: OfferDataTypes[],
+  commentsData: CommentsDataTypes[],
+}
+
+function App(props: AppTypes): JSX.Element {
   const { offersData, commentsData } = props;
   const favoritesData = offersData.filter((item) => item.isFavorite);
 

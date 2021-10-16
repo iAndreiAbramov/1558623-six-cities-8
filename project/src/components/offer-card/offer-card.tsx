@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { OfferCardTypes } from '../../types/offer-card-types';
 import { getVisualRating } from '../../utils/common-utils';
+import { OfferDataTypes } from '../../types/offer-data-types';
+
+type OfferCardTypes = {
+  data: OfferDataTypes,
+  onActiveCardChange: (newId: string) => void,
+}
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
   const { data, onActiveCardChange } = props;

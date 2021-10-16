@@ -1,12 +1,47 @@
-import React from 'react';
-import { HomePageMapProps } from '../../types/home-page-types';
+import React, { useEffect, useRef } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { Marker } from 'leaflet';
+import { City, Point } from '../../types/map-types';
+import { DefaultCustomIcon, ActiveCustomIcon } from '../../const';
+import useMap from '../../hooks/useMap';
+
+type HomePageMapProps = {
+  activeCardId: string,
+  city: City,
+  points: Point[],
+}
 
 function HomePageMap(props: HomePageMapProps): JSX.Element {
-  const { activeCardId } = props;
+  const { activeCardId, city, points } = props;
+
+  const mapRef = useRef(null);
+  const map = useMap(mapRef, city);
+
+  useEffect(() => {
+    if (map) {
+      points.forEach((point) => {
+        const marker = new Marker({
+          lat: point.lat,
+          lng: point.lng,
+        });
+
+        marker
+          .setIcon(
+            activeCardId && activeCardId === point.offerId
+              ? ActiveCustomIcon
+              : DefaultCustomIcon,
+          )
+          .addTo(map);
+      });
+    }
+  }, [map, points, activeCardId]);
+
   return (
     <div className="cities__right-section">
-      <p style={ { position: 'absolute', fontWeight: 'bold' } }>{ activeCardId }</p>
-      <section className="cities__map map" />
+      <section
+        className="cities__map map"
+        ref={ mapRef }
+      />
     </div>
   );
 }
