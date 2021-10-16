@@ -28,7 +28,7 @@ function useMap(
       instance.addLayer(layer);
       setMap(instance);
     }
-  }, [mapRef, map, city]);
+  }, [mapRef, map, latitude, longitude, zoom]);
 
   return map;
 }

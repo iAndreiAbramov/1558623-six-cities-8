@@ -25,11 +25,10 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
     ? 'property__bookmark-button property__bookmark-button--active button'
     : 'property__bookmark-button button';
   const nearbyPoints = nearOffersData.map((item) => ({
-      latitude: item.location.latitude,
-      longitude: item.location.longitude,
-      offerId: item.id,
-    }
-  ));
+    latitude: item.location.latitude,
+    longitude: item.location.longitude,
+    offerId: item.id,
+  }));
   const currentPoint = {
     latitude: pageData.location.latitude,
     longitude: pageData.location.longitude,

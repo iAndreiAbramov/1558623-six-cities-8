@@ -28,7 +28,7 @@ function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
       });
 
       const currentMarker = new Marker(
-        [currentPoint.latitude, currentPoint.longitude]
+        [currentPoint.latitude, currentPoint.longitude],
       );
       currentMarker.setIcon(ActiveCustomIcon).addTo(map);
 

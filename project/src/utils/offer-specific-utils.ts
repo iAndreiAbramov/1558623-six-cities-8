@@ -51,13 +51,13 @@ export const getRandomName = (): string => getRandomArrayItem(NAMES);
 
 export const getRandomRoomType = (): string => getRandomArrayItem(ROOM_TYPES);
 
-export const getCityCoordinates = () => {
+export const getCityCoordinates = (): [number, number] => {
   const cityCoordinates = [0, 0];
   const sumOfCoordinates = COORDINATES.reduce((acc, cur) => [acc[0] += cur[0], acc[1] += cur[1]], cityCoordinates);
   return [sumOfCoordinates[0]/COORDINATES.length, sumOfCoordinates[1]/COORDINATES.length];
 };
 
-export const getOfferCoordinates = () => COORDINATES.pop() as [number, number];
+export const getOfferCoordinates = (): number[] => COORDINATES.pop() as [number, number];
 
 export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes => {
   const offersByCities: OffersByCitiesTypes = {};
