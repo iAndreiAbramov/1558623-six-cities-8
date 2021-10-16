@@ -1,3 +1,6 @@
+import { City } from './types/map-types';
+import { Icon } from 'leaflet';
+
 export enum AppRoute {
   Home = '/',
   Login = '/login',
@@ -27,3 +30,25 @@ export enum RatingPosition {
 export const INITIAL_RATING = [false, false, false, false, false];
 export const INITIAL_REVIEW_STATE = '';
 export const MIN_COMMENT_LENGTH = 50;
+
+export const DEFAULT_CITY: City = {
+  title: 'Amsterdam',
+  lat: 52.38310503,
+  lng: 4.893703165,
+  zoom: 10,
+};
+
+export const URL_MARKER_DEFAULT = './img/pin.svg';
+export const URL_MARKER_ACTIVE = './img/pin-active.svg';
+
+export const DefaultCustomIcon = new Icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+export const ActiveCustomIcon = new Icon({
+  iconUrl: URL_MARKER_ACTIVE,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});

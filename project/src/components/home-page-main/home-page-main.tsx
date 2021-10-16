@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_CITY } from '../../const';
 import HomePageList from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import { OfferDataTypes } from '../../types/offer-data-types';
@@ -11,6 +12,15 @@ type HomePageMainTypes = {
 function HomePageMain(props: HomePageMainTypes): JSX.Element {
   const { offersData } = props;
   const [activeCardId, setActiveCardId] = useState('');
+  const points = offersData.map((item) => {
+    const { id } = item;
+    const { latitude, longitude } = item.location;
+    return {
+      lat: latitude,
+      lng: longitude,
+      offerId: id,
+    };
+  });
 
   return (
     <main className="page__main page__main--index">
@@ -61,6 +71,8 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
           />
           <HomePageMap
             activeCardId={ activeCardId }
+            city={ DEFAULT_CITY }
+            points={ points }
           />
         </div>
       </div>
