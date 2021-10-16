@@ -18,10 +18,12 @@ function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      const nearbyMarkers: Marker[] = [];
       nearbyPoints.forEach((point) => {
         const nearbyMarker = new Marker(
           [point.latitude, point.longitude],
         );
+        nearbyMarkers.push(nearbyMarker);
         nearbyMarker.setIcon(DefaultCustomIcon).addTo(map);
       });
 
@@ -29,6 +31,11 @@ function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
         [currentPoint.latitude, currentPoint.longitude]
       );
       currentMarker.setIcon(ActiveCustomIcon).addTo(map);
+
+      return () => {
+        nearbyMarkers.forEach((marker: Marker) => marker.removeFrom(map));
+        currentMarker.removeFrom(map);
+      };
     }
   });
 
