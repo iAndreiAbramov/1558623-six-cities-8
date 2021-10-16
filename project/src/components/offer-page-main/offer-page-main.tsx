@@ -8,6 +8,7 @@ import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
+import OfferPageMap from '../offer-page-map/offer-page-map';
 
 type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH',
@@ -18,11 +19,22 @@ type OfferPageMainTypes = {
 
 function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   const { authorizationStatus, pageData, nearOffersData, commentsData } = props;
-  const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods } = pageData;
+  const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
     ? 'property__bookmark-button property__bookmark-button--active button'
     : 'property__bookmark-button button';
+  const nearbyPoints = nearOffersData.map((item) => ({
+      latitude: item.location.latitude,
+      longitude: item.location.longitude,
+      offerId: item.id,
+    }
+  ));
+  const currentPoint = {
+    latitude: pageData.location.latitude,
+    longitude: pageData.location.longitude,
+    offerId: pageData.id,
+  };
 
   return (
     <main className="page__main page__main--property">
@@ -81,7 +93,11 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
             </section>
           </div>
         </div>
-        <section className="property__map map" />
+        <OfferPageMap
+          city={ city }
+          nearbyPoints={ nearbyPoints }
+          currentPoint={ currentPoint }
+        />
       </section>
       <OfferPageNearList
         nearOffersData={ nearOffersData }

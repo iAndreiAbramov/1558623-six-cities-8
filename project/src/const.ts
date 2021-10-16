@@ -32,10 +32,12 @@ export const INITIAL_REVIEW_STATE = '';
 export const MIN_COMMENT_LENGTH = 50;
 
 export const DEFAULT_CITY: City = {
-  title: 'Amsterdam',
-  lat: 52.38310503,
-  lng: 4.893703165,
-  zoom: 10,
+  location: {
+    latitude: 52.38310503,
+    longitude: 4.893703165,
+    zoom: 12,
+  },
+  name: 'Amsterdam',
 };
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
