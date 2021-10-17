@@ -32,10 +32,12 @@ export const INITIAL_REVIEW_STATE = '';
 export const MIN_COMMENT_LENGTH = 50;
 
 export const DEFAULT_CITY: City = {
-  title: 'Amsterdam',
-  lat: 52.38310503,
-  lng: 4.893703165,
-  zoom: 10,
+  location: {
+    latitude: 52.38310503,
+    longitude: 4.893703165,
+    zoom: 12,
+  },
+  name: 'Amsterdam',
 };
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
@@ -52,3 +54,13 @@ export const ActiveCustomIcon = new Icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
+
+export const CardArticleClasses = {
+  MAIN_PAGE_LIST: 'cities__place-card',
+  NEARBY_LIST: 'near-places__card',
+};
+
+export const CardImgWrapperClasses = {
+  MAIN_PAGE_LIST: 'cities__image-wrapper',
+  NEARBY_LIST: 'near-places__image-wrapper',
+};

@@ -16,8 +16,8 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
     const { id } = item;
     const { latitude, longitude } = item.location;
     return {
-      lat: latitude,
-      lng: longitude,
+      latitude: latitude,
+      longitude: longitude,
       offerId: id,
     };
   });

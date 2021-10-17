@@ -21,8 +21,8 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
     if (map) {
       points.forEach((point) => {
         const marker = new Marker({
-          lat: point.lat,
-          lng: point.lng,
+          lat: point.latitude,
+          lng: point.longitude,
         });
 
         marker

@@ -1,10 +1,11 @@
 import React from 'react';
+import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
-  onActiveCardChange: (newId: string) => void,
+  onActiveCardChange?: (newId: string) => void,
 }
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
@@ -17,6 +18,8 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
         key={ id }
         data={ cardItem }
         onActiveCardChange={ onActiveCardChange }
+        articleClass={ CardArticleClasses.MAIN_PAGE_LIST }
+        imgWrapperClass={ CardImgWrapperClasses.MAIN_PAGE_LIST }
       />
     );
   });

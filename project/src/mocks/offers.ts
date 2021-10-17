@@ -29,7 +29,7 @@ const getOffer = (): OfferDataTypes => {
       location: {
         latitude: cityLat,
         longitude: cityLng,
-        zoom: 10,
+        zoom: 12,
       },
       name: getRandomCity(),
     },

@@ -5,9 +5,9 @@ export type OfferDataTypes = {
       latitude: number,
       longitude: number,
       zoom: number,
-    };
+    },
     name: string,
-  };
+  },
   description: string,
   goods: string[],
   host: {
@@ -15,7 +15,7 @@ export type OfferDataTypes = {
     id: string,
     isPro: boolean,
     name: string,
-  };
+  },
   id: string,
   images: string[],
   isFavorite: boolean,
@@ -24,7 +24,7 @@ export type OfferDataTypes = {
     latitude: number,
     longitude: number,
     zoom: number,
-  };
+  },
   maxAdults: number,
   previewImage: string,
   price: number,
