@@ -1,6 +1,7 @@
 import React from 'react';
-import OfferPageNearCard from '../offer-page-near-card/offer-page-near-card';
+import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import OfferCard from '../offer-card/offer-card';
 
 type OfferPageNearListTypes = {
   nearOffersData: OfferDataTypes[],
@@ -9,9 +10,11 @@ type OfferPageNearListTypes = {
 function OfferPageNearList(props: OfferPageNearListTypes): JSX.Element {
   const { nearOffersData } = props;
   const nearCards = nearOffersData.map((cardItem) => (
-    <OfferPageNearCard
+    <OfferCard
       key={ cardItem.id }
-      pageData={ cardItem }
+      data={ cardItem }
+      articleClass={ CardArticleClasses.NEARBY_LIST }
+      imgWrapperClass={ CardImgWrapperClasses.NEARBY_LIST }
     />
   ));
 

@@ -54,3 +54,13 @@ export const ActiveCustomIcon = new Icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
+
+export const CardArticleClasses = {
+  MAIN_PAGE_LIST: 'cities__place-card',
+  NEARBY_LIST: 'near-places__card',
+};
+
+export const CardImgWrapperClasses = {
+  MAIN_PAGE_LIST: 'cities__image-wrapper',
+  NEARBY_LIST: 'near-places__image-wrapper',
+};

@@ -6,11 +6,13 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferCardTypes = {
   data: OfferDataTypes,
-  onActiveCardChange: (newId: string) => void,
+  onActiveCardChange?: (newId: string) => void,
+  articleClass: string,
+  imgWrapperClass: string,
 }
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data, onActiveCardChange } = props;
+  const { data, onActiveCardChange, articleClass, imgWrapperClass } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -18,9 +20,9 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
     : 'place-card__bookmark-button button';
 
   return (
-    <article className="cities__place-card place-card"
-      onMouseEnter={ () => onActiveCardChange(id) }
-      onMouseLeave={ () => onActiveCardChange('') }
+    <article className={ `${ articleClass } place-card` }
+      onMouseEnter={ () => onActiveCardChange && onActiveCardChange(id) }
+      onMouseLeave={ () => onActiveCardChange && onActiveCardChange('') }
     >
       {
         isPremium &&
@@ -28,7 +30,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           <span>Premium</span>
         </div>
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={ `${ imgWrapperClass } place-card__image-wrapper` }>
         <Link to={ `${ AppRoute.Offer }/${ id }` }>
           <img className="place-card__image" src={ previewImage } width="260" height="200"
             alt="Place view"
