@@ -1,11 +1,11 @@
 import React from 'react';
+import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
-  onActiveCardChange: (newId: string) => void,
+  onActiveCardChange?: (newId: string) => void,
 }
 
 function HomePageList(props: HomePageListTypes): JSX.Element {

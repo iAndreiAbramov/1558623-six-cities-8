@@ -14,6 +14,7 @@ function useMap(
       const instance = new Map(mapRef.current, {
         center: [latitude, longitude],
         zoom: zoom,
+        scrollWheelZoom: false,
       });
 
       const layer = new TileLayer(
