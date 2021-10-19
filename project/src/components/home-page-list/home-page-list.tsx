@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
+import React, { useEffect, useState } from 'react';
+import { CardArticleClasses, CardImgWrapperClasses, SortOptions } from '../../const';
+import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
+import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
-import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
@@ -13,8 +13,31 @@ type HomePageListTypes = {
 function HomePageList(props: HomePageListTypes): JSX.Element {
   const { offersData, onActiveCardChange } = props;
   const [dropdownState, setDropdownState] = useState(false);
+  const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
+  const [sortedData, setSortedData] = useState(offersData.slice());
 
-  const offerCards = offersData.map((cardItem) => {
+  useEffect(() => {
+    if (sortOption === SortOptions.PRICE_UP) {
+      setSortedData(() => (
+        [...offersData].sort((a, b) => (
+          a.price - b.price
+        ))));
+    } else if (sortOption === SortOptions.PRICE_DOWN) {
+      setSortedData(() => (
+        [...offersData].sort((a, b) => (
+          b.price - a.price
+        ))));
+    } else if (sortOption === SortOptions.RATING_DOWN) {
+      setSortedData(() => (
+        [...offersData].sort((a, b) => (
+          b.rating - a.rating
+        ))));
+    } else {
+      setSortedData([...offersData]);
+    }
+  }, [offersData, sortOption]);
+
+  const offerCards = sortedData.map((cardItem) => {
     const { id } = cardItem;
     return (
       <OfferCard
@@ -28,7 +51,12 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   });
 
   const handleDropdownClick = (): void => {
-    setDropdownState((prevState) => !prevState);
+    setDropdownState((prevState: boolean) => !prevState);
+  }
+
+  const handleSortToggle = (sortOption: string) => {
+    setDropdownState((prevState: boolean) => !prevState);
+    setSortOption(sortOption);
   }
 
   return (
@@ -38,9 +66,15 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <HomePageSortDropdown
+          sortOption={ sortOption }
           clickHandler={ handleDropdownClick }
         />
-        { dropdownState && <HomePageSortToggler /> }
+        {
+          dropdownState &&
+          <HomePageSortToggler
+            clickHandler={ handleSortToggle }
+          />
+        }
       </form>
       <div className="cities__places-list places__list tabs__content">
         { offerCards }

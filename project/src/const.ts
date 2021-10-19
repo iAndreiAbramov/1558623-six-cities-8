@@ -64,3 +64,10 @@ export const CardImgWrapperClasses = {
   MAIN_PAGE_LIST: 'cities__image-wrapper',
   NEARBY_LIST: 'near-places__image-wrapper',
 };
+
+export const SortOptions = {
+  POPULAR: 'Popular',
+  PRICE_UP: 'Price: low to high',
+  PRICE_DOWN: 'Price: high to low',
+  RATING_DOWN: 'Top rated first',
+}
