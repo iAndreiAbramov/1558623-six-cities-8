@@ -14,7 +14,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const { offersData, onActiveCardChange } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
-  const [sortedData, setSortedData] = useState(offersData.slice());
+  const [sortedData, setSortedData] = useState([...offersData]);
 
   useEffect(() => {
     if (sortOption === SortOptions.PRICE_UP) {
@@ -52,12 +52,12 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
 
   const handleDropdownClick = (): void => {
     setDropdownState((prevState: boolean) => !prevState);
-  }
+  };
 
-  const handleSortToggle = (sortOption: string) => {
+  const handleSortToggle = (option: string) => {
     setDropdownState((prevState: boolean) => !prevState);
-    setSortOption(sortOption);
-  }
+    setSortOption(option);
+  };
 
   return (
     <section className="cities__places places">

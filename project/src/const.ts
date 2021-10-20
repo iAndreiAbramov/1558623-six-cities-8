@@ -14,6 +14,17 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
 }
 
+export const Cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+export const DEFAULT_CITY_NAME = 'Paris';
+
 export const PERCENTS_CAP = 100;
 export const MIN_RATING = 1;
 export const MAX_RATING = 5;
@@ -37,7 +48,7 @@ export const DEFAULT_CITY: City = {
     longitude: 4.893703165,
     zoom: 12,
   },
-  name: 'Amsterdam',
+  name: 'Paris',
 };
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
@@ -70,4 +81,4 @@ export const SortOptions = {
   PRICE_UP: 'Price: low to high',
   PRICE_DOWN: 'Price: high to low',
   RATING_DOWN: 'Top rated first',
-}
+};

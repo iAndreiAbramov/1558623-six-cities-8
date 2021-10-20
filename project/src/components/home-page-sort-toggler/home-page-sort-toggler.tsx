@@ -12,25 +12,30 @@ function HomePageSortToggler(props: HomePageSortTogglerTypes): JSX.Element {
       <li
         onClick={ () => clickHandler(SortOptions.POPULAR) }
         className="places__option places__option--active"
-        tabIndex={ 0 }>
+        tabIndex={ 0 }
+      >
         Popular
       </li>
       <li
         onClick={ () => clickHandler(SortOptions.PRICE_UP) }
         className="places__option"
-        tabIndex={ 0 }>
+        tabIndex={ 0 }
+      >
         Price: low to high
       </li>
       <li
         onClick={ () => clickHandler(SortOptions.PRICE_DOWN) }
         className="places__option"
-        tabIndex={ 0 }>
+        tabIndex={ 0 }
+      >
         Price: high to low
       </li>
       <li
         onClick={ () => clickHandler(SortOptions.RATING_DOWN) }
         className="places__option"
-        tabIndex={ 0 }>Top rated first
+        tabIndex={ 0 }
+      >
+        Top rated first
       </li>
     </ul>
   );
