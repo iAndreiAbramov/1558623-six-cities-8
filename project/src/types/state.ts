@@ -1,6 +1,6 @@
-// import { OfferDataTypes } from './offer-data-types';
+import { OfferDataTypes } from './offer-data-types';
 
 export type State = {
-  city: string,
-  // offersList: OfferDataTypes[],
+  cityName: string,
+  offersList: OfferDataTypes[],
 }

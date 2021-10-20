@@ -4,7 +4,6 @@ import App from './components/app/app';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore } from '@reduxjs/toolkit';
 import { getCommentsData } from './mocks/comments';
-import { getOffersData, OFFERS_NUMBER } from './mocks/offers';
 import { Provider } from 'react-redux';
 import { reducer } from './store/reducer';
 
@@ -14,7 +13,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={ store }>
       <App
-        offersData={ getOffersData(OFFERS_NUMBER) }
         commentsData={ getCommentsData() }
       />
     </Provider>

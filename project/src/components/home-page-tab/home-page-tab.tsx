@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { ActionTypes } from '../../types/action-types';
 import { changeCityAction } from '../../store/actions';
 import { State } from '../../types/state';
@@ -13,7 +13,7 @@ type HomePageTabTypes = {
 }
 
 const mapStateToProps = (state: State) => ({
-  currentCity: state.city,
+  currentCity: state.cityName,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   setActiveCity: changeCityAction,

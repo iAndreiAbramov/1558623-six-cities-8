@@ -4,14 +4,23 @@ import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-drop
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { connect } from 'react-redux';
+import { State } from '../../types/state';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
   onActiveCardChange?: (newId: string) => void,
+  currentCity: string,
 }
 
+const mapStateToProps = (state: State) => ({
+  currentCity: state.cityName,
+});
+
+const HomePageListConnected = connect(mapStateToProps)(HomePageList);
+
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange } = props;
+  const { offersData, onActiveCardChange, currentCity } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -62,7 +71,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{ offersData.length } places to stay in Amsterdam</b>
+      <b className="places__found">{ offersData.length } places to stay in { currentCity }</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <HomePageSortDropdown
@@ -83,4 +92,5 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   );
 }
 
-export default HomePageList;
+export { HomePageList };
+export default HomePageListConnected;

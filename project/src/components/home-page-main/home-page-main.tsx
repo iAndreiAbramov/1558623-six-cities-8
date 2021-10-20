@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DEFAULT_CITY } from '../../const';
-import HomePageList from '../home-page-list/home-page-list';
+import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
@@ -29,7 +29,7 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
       <HomePageTabs />
       <div className="cities">
         <div className="cities__places-container container">
-          <HomePageList
+          <HomePageListConnected
             offersData={ offersData }
             onActiveCardChange={ (newId: string): void => (
               setActiveCardId(newId)

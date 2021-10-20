@@ -3,8 +3,8 @@ import { Icon } from 'leaflet';
 
 export enum AppRoute {
   Home = '/',
-  Login = '/login',
   Favorites = '/favorites',
+  Login = '/login',
   OfferId = '/offer/:id',
   Offer = '/offer'
 }
@@ -23,7 +23,7 @@ export const Cities = [
   'Dusseldorf',
 ];
 
-export const DEFAULT_CITY_NAME = 'Paris';
+export const DEFAULT_CITY_NAME = 'Amsterdam';
 
 export const PERCENTS_CAP = 100;
 export const MIN_RATING = 1;

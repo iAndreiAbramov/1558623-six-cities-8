@@ -9,14 +9,22 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
+import { State } from '../../types/state';
+import { connect } from 'react-redux';
 
 type AppTypes = {
   offersData: OfferDataTypes[],
   commentsData: CommentsDataTypes[],
 }
 
+const mapStateToProps = (state: State) => ({
+  offersData: state.offersList,
+});
+
+const AppConnected = connect(mapStateToProps)(App);
+
 function App(props: AppTypes): JSX.Element {
-  const { offersData, commentsData } = props;
+  const { offersData ,commentsData } = props;
   const favoritesData = offersData.filter((item) => item.isFavorite);
 
   return (
@@ -60,4 +68,5 @@ function App(props: AppTypes): JSX.Element {
   );
 }
 
-export default App;
+export { App };
+export default AppConnected;
