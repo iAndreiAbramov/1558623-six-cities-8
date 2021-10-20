@@ -1,11 +1,11 @@
 import React from 'react';
 import { Cities } from '../../const';
-import HomePageTab from '../home-page-tab/home-page-tab';
+import HomePageTabConnected from '../home-page-tab/home-page-tab';
 
 function HomePageTabs(): JSX.Element {
   const tabs = Cities.map((cityName) => (
     <li key={ cityName } className="locations__item">
-      <HomePageTab
+      <HomePageTabConnected
         name={ cityName }
       />
     </li>
