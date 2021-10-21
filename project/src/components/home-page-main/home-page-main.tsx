@@ -4,10 +4,18 @@ import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { State } from '../../types/state';
+import { connect } from 'react-redux';
 
 type HomePageMainTypes = {
   offersData: OfferDataTypes[],
 }
+
+const mapStateToProps = (state: State) => ({
+  offersData: state.offersList,
+});
+
+const HomePageMainConnected = connect(mapStateToProps)(HomePageMain);
 
 function HomePageMain(props: HomePageMainTypes): JSX.Element {
   const { offersData } = props;
@@ -46,4 +54,5 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
   );
 }
 
-export default HomePageMain;
+export { HomePageMain };
+export default HomePageMainConnected;

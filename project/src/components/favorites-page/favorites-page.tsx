@@ -2,15 +2,12 @@ import React from 'react';
 import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
-import { OfferDataTypes } from '../../types/offer-data-types';
+import { offersData } from '../../store/reducer';
 import PageHeader from '../page-header/page-header';
 
-type FavoritesTypes = {
-  favoritesData: OfferDataTypes[],
-}
+const favoritesData = offersData.filter((item) => item.isFavorite);
 
-function FavoritesPage(props: FavoritesTypes): JSX.Element {
-  const { favoritesData } = props;
+function FavoritesPage(): JSX.Element {
   const isEmpty = favoritesData.length === 0;
   const wrapperClass: string = isEmpty ? 'page page--favorites-empty' : 'page';
   const pageContent: JSX.Element = isEmpty

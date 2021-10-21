@@ -5,4 +5,6 @@ export enum ActionType {
   GetOffersData = 'getOffersData',
 }
 
-export type ActionTypes = ReturnType<typeof changeCityAction> | ReturnType<typeof getOffersDataAction>;
+export type ActionTypes =
+  | ReturnType<typeof changeCityAction>
+  | ReturnType<typeof getOffersDataAction>;
