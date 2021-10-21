@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { CommentsDataTypes } from '../../types/comments-data-types';
 import FavoritesPage from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
