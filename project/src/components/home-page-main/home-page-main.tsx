@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { DEFAULT_CITY } from '../../const';
 import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { State } from '../../types/state';
-import { connect } from 'react-redux';
 
 type HomePageMainTypes = {
   offersData: OfferDataTypes[],
