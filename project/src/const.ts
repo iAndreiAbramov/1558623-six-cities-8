@@ -3,8 +3,8 @@ import { Icon } from 'leaflet';
 
 export enum AppRoute {
   Home = '/',
-  Login = '/login',
   Favorites = '/favorites',
+  Login = '/login',
   OfferId = '/offer/:id',
   Offer = '/offer'
 }
@@ -13,6 +13,17 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
 }
+
+export const Cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+export const DEFAULT_CITY_NAME = 'Amsterdam';
 
 export const PERCENTS_CAP = 100;
 export const MIN_RATING = 1;
@@ -37,7 +48,7 @@ export const DEFAULT_CITY: City = {
     longitude: 4.893703165,
     zoom: 12,
   },
-  name: 'Amsterdam',
+  name: 'Paris',
 };
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
@@ -63,4 +74,11 @@ export const CardArticleClasses = {
 export const CardImgWrapperClasses = {
   MAIN_PAGE_LIST: 'cities__image-wrapper',
   NEARBY_LIST: 'near-places__image-wrapper',
+};
+
+export const SortOptions = {
+  POPULAR: 'Popular',
+  PRICE_UP: 'Price: low to high',
+  PRICE_DOWN: 'Price: high to low',
+  RATING_DOWN: 'Top rated first',
 };

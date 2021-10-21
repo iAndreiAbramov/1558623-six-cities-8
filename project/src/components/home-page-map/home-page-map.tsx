@@ -16,6 +16,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const markers: Marker[] = [];
 
   useEffect(() => {
     if (map) {
@@ -32,7 +33,9 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
               : DefaultCustomIcon,
           )
           .addTo(map);
+        markers.push(marker);
       });
+      return () => markers.forEach((marker) => marker.removeFrom(map));
     }
   }, [map, points, activeCardId]);
 
