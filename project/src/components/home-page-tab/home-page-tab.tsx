@@ -1,25 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
 import { changeCityAction } from '../../store/actions';
 import { State } from '../../types/state';
 
-type HomePageTabTypes = {
-  name: string,
-  currentCity: string,
-  setActiveCity: (newName: string) => ActionTypes,
-}
-
 const mapStateToProps = (state: State) => ({
   currentCity: state.cityName,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   setActiveCity: changeCityAction,
-}, dispatch as Dispatch);
+}, dispatch);
 
-const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps)(HomePageTab);
+const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps);
+
+type HomePageTabTypes = { name: string } & ConnectedProps<typeof HomePageTabConnected>;
 
 function HomePageTab(props: HomePageTabTypes): JSX.Element {
   const { name, currentCity, setActiveCity } = props;
@@ -37,4 +33,4 @@ function HomePageTab(props: HomePageTabTypes): JSX.Element {
 }
 
 export { HomePageTab };
-export default HomePageTabConnected;
+export default HomePageTabConnected(HomePageTab);

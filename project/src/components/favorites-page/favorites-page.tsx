@@ -2,12 +2,23 @@ import React from 'react';
 import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
-import { offersData } from '../../store/reducer';
 import PageHeader from '../page-header/page-header';
+import { State } from '../../types/state';
+import { connect } from 'react-redux';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
-const favoritesData = offersData.filter((item) => item.isFavorite);
+type FavoritesPageTypes = {
+  favoritesData: OfferDataTypes[],
+}
 
-function FavoritesPage(): JSX.Element {
+const mapStateToProps = (state: State) => ({
+  favoritesData: state.offersData.filter((item) => item.isFavorite)
+});
+
+const FavoritesPageConnected = connect(mapStateToProps)(FavoritesPage);
+
+function FavoritesPage(props: FavoritesPageTypes): JSX.Element {
+  const { favoritesData } = props;
   const isEmpty = favoritesData.length === 0;
   const wrapperClass: string = isEmpty ? 'page page--favorites-empty' : 'page';
   const pageContent: JSX.Element = isEmpty
@@ -23,4 +34,5 @@ function FavoritesPage(): JSX.Element {
   );
 }
 
-export default FavoritesPage;
+export { FavoritesPage };
+export default FavoritesPageConnected;
