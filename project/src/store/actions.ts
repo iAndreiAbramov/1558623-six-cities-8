@@ -1,4 +1,6 @@
 import { ActionType } from '../types/action-types';
+import { AuthorizationStatus } from '../const';
+import { OfferDataTypes } from '../types/offer-data-types';
 import { offersData } from './reducer';
 
 export const changeCityAction = (
@@ -14,6 +16,20 @@ export const changeCityAction = (
   },
 } as const);
 
-export const getOffersDataAction = () => ({
-  type: ActionType.GetOffersData,
+export const loadOffersDataAction = (allOffersList: OfferDataTypes[]) => ({
+  type: ActionType.LoadOffersData,
+  payload: {
+    offersList: allOffersList,
+  },
+} as const);
+
+export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
+  type: ActionType.RequireAuthorization,
+  payload: {
+    authStatus,
+  },
+} as const);
+
+export const requireLogout = () => ({
+  type: ActionType.RequireLogout,
 } as const);

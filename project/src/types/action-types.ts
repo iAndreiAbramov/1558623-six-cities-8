@@ -1,10 +1,14 @@
-import { changeCityAction, getOffersDataAction } from '../store/actions';
+import { changeCityAction, loadOffersDataAction, requireAuthorization, requireLogout } from '../store/actions';
 
 export enum ActionType {
-  ChangeCity = 'changeCity',
-  GetOffersData = 'getOffersData',
+  ChangeCity = 'home/changeCity',
+  LoadOffersData = 'data/getOffersData',
+  RequireAuthorization = 'user/requireAuthorization',
+  RequireLogout = 'user/requireLogout',
 }
 
 export type ActionTypes =
   | ReturnType<typeof changeCityAction>
-  | ReturnType<typeof getOffersDataAction>;
+  | ReturnType<typeof loadOffersDataAction>
+  | ReturnType<typeof requireAuthorization>
+  | ReturnType<typeof requireLogout>

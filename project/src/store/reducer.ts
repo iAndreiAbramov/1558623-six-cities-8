@@ -1,5 +1,5 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { DEFAULT_CITY_NAME } from '../const';
+import { AuthorizationStatus, DEFAULT_CITY_NAME } from '../const';
 import { getOffersData, OFFERS_NUMBER } from '../mocks/offers';
 import { State } from '../types/state';
 
@@ -11,6 +11,7 @@ const initialOffersData = offersData.filter((offer) => (
 const initialState: State = {
   cityName: DEFAULT_CITY_NAME,
   offersData: initialOffersData,
+  authorization: AuthorizationStatus.Unknown,
 };
 
 export const reducer = (state: State = initialState, action: ActionTypes): State => {
@@ -20,6 +21,21 @@ export const reducer = (state: State = initialState, action: ActionTypes): State
         ...state,
         cityName: action.payload.cityName,
         offersData: action.payload.offersList,
+      };
+    case ActionType.LoadOffersData:
+      return {
+        ...state,
+        offersData: action.payload.offersList,
+      };
+    case ActionType.RequireAuthorization:
+      return {
+        ...state,
+        authorization: action.payload.authStatus,
+      };
+    case ActionType.RequireLogout:
+      return {
+        ...state,
+        authorization: AuthorizationStatus.NoAuth,
       };
     default:
       return state;

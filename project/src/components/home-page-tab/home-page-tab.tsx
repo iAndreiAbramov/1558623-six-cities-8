@@ -17,7 +17,7 @@ const mapStateToProps = (state: State) => ({
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   setActiveCity: changeCityAction,
-}, dispatch);
+}, dispatch as Dispatch);
 
 const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps)(HomePageTab);
 
