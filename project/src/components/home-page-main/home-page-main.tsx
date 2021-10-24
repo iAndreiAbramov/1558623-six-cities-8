@@ -12,7 +12,7 @@ type HomePageMainTypes = {
 }
 
 const mapStateToProps = (state: State) => ({
-  offersData: state.offersList,
+  offersData: state.offersData,
 });
 
 const HomePageMainConnected = connect(mapStateToProps)(HomePageMain);

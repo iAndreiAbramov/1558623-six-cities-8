@@ -10,7 +10,7 @@ const initialOffersData = offersData.filter((offer) => (
 
 const initialState: State = {
   cityName: DEFAULT_CITY_NAME,
-  offersList: initialOffersData,
+  offersData: initialOffersData,
 };
 
 export const reducer = (state: State = initialState, action: ActionTypes): State => {
@@ -19,7 +19,7 @@ export const reducer = (state: State = initialState, action: ActionTypes): State
       return {
         ...state,
         cityName: action.payload.cityName,
-        offersList: action.payload.offersList,
+        offersData: action.payload.offersList,
       };
     default:
       return state;
