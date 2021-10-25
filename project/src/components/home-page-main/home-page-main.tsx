@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { DEFAULT_CITY } from '../../const';
+import { Cities, DEFAULT_CITY_NAME } from '../../const';
 import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { State } from '../../types/state';
+import { StateTypes } from '../../types/state-types';
 
 type HomePageMainTypes = {
   offersData: OfferDataTypes[],
+  activeCity: string,
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: StateTypes) => ({
   offersData: state.offersData,
+  activeCity: state.activeCity.name,
 });
 
 const HomePageMainConnected = connect(mapStateToProps)(HomePageMain);
 
 function HomePageMain(props: HomePageMainTypes): JSX.Element {
-  const { offersData } = props;
+  const { offersData, activeCity } = props;
   const [activeCardId, setActiveCardId] = useState('');
+
+  const cityData = offersData.filter((offer) => (
+    offer.city.name === activeCity
+  ));
 
   const points = offersData.map((item) => {
     const { id } = item;
     const { latitude, longitude } = item.location;
     return {
-      latitude: latitude,
-      longitude: longitude,
+      latitude,
+      longitude,
       offerId: id,
     };
   });
@@ -38,14 +44,14 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
       <div className="cities">
         <div className="cities__places-container container">
           <HomePageListConnected
-            offersData={ offersData }
+            offersData={ cityData }
             onActiveCardChange={ (newId: string): void => (
               setActiveCardId(newId)
             ) }
           />
           <HomePageMap
             activeCardId={ activeCardId }
-            city={ DEFAULT_CITY }
+            city={ Cities[DEFAULT_CITY_NAME] }
             points={ points }
           />
         </div>

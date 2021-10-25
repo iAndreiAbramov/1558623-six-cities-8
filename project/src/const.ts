@@ -1,5 +1,5 @@
-import { City } from './types/map-types';
 import { Icon } from 'leaflet';
+import { CitiesTypes } from './types/state-types';
 
 export enum AppRoute {
   Home = '/',
@@ -15,16 +15,58 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const Cities = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-];
+export const Cities: CitiesTypes = {
+  'Paris': {
+    name: 'Paris',
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13,
+    },
+  },
+  'Cologne': {
+    name: 'Cologne',
+    location: {
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13,
+    },
+  },
+  'Brussels': {
+    name: 'Brussels',
+    location: {
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13,
+    },
+  },
+  'Amsterdam': {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.38310503,
+      longitude: 4.893703165,
+      zoom: 13,
+    },
+  },
+  'Hamburg': {
+    name: 'Hamburg',
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13,
+    },
+  },
+  'Dusseldorf': {
+    name: 'Dusseldorf',
+    location: {
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: 13,
+    },
+  },
+};
 
-export const DEFAULT_CITY_NAME = 'Amsterdam';
+export const DEFAULT_CITY_NAME: string = 'Paris';
 
 export const PERCENTS_CAP = 100;
 export const MIN_RATING = 1;
@@ -42,15 +84,6 @@ export enum RatingPosition {
 export const INITIAL_RATING = [false, false, false, false, false];
 export const INITIAL_REVIEW_STATE = '';
 export const MIN_COMMENT_LENGTH = 50;
-
-export const DEFAULT_CITY: City = {
-  location: {
-    latitude: 52.38310503,
-    longitude: 4.893703165,
-    zoom: 12,
-  },
-  name: 'Paris',
-};
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
 export const URL_MARKER_ACTIVE = './img/pin-active.svg';

@@ -3,7 +3,7 @@ import { Cities } from '../../const';
 import HomePageTabConnected from '../home-page-tab/home-page-tab';
 
 function HomePageTabs(): JSX.Element {
-  const tabs = Cities.map((cityName) => (
+  const tabs = Object.keys(Cities).map((cityName) => (
     <li key={ cityName } className="locations__item">
       <HomePageTabConnected
         name={ cityName }

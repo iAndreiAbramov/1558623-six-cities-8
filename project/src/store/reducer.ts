@@ -1,19 +1,33 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { AuthorizationStatus, DEFAULT_CITY_NAME } from '../const';
-import { State } from '../types/state';
+import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME } from '../const';
+import { StateTypes } from '../types/state-types';
 
-const initialState: State = {
-  cityName: DEFAULT_CITY_NAME,
+const initialState: StateTypes = {
+  activeCity: {
+    name: Cities[DEFAULT_CITY_NAME].name,
+    location: {
+      latitude: Cities[DEFAULT_CITY_NAME].location.latitude,
+      longitude: Cities[DEFAULT_CITY_NAME].location.longitude,
+      zoom: Cities[DEFAULT_CITY_NAME].location.zoom,
+    }
+  },
   offersData: [],
   authorization: AuthorizationStatus.Unknown,
 };
 
-export const reducer = (state: State = initialState, action: ActionTypes): State => {
+export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
   switch (action.type) {
     case ActionType.ChangeCity:
       return {
         ...state,
-        cityName: action.payload.cityName,
+        activeCity: {
+          name: action.payload.cityName,
+          location: {
+            latitude: Cities[action.payload.cityName].location.latitude,
+            longitude: Cities[action.payload.cityName].location.longitude,
+            zoom: Cities[action.payload.cityName].location.zoom,
+          }
+        },
       };
     case ActionType.LoadOffersData:
       return {

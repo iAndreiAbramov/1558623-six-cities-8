@@ -4,10 +4,10 @@ import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
 import { changeCityAction } from '../../store/actions';
-import { State } from '../../types/state';
+import { StateTypes } from '../../types/state-types';
 
-const mapStateToProps = (state: State) => ({
-  currentCity: state.cityName,
+const mapStateToProps = (state: StateTypes) => ({
+  currentCity: state.activeCity.name,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   setActiveCity: changeCityAction,

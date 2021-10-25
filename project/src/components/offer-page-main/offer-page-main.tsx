@@ -15,6 +15,7 @@ import { getOffersData } from '../../mocks/offers';
 type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH',
 }
+
 const offersData = getOffersData(4);
 const nearOffersData = offersData.slice(0, 3);
 const commentsData = getCommentsData();

@@ -5,7 +5,7 @@ import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggle
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { connect } from 'react-redux';
-import { State } from '../../types/state';
+import { StateTypes } from '../../types/state-types';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
@@ -13,8 +13,8 @@ type HomePageListTypes = {
   currentCity: string,
 }
 
-const mapStateToProps = (state: State) => ({
-  currentCity: state.cityName,
+const mapStateToProps = (state: StateTypes) => ({
+  currentCity: state.activeCity.name,
 });
 
 const HomePageListConnected = connect(mapStateToProps)(HomePageList);

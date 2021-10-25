@@ -1,10 +1,10 @@
-import { City } from '../types/map-types';
 import { Map, TileLayer } from 'leaflet';
 import { MutableRefObject, useEffect, useState } from 'react';
+import { CityTypes } from '../types/state-types';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: City,
+  city: CityTypes,
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const { latitude, longitude, zoom } = city.location;

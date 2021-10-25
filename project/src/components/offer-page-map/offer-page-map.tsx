@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
-import { City, Point } from '../../types/map-types';
 import { Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
+import { CityTypes, PointTypes } from '../../types/state-types';
 
 type OfferPageMapTypes = {
-  city: City,
-  nearbyPoints: Point[],
-  currentPoint: Point,
+  city: CityTypes,
+  nearbyPoints: PointTypes[],
+  currentPoint: PointTypes,
 }
 
 function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
