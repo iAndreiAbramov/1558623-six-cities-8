@@ -1,8 +1,8 @@
 import { BackDataTypes } from '../types/back-data-types';
 import { OfferDataTypes } from '../types/offer-data-types';
 
-export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] => (
-  backData.map((item): OfferDataTypes => {
+export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] => {
+  const adaptedData = backData.map((item): OfferDataTypes => {
     return Object.assign(
       {},
       item,
@@ -22,4 +22,14 @@ export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] =>
       }
     )
   })
-)
+
+  adaptedData.forEach((item) => {
+    delete item.is_favorite;
+    delete item.is_premium;
+    delete item.max_adults;
+    delete item.preview_image;
+    delete item.host.is_pro;
+    delete item.host.avatar_url;
+  })
+  return adaptedData;
+}
