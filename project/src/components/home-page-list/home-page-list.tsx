@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { CardArticleClasses, CardImgWrapperClasses, SortOptions } from '../../const';
+import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { connect } from 'react-redux';
 import { StateTypes } from '../../types/state-types';
+import Spinner from '../spinner/spinner';
 
 type HomePageListTypes = {
+  isFetching: string,
   offersData: OfferDataTypes[],
   onActiveCardChange?: (newId: string) => void,
   activeCity: string,
 }
 
 const mapStateToProps = (state: StateTypes) => ({
+  isFetching: state.isFetching,
   activeCity: state.activeCity.name,
 });
 
 const HomePageListConnected = connect(mapStateToProps)(HomePageList);
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity } = props;
+  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -85,8 +88,9 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
           />
         }
       </form>
-      <div className="cities__places-list places__list tabs__content">
-        { offerCards }
+      <div className="cities__places-list places__list tabs__content" style={ { position: 'relative' } }>
+        { isFetching === FetchStatus.InProgress && <Spinner /> }
+        { isFetching === FetchStatus.Success && offerCards }
       </div>
     </section>
   );

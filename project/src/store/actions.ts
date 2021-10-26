@@ -16,6 +16,13 @@ export const initCityAction = (
   },
 } as const);
 
+export const toggleIsFetchingAction = (isFetching: string) => ({
+  type: ActionType.ToggleIsFetching,
+  payload: {
+    isFetching,
+  }
+} as const);
+
 export const loadOffersDataAction = (offersList: OfferDataTypes[], pointsForMap: PointTypes[]) => ({
   type: ActionType.LoadOffersData,
   payload: {

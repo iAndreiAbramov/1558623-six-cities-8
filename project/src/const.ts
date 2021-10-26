@@ -15,6 +15,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum FetchStatus {
+  InProgress = 'IN_PROGRESS',
+  Success = 'SUCCESS',
+  Error = 'ERROR',
+}
+
 export const Cities: CitiesTypes = {
   'Paris': {
     name: 'Paris',

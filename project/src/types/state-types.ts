@@ -30,6 +30,7 @@ export type CitiesTypes = {
 }
 
 export type StateTypes = {
+  isFetching: string,
   activeCity: CityTypes,
   offersData: OfferDataTypes[],
   pointsForMap: PointTypes[],

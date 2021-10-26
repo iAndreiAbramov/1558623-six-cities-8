@@ -1,8 +1,9 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME } from '../const';
+import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, FetchStatus } from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
+  isFetching: FetchStatus.InProgress,
   activeCity: {
     name: Cities[DEFAULT_CITY_NAME].name,
     location: {
@@ -32,17 +33,26 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         offersData: action.payload.offersData,
         pointsForMap: action.payload.pointsForMap,
       };
+
+    case ActionType.ToggleIsFetching:
+      return {
+        ...state,
+        isFetching: action.payload.isFetching,
+      };
+
     case ActionType.LoadOffersData:
       return {
         ...state,
         offersData: action.payload.offersList,
         pointsForMap: action.payload.pointsForMap,
       };
+
     case ActionType.RequireAuthorization:
       return {
         ...state,
         authorization: action.payload.authStatus,
       };
+
     case ActionType.RequireLogout:
       return {
         ...state,
