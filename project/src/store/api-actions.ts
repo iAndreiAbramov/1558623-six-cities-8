@@ -7,21 +7,25 @@ import { ThunkActionResult } from '../types/action-types';
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, getState, api): Promise<void> => {
     dispatch(toggleIsFetchingAction(FetchStatus.InProgress));
-    const { data } = await api.get<BackDataTypes[]>(APIRoute.Hotels);
-    const offersData = adaptBackToFront(data)
-      .filter((offer) => offer.city.name === newCityName);
-    const cityData = Cities[newCityName];
-    const pointsForMap = offersData.map((item) => {
-      const { id } = item;
-      const { latitude, longitude } = item.location;
-      return {
-        latitude,
-        longitude,
-        offerId: id,
-      };
-    });
-    await dispatch(initCityAction(cityData, offersData, pointsForMap));
-    await dispatch(toggleIsFetchingAction(FetchStatus.Success));
+
+    await api.get<BackDataTypes[]>(APIRoute.Hotels)
+      .then(({ data }) => {
+        const offersData = adaptBackToFront(data)
+          .filter((offer) => offer.city.name === newCityName);
+        const cityData = Cities[newCityName];
+        const pointsForMap = offersData.map((item) => {
+          const { id } = item;
+          const { latitude, longitude } = item.location;
+          return {
+            latitude,
+            longitude,
+            offerId: id,
+          };
+        });
+        dispatch(initCityAction(cityData, offersData, pointsForMap));
+      })
+      .then(() => dispatch(toggleIsFetchingAction(FetchStatus.Success)))
+      .catch(() => dispatch(toggleIsFetchingAction(FetchStatus.Error)));
   }
 );
 

@@ -7,6 +7,7 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import { connect } from 'react-redux';
 import { StateTypes } from '../../types/state-types';
 import Spinner from '../spinner/spinner';
+import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 
 type HomePageListTypes = {
   isFetching: string,
@@ -91,6 +92,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
       <div className="cities__places-list places__list tabs__content" style={ { position: 'relative' } }>
         { isFetching === FetchStatus.InProgress && <Spinner /> }
         { isFetching === FetchStatus.Success && offerCards }
+        { isFetching === FetchStatus.Error && <FetchFailMessage /> }
       </div>
     </section>
   );
