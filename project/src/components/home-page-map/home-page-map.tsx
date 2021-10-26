@@ -1,21 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
-import { CityTypes, PointTypes } from '../../types/state-types';
+import { CityLocationTypes, PointTypes } from '../../types/state-types';
 import { Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 
 type HomePageMapProps = {
   activeCardId: string,
-  city: CityTypes,
+  cityLocation: CityLocationTypes,
   pointsForMap: PointTypes[],
 }
 
 function HomePageMap(props: HomePageMapProps): JSX.Element {
-  const { activeCardId, city, pointsForMap } = props;
+  const { activeCardId, cityLocation, pointsForMap } = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, cityLocation);
   const markers: Marker[] = [];
 
   useEffect(() => {

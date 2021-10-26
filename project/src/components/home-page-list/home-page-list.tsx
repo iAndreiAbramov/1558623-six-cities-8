@@ -10,17 +10,17 @@ import { StateTypes } from '../../types/state-types';
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
   onActiveCardChange?: (newId: string) => void,
-  currentCity: string,
+  activeCity: string,
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-  currentCity: state.activeCity.name,
+  activeCity: state.activeCity.name,
 });
 
 const HomePageListConnected = connect(mapStateToProps)(HomePageList);
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, currentCity } = props;
+  const { offersData, onActiveCardChange, activeCity } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -71,7 +71,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{ offersData.length } places to stay in { currentCity }</b>
+      <b className="places__found">{ offersData.length } places to stay in { activeCity }</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <HomePageSortDropdown

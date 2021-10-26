@@ -1,14 +1,18 @@
 import { ActionType } from '../types/action-types';
 import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';
-import { PointTypes } from '../types/state-types';
+import { CityTypes, PointTypes } from '../types/state-types';
 
-export const changeCityAction = (
-  newCityName: string,
+export const initCityAction = (
+  cityData: CityTypes,
+  offersData: OfferDataTypes[],
+  pointsForMap: PointTypes[],
 ) => ({
-  type: ActionType.ChangeCity,
+  type: ActionType.InitCity,
   payload: {
-    cityName: newCityName,
+    cityData,
+    offersData,
+    pointsForMap,
   },
 } as const);
 

@@ -96,7 +96,7 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
           </div>
         </div>
         <OfferPageMap
-          city={ city }
+          cityLocation={ city.location }
           nearbyPoints={ nearbyPoints }
           currentPoint={ currentPoint }
         />

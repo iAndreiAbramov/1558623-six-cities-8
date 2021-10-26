@@ -18,17 +18,19 @@ const initialState: StateTypes = {
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
   switch (action.type) {
-    case ActionType.ChangeCity:
+    case ActionType.InitCity:
       return {
         ...state,
         activeCity: {
-          name: action.payload.cityName,
+          name: action.payload.cityData.name,
           location: {
-            latitude: Cities[action.payload.cityName].location.latitude,
-            longitude: Cities[action.payload.cityName].location.longitude,
-            zoom: Cities[action.payload.cityName].location.zoom,
+            latitude: action.payload.cityData.location.latitude,
+            longitude: action.payload.cityData.location.longitude,
+            zoom: action.payload.cityData.location.zoom,
           }
         },
+        offersData: action.payload.offersData,
+        pointsForMap: action.payload.pointsForMap,
       };
     case ActionType.LoadOffersData:
       return {

@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Cities, DEFAULT_CITY_NAME } from '../../const';
 import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { PointTypes, StateTypes } from '../../types/state-types';
+import { CityLocationTypes, PointTypes, StateTypes } from '../../types/state-types';
 
 type HomePageMainTypes = {
   offersData: OfferDataTypes[],
-  activeCity: string,
+  activeCityName: string,
+  activeCityLocation: CityLocationTypes,
   pointsForMap: PointTypes[],
 }
 
 const mapStateToProps = (state: StateTypes) => ({
   offersData: state.offersData,
-  activeCity: state.activeCity.name,
+  activeCityName: state.activeCity.name,
+  activeCityLocation: state.activeCity.location,
   pointsForMap: state.pointsForMap,
 });
 
 const HomePageMainConnected = connect(mapStateToProps)(HomePageMain);
 
 function HomePageMain(props: HomePageMainTypes): JSX.Element {
-  const { offersData, activeCity, pointsForMap } = props;
+  const { offersData, pointsForMap, activeCityLocation } = props;
   const [activeCardId, setActiveCardId] = useState('');
-
-  const cityData = offersData.filter((offer) => (
-    offer.city.name === activeCity
-  ));
 
   return (
     <main className="page__main page__main--index">
@@ -36,14 +33,14 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
       <div className="cities">
         <div className="cities__places-container container">
           <HomePageListConnected
-            offersData={ cityData }
+            offersData={ offersData }
             onActiveCardChange={ (newId: string): void => (
               setActiveCardId(newId)
             ) }
           />
           <HomePageMap
             activeCardId={ activeCardId }
-            city={ Cities[activeCity] }
+            cityLocation={ activeCityLocation }
             pointsForMap={ pointsForMap }
           />
         </div>

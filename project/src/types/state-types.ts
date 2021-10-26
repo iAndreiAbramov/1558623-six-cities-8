@@ -2,12 +2,14 @@ import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from './offer-data-types';
 
 export type CityTypes = {
-  location: {
-    latitude: number,
-    longitude: number,
-    zoom: number,
-  },
   name: string,
+  location: CityLocationTypes,
+}
+
+export type CityLocationTypes = {
+  latitude: number,
+  longitude: number,
+  zoom: number,
 }
 
 export type PointTypes = {
