@@ -11,8 +11,16 @@ export const fetchHotelsAction = (): ThunkActionResult => (
       .filter((offer) => (
         offer.city.name === getState().activeCity.name
       ));
-    console.log(adaptedData);
-    dispatch(loadOffersDataAction(adaptedData));
+    const pointsForMap = adaptedData.map((item) => {
+      const { id } = item;
+      const { latitude, longitude } = item.location;
+      return {
+        latitude,
+        longitude,
+        offerId: id,
+      };
+    });
+    dispatch(loadOffersDataAction(adaptedData, pointsForMap));
   }
 )
 

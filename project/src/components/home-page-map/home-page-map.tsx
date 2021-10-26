@@ -1,18 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { Marker } from 'leaflet';
-import { DefaultCustomIcon, ActiveCustomIcon } from '../../const';
-import useMap from '../../hooks/useMap';
+import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
 import { CityTypes, PointTypes } from '../../types/state-types';
+import { Marker } from 'leaflet';
+import useMap from '../../hooks/useMap';
 
 type HomePageMapProps = {
   activeCardId: string,
   city: CityTypes,
-  points: PointTypes[],
+  pointsForMap: PointTypes[],
 }
 
 function HomePageMap(props: HomePageMapProps): JSX.Element {
-  const { activeCardId, city, points } = props;
+  const { activeCardId, city, pointsForMap } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -20,7 +20,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
+      pointsForMap.forEach((point) => {
         const marker = new Marker({
           lat: point.latitude,
           lng: point.longitude,
@@ -37,7 +37,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
       });
       return () => markers.forEach((marker) => marker.removeFrom(map));
     }
-  }, [map, points, activeCardId]);
+  }, [map, pointsForMap, activeCardId]);
 
   return (
     <div className="cities__right-section">

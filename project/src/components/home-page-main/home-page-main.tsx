@@ -5,37 +5,29 @@ import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { StateTypes } from '../../types/state-types';
+import { PointTypes, StateTypes } from '../../types/state-types';
 
 type HomePageMainTypes = {
   offersData: OfferDataTypes[],
   activeCity: string,
+  pointsForMap: PointTypes[],
 }
 
 const mapStateToProps = (state: StateTypes) => ({
   offersData: state.offersData,
   activeCity: state.activeCity.name,
+  pointsForMap: state.pointsForMap,
 });
 
 const HomePageMainConnected = connect(mapStateToProps)(HomePageMain);
 
 function HomePageMain(props: HomePageMainTypes): JSX.Element {
-  const { offersData, activeCity } = props;
+  const { offersData, activeCity, pointsForMap } = props;
   const [activeCardId, setActiveCardId] = useState('');
 
   const cityData = offersData.filter((offer) => (
     offer.city.name === activeCity
   ));
-
-  const points = offersData.map((item) => {
-    const { id } = item;
-    const { latitude, longitude } = item.location;
-    return {
-      latitude,
-      longitude,
-      offerId: id,
-    };
-  });
 
   return (
     <main className="page__main page__main--index">
@@ -51,8 +43,8 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
           />
           <HomePageMap
             activeCardId={ activeCardId }
-            city={ Cities[DEFAULT_CITY_NAME] }
-            points={ points }
+            city={ Cities[activeCity] }
+            pointsForMap={ pointsForMap }
           />
         </div>
       </div>

@@ -30,5 +30,6 @@ export type CitiesTypes = {
 export type StateTypes = {
   activeCity: CityTypes,
   offersData: OfferDataTypes[],
+  pointsForMap: PointTypes[],
   authorization: AuthorizationStatus;
 }

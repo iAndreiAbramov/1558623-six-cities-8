@@ -1,6 +1,7 @@
 import { ActionType } from '../types/action-types';
 import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';
+import { PointTypes } from '../types/state-types';
 
 export const changeCityAction = (
   newCityName: string,
@@ -11,10 +12,11 @@ export const changeCityAction = (
   },
 } as const);
 
-export const loadOffersDataAction = (allOffersList: OfferDataTypes[]) => ({
+export const loadOffersDataAction = (offersList: OfferDataTypes[], pointsForMap: PointTypes[]) => ({
   type: ActionType.LoadOffersData,
   payload: {
-    offersList: allOffersList,
+    offersList,
+    pointsForMap,
   },
 } as const);
 

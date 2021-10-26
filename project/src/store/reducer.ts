@@ -12,6 +12,7 @@ const initialState: StateTypes = {
     }
   },
   offersData: [],
+  pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
 };
 
@@ -33,6 +34,7 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         offersData: action.payload.offersList,
+        pointsForMap: action.payload.pointsForMap,
       };
     case ActionType.RequireAuthorization:
       return {
