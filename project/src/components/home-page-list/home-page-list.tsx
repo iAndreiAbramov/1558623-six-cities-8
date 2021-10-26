@@ -74,26 +74,32 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
 
   return (
     <section className="cities__places places">
-      <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{ offersData.length } places to stay in { activeCity }</b>
-      <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
-        <HomePageSortDropdown
-          sortOption={ sortOption }
-          clickHandler={ handleDropdownClick }
-        />
-        {
-          dropdownState &&
-          <HomePageSortToggler
-            clickHandler={ handleSortToggle }
-          />
-        }
-      </form>
-      <div className="cities__places-list places__list tabs__content" style={ { position: 'relative' } }>
-        { isFetching === FetchStatus.InProgress && <Spinner /> }
-        { isFetching === FetchStatus.Success && offerCards }
-        { isFetching === FetchStatus.Error && <FetchFailMessage /> }
-      </div>
+      { isFetching === FetchStatus.InProgress && <Spinner /> }
+      { isFetching === FetchStatus.Error && <FetchFailMessage /> }
+      {
+        isFetching === FetchStatus.Success
+        &&
+        <>
+          <h2 className="visually-hidden">Places</h2>
+          <b className="places__found">{ offersData.length } places to stay in { activeCity }</b>
+          <form className="places__sorting" action="#" method="get">
+            <span className="places__sorting-caption">Sort by</span>
+            <HomePageSortDropdown
+              sortOption={ sortOption }
+              clickHandler={ handleDropdownClick }
+            />
+            {
+              dropdownState &&
+              <HomePageSortToggler
+                clickHandler={ handleSortToggle }
+              />
+            }
+          </form>
+          <div className="cities__places-list places__list tabs__content" style={ { position: 'relative' } }>
+            { offerCards }
+          </div>
+        </>
+      }
     </section>
   );
 }
