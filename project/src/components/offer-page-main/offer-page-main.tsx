@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import { getOffersData } from '../../mocks/offers';
 
 type OfferPageMainTypes = {
-  authorizationStatus: 'AUTH' | 'NO_AUTH',
+  authorizationStatus: 'AUTH' | 'NO_AUTH' | 'UNKNOWN',
 }
 
 const offersData = getOffersData(4);
@@ -32,12 +32,12 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   const nearbyPoints = nearOffersData.map((item) => ({
     latitude: item.location.latitude,
     longitude: item.location.longitude,
-    offerId: item.id,
+    id: item.id,
   }));
   const currentPoint = {
     latitude: pageData.location.latitude,
     longitude: pageData.location.longitude,
-    offerId: pageData.id,
+    id: pageData.id,
   };
 
   return (

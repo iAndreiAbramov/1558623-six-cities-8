@@ -1,7 +1,6 @@
 import { AxiosInstance } from 'axios';
 import {
   initCityAction,
-  loadOffersDataAction,
   requireAuthorization,
   requireLogout,
   toggleIsFetchingAction
@@ -12,7 +11,6 @@ import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 export enum ActionType {
   InitCity = 'home/initCity',
   ToggleIsFetching = 'data/toggleIsFetching',
-  LoadOffersData = 'data/getOffersData',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
 }
@@ -20,7 +18,6 @@ export enum ActionType {
 export type ActionTypes =
   | ReturnType<typeof initCityAction>
   | ReturnType<typeof toggleIsFetchingAction>
-  | ReturnType<typeof loadOffersDataAction>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>;
 

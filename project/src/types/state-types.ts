@@ -15,7 +15,7 @@ export type CityLocationTypes = {
 export type PointTypes = {
   latitude: number,
   longitude: number,
-  offerId: string,
+  id: string,
 }
 
 export type CitiesTypes = {

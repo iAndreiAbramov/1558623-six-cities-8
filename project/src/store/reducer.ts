@@ -40,13 +40,6 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         fetchStatus: action.payload.isFetching,
       };
 
-    case ActionType.LoadOffersData:
-      return {
-        ...state,
-        offersData: action.payload.offersList,
-        pointsForMap: action.payload.pointsForMap,
-      };
-
     case ActionType.RequireAuthorization:
       return {
         ...state,

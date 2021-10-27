@@ -23,14 +23,6 @@ export const toggleIsFetchingAction = (isFetching: string) => ({
   },
 } as const);
 
-export const loadOffersDataAction = (offersList: OfferDataTypes[], pointsForMap: PointTypes[]) => ({
-  type: ActionType.LoadOffersData,
-  payload: {
-    offersList,
-    pointsForMap,
-  },
-} as const);
-
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
   type: ActionType.RequireAuthorization,
   payload: {
