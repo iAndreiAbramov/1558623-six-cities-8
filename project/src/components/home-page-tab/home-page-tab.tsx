@@ -1,30 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
-import { changeCityAction } from '../../store/actions';
-import { State } from '../../types/state';
+import { initActiveCityAction } from '../../store/api-actions';
+import { StateTypes } from '../../types/state-types';
 
-type HomePageTabTypes = {
-  name: string,
-  currentCity: string,
-  setActiveCity: (newName: string) => ActionTypes,
-}
-
-const mapStateToProps = (state: State) => ({
-  currentCity: state.cityName,
+const mapStateToProps = (state: StateTypes) => ({
+  activeCity: state.activeCity.name,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  setActiveCity: changeCityAction,
-
+  setActiveCity: initActiveCityAction,
 }, dispatch);
 
-const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps)(HomePageTab);
+const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps);
+
+type HomePageTabTypes = { name: string } & ConnectedProps<typeof HomePageTabConnected>;
 
 function HomePageTab(props: HomePageTabTypes): JSX.Element {
-  const { name, currentCity, setActiveCity } = props;
-  const tabClass = name.toLowerCase() === currentCity.toLowerCase()
+  const { name, activeCity, setActiveCity } = props;
+  const tabClass = name.toLowerCase() === activeCity.toLowerCase()
     ? 'locations__item-link tabs__item tabs__item--active'
     : 'locations__item-link tabs__items';
 
@@ -38,4 +33,4 @@ function HomePageTab(props: HomePageTabTypes): JSX.Element {
 }
 
 export { HomePageTab };
-export default HomePageTabConnected;
+export default HomePageTabConnected(HomePageTab);

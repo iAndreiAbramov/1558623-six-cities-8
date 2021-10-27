@@ -9,13 +9,14 @@ import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageMap from '../offer-page-map/offer-page-map';
-import { offersData } from '../../store/reducer';
 import { useParams } from 'react-router-dom';
+import { getOffersData } from '../../mocks/offers';
 
 type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH',
 }
 
+const offersData = getOffersData(4);
 const nearOffersData = offersData.slice(0, 3);
 const commentsData = getCommentsData();
 
@@ -95,7 +96,7 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
           </div>
         </div>
         <OfferPageMap
-          city={ city }
+          cityLocation={ city.location }
           nearbyPoints={ nearbyPoints }
           currentPoint={ currentPoint }
         />

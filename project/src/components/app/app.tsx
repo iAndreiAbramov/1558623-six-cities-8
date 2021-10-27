@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import FavoritesPage from '../favorites-page/favorites-page';
+import FavoritesPageConnected from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
@@ -25,7 +25,7 @@ function App(): JSX.Element {
           path={ AppRoute.Favorites }
           authorizationStatus={ AuthorizationStatus.Auth }
           render={ () => (
-            <FavoritesPage />
+            <FavoritesPageConnected />
           ) }
         />
 

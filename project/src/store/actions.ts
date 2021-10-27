@@ -1,19 +1,43 @@
 import { ActionType } from '../types/action-types';
-import { offersData } from './reducer';
+import { AuthorizationStatus } from '../const';
+import { OfferDataTypes } from '../types/offer-data-types';
+import { CityTypes, PointTypes } from '../types/state-types';
 
-export const changeCityAction = (
-  newCityName: string,
-  allOffersList = offersData,
+export const initCityAction = (
+  cityData: CityTypes,
+  offersData: OfferDataTypes[],
+  pointsForMap: PointTypes[],
 ) => ({
-  type: ActionType.ChangeCity,
+  type: ActionType.InitCity,
   payload: {
-    cityName: newCityName,
-    offersList: allOffersList.filter((offer) => (
-      offer.city.name === newCityName
-    )),
+    cityData,
+    offersData,
+    pointsForMap,
   },
 } as const);
 
-export const getOffersDataAction = () => ({
-  type: ActionType.GetOffersData,
+export const toggleIsFetchingAction = (isFetching: string) => ({
+  type: ActionType.ToggleIsFetching,
+  payload: {
+    isFetching,
+  },
+} as const);
+
+export const loadOffersDataAction = (offersList: OfferDataTypes[], pointsForMap: PointTypes[]) => ({
+  type: ActionType.LoadOffersData,
+  payload: {
+    offersList,
+    pointsForMap,
+  },
+} as const);
+
+export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
+  type: ActionType.RequireAuthorization,
+  payload: {
+    authStatus,
+  },
+} as const);
+
+export const requireLogout = () => ({
+  type: ActionType.RequireLogout,
 } as const);

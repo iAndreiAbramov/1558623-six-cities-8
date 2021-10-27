@@ -3,12 +3,10 @@ import {
   getRandomAvatar,
   getRandomGoods,
   getImages, getRandomName,
-  getRandomPreviewImage, getRandomRoomType, getCityCoordinates, getOfferCoordinates
+  getRandomPreviewImage, getRandomRoomType, getCityCoordinates
 } from '../utils/offer-specific-utils';
-import { DEFAULT_CITY_NAME, MAX_RATING, MIN_RATING, RATING_DECIMALS } from '../const';
+import { Cities, DEFAULT_CITY_NAME, MAX_RATING, MIN_RATING, RATING_DECIMALS } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';
-
-export const OFFERS_NUMBER = 4;
 
 const MIN_BEDROOMS = 1;
 const MAX_BEDROOMS = 5;
@@ -21,7 +19,8 @@ const MAX_PRICE = 500;
 
 const [cityLat, cityLng] = getCityCoordinates();
 const getOffer = (): OfferDataTypes => {
-  const [offerLat, offerLng] = getOfferCoordinates();
+  const offerLat = 52.3909553943508;
+  const offerLng = 4.85309666406198;
   return {
     bedrooms: getRandomInteger(MIN_BEDROOMS, MAX_BEDROOMS),
     city: {
@@ -30,7 +29,7 @@ const getOffer = (): OfferDataTypes => {
         longitude: cityLng,
         zoom: 12,
       },
-      name: DEFAULT_CITY_NAME,
+      name: Cities[DEFAULT_CITY_NAME].name,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: getRandomGoods(),

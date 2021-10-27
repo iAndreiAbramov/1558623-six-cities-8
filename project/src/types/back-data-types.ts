@@ -1,4 +1,4 @@
-export type OfferDataTypes = {
+export type BackDataTypes = {
   bedrooms: number,
   city: {
     location: {
@@ -11,28 +11,22 @@ export type OfferDataTypes = {
   description: string,
   goods: string[],
   host: {
-    avatarUrl: string,
-    ['avatar_url']?: string,
+   ['avatar_url']: string,
     id: string,
-    isPro: boolean,
-    ['is_pro']?: boolean,
+    ['is_pro']: boolean,
     name: string,
   },
   id: string,
   images: string[],
-  isFavorite: boolean,
-  ['is_favorite']?: boolean,
-  isPremium: boolean,
-  ['is_premium']?: boolean,
+  ['is_favorite']: boolean,
+  ['is_premium']: boolean,
   location: {
     latitude: number,
     longitude: number,
     zoom: number,
   },
-  maxAdults: number,
-  ['max_adults']?: number,
-  previewImage: string,
-  ['preview_image']?: string,
+  ['max_adults']: number,
+  ['preview_image']: string,
   price: number,
   rating: number,
   title: string,
