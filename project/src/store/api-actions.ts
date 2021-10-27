@@ -32,8 +32,6 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
 export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, getState, api) => {
     await api.get(APIRoute.Login)
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.Auth))
-      });
+      .then(() => dispatch(requireAuthorization(AuthorizationStatus.Auth)));
   }
 );

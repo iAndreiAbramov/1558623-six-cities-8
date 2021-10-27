@@ -3,7 +3,7 @@ import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, FetchStatus } from '../
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
-  isFetching: FetchStatus.InProgress,
+  fetchStatus: FetchStatus.InProgress,
   activeCity: {
     name: Cities[DEFAULT_CITY_NAME].name,
     location: {
@@ -37,7 +37,7 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
     case ActionType.ToggleIsFetching:
       return {
         ...state,
-        isFetching: action.payload.isFetching,
+        fetchStatus: action.payload.isFetching,
       };
 
     case ActionType.LoadOffersData:

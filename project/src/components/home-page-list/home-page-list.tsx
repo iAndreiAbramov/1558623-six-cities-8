@@ -17,7 +17,7 @@ type HomePageListTypes = {
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-  isFetching: state.isFetching,
+  isFetching: state.fetchStatus,
   activeCity: state.activeCity.name,
 });
 
