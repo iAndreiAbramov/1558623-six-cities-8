@@ -36,7 +36,7 @@ export const createApi = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       }
 
       return Promise.reject(error);
-    })
+    });
 
   return api;
-}
+};

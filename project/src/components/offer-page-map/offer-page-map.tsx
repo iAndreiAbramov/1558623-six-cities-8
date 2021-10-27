@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
 import { Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import { CityLocationTypes, CityTypes, PointTypes } from '../../types/state-types';
+import { CityLocationTypes, PointTypes } from '../../types/state-types';
 
 type OfferPageMapTypes = {
   cityLocation: CityLocationTypes,

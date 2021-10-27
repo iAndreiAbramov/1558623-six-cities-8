@@ -3,7 +3,7 @@ import {
   getRandomAvatar,
   getRandomGoods,
   getImages, getRandomName,
-  getRandomPreviewImage, getRandomRoomType, getCityCoordinates,
+  getRandomPreviewImage, getRandomRoomType, getCityCoordinates
 } from '../utils/offer-specific-utils';
 import { Cities, DEFAULT_CITY_NAME, MAX_RATING, MIN_RATING, RATING_DECIMALS } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';

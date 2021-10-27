@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FetchFailMessage() {
+function FetchFailMessage(): JSX.Element {
   return (
     <span style={ {
       width: '100%',

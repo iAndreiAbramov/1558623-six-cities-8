@@ -10,7 +10,7 @@ const initialState: StateTypes = {
       latitude: Cities[DEFAULT_CITY_NAME].location.latitude,
       longitude: Cities[DEFAULT_CITY_NAME].location.longitude,
       zoom: Cities[DEFAULT_CITY_NAME].location.zoom,
-    }
+    },
   },
   offersData: [],
   pointsForMap: [],
@@ -28,7 +28,7 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
             latitude: action.payload.cityData.location.latitude,
             longitude: action.payload.cityData.location.longitude,
             zoom: action.payload.cityData.location.zoom,
-          }
+          },
         },
         offersData: action.payload.offersData,
         pointsForMap: action.payload.pointsForMap,

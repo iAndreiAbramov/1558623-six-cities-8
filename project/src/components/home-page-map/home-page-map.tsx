@@ -37,7 +37,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
       });
       return () => markers.forEach((marker) => marker.removeFrom(map));
     }
-  }, [map, pointsForMap, activeCardId]);
+  });
 
   return (
     <div className="cities__right-section">

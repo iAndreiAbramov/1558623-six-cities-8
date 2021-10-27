@@ -12,7 +12,7 @@ type FavoritesPageTypes = {
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-  favoritesData: state.offersData.filter((item) => item.isFavorite)
+  favoritesData: state.offersData.filter((item) => item.isFavorite),
 });
 
 const FavoritesPageConnected = connect(mapStateToProps)(FavoritesPage);

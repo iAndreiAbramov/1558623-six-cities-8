@@ -20,7 +20,7 @@ export const toggleIsFetchingAction = (isFetching: string) => ({
   type: ActionType.ToggleIsFetching,
   payload: {
     isFetching,
-  }
+  },
 } as const);
 
 export const loadOffersDataAction = (offersList: OfferDataTypes[], pointsForMap: PointTypes[]) => ({

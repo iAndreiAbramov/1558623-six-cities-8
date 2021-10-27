@@ -72,7 +72,7 @@ export const Cities: CitiesTypes = {
   },
 };
 
-export const DEFAULT_CITY_NAME: string = 'Paris';
+export const DEFAULT_CITY_NAME = 'Paris';
 
 export const PERCENTS_CAP = 100;
 export const MIN_RATING = 1;
