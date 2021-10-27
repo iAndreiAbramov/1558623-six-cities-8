@@ -51,6 +51,13 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         ...state,
         authorization: AuthorizationStatus.NoAuth,
       };
+
+    case ActionType.SetIsFavorite:
+      return {
+        ...state,
+        // offersData: action.payload.offersData,
+      };
+
     default:
       return state;
   }

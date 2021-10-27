@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
+import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
@@ -7,7 +8,6 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import { connect } from 'react-redux';
 import { StateTypes } from '../../types/state-types';
 import Spinner from '../spinner/spinner';
-import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 
 type HomePageListTypes = {
   isFetching: string,
@@ -89,7 +89,8 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
               clickHandler={ handleDropdownClick }
             />
             {
-              dropdownState &&
+              dropdownState
+              &&
               <HomePageSortToggler
                 clickHandler={ handleSortToggle }
               />

@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import {
   initCityAction,
   requireAuthorization,
-  requireLogout,
+  requireLogout, setIsFavorite,
   toggleIsFetchingAction
 } from '../store/actions';
 import { StateTypes } from './state-types';
@@ -13,13 +13,15 @@ export enum ActionType {
   ToggleIsFetching = 'data/toggleIsFetching',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
+  SetIsFavorite = 'data/setIsFavorite',
 }
 
 export type ActionTypes =
   | ReturnType<typeof initCityAction>
   | ReturnType<typeof toggleIsFetchingAction>
   | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof setIsFavorite>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, ActionTypes>;
 

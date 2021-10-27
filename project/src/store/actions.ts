@@ -33,3 +33,8 @@ export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
 export const requireLogout = () => ({
   type: ActionType.RequireLogout,
 } as const);
+
+export const setIsFavorite = (offersData: OfferDataTypes[]) =>({
+  type: ActionType.SetIsFavorite,
+  payload: offersData,
+} as const);

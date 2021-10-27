@@ -27,19 +27,31 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
 );
 
 export const checkAuthAction = (): ThunkActionResult => (
-  async (dispatch, getState, api) => {
+  async (dispatch, getState, api): Promise<void> => {
     await api.get(APIRoute.Login)
       .then(() => dispatch(requireAuthorization(AuthorizationStatus.Auth)));
   }
 );
 
 export const requestAuthAction = (loginInfo: UserTypes): ThunkActionResult => (
-  async (dispatch, getState, api) => {
+  async (dispatch, getState, api): Promise<void> => {
     await api.post(APIRoute.Login, {
       body: {
         email: loginInfo.email,
         password: loginInfo.password,
       } as UserTypes,
     });
+  }
+);
+
+export const setIsFavoriteAction = (hotelId: string, isFavoriteValue: string): ThunkActionResult => (
+  async (dispatch, getState, api): Promise<void> => {
+    const favoriteUrl = `${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`;
+    (await api.post(favoriteUrl)
+      .then(({ status, data}) => {
+        status === 200 && console.log(data);
+        status === 401 && console.log('status 401');
+      })
+    );
   }
 );
