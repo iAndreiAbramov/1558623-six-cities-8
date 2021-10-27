@@ -8,22 +8,22 @@ type OfferPageNearListTypes = {
 }
 
 function OfferPageNearList(props: OfferPageNearListTypes): JSX.Element {
-  const { nearOffersData } = props;
-  const nearCards = nearOffersData.map((cardItem) => (
-    <OfferCard
-      key={ cardItem.id }
-      data={ cardItem }
-      articleClass={ CardArticleClasses.NEARBY_LIST }
-      imgWrapperClass={ CardImgWrapperClasses.NEARBY_LIST }
-    />
-  ));
+  // const { nearOffersData } = props;
+  // const nearCards = nearOffersData.map((cardItem) => (
+  //   <OfferCard
+  //     key={ cardItem.id }
+  //     data={ cardItem }
+  //     articleClass={ CardArticleClasses.NEARBY_LIST }
+  //     imgWrapperClass={ CardImgWrapperClasses.NEARBY_LIST }
+  //   />
+  // ));
 
   return (
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
-          { nearCards }
+          {/*{ nearCards }*/}
         </div>
       </section>
     </div>

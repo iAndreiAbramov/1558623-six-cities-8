@@ -29,11 +29,11 @@ function App(): JSX.Element {
           ) }
         />
 
-        <Route path={ AppRoute.OfferId } exact>
-          <OfferPage
-            authorizationStatus={ AuthorizationStatus.Auth }
-          />
-        </Route>
+        {/*<Route path={ AppRoute.OfferId } exact>*/}
+        {/*  <OfferPage*/}
+        {/*    authorizationStatus={ AuthorizationStatus.Auth }*/}
+        {/*  />*/}
+        {/*</Route>*/}
 
         <Route>
           <NotFoundPage />

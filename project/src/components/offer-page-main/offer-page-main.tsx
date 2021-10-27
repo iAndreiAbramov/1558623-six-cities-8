@@ -1,6 +1,7 @@
 import React from 'react';
 import { getCommentsData } from '../../mocks/comments';
 import { getVisualRating } from '../../utils/common-utils';
+import { getOffersData } from '../../mocks/offers';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
@@ -10,7 +11,6 @@ import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comme
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import { useParams } from 'react-router-dom';
-import { getOffersData } from '../../mocks/offers';
 
 type OfferPageMainTypes = {
   authorizationStatus: 'AUTH' | 'NO_AUTH' | 'UNKNOWN',
@@ -101,9 +101,9 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
           currentPoint={ currentPoint }
         />
       </section>
-      <OfferPageNearList
-        nearOffersData={ nearOffersData }
-      />
+      {/*<OfferPageNearList*/}
+      {/*  nearOffersData={ nearOffersData }*/}
+      {/*/>*/}
     </main>
   );
 }
