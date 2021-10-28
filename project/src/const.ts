@@ -1,5 +1,6 @@
 import { Icon } from 'leaflet';
 import { CitiesTypes } from './types/state-types';
+import { FrontUserDataTypes } from './types/user-data-types';
 
 export enum AppRoute {
   Home = '/',
@@ -24,6 +25,14 @@ export enum FetchStatus {
   Success = 'SUCCESS',
   Error = 'ERROR',
 }
+
+export const DEFAULT_USER_DATA = {
+  avatarUrl: '../../public/img/avatar.svg',
+  email: '',
+  id: '',
+  isPro: false,
+  name: '',
+} as const;
 
 export const Cities: CitiesTypes = {
   'Paris': {

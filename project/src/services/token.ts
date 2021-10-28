@@ -3,14 +3,14 @@ const AUTH_TOKEN_KEY_NAME = 'six-sities-token';
 type Token = string;
 
 export const getToken = (): Token => {
-  const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);
+  const token = sessionStorage.getItem(AUTH_TOKEN_KEY_NAME);
   return token || '';
 };
 
 export const setToken = (token: Token): void => {
-  localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
+  sessionStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 };
 
 export const dropToken = (): void  => {
-  localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
+  sessionStorage.removeItem(AUTH_TOKEN_KEY_NAME);
 };

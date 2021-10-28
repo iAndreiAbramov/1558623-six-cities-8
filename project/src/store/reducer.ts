@@ -1,5 +1,5 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, FetchStatus } from '../const';
+import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, DEFAULT_USER_DATA, FetchStatus } from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
@@ -15,13 +15,7 @@ const initialState: StateTypes = {
   offersData: [],
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
-  currentUser: {
-    avatarUrl: '../../public/img/avatar.svg',
-    email: '',
-    id: '',
-    isPro: false,
-    name: '',
-  }
+  currentUser: DEFAULT_USER_DATA,
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {

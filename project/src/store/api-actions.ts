@@ -1,10 +1,11 @@
-import { APIRoute, AuthorizationStatus, Cities, FetchStatus, HttpStatusCode } from '../const';
+import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
 import { adaptBackToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
+import { Dispatch } from '@reduxjs/toolkit';
 import { initCityAction, requireAuthorization, setCurrentUser, setIsFavorite, toggleIsFetchingAction } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
-import { setToken } from '../services/token';
+import { dropToken, setToken } from '../services/token';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
