@@ -28,6 +28,33 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
   }
 );
 
+export const getOfferDataAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.get(`${ APIRoute.Hotels }/${ id }`)
+      .then((response) => {
+        console.log(response);
+      });
+  }
+);
+
+export const getCommentsDataAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.get(`${ APIRoute.Comments }/${ id }`)
+      .then((response) => {
+        console.log(response);
+      });
+  }
+);
+
+export const getNearbyOffersAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.get(`${ APIRoute.Hotels }/${ id }/nearby`)
+      .then((response) => {
+        console.log(response);
+      });
+  }
+);
+
 export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(APIRoute.Login)

@@ -16,6 +16,11 @@ const initialState: StateTypes = {
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
   currentUser: DEFAULT_USER_DATA,
+  currentOffer: {
+    offerData: {},
+    nearOffersData: [],
+    commentsData: [],
+  },
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {

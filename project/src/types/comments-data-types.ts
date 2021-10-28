@@ -10,3 +10,5 @@ export type CommentsDataTypes = {
     name: string,
   }
 }
+
+// export type

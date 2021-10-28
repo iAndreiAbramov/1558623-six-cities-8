@@ -11,6 +11,7 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import { setIsFavoriteAction } from '../../store/api-actions';
 import Spinner from '../spinner/spinner';
 import { StateTypes } from '../../types/state-types';
+import OfferCardConnected from '../offer-card/offer-card';
 
 const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,
@@ -54,7 +55,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const offerCards = sortedData.map((cardItem) => {
     const { id } = cardItem;
     return (
-      <OfferCard
+      <OfferCardConnected
         key={ id }
         data={ cardItem }
         onActiveCardChange={ onActiveCardChange }

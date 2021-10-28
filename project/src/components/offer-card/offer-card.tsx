@@ -1,8 +1,19 @@
 import React from 'react';
+import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { getCommentsDataAction, getNearbyOffersAction, getOfferDataAction } from '../../store/api-actions';
+import { connect, ConnectedProps } from 'react-redux';
+import { ActionTypes } from '../../types/action-types';
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+  handleOfferClick: getNearbyOffersAction,
+}, dispatch);
+
+const offerCardConnector = connect(null, mapDispatchToProps);
+const OfferCardConnected = offerCardConnector(OfferCard);
 
 type OfferCardTypes = {
   data: OfferDataTypes,
@@ -10,10 +21,10 @@ type OfferCardTypes = {
   articleClass: string,
   imgWrapperClass: string,
   handleBookmarkClick: (id: string, isFavoriteValue: string) => void,
-}
+} & ConnectedProps<typeof offerCardConnector>
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleBookmarkClick } = props;
+  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleBookmarkClick, handleOfferClick } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
   const isFavoriteValue = isFavorite ? '0' : '1';
   const visualRating = getVisualRating(rating);
@@ -41,7 +52,10 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
-          <div className="place-card__price">
+          <div
+            className="place-card__price"
+            onClick={ () => handleOfferClick(id) }
+          >
             <b className="place-card__price-value">&euro;{ price }</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
@@ -71,4 +85,5 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
   );
 }
 
-export default OfferCard;
+export { OfferCard };
+export default OfferCardConnected;

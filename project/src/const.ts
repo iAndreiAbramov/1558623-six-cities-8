@@ -140,4 +140,5 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Favorite = '/favorite',
+  Comments = '/comments',
 }
