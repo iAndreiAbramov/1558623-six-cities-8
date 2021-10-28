@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import FavoritesPageConnected from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import OfferPage from '../offer-page/offer-page';
-import PrivateRoute from '../private-route/private-route';
+import PrivateRouteConnected from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
@@ -20,10 +20,9 @@ function App(): JSX.Element {
           <LoginPage />
         </Route>
 
-        <PrivateRoute
+        <PrivateRouteConnected
           exact
           path={ AppRoute.Favorites }
-          authorizationStatus={ AuthorizationStatus.Auth }
           render={ () => (
             <FavoritesPageConnected />
           ) }

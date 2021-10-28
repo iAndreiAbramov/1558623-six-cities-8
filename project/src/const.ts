@@ -15,6 +15,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum HttpStatusCode {
+  Unauthorised = 401,
+}
+
 export enum FetchStatus {
   InProgress = 'IN_PROGRESS',
   Success = 'SUCCESS',

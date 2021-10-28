@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import { connect, ConnectedProps } from 'react-redux';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { ActionTypes } from '../../types/action-types';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { connect, ConnectedProps } from 'react-redux';
-import { StateTypes } from '../../types/state-types';
-import Spinner from '../spinner/spinner';
 import { setIsFavoriteAction } from '../../store/api-actions';
-import { ActionTypes } from '../../types/action-types';
+import Spinner from '../spinner/spinner';
+import { StateTypes } from '../../types/state-types';
 
 const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,

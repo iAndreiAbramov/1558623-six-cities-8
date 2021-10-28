@@ -1,12 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getToken } from './token';
+import { HttpStatusCode } from '../const';
 
 const BASE_URL = 'https://8.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
-
-enum HttpStatusCode {
-  Unauthorised = 401,
-}
 
 type UnauthorizedCallback = () => void;
 
@@ -20,7 +17,7 @@ export const createApi = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
     (requestConfig: AxiosRequestConfig) => {
       const token = getToken();
       if (token) {
-        requestConfig.headers['X-Token'] = token;
+        requestConfig.headers['x-token'] = token;
       }
 
       return requestConfig;
