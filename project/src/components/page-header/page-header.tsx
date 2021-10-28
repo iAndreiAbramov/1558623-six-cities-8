@@ -1,14 +1,13 @@
 import React from 'react';
 import PageHeaderLogo from '../page-header-logo/page-header-logo';
-import PageHeaderUser from '../page-header-user/page-header-user';
 import { StateTypes } from '../../types/state-types';
 import { connect, ConnectedProps } from 'react-redux';
 import PageHeaderUserNotLogged from '../page-header-user-not-logged/page-header-user-not-logged';
 import { AuthorizationStatus } from '../../const';
+import PageHeaderUserConnected from '../page-header-user/page-header-user';
 
 const mapStateToProps = (state: StateTypes) => ({
   authorizationStatus: state.authorization,
-  userEmail: state.currentUser.email,
 });
 
 const pageHeaderConnector = connect(mapStateToProps);
@@ -17,7 +16,7 @@ const PageHeaderConnected = pageHeaderConnector(PageHeader);
 type PageHeaderTypes = ConnectedProps<typeof pageHeaderConnector>
 
 function PageHeader(props: PageHeaderTypes): JSX.Element {
-  const { authorizationStatus, userEmail } = props;
+  const { authorizationStatus } = props;
 
   return (
     <header className="header">
@@ -26,9 +25,7 @@ function PageHeader(props: PageHeaderTypes): JSX.Element {
           <PageHeaderLogo />
           {
             authorizationStatus === AuthorizationStatus.Auth
-              ? <PageHeaderUser
-                userEmail={ userEmail }
-              />
+              ? <PageHeaderUserConnected />
               : <PageHeaderUserNotLogged />
           }
         </div>

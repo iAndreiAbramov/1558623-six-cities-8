@@ -1,6 +1,6 @@
 import React from 'react';
-import HomePageMainConnected from '../home-page-main/home-page-main';
 import PageHeaderConnected from '../page-header/page-header';
+import HomePageMainConnected from '../home-page-main/home-page-main';
 
 function HomePage(): JSX.Element {
   return (

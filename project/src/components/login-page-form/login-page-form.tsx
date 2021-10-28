@@ -2,10 +2,10 @@ import React, { FormEvent, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { ActionTypes } from '../../types/action-types';
-import { requestAuthAction } from '../../store/api-actions';
+import { requestLoginAction } from '../../store/api-actions';
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  handleFormSubmit: requestAuthAction,
+  handleFormSubmit: requestLoginAction,
 }, dispatch);
 
 const loginPageFormConnector = connect(null, mapDispatchToProps);

@@ -6,6 +6,7 @@ import { initCityAction, requireAuthorization, setCurrentUser, setIsFavorite, to
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
 import { dropToken, setToken } from '../services/token';
+import { dropEmail, setEmail } from '../services/email';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -36,14 +37,27 @@ export const checkAuthAction = (): ThunkActionResult => (
       });
   });
 
-export const requestAuthAction = (loginInfo: UserLoginTypes): ThunkActionResult => (
+export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.post(APIRoute.Login, loginInfo)
       .then(({ data }) => {
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
         setToken(data.token);
+        setEmail(data.email);
         const adaptedUserData = adaptUserDataToFront(data);
         dispatch(setCurrentUser(adaptedUserData));
+      })
+  }
+);
+
+export const requestLogoutAction = (): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.delete(APIRoute.Logout)
+      .then(() => {
+        dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+        dropToken();
+        dropEmail();
+        dispatch(setCurrentUser(DEFAULT_USER_DATA));
       })
   }
 );
