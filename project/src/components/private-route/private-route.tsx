@@ -5,7 +5,7 @@ import { StateTypes } from '../../types/state-types';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state: StateTypes) => ({
-  authorizationStatus: state.authorization
+  authorizationStatus: state.authorization,
 });
 
 const privateRouteConnector = connect(mapStateToProps);

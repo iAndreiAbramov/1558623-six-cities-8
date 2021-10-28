@@ -51,7 +51,7 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         currentUser: action.payload.userData,
-      }
+      };
     }
 
     case ActionType.RequireLogout:

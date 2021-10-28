@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import LoginPageForm from '../login-page-form/login-page-form';
 

@@ -21,11 +21,11 @@ function LoginPageForm(props: LoginPageFormTypes): JSX.Element {
   const handleLoginInput = (evt: FormEvent<HTMLInputElement>): void => {
     evt.preventDefault();
     setEmail(evt.currentTarget.value);
-  }
+  };
   const handlePasswordInput = (evt: FormEvent<HTMLInputElement>): void => {
     evt.preventDefault();
     setPassword(evt.currentTarget.value);
-  }
+  };
 
   return (
     <form className="login__form form" action="#" method="post">

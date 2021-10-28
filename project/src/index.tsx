@@ -13,7 +13,7 @@ import { ThunkAppDispatch } from './types/action-types';
 import { checkAuthAction, initActiveCityAction } from './store/api-actions';
 
 const api = createApi(
-  () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth))
+  () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
 const store = createStore(

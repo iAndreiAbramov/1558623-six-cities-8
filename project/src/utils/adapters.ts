@@ -36,12 +36,12 @@ export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] =>
 };
 
 export const adaptUserDataToFront = (backUserData: BackUserDataTypes): FrontUserDataTypes => {
-  const { avatar_url, email, id, is_pro, name } = backUserData;
+  const { email, id, name } = backUserData;
   return {
-    avatarUrl: avatar_url,
-    isPro: is_pro,
+    avatarUrl: backUserData.avatar_url,
+    isPro: backUserData.is_pro,
     email,
     id,
     name,
-  }
+  };
 };

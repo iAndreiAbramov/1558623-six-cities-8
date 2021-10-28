@@ -17,7 +17,7 @@ const mapStateToProps = (state: StateTypes) => ({
   activeCity: state.activeCity.name,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  handleBookmarkClick: setIsFavoriteAction
+  handleBookmarkClick: setIsFavoriteAction,
 }, dispatch);
 
 const homePageListConnect = connect(mapStateToProps, mapDispatchToProps);

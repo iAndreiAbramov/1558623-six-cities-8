@@ -1,4 +1,4 @@
-const USER_EMAIL = 'six-sities-token';
+const USER_EMAIL = 'six-sities-email';
 
 type Email = string;
 

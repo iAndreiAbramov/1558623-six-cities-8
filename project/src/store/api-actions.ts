@@ -1,12 +1,12 @@
 import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
 import { adaptBackToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
-import { Dispatch } from '@reduxjs/toolkit';
 import { initCityAction, requireAuthorization, setCurrentUser, setIsFavorite, toggleIsFetchingAction } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
 import { dropToken, setToken } from '../services/token';
 import { dropEmail, setEmail } from '../services/email';
+import browserHistory from '../services/browser-history';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -33,7 +33,7 @@ export const checkAuthAction = (): ThunkActionResult => (
     await api.get(APIRoute.Login)
       .then(({ status }) => {
         status && status !== HttpStatusCode.Unauthorised
-        && dispatch(requireAuthorization(AuthorizationStatus.Auth))
+        && dispatch(requireAuthorization(AuthorizationStatus.Auth));
       });
   });
 
@@ -46,7 +46,8 @@ export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult
         setEmail(data.email);
         const adaptedUserData = adaptUserDataToFront(data);
         dispatch(setCurrentUser(adaptedUserData));
-      })
+        browserHistory.push('/');
+      });
   }
 );
 
@@ -58,22 +59,18 @@ export const requestLogoutAction = (): ThunkActionResult => (
         dropToken();
         dropEmail();
         dispatch(setCurrentUser(DEFAULT_USER_DATA));
-      })
+      });
   }
 );
 
+//todo: Это просто заготовка
 export const setIsFavoriteAction = (hotelId: string, isFavoriteValue: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    console.log(`${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`);
+    // console.log(`${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`);
     const favoriteUrl = `${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`;
-    (await api.post(favoriteUrl)
-        .then(({ status, data }) => {
-          status === 200 && console.log(data);
-          dispatch(setIsFavorite(data));
-        })
-        .catch(({ status }) => {
-          status === 401 && console.log('status 401');
-        })
-    );
+    await api.post(favoriteUrl)
+      .then(({ data }) => {
+        dispatch(setIsFavorite(data));
+      });
   }
 );

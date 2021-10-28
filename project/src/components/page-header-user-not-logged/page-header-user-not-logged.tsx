@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-function PageHeaderUserNotLogged() {
+function PageHeaderUserNotLogged(): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit'
+import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { ActionTypes } from '../../types/action-types';
 import { requestLogoutAction } from '../../store/api-actions';
 import { StateTypes } from '../../types/state-types';
@@ -22,7 +22,7 @@ type PageHeaderUserTypes = ConnectedProps<typeof PageHeaderUserConnector>
 
 function PageHeaderUser(props: PageHeaderUserTypes): JSX.Element {
   const { userEmail, handleLogoutClick } = props;
-  const email = userEmail ? userEmail : getEmail;
+  const email = userEmail ? userEmail : getEmail();
 
   return (
     <nav className="header__nav">

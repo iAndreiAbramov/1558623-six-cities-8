@@ -1,6 +1,5 @@
 import { Icon } from 'leaflet';
 import { CitiesTypes } from './types/state-types';
-import { FrontUserDataTypes } from './types/user-data-types';
 
 export enum AppRoute {
   Home = '/',
