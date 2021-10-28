@@ -1,9 +1,9 @@
 import { APIRoute, AuthorizationStatus, Cities, FetchStatus, HttpStatusCode } from '../const';
-import { adaptBackToFront } from '../utils/adapter';
+import { adaptBackToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
-import { initCityAction, requireAuthorization, setIsFavorite, toggleIsFetchingAction } from './actions';
+import { initCityAction, requireAuthorization, setCurrentUser, setIsFavorite, toggleIsFetchingAction } from './actions';
 import { ThunkActionResult } from '../types/action-types';
-import { UserDataTypes, UserLoginTypes } from '../types/auth-data';
+import { UserLoginTypes } from '../types/user-data-types';
 import { setToken } from '../services/token';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
@@ -37,11 +37,12 @@ export const checkAuthAction = (): ThunkActionResult => (
 
 export const requestAuthAction = (loginInfo: UserLoginTypes): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    await api.post<UserDataTypes>(APIRoute.Login, loginInfo)
+    await api.post(APIRoute.Login, loginInfo)
       .then(({ data }) => {
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
         setToken(data.token);
-
+        const adaptedUserData = adaptUserDataToFront(data);
+        dispatch(setCurrentUser(adaptedUserData));
       })
   }
 );

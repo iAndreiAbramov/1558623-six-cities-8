@@ -2,6 +2,7 @@ import { ActionType } from '../types/action-types';
 import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';
 import { CityTypes, PointTypes } from '../types/state-types';
+import { FrontUserDataTypes } from '../types/user-data-types';
 
 export const initCityAction = (
   cityData: CityTypes,
@@ -37,4 +38,11 @@ export const requireLogout = () => ({
 export const setIsFavorite = (offersData: OfferDataTypes[]) =>({
   type: ActionType.SetIsFavorite,
   payload: offersData,
+} as const);
+
+export const setCurrentUser = (userData: FrontUserDataTypes) => ({
+  type: ActionType.SetCurrentUser,
+  payload: {
+    userData,
+  },
 } as const);

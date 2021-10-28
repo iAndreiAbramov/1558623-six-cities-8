@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-function PageHeaderUser(): JSX.Element {
+type PageHeaderUserTypes = {
+  userEmail: string,
+}
+
+function PageHeaderUser(props: PageHeaderUserTypes): JSX.Element {
+  const { userEmail } = props;
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -10,11 +15,11 @@ function PageHeaderUser(): JSX.Element {
           <Link className="header__nav-link header__nav-link--profile" to={ AppRoute.Favorites }>
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+            <span className="header__user-name user__name">{ userEmail }</span>
           </Link>
         </li>
         <li className="header__nav-item">
-          {/*todo Разобраться куда ссылка*/}
+          {/*todo Разобраться куда ссылка*/ }
           <a className="header__nav-link" href="#">
             <span className="header__signout">Sign out</span>
           </a>

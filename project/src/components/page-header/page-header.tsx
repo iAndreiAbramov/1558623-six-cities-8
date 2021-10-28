@@ -8,6 +8,7 @@ import { AuthorizationStatus } from '../../const';
 
 const mapStateToProps = (state: StateTypes) => ({
   authorizationStatus: state.authorization,
+  userEmail: state.currentUser.email,
 });
 
 const pageHeaderConnector = connect(mapStateToProps);
@@ -16,7 +17,7 @@ const PageHeaderConnected = pageHeaderConnector(PageHeader);
 type PageHeaderTypes = ConnectedProps<typeof pageHeaderConnector>
 
 function PageHeader(props: PageHeaderTypes): JSX.Element {
-  const { authorizationStatus } = props;
+  const { authorizationStatus, userEmail } = props;
 
   return (
     <header className="header">
@@ -25,8 +26,10 @@ function PageHeader(props: PageHeaderTypes): JSX.Element {
           <PageHeaderLogo />
           {
             authorizationStatus === AuthorizationStatus.Auth
-            ? <PageHeaderUser />
-            : <PageHeaderUserNotLogged />
+              ? <PageHeaderUser
+                userEmail={ userEmail }
+              />
+              : <PageHeaderUserNotLogged />
           }
         </div>
       </div>

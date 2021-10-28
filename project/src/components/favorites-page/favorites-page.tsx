@@ -3,7 +3,7 @@ import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
 import PageHeaderConnected from '../page-header/page-header';
-import { StateTypes } from '../../types/state-types';
+import { StateTypes} from '../../types/state-types';
 import { connect } from 'react-redux';
 import { OfferDataTypes } from '../../types/offer-data-types';
 

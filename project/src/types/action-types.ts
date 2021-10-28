@@ -2,18 +2,19 @@ import { AxiosInstance } from 'axios';
 import {
   initCityAction,
   requireAuthorization,
-  requireLogout, setIsFavorite,
+  requireLogout, setCurrentUser, setIsFavorite,
   toggleIsFetchingAction
 } from '../store/actions';
 import { StateTypes } from './state-types';
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 
 export enum ActionType {
-  InitCity = 'home/initCity',
+  InitCity = 'init/initCity',
   ToggleIsFetching = 'data/toggleIsFetching',
+  SetIsFavorite = 'data/setIsFavorite',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
-  SetIsFavorite = 'data/setIsFavorite',
+  SetCurrentUser = 'user/setCurrentUser',
 }
 
 export type ActionTypes =
@@ -21,7 +22,8 @@ export type ActionTypes =
   | ReturnType<typeof toggleIsFetchingAction>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>
-  | ReturnType<typeof setIsFavorite>;
+  | ReturnType<typeof setIsFavorite>
+  | ReturnType<typeof setCurrentUser>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, ActionTypes>;
 

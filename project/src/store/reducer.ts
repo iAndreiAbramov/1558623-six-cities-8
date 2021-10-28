@@ -15,6 +15,13 @@ const initialState: StateTypes = {
   offersData: [],
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
+  currentUser: {
+    avatarUrl: '../../public/img/avatar.svg',
+    email: '',
+    id: '',
+    isPro: false,
+    name: '',
+  }
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
@@ -45,6 +52,13 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         ...state,
         authorization: action.payload.authStatus,
       };
+
+    case ActionType.SetCurrentUser: {
+      return {
+        ...state,
+        currentUser: action.payload.userData,
+      }
+    }
 
     case ActionType.RequireLogout:
       return {

@@ -1,4 +1,5 @@
 import { BackDataTypes } from '../types/back-data-types';
+import { BackUserDataTypes, FrontUserDataTypes } from '../types/user-data-types';
 import { OfferDataTypes } from '../types/offer-data-types';
 
 export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] => {
@@ -32,4 +33,15 @@ export const adaptBackToFront = (backData: BackDataTypes[]): OfferDataTypes[] =>
     delete item.host.avatar_url;
   });
   return adaptedData;
+};
+
+export const adaptUserDataToFront = (backUserData: BackUserDataTypes): FrontUserDataTypes => {
+  const { avatar_url, email, id, is_pro, name } = backUserData;
+  return {
+    avatarUrl: avatar_url,
+    isPro: is_pro,
+    email,
+    id,
+    name,
+  }
 };
