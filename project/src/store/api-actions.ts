@@ -1,10 +1,10 @@
 import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
-import { adaptBackToFront, adaptSingleBackToFront, adaptUserDataToFront } from '../utils/adapters';
+import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import {
   initCityAction,
   requireAuthorization,
-  setCurrentHotel,
+  setCurrentHotel, setCurrentHotelComments,
   setCurrentUser,
   setIsFavorite,
   setIsFetchingAction, setNearOffersData
@@ -20,7 +20,7 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
     dispatch(setIsFetchingAction(FetchStatus.InProgress));
     await api.get<BackDataTypes[]>(APIRoute.Hotels)
       .then(({ data }) => {
-        const offersData = adaptBackToFront(data)
+        const offersData = adaptOffersToFront(data)
           .filter((offer) => offer.city.name === newCityName);
         const cityData = Cities[newCityName];
         const pointsForMap = offersData.map((item) => {
@@ -40,7 +40,7 @@ export const getOfferDataAction = (id: string): ThunkActionResult => (
     dispatch(setIsFetchingAction(FetchStatus.InProgress));
     await api.get(`${ APIRoute.Hotels }/${ id }`)
       .then(({ data }) => {
-        dispatch(setCurrentHotel(adaptSingleBackToFront(data)));
+        dispatch(setCurrentHotel(adaptOfferToFront(data)));
         dispatch(setIsFetchingAction(FetchStatus.Success));
       })
       .catch(() => {
@@ -53,8 +53,8 @@ export const getCommentsDataAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(`${ APIRoute.Comments }/${ id }`)
       .then(({ data }) => {
-        // console.log(data);
-      })
+        dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
+      });
   }
 );
 
@@ -62,7 +62,7 @@ export const getNearOffersAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(`${ APIRoute.Hotels }/${ id }/nearby`)
       .then(({ data }) => {
-        dispatch(setNearOffersData(adaptBackToFront(data)));
+        dispatch(setNearOffersData(adaptOffersToFront(data)));
       });
   }
 );

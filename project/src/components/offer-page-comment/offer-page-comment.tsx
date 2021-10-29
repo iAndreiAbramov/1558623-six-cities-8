@@ -1,9 +1,9 @@
 import React from 'react';
-import { CommentsDataTypes } from '../../types/comments-data-types';
+import { CommentsFrontTypes } from '../../types/comments-types';
 import { getVisualRating } from '../../utils/common-utils';
 
 type OfferPageCommentTypes = {
-  commentData: CommentsDataTypes,
+  commentData: CommentsFrontTypes,
 }
 
 function OfferPageComment(props: OfferPageCommentTypes): JSX.Element {

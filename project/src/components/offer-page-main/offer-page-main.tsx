@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { ActionTypes } from '../../types/action-types';
+import { AuthorizationStatus } from '../../const';
+import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
-import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
-import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
-// import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageMap from '../offer-page-map/offer-page-map';
-import { StateTypes } from '../../types/state-types';
-import { connect, ConnectedProps } from 'react-redux';
-import { AuthorizationStatus } from '../../const';
-import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
-import { ActionTypes } from '../../types/action-types';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
+import { StateTypes } from '../../types/state-types';
 
 const mapStateToProps = (state: StateTypes) => ({
   pageData: state.currentHotel,
   nearOffersData: state.nearOffersData,
+  currentHotelComments: state.currentHotelComments,
   authorization: state.authorization,
 })
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
@@ -34,7 +33,7 @@ const OfferPageMainConnected = offerPageMainConnector(OfferPageMain);
 type OfferPageTypes = ConnectedProps<typeof offerPageMainConnector>;
 
 function OfferPageMain(props: OfferPageTypes): JSX.Element {
-  const { pageData, nearOffersData, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
+  const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -59,7 +58,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     }
     getCommentsData(id);
     getNearbyOffers(id);
-  },[]);
+  }, []);
 
   return (
     <main className="page__main page__main--property">
@@ -109,9 +108,9 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
             { goods.length > 0 && <OfferPageGoods goods={ goods } /> }
             <OfferPageHost host={ host } />
             <section className="property__reviews reviews">
-              {/*<OfferPageCommentsList*/ }
-              {/*  commentsData={ commentsData }*/ }
-              {/*/>*/ }
+              <OfferPageCommentsList
+                commentsData={ currentHotelComments }
+              />
               { authorization === AuthorizationStatus.Auth && <OfferPageNewComment /> }
             </section>
           </div>
@@ -126,8 +125,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
         nearOffersData={ nearOffersData }
       />
     </main>
-  )
-    ;
+  );
 }
 
 export { OfferPageMain };

@@ -6,7 +6,7 @@ import {
   getUniqueId
 } from '../utils/common-utils';
 import { getRandomAvatar, getRandomName } from '../utils/offer-specific-utils';
-import { CommentsDataTypes } from '../types/comments-data-types';
+import { CommentsFrontTypes } from '../types/comments-types';
 
 const MIN_NUMBER_OF_COMMENTS = 0;
 const MAX_NUMBER_OF_COMMENTS = 10;
@@ -17,7 +17,7 @@ const RATING_DECIMALS = 1;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'August'];
 const YEARS = ['2019', '2020', '2021'];
 
-const getComment = (): CommentsDataTypes => ({
+const getComment = (): CommentsFrontTypes => ({
   comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   date: `${ getRandomArrayItem(MONTHS) } ${ getRandomArrayItem(YEARS) }`,
   id: getUniqueId(),
@@ -30,7 +30,7 @@ const getComment = (): CommentsDataTypes => ({
   },
 });
 
-export const getCommentsData = (): CommentsDataTypes[] => {
+export const getCommentsData = (): CommentsFrontTypes[] => {
   const comments = [];
   const numberOfComments = getRandomInteger(MIN_NUMBER_OF_COMMENTS, MAX_NUMBER_OF_COMMENTS);
   for (let i = 0; i < numberOfComments; i++) {

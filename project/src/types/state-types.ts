@@ -1,6 +1,7 @@
 import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from './offer-data-types';
 import { FrontUserDataTypes } from './user-data-types';
+import { CommentsFrontTypes } from './comments-types';
 
 export type CityTypes = {
   name: string,
@@ -39,4 +40,5 @@ export type StateTypes = {
   currentUser: FrontUserDataTypes,
   currentHotel: OfferDataTypes,
   nearOffersData: OfferDataTypes[],
+  currentHotelComments: CommentsFrontTypes[],
 }

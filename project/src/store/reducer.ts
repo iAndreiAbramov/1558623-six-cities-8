@@ -26,6 +26,7 @@ const initialState: StateTypes = {
   currentUser: DEFAULT_USER_DATA,
   currentHotel: DEFAULT_HOTEL_DATA,
   nearOffersData: [],
+  currentHotelComments: [],
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
@@ -81,6 +82,12 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         nearOffersData: action.payload.nearOffersData,
+      }
+
+    case ActionType.SetCurrentHotelComments:
+      return {
+        ...state,
+        currentHotelComments: action.payload.currentHotelComments,
       }
 
     case ActionType.SetIsFavorite:

@@ -3,6 +3,7 @@ import { AuthorizationStatus } from '../const';
 import { CityTypes, PointTypes } from '../types/state-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
 import { OfferDataTypes } from '../types/offer-data-types';
+import { CommentsFrontTypes } from '../types/comments-types';
 
 export const initCityAction = (
   cityData: CityTypes,
@@ -59,4 +60,11 @@ export const setNearOffersData = (nearOffersData: OfferDataTypes[]) => ({
   payload: {
     nearOffersData,
   },
+} as const);
+
+export const setCurrentHotelComments = (currentHotelComments: CommentsFrontTypes[]) => ({
+  type: ActionType.SetCurrentHotelComments,
+  payload: {
+    currentHotelComments,
+  }
 } as const);
