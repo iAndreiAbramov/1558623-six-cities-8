@@ -25,6 +25,7 @@ const initialState: StateTypes = {
   //todo: Подумать как уйти от этих констант DEFAULT_...
   currentUser: DEFAULT_USER_DATA,
   currentHotel: DEFAULT_HOTEL_DATA,
+  nearOffersData: [],
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
@@ -74,6 +75,12 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         currentHotel: action.payload.currentHotel,
+      }
+
+    case ActionType.SetNearOffersData:
+      return {
+        ...state,
+        nearOffersData: action.payload.nearOffersData,
       }
 
     case ActionType.SetIsFavorite:

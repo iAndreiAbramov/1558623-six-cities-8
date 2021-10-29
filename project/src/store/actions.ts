@@ -53,3 +53,10 @@ export const setCurrentHotel = (currentHotel: OfferDataTypes) => ({
     currentHotel,
   },
 } as const);
+
+export const setNearOffersData = (nearOffersData: OfferDataTypes[]) => ({
+  type: ActionType.SetNearOffersData,
+  payload: {
+    nearOffersData,
+  },
+} as const);

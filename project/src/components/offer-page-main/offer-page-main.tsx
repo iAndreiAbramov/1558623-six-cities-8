@@ -12,18 +12,20 @@ import OfferPageMap from '../offer-page-map/offer-page-map';
 import { StateTypes } from '../../types/state-types';
 import { connect, ConnectedProps } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
-import { getCommentsDataAction, getNearbyOffersAction, getOfferDataAction } from '../../store/api-actions';
+import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { ActionTypes } from '../../types/action-types';
 import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 
 const mapStateToProps = (state: StateTypes) => ({
   pageData: state.currentHotel,
+  nearOffersData: state.nearOffersData,
   authorization: state.authorization,
 })
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   getOfferData: getOfferDataAction,
   getCommentsData: getCommentsDataAction,
-  getNearbyOffers: getNearbyOffersAction,
+  getNearbyOffers: getNearOffersAction,
 }, dispatch);
 
 const offerPageMainConnector = connect(mapStateToProps, mapDispatchToProps);
@@ -32,22 +34,22 @@ const OfferPageMainConnected = offerPageMainConnector(OfferPageMain);
 type OfferPageTypes = ConnectedProps<typeof offerPageMainConnector>;
 
 function OfferPageMain(props: OfferPageTypes): JSX.Element {
-  const { pageData, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
+  const { pageData, nearOffersData, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
     ? 'property__bookmark-button property__bookmark-button--active button'
     : 'property__bookmark-button button';
-  // const nearbyPoints = nearOffersData.map((item) => ({
-  //   latitude: item.location.latitude,
-  //   longitude: item.location.longitude,
-  //   id: item.id,
-  // }));
-  // const currentPoint = {
-  //   latitude: pageData.location.latitude,
-  //   longitude: pageData.location.longitude,
-  //   id: pageData.id,
-  // };
+  const nearbyPoints = nearOffersData.map((item) => ({
+    latitude: item.location.latitude,
+    longitude: item.location.longitude,
+    id: item.id,
+  }));
+  const currentPoint = {
+    latitude: pageData.location.latitude,
+    longitude: pageData.location.longitude,
+    id: pageData.id,
+  };
 
   const { id } = useParams() as { id: string };
 
@@ -110,22 +112,22 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
               {/*<OfferPageCommentsList*/ }
               {/*  commentsData={ commentsData }*/ }
               {/*/>*/ }
-              {/*//todo: Компонент ниже показывать только авторизованным пользователям*/ }
               { authorization === AuthorizationStatus.Auth && <OfferPageNewComment /> }
             </section>
           </div>
         </div>
-        {/*<OfferPageMap*/ }
-        {/*  cityLocation={ city.location }*/ }
-        {/*  nearbyPoints={ nearbyPoints }*/ }
-        {/*  currentPoint={ currentPoint }*/ }
-        {/*/>*/ }
+        <OfferPageMap
+          cityLocation={ city.location }
+          nearbyPoints={ nearbyPoints }
+          currentPoint={ currentPoint }
+        />
       </section>
-      {/*<OfferPageNearList*/ }
-      {/*  nearOffersData={ nearOffersData }*/ }
-      {/*/>*/ }
+      <OfferPageNearList
+        nearOffersData={ nearOffersData }
+      />
     </main>
-  );
+  )
+    ;
 }
 
 export { OfferPageMain };

@@ -3,7 +3,7 @@ import {
   initCityAction,
   requireAuthorization,
   requireLogout, setCurrentUser, setIsFavorite,
-  setIsFetchingAction, setCurrentHotel
+  setIsFetchingAction, setCurrentHotel, setNearOffersData
 } from '../store/actions';
 import { StateTypes } from './state-types';
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
@@ -16,6 +16,7 @@ export enum ActionType {
   RequireLogout = 'user/requireLogout',
   SetCurrentUser = 'user/setCurrentUser',
   SetCurrentHotel = 'offer/setHotelData',
+  SetNearOffersData = 'offer/setNearOffersData',
 }
 
 export type ActionTypes =
@@ -25,7 +26,8 @@ export type ActionTypes =
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof setIsFavorite>
   | ReturnType<typeof setCurrentUser>
-  | ReturnType<typeof setCurrentHotel>;
+  | ReturnType<typeof setCurrentHotel>
+  | ReturnType<typeof setNearOffersData>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, ActionTypes>;
 

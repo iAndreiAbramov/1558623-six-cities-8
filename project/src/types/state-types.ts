@@ -38,4 +38,5 @@ export type StateTypes = {
   authorization: AuthorizationStatus,
   currentUser: FrontUserDataTypes,
   currentHotel: OfferDataTypes,
+  nearOffersData: OfferDataTypes[],
 }

@@ -17,11 +17,8 @@ const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,
   activeCity: state.activeCity.name,
 });
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  handleBookmarkClick: setIsFavoriteAction,
-}, dispatch);
 
-const homePageListConnect = connect(mapStateToProps, mapDispatchToProps);
+const homePageListConnect = connect(mapStateToProps);
 const HomePageListConnected = homePageListConnect(HomePageList);
 
 type HomePageListTypes = {
@@ -30,7 +27,7 @@ type HomePageListTypes = {
 } & ConnectedProps<typeof homePageListConnect>
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity, isFetching, handleBookmarkClick } = props;
+  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -61,7 +58,6 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
         onActiveCardChange={ onActiveCardChange }
         articleClass={ CardArticleClasses.MAIN_PAGE_LIST }
         imgWrapperClass={ CardImgWrapperClasses.MAIN_PAGE_LIST }
-        handleBookmarkClick={ handleBookmarkClick }
       />
     );
   });

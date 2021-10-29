@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { getOfferDataAction } from '../../store/api-actions';
+import { getOfferDataAction, setIsFavoriteAction } from '../../store/api-actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { ActionTypes } from '../../types/action-types';
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   handleOfferClick: getOfferDataAction,
+  handleBookmarkClick: setIsFavoriteAction,
 }, dispatch);
 
 const offerCardConnector = connect(null, mapDispatchToProps);
@@ -20,7 +21,6 @@ type OfferCardTypes = {
   onActiveCardChange?: (newId: string) => void,
   articleClass: string,
   imgWrapperClass: string,
-  handleBookmarkClick: (id: string, isFavoriteValue: string) => void,
 } & ConnectedProps<typeof offerCardConnector>
 
 function OfferCard(props: OfferCardTypes): JSX.Element {

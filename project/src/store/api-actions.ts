@@ -7,7 +7,7 @@ import {
   setCurrentHotel,
   setCurrentUser,
   setIsFavorite,
-  setIsFetchingAction
+  setIsFetchingAction, setNearOffersData
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
@@ -53,16 +53,16 @@ export const getCommentsDataAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(`${ APIRoute.Comments }/${ id }`)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
       })
   }
 );
 
-export const getNearbyOffersAction = (id: string): ThunkActionResult => (
+export const getNearOffersAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(`${ APIRoute.Hotels }/${ id }/nearby`)
-      .then((response) => {
-        console.log(response);
+      .then(({ data }) => {
+        dispatch(setNearOffersData(adaptBackToFront(data)));
       });
   }
 );
