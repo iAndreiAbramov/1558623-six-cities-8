@@ -5,12 +5,14 @@ import {
   DEFAULT_CITY_NAME,
   DEFAULT_HOTEL_DATA,
   DEFAULT_USER_DATA,
-  FetchStatus
+  FetchStatus,
+  PostStatus
 } from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
   fetchStatus: FetchStatus.InProgress,
+  postStatus: PostStatus.Success,
   activeCity: {
     name: Cities[DEFAULT_CITY_NAME].name,
     location: {
@@ -47,10 +49,10 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         pointsForMap: action.payload.pointsForMap,
       };
 
-    case ActionType.ToggleIsFetching:
+    case ActionType.SetFetchStatus:
       return {
         ...state,
-        fetchStatus: action.payload.isFetching,
+        fetchStatus: action.payload.fetchStatus,
       };
 
     case ActionType.RequireAuthorization:

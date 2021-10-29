@@ -1,3 +1,5 @@
+import { strict } from 'assert';
+
 export type CommentsFrontTypes = {
   comment: string,
   date: string,
@@ -25,3 +27,8 @@ export type CommentsBackTypes = {
     name: string,
   }
 }
+
+export type CommentPostTypes = {
+  comment: string,
+  rating: number,
+};

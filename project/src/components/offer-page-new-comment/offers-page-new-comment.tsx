@@ -1,7 +1,14 @@
-import React, { ChangeEvent, useState } from 'react';
-import { INITIAL_RATING, INITIAL_REVIEW_STATE, MIN_COMMENT_LENGTH, RatingPosition } from '../../const';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { INITIAL_RATING, INITIAL_REVIEW_STATE, MIN_COMMENT_LENGTH, MIN_RATING, RatingPosition } from '../../const';
+import { CommentPostTypes } from '../../types/comments-types';
 
-function OfferPageNewComment(): JSX.Element {
+type OfferPageNewCommentTypes = {
+  id: string,
+  postNewComment: (comment: CommentPostTypes, id: string) => void;
+}
+
+function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
+  const { postNewComment, id } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
 
@@ -16,14 +23,28 @@ function OfferPageNewComment(): JSX.Element {
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(() => {
-      const newRating = INITIAL_RATING;
+      const newRating = [...INITIAL_RATING];
       newRating[+evt.target.value - 1] = true;
       return newRating;
     });
   };
 
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const newReview: CommentPostTypes = {
+      comment: review,
+      rating: rating.findIndex((item) => item) + 1,
+    };
+    postNewComment(newReview, id);
+  }
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={ handleFormSubmit }
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input

@@ -4,7 +4,12 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
 import { AuthorizationStatus } from '../../const';
-import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
+import {
+  getCommentsDataAction,
+  getNearOffersAction,
+  getOfferDataAction,
+  postNewCommentAction
+} from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
@@ -25,6 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreato
   getOfferData: getOfferDataAction,
   getCommentsData: getCommentsDataAction,
   getNearbyOffers: getNearOffersAction,
+  postNewComment: postNewCommentAction,
 }, dispatch);
 
 const offerPageMainConnector = connect(mapStateToProps, mapDispatchToProps);
@@ -33,7 +39,7 @@ const OfferPageMainConnected = offerPageMainConnector(OfferPageMain);
 type OfferPageTypes = ConnectedProps<typeof offerPageMainConnector>;
 
 function OfferPageMain(props: OfferPageTypes): JSX.Element {
-  const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
+  const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers, postNewComment } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
   const visualRating = getVisualRating(rating);
   const bookmarkButtonClass = isFavorite
@@ -111,7 +117,13 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
               <OfferPageCommentsList
                 commentsData={ currentHotelComments }
               />
-              { authorization === AuthorizationStatus.Auth && <OfferPageNewComment /> }
+              {
+                authorization === AuthorizationStatus.Auth
+                && <OfferPageNewComment
+                  id={ id }
+                  postNewComment={ postNewComment }
+                />
+              }
             </section>
           </div>
         </div>

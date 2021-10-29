@@ -3,15 +3,17 @@ import {
   initCityAction,
   requireAuthorization,
   requireLogout, setCurrentUser, setIsFavorite,
-  setIsFetchingAction, setCurrentHotel, setNearOffersData, setCurrentHotelComments
+  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments, setPostStatus
 } from '../store/actions';
 import { StateTypes } from './state-types';
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 
 export enum ActionType {
   InitCity = 'init/initCity',
-  ToggleIsFetching = 'data/toggleIsFetching',
+  SetFetchStatus = 'data/setFetchStatus',
+  SetPostStatus = 'data/setPostStatus',
   SetIsFavorite = 'data/setIsFavorite',
+  AddNewComment = 'data/addNewComment',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
   SetCurrentUser = 'user/setCurrentUser',
@@ -22,14 +24,15 @@ export enum ActionType {
 
 export type ActionTypes =
   | ReturnType<typeof initCityAction>
-  | ReturnType<typeof setIsFetchingAction>
+  | ReturnType<typeof setFetchStatus>
+  | ReturnType<typeof setPostStatus>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof setIsFavorite>
   | ReturnType<typeof setCurrentUser>
   | ReturnType<typeof setCurrentHotel>
   | ReturnType<typeof setNearOffersData>
-  | ReturnType<typeof setCurrentHotelComments>
+  | ReturnType<typeof setCurrentHotelComments>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, ActionTypes>;
 

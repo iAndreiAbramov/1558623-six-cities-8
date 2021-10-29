@@ -1,23 +1,35 @@
-import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
+import {
+  APIRoute,
+  AuthorizationStatus,
+  Cities,
+  DEFAULT_USER_DATA,
+  FetchStatus,
+  HttpStatusCode,
+  PostStatus
+} from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
+import browserHistory from '../services/browser-history';
+import { CommentPostTypes } from '../types/comments-types';
+import { dropToken, setToken } from '../services/token';
+import { dropEmail, setEmail } from '../services/email';
 import {
   initCityAction,
   requireAuthorization,
-  setCurrentHotel, setCurrentHotelComments,
+  setCurrentHotel,
+  setCurrentHotelComments,
   setCurrentUser,
+  setFetchStatus,
   setIsFavorite,
-  setIsFetchingAction, setNearOffersData
+  setNearOffersData,
+  setPostStatus
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
-import { dropToken, setToken } from '../services/token';
-import { dropEmail, setEmail } from '../services/email';
-import browserHistory from '../services/browser-history';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    dispatch(setIsFetchingAction(FetchStatus.InProgress));
+    dispatch(setFetchStatus(FetchStatus.InProgress));
     await api.get<BackDataTypes[]>(APIRoute.Hotels)
       .then(({ data }) => {
         const offersData = adaptOffersToFront(data)
@@ -30,21 +42,21 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
         });
         dispatch(initCityAction(cityData, offersData, pointsForMap));
       })
-      .then(() => dispatch(setIsFetchingAction(FetchStatus.Success)))
-      .catch(() => dispatch(setIsFetchingAction(FetchStatus.Error)));
+      .then(() => dispatch(setFetchStatus(FetchStatus.Success)))
+      .catch(() => dispatch(setFetchStatus(FetchStatus.Error)));
   }
 );
 
 export const getOfferDataAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    dispatch(setIsFetchingAction(FetchStatus.InProgress));
+    dispatch(setFetchStatus(FetchStatus.InProgress));
     await api.get(`${ APIRoute.Hotels }/${ id }`)
       .then(({ data }) => {
         dispatch(setCurrentHotel(adaptOfferToFront(data)));
-        dispatch(setIsFetchingAction(FetchStatus.Success));
+        dispatch(setFetchStatus(FetchStatus.Success));
       })
       .catch(() => {
-        dispatch(setIsFetchingAction(FetchStatus.Error));
+        dispatch(setFetchStatus(FetchStatus.Error));
       });
   }
 );
@@ -54,6 +66,20 @@ export const getCommentsDataAction = (id: string): ThunkActionResult => (
     await api.get(`${ APIRoute.Comments }/${ id }`)
       .then(({ data }) => {
         dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
+      });
+  }
+);
+
+export const postNewCommentAction = (comment: CommentPostTypes, id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(setPostStatus(PostStatus.InProgress));
+    await api.post(`${ APIRoute.Comments }/${ id }`, comment)
+      .then(({ data }) => {
+        dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
+        dispatch(setPostStatus(PostStatus.Success));
+      })
+      .catch(() => {
+        dispatch(setPostStatus(PostStatus.Error));
       });
   }
 );

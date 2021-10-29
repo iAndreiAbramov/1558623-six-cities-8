@@ -1,9 +1,9 @@
 import { ActionType } from '../types/action-types';
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, FetchStatus, PostStatus } from '../const';
 import { CityTypes, PointTypes } from '../types/state-types';
+import { CommentsFrontTypes } from '../types/comments-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
 import { OfferDataTypes } from '../types/offer-data-types';
-import { CommentsFrontTypes } from '../types/comments-types';
 
 export const initCityAction = (
   cityData: CityTypes,
@@ -18,11 +18,18 @@ export const initCityAction = (
   },
 } as const);
 
-export const setIsFetchingAction = (isFetching: string) => ({
-  type: ActionType.ToggleIsFetching,
+export const setFetchStatus = (fetchStatus: FetchStatus) => ({
+  type: ActionType.SetFetchStatus,
   payload: {
-    isFetching,
+    fetchStatus,
   },
+} as const);
+
+export const setPostStatus = (postStatus: PostStatus) => ({
+  type: ActionType.SetPostStatus,
+  payload: {
+    postStatus,
+  }
 } as const);
 
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
