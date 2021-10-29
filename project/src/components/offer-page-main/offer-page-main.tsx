@@ -59,7 +59,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     }
     getCommentsData(id);
     getNearbyOffers(id);
-  });
+  },[]);
 
   return (
     <main className="page__main page__main--property">
