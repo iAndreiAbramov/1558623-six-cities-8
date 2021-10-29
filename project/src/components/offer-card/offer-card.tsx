@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { getCommentsDataAction, getNearbyOffersAction, getOfferDataAction } from '../../store/api-actions';
+import { getOfferDataAction } from '../../store/api-actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { ActionTypes } from '../../types/action-types';
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  handleOfferClick: getNearbyOffersAction,
+  handleOfferClick: getOfferDataAction,
 }, dispatch);
 
 const offerCardConnector = connect(null, mapDispatchToProps);
@@ -44,7 +44,10 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
         </div>
       }
       <div className={ `${ imgWrapperClass } place-card__image-wrapper` }>
-        <Link to={ `${ AppRoute.Offer }/${ id }` }>
+        <Link
+          to={ `${ AppRoute.Offer }/${ id }` }
+          onClick={ () => handleOfferClick(id) }
+        >
           <img className="place-card__image" src={ previewImage } width="260" height="200"
             alt="Place view"
           />
@@ -52,10 +55,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
-          <div
-            className="place-card__price"
-            onClick={ () => handleOfferClick(id) }
-          >
+          <div className="place-card__price">
             <b className="place-card__price-value">&euro;{ price }</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
@@ -77,7 +77,12 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={ `${ AppRoute.Offer }/${ id }` }>{ title }</Link>
+          <Link
+            to={ `${ AppRoute.Offer }/${ id }` }
+            onClick={ () => handleOfferClick(id) }
+          >
+            { title }
+          </Link>
         </h2>
         <p className="place-card__type">{ type }</p>
       </div>

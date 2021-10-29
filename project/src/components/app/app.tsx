@@ -8,6 +8,7 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRouteConnected from '../private-route/private-route';
 import browserHistory from '../../services/browser-history';
+import OfferPageConnected from '../offer-page/offer-page';
 
 function App(): JSX.Element {
   return (
@@ -30,7 +31,7 @@ function App(): JSX.Element {
         />
 
         <Route path={ AppRoute.OfferId } exact>
-          <OfferPage />
+          <OfferPageConnected />
         </Route>
 
         <Route>

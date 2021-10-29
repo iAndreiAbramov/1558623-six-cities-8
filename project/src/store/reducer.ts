@@ -1,5 +1,12 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, DEFAULT_USER_DATA, FetchStatus } from '../const';
+import {
+  AuthorizationStatus,
+  Cities,
+  DEFAULT_CITY_NAME,
+  DEFAULT_HOTEL_DATA,
+  DEFAULT_USER_DATA,
+  FetchStatus
+} from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
@@ -15,16 +22,14 @@ const initialState: StateTypes = {
   offersData: [],
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
+  //todo: Подумать как уйти от этих констант DEFAULT_...
   currentUser: DEFAULT_USER_DATA,
-  currentOffer: {
-    offerData: {},
-    nearOffersData: [],
-    commentsData: [],
-  },
+  currentHotel: DEFAULT_HOTEL_DATA,
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
   switch (action.type) {
+
     case ActionType.InitCity:
       return {
         ...state,
@@ -64,6 +69,12 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         ...state,
         authorization: AuthorizationStatus.NoAuth,
       };
+
+    case ActionType.SetCurrentHotel:
+      return {
+        ...state,
+        currentHotel: action.payload.currentHotel,
+      }
 
     case ActionType.SetIsFavorite:
       return {

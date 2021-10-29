@@ -1,7 +1,6 @@
 import { AuthorizationStatus } from '../const';
 import { OfferDataTypes } from './offer-data-types';
 import { FrontUserDataTypes } from './user-data-types';
-import { CommentsDataTypes } from './comments-data-types';
 
 export type CityTypes = {
   name: string,
@@ -38,9 +37,5 @@ export type StateTypes = {
   pointsForMap: PointTypes[],
   authorization: AuthorizationStatus,
   currentUser: FrontUserDataTypes,
-  currentOffer: {
-    offerData: OfferDataTypes | {},
-    nearOffersData: OfferDataTypes[] | [],
-    commentsData: CommentsDataTypes[] | [],
-  },
+  currentHotel: OfferDataTypes,
 }

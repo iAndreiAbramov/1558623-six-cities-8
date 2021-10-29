@@ -9,7 +9,7 @@ import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggle
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { setIsFavoriteAction } from '../../store/api-actions';
-import Spinner from '../spinner/spinner';
+import SpinnerHome from '../spinner-home/spinner-home';
 import { StateTypes } from '../../types/state-types';
 import OfferCardConnected from '../offer-card/offer-card';
 
@@ -77,7 +77,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
 
   return (
     <section className="cities__places places">
-      { isFetching === FetchStatus.InProgress && <Spinner /> }
+      { isFetching === FetchStatus.InProgress && <SpinnerHome /> }
       { isFetching === FetchStatus.Error && <FetchFailMessage /> }
       {
         isFetching === FetchStatus.Success

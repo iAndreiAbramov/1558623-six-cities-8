@@ -33,6 +33,41 @@ export const DEFAULT_USER_DATA = {
   name: '',
 } as const;
 
+export const DEFAULT_HOTEL_DATA = {
+  bedrooms: 0,
+  city: {
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+    name: '',
+  },
+  description: '',
+  goods: [''],
+  host: {
+    avatarUrl: '',
+    id: '',
+    isPro: false,
+    name: '',
+  },
+  id: '',
+  images: [''],
+  isFavorite: false,
+  isPremium: false,
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  maxAdults: 0,
+  previewImage: '',
+  price: 0,
+  rating: 0,
+  title: '',
+  type: '',
+};
+
 export const Cities: CitiesTypes = {
   'Paris': {
     name: 'Paris',

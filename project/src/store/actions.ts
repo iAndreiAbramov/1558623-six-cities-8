@@ -1,8 +1,8 @@
 import { ActionType } from '../types/action-types';
 import { AuthorizationStatus } from '../const';
-import { OfferDataTypes } from '../types/offer-data-types';
 import { CityTypes, PointTypes } from '../types/state-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
+import { OfferDataTypes } from '../types/offer-data-types';
 
 export const initCityAction = (
   cityData: CityTypes,
@@ -17,7 +17,7 @@ export const initCityAction = (
   },
 } as const);
 
-export const toggleIsFetchingAction = (isFetching: string) => ({
+export const setIsFetchingAction = (isFetching: string) => ({
   type: ActionType.ToggleIsFetching,
   payload: {
     isFetching,
@@ -44,5 +44,12 @@ export const setCurrentUser = (userData: FrontUserDataTypes) => ({
   type: ActionType.SetCurrentUser,
   payload: {
     userData,
+  },
+} as const);
+
+export const setCurrentHotel = (currentHotel: OfferDataTypes) => ({
+  type: ActionType.SetCurrentHotel,
+  payload: {
+    currentHotel,
   },
 } as const);
