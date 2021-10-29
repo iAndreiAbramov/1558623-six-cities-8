@@ -28,7 +28,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
 
         marker
           .setIcon(
-            activeCardId && activeCardId === point.offerId
+            activeCardId && activeCardId === point.id
               ? ActiveCustomIcon
               : DefaultCustomIcon,
           )

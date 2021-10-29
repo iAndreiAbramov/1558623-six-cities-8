@@ -2,8 +2,8 @@ import React from 'react';
 import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
-import PageHeader from '../page-header/page-header';
-import { StateTypes } from '../../types/state-types';
+import PageHeaderConnected from '../page-header/page-header';
+import { StateTypes} from '../../types/state-types';
 import { connect } from 'react-redux';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
@@ -27,7 +27,7 @@ function FavoritesPage(props: FavoritesPageTypes): JSX.Element {
 
   return (
     <div className={ wrapperClass }>
-      <PageHeader />
+      <PageHeaderConnected />
       { pageContent }
       <FavoritesPageFooter />
     </div>

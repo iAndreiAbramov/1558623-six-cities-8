@@ -1,52 +1,53 @@
 import React, { useEffect, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { ActionTypes } from '../../types/action-types';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
+import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { connect } from 'react-redux';
-import { StateTypes } from '../../types/state-types';
+import { setIsFavoriteAction } from '../../store/api-actions';
 import Spinner from '../spinner/spinner';
-import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
-
-type HomePageListTypes = {
-  isFetching: string,
-  offersData: OfferDataTypes[],
-  onActiveCardChange?: (newId: string) => void,
-  activeCity: string,
-}
+import { StateTypes } from '../../types/state-types';
 
 const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,
   activeCity: state.activeCity.name,
 });
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+  handleBookmarkClick: setIsFavoriteAction,
+}, dispatch);
 
-const HomePageListConnected = connect(mapStateToProps)(HomePageList);
+const homePageListConnect = connect(mapStateToProps, mapDispatchToProps);
+const HomePageListConnected = homePageListConnect(HomePageList);
+
+type HomePageListTypes = {
+  offersData: OfferDataTypes[],
+  onActiveCardChange?: (newId: string) => void,
+} & ConnectedProps<typeof homePageListConnect>
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
+  const { offersData, onActiveCardChange, activeCity, isFetching, handleBookmarkClick } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
 
   useEffect(() => {
-    if (sortOption === SortOptions.PRICE_UP) {
-      setSortedData(() => (
-        [...offersData].sort((a, b) => (
-          a.price - b.price
-        ))));
-    } else if (sortOption === SortOptions.PRICE_DOWN) {
-      setSortedData(() => (
-        [...offersData].sort((a, b) => (
-          b.price - a.price
-        ))));
-    } else if (sortOption === SortOptions.RATING_DOWN) {
-      setSortedData(() => (
-        [...offersData].sort((a, b) => (
-          b.rating - a.rating
-        ))));
-    } else {
-      setSortedData([...offersData]);
+    switch (sortOption) {
+      case SortOptions.PRICE_UP:
+        setSortedData(() => [...offersData].sort((a, b) => a.price - b.price));
+        break;
+      case SortOptions.PRICE_DOWN:
+        setSortedData(() => [...offersData].sort((a, b) => b.price - a.price));
+        break;
+      case SortOptions.RATING_DOWN:
+        setSortedData(() => [...offersData].sort((a, b) => b.rating - a.rating));
+        break;
+      default:
+        setSortedData([...offersData]);
+        break;
     }
   }, [offersData, sortOption]);
 
@@ -59,6 +60,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
         onActiveCardChange={ onActiveCardChange }
         articleClass={ CardArticleClasses.MAIN_PAGE_LIST }
         imgWrapperClass={ CardImgWrapperClasses.MAIN_PAGE_LIST }
+        handleBookmarkClick={ handleBookmarkClick }
       />
     );
   });
@@ -89,7 +91,8 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
               clickHandler={ handleDropdownClick }
             />
             {
-              dropdownState &&
+              dropdownState
+              &&
               <HomePageSortToggler
                 clickHandler={ handleSortToggle }
               />

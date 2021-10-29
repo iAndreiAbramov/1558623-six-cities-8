@@ -15,11 +15,23 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum HttpStatusCode {
+  Unauthorised = 401,
+}
+
 export enum FetchStatus {
   InProgress = 'IN_PROGRESS',
   Success = 'SUCCESS',
   Error = 'ERROR',
 }
+
+export const DEFAULT_USER_DATA = {
+  avatarUrl: '../../public/img/avatar.svg',
+  email: '',
+  id: '',
+  isPro: false,
+  name: '',
+} as const;
 
 export const Cities: CitiesTypes = {
   'Paris': {
@@ -127,4 +139,5 @@ export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite',
 }

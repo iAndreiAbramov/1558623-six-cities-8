@@ -12,15 +12,13 @@ import { requireAuthorization } from './store/actions';
 import { ThunkAppDispatch } from './types/action-types';
 import { checkAuthAction, initActiveCityAction } from './store/api-actions';
 
-const api =createApi(
+const api = createApi(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
 const store = createStore(
   reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-  ),
+  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))),
 );
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());

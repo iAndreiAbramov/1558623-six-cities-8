@@ -1,16 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Router, Route, Switch } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import FavoritesPageConnected from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import OfferPage from '../offer-page/offer-page';
-import PrivateRoute from '../private-route/private-route';
+import PrivateRouteConnected from '../private-route/private-route';
+import browserHistory from '../../services/browser-history';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <Router history={ browserHistory }>
       <Switch>
         <Route path={ AppRoute.Home } exact>
           <HomePage />
@@ -20,19 +21,16 @@ function App(): JSX.Element {
           <LoginPage />
         </Route>
 
-        <PrivateRoute
+        <PrivateRouteConnected
           exact
           path={ AppRoute.Favorites }
-          authorizationStatus={ AuthorizationStatus.Auth }
           render={ () => (
             <FavoritesPageConnected />
           ) }
         />
 
         <Route path={ AppRoute.OfferId } exact>
-          <OfferPage
-            authorizationStatus={ AuthorizationStatus.Auth }
-          />
+          <OfferPage />
         </Route>
 
         <Route>
@@ -40,7 +38,7 @@ function App(): JSX.Element {
         </Route>
 
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 

@@ -1,27 +1,22 @@
 import React from 'react';
 import { getCommentsData } from '../../mocks/comments';
 import { getVisualRating } from '../../utils/common-utils';
+import { getOffersData } from '../../mocks/offers';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
-import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
+// import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import { useParams } from 'react-router-dom';
-import { getOffersData } from '../../mocks/offers';
-
-type OfferPageMainTypes = {
-  authorizationStatus: 'AUTH' | 'NO_AUTH',
-}
 
 const offersData = getOffersData(4);
 const nearOffersData = offersData.slice(0, 3);
 const commentsData = getCommentsData();
 
-function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
-  const { authorizationStatus } = props;
+function OfferPageMain(): JSX.Element {
   const { id } = useParams() as { id: string };
   const pageData = offersData.find((item) => item.id === id) as OfferDataTypes;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city } = pageData;
@@ -32,12 +27,12 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
   const nearbyPoints = nearOffersData.map((item) => ({
     latitude: item.location.latitude,
     longitude: item.location.longitude,
-    offerId: item.id,
+    id: item.id,
   }));
   const currentPoint = {
     latitude: pageData.location.latitude,
     longitude: pageData.location.longitude,
-    offerId: pageData.id,
+    id: pageData.id,
   };
 
   return (
@@ -91,7 +86,7 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
               <OfferPageCommentsList
                 commentsData={ commentsData }
               />
-              { authorizationStatus === 'AUTH' ? <OfferPageNewComment /> : null }
+              { <OfferPageNewComment /> }
             </section>
           </div>
         </div>
@@ -101,9 +96,9 @@ function OfferPageMain(props: OfferPageMainTypes): JSX.Element {
           currentPoint={ currentPoint }
         />
       </section>
-      <OfferPageNearList
-        nearOffersData={ nearOffersData }
-      />
+      {/*<OfferPageNearList*/}
+      {/*  nearOffersData={ nearOffersData }*/}
+      {/*/>*/}
     </main>
   );
 }
