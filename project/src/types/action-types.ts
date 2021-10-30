@@ -12,7 +12,6 @@ export enum ActionType {
   InitCity = 'init/initCity',
   SetFetchStatus = 'data/setFetchStatus',
   SetIsFavorite = 'data/setIsFavorite',
-  AddNewComment = 'data/addNewComment',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
   SetCurrentUser = 'user/setCurrentUser',

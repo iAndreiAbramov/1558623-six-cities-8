@@ -58,10 +58,6 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     getCommentsData(id);
   }, []);
 
-  // useEffect(() => {
-  //   getCommentsData(id)
-  // }, []);
-
   return (
     <main className="page__main page__main--property">
       <section className="property">

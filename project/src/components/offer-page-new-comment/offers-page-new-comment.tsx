@@ -11,7 +11,6 @@ import {
   RatingPosition
 } from '../../const';
 import { setCurrentHotelComments } from '../../store/actions';
-import { ThunkActionResult } from '../../types/action-types';
 import { api } from '../../index';
 import { AxiosResponse } from 'axios';
 
@@ -27,7 +26,7 @@ type OfferPageNewCommentTypes = {
 } & ConnectedProps<typeof offerPageNewCommentConnector>
 
 function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
-  const { id } = props;
+  const { id, setCurrentHotelComments } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
@@ -38,7 +37,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     } else {
       setSubmitIsDisabled(false);
     }
-  });
+  }, [rating, review]);
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
     evt.preventDefault();
@@ -59,11 +58,11 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setSubmitIsDisabled(true);
     const newReview: CommentPostTypes = {
       comment: review,
       rating: rating.findIndex((item) => item) + 1,
     };
-    setSubmitIsDisabled(true);
     postNewComment(newReview, id)
       .then(({ data }) => {
         console.log(data);
