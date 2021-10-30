@@ -65,7 +65,6 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     };
     postNewComment(newReview, id)
       .then(({ data }) => {
-        console.log(data);
         setCurrentHotelComments(adaptCommentsToFront(data));
         setRating(INITIAL_RATING);
         setReview('');
