@@ -3,7 +3,7 @@ import {
   initCityAction,
   requireAuthorization,
   requireLogout, setCurrentUser, setIsFavorite,
-  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments, setPostStatus
+  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments,
 } from '../store/actions';
 import { StateTypes } from './state-types';
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
@@ -11,7 +11,6 @@ import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 export enum ActionType {
   InitCity = 'init/initCity',
   SetFetchStatus = 'data/setFetchStatus',
-  SetPostStatus = 'data/setPostStatus',
   SetIsFavorite = 'data/setIsFavorite',
   AddNewComment = 'data/addNewComment',
   RequireAuthorization = 'user/requireAuthorization',
@@ -25,7 +24,6 @@ export enum ActionType {
 export type ActionTypes =
   | ReturnType<typeof initCityAction>
   | ReturnType<typeof setFetchStatus>
-  | ReturnType<typeof setPostStatus>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof setIsFavorite>

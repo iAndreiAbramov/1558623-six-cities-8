@@ -1,20 +1,44 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { INITIAL_RATING, INITIAL_REVIEW_STATE, MIN_COMMENT_LENGTH, MIN_RATING, RatingPosition } from '../../const';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { connect, ConnectedProps } from 'react-redux';
+import { adaptCommentsToFront } from '../../utils/adapters';
 import { CommentPostTypes } from '../../types/comments-types';
+import {
+  APIRoute,
+  INITIAL_RATING,
+  INITIAL_REVIEW_STATE,
+  MIN_COMMENT_LENGTH,
+  RatingPosition
+} from '../../const';
+import { setCurrentHotelComments } from '../../store/actions';
+import { ThunkActionResult } from '../../types/action-types';
+import { api } from '../../index';
+import { AxiosResponse } from 'axios';
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+  setCurrentHotelComments: setCurrentHotelComments,
+}, dispatch);
+
+const offerPageNewCommentConnector = connect(null, mapDispatchToProps);
+const OfferPageNewCommentConnected = offerPageNewCommentConnector(OfferPageNewComment);
 
 type OfferPageNewCommentTypes = {
   id: string,
-  postNewComment: (comment: CommentPostTypes, id: string) => void;
-}
+} & ConnectedProps<typeof offerPageNewCommentConnector>
 
 function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
-  const { postNewComment, id } = props;
+  const { id } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
+  const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
 
-  const submitIsDisabled = () => (
-    rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH
-  );
+  useEffect(() => {
+    if (rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH) {
+      setSubmitIsDisabled(true);
+    } else {
+      setSubmitIsDisabled(false);
+    }
+  });
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
     evt.preventDefault();
@@ -29,13 +53,27 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     });
   };
 
+  const postNewComment = async (comment: CommentPostTypes, id: string): Promise<AxiosResponse> => (
+    await api.post(`${ APIRoute.Comments }/${ id }`, comment)
+  );
+
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const newReview: CommentPostTypes = {
       comment: review,
       rating: rating.findIndex((item) => item) + 1,
     };
-    postNewComment(newReview, id);
+    setSubmitIsDisabled(true);
+    postNewComment(newReview, id)
+      .then(({ data }) => {
+        console.log(data);
+        setCurrentHotelComments(adaptCommentsToFront(data));
+        setRating(INITIAL_RATING);
+        setReview('');
+      })
+      .catch(() => {
+        setSubmitIsDisabled(false);
+      })
   }
 
   return (
@@ -142,7 +180,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={ submitIsDisabled() }
+          disabled={ submitIsDisabled }
         >
           Submit
         </button>
@@ -151,4 +189,5 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
   );
 }
 
-export default OfferPageNewComment;
+export { OfferPageNewComment };
+export default OfferPageNewCommentConnected;

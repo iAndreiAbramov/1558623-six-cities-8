@@ -1,5 +1,5 @@
 import { ActionType } from '../types/action-types';
-import { AuthorizationStatus, FetchStatus, PostStatus } from '../const';
+import { AuthorizationStatus, FetchStatus } from '../const';
 import { CityTypes, PointTypes } from '../types/state-types';
 import { CommentsFrontTypes } from '../types/comments-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
@@ -23,13 +23,6 @@ export const setFetchStatus = (fetchStatus: FetchStatus) => ({
   payload: {
     fetchStatus,
   },
-} as const);
-
-export const setPostStatus = (postStatus: PostStatus) => ({
-  type: ActionType.SetPostStatus,
-  payload: {
-    postStatus,
-  }
 } as const);
 
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({

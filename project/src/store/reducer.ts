@@ -6,13 +6,11 @@ import {
   DEFAULT_HOTEL_DATA,
   DEFAULT_USER_DATA,
   FetchStatus,
-  PostStatus
 } from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
   fetchStatus: FetchStatus.InProgress,
-  postStatus: PostStatus.Success,
   activeCity: {
     name: Cities[DEFAULT_CITY_NAME].name,
     location: {

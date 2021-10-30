@@ -25,12 +25,6 @@ export enum FetchStatus {
   Error = 'ERROR',
 }
 
-export enum PostStatus {
-  InProgress = 'IN_PROGRESS',
-  Success = 'SUCCESS',
-  Error = 'ERROR',
-}
-
 export const DEFAULT_USER_DATA = {
   avatarUrl: '../../public/img/avatar.svg',
   email: '',

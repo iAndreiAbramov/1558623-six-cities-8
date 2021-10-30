@@ -5,7 +5,6 @@ import {
   DEFAULT_USER_DATA,
   FetchStatus,
   HttpStatusCode,
-  PostStatus
 } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
@@ -22,7 +21,6 @@ import {
   setFetchStatus,
   setIsFavorite,
   setNearOffersData,
-  setPostStatus
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
@@ -70,19 +68,7 @@ export const getCommentsDataAction = (id: string): ThunkActionResult => (
   }
 );
 
-export const postNewCommentAction = (comment: CommentPostTypes, id: string): ThunkActionResult => (
-  async (dispatch, _getState, api): Promise<void> => {
-    dispatch(setPostStatus(PostStatus.InProgress));
-    await api.post(`${ APIRoute.Comments }/${ id }`, comment)
-      .then(({ data }) => {
-        dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
-        dispatch(setPostStatus(PostStatus.Success));
-      })
-      .catch(() => {
-        dispatch(setPostStatus(PostStatus.Error));
-      });
-  }
-);
+
 
 export const getNearOffersAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -97,7 +83,8 @@ export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(APIRoute.Login)
       .then(({ status }) => {
-        status && status !== HttpStatusCode.Unauthorised
+        status
+        && status !== HttpStatusCode.Unauthorised
         && dispatch(requireAuthorization(AuthorizationStatus.Auth));
       });
   });
@@ -109,8 +96,7 @@ export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
         setToken(data.token);
         setEmail(data.email);
-        const adaptedUserData = adaptUserDataToFront(data);
-        dispatch(setCurrentUser(adaptedUserData));
+        dispatch(setCurrentUser(adaptUserDataToFront(data)));
         browserHistory.push('/');
       });
   }
