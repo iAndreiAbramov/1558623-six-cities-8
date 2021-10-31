@@ -25,6 +25,11 @@ export enum FetchStatus {
   Error = 'ERROR',
 }
 
+export enum IsFavoriteValue {
+  Favorite = '1',
+  NotFavorite = '0',
+}
+
 export const DEFAULT_USER_DATA = {
   avatarUrl: '../../public/img/avatar.svg',
   email: '',
@@ -122,9 +127,7 @@ export const Cities: CitiesTypes = {
 export const DEFAULT_CITY_NAME = 'Paris';
 
 export const PERCENTS_CAP = 100;
-export const MIN_RATING = 0;
 export const MAX_RATING = 5;
-export const RATING_DECIMALS = 1;
 
 export enum RatingPosition {
   Perfect = 4,

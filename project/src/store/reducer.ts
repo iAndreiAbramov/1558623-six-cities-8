@@ -90,12 +90,6 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         currentHotelComments: action.payload.currentHotelComments,
       }
 
-    case ActionType.SetIsFavorite:
-      return {
-        ...state,
-        // offersData: action.payload.offersData,
-      };
-
     default:
       return state;
   }

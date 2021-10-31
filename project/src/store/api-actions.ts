@@ -113,15 +113,3 @@ export const requestLogoutAction = (): ThunkActionResult => (
       });
   }
 );
-
-//todo: Это просто заготовка
-export const setIsFavoriteAction = (hotelId: string, isFavoriteValue: string): ThunkActionResult => (
-  async (dispatch, _getState, api): Promise<void> => {
-    // console.log(`${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`);
-    const favoriteUrl = `${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`;
-    await api.post(favoriteUrl)
-      .then(({ data }) => {
-        dispatch(setIsFavorite(data));
-      });
-  }
-);

@@ -1,16 +1,17 @@
-import React from 'react';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import React, { useState } from 'react';
+import { api } from '../../index';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { APIRoute, AppRoute, IsFavoriteValue } from '../../const';
 import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { getOfferDataAction, setIsFavoriteAction } from '../../store/api-actions';
+import { getOfferDataAction } from '../../store/api-actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { ActionTypes } from '../../types/action-types';
+import { adaptOfferToFront } from '../../utils/adapters';
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   handleOfferClick: getOfferDataAction,
-  handleBookmarkClick: setIsFavoriteAction,
 }, dispatch);
 
 const offerCardConnector = connect(null, mapDispatchToProps);
@@ -24,13 +25,23 @@ type OfferCardTypes = {
 } & ConnectedProps<typeof offerCardConnector>
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleBookmarkClick, handleOfferClick } = props;
+  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleOfferClick } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
-  const isFavoriteValue = isFavorite ? '0' : '1';
   const visualRating = getVisualRating(rating);
-  const bookmarkButtonClass = isFavorite
+
+  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
+
+  const bookmarkButtonClass = isFavoriteStatus
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
+
+  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
+    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
+    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
+      .then(({ data }) => {
+        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite)
+      });
+  };
 
   return (
     <article className={ `${ articleClass } place-card` }
@@ -62,7 +73,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           <button
             className={ bookmarkButtonClass }
             type="button"
-            onClick={ () => handleBookmarkClick(id, isFavoriteValue) }
+            onClick={ () => handleBookmarkClick(id) }
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
