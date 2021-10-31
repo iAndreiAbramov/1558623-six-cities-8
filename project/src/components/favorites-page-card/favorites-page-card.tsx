@@ -22,8 +22,8 @@ type FavoritesCardTypes = {
 } & ConnectedProps<typeof favoritesPageCardConnector>;
 
 function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
-  const { data, handleOfferClick, refreshFavoritesData } = props;
-  const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = data;
+  const { data: offerData, handleOfferClick, refreshFavoritesData } = props;
+  const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = offerData;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
 
   const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
