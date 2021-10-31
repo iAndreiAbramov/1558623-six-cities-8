@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
-import { AuthorizationStatus } from '../../const';
+import { APIRoute, AuthorizationStatus, IsFavoriteValue } from '../../const';
 import { getCommentsDataAction, getNearOffersAction, getOfferDataAction, } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
@@ -14,6 +14,8 @@ import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import { StateTypes } from '../../types/state-types';
+import { api } from '../../index';
+import { adaptOfferToFront } from '../../utils/adapters';
 
 const mapStateToProps = (state: StateTypes) => ({
   pageData: state.currentHotel,
@@ -36,9 +38,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
   const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
   const visualRating = getVisualRating(rating);
-  const bookmarkButtonClass = isFavorite
-    ? 'property__bookmark-button property__bookmark-button--active button'
-    : 'property__bookmark-button button';
+
   const nearbyPoints = nearOffersData.map((item) => ({
     latitude: item.location.latitude,
     longitude: item.location.longitude,
@@ -50,8 +50,21 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     id: pageData.id,
   };
 
-  const { id } = useParams() as { id: string };
+  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
 
+  const bookmarkButtonClass = isFavoriteStatus
+    ? 'property__bookmark-button property__bookmark-button--active button'
+    : 'property__bookmark-button button';
+
+  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
+    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
+    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
+      .then(({ data }) => {
+        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite)
+      });
+  };
+
+  const { id } = useParams() as { id: string };
   useEffect(() => {
     !offerId && getOfferData(id);
     getNearbyOffers(id);
@@ -74,7 +87,11 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <button className={ bookmarkButtonClass } type="button">
+              <button
+                className={ bookmarkButtonClass }
+                type="button"
+                onClick={ () => handleBookmarkClick(id) }
+              >
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark" />
                 </svg>
