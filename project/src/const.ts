@@ -25,6 +25,11 @@ export enum FetchStatus {
   Error = 'ERROR',
 }
 
+export enum PostNotificationMessage {
+  Success = 'Your comment successfully posted!',
+  Error = 'Sorry, your comment wasn\'t posted!',
+}
+
 export enum IsFavoriteValue {
   Favorite = '1',
   NotFavorite = '0',

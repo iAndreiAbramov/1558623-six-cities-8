@@ -8,11 +8,15 @@ import {
   INITIAL_RATING,
   INITIAL_REVIEW_STATE,
   MIN_COMMENT_LENGTH,
+  PostNotificationMessage,
   RatingPosition
 } from '../../const';
 import { setCurrentHotelComments } from '../../store/actions';
 import { api } from '../../index';
 import { AxiosResponse } from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   setCurrentHotelComments: setCurrentHotelComments,
@@ -30,6 +34,26 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
+
+  const notifySuccess = (message: string) => toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+  const notifyError = (message: string) => toast.error(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   useEffect(() => {
     if (rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH) {
@@ -68,9 +92,11 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
         setCurrentHotelComments(adaptCommentsToFront(data));
         setRating(INITIAL_RATING);
         setReview('');
+        notifySuccess(PostNotificationMessage.Success);
       })
       .catch(() => {
         setSubmitIsDisabled(false);
+        notifyError(PostNotificationMessage.Error);
       })
   }
 
@@ -183,6 +209,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
           Submit
         </button>
       </div>
+      <ToastContainer />
     </form>
   );
 }
