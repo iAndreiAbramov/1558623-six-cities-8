@@ -35,6 +35,7 @@ export type StateTypes = {
   fetchStatus: FetchStatus,
   activeCity: CityTypes,
   offersData: OfferDataTypes[],
+  favoritesData: OfferDataTypes[];
   pointsForMap: PointTypes[],
   authorization: AuthorizationStatus,
   currentUser: FrontUserDataTypes,

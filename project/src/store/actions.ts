@@ -68,3 +68,10 @@ export const setCurrentHotelComments = (currentHotelComments: CommentsFrontTypes
     currentHotelComments,
   },
 } as const);
+
+export const setFavoritesData = (favoritesData: OfferDataTypes[]) => ({
+  type: ActionType.SetFavoritesData,
+  payload: {
+    favoritesData,
+  },
+} as const);

@@ -20,6 +20,7 @@ const initialState: StateTypes = {
     },
   },
   offersData: [],
+  favoritesData: [],
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
   //todo: Подумать как уйти от этих констант DEFAULT_...
@@ -88,6 +89,12 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         currentHotelComments: action.payload.currentHotelComments,
+      };
+
+    case ActionType.SetFavoritesData:
+      return {
+        ...state,
+        favoritesData: action.payload.favoritesData,
       };
 
     default:

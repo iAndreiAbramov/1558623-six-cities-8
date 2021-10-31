@@ -1,11 +1,4 @@
-import {
-  APIRoute,
-  AuthorizationStatus,
-  Cities,
-  DEFAULT_USER_DATA,
-  FetchStatus,
-  HttpStatusCode
-} from '../const';
+import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';
@@ -17,6 +10,7 @@ import {
   setCurrentHotel,
   setCurrentHotelComments,
   setCurrentUser,
+  setFavoritesData,
   setFetchStatus,
   setNearOffersData
 } from './actions';
@@ -71,6 +65,20 @@ export const getNearOffersAction = (id: string): ThunkActionResult => (
     await api.get(`${ APIRoute.Hotels }/${ id }/nearby`)
       .then(({ data }) => {
         dispatch(setNearOffersData(adaptOffersToFront(data)));
+      });
+  }
+);
+
+export const getFavoritesDataAction = (): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(setFetchStatus(FetchStatus.InProgress));
+    await api.get(APIRoute.Favorite )
+      .then(({ data }) => {
+        dispatch(setFavoritesData(adaptOffersToFront(data)));
+        dispatch(setFetchStatus(FetchStatus.Success));
+      })
+      .catch(() => {
+        dispatch(setFetchStatus(FetchStatus.Error));
       });
   }
 );
