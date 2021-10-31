@@ -4,7 +4,9 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
 import { APIRoute, AuthorizationStatus, IsFavoriteValue } from '../../const';
-import { getCommentsDataAction, getNearOffersAction, getOfferDataAction, } from '../../store/api-actions';
+import { api } from '../../index';
+import { adaptOfferToFront } from '../../utils/adapters';
+import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
@@ -14,15 +16,13 @@ import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import { StateTypes } from '../../types/state-types';
-import { api } from '../../index';
-import { adaptOfferToFront } from '../../utils/adapters';
 
 const mapStateToProps = (state: StateTypes) => ({
   pageData: state.currentHotel,
   nearOffersData: state.nearOffersData,
   currentHotelComments: state.currentHotelComments,
   authorization: state.authorization,
-})
+});
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   getOfferData: getOfferDataAction,
   getCommentsData: getCommentsDataAction,
@@ -60,7 +60,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
     await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
       .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite)
+        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
       });
   };
 

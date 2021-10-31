@@ -5,7 +5,7 @@ import {
   DEFAULT_CITY_NAME,
   DEFAULT_HOTEL_DATA,
   DEFAULT_USER_DATA,
-  FetchStatus,
+  FetchStatus
 } from '../const';
 import { StateTypes } from '../types/state-types';
 
@@ -76,19 +76,19 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
       return {
         ...state,
         currentHotel: action.payload.currentHotel,
-      }
+      };
 
     case ActionType.SetNearOffersData:
       return {
         ...state,
         nearOffersData: action.payload.nearOffersData,
-      }
+      };
 
     case ActionType.SetCurrentHotelComments:
       return {
         ...state,
         currentHotelComments: action.payload.currentHotelComments,
-      }
+      };
 
     default:
       return state;

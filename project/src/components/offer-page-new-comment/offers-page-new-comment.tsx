@@ -19,7 +19,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  setCurrentHotelComments: setCurrentHotelComments,
+  setHotelComments: setCurrentHotelComments,
 }, dispatch);
 
 const offerPageNewCommentConnector = connect(null, mapDispatchToProps);
@@ -30,13 +30,13 @@ type OfferPageNewCommentTypes = {
 } & ConnectedProps<typeof offerPageNewCommentConnector>
 
 function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
-  const { id, setCurrentHotelComments } = props;
+  const { id, setHotelComments } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
 
   const notifySuccess = (message: string) => toast.success(message, {
-    position: "top-right",
+    position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -46,7 +46,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
   });
 
   const notifyError = (message: string) => toast.error(message, {
-    position: "top-right",
+    position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -76,8 +76,8 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     });
   };
 
-  const postNewComment = async (comment: CommentPostTypes, id: string): Promise<AxiosResponse> => (
-    await api.post(`${ APIRoute.Comments }/${ id }`, comment)
+  const postNewComment = async (comment: CommentPostTypes, offerId: string): Promise<AxiosResponse> => (
+    await api.post(`${ APIRoute.Comments }/${ offerId }`, comment)
   );
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -89,7 +89,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     };
     postNewComment(newReview, id)
       .then(({ data }) => {
-        setCurrentHotelComments(adaptCommentsToFront(data));
+        setHotelComments(adaptCommentsToFront(data));
         setRating(INITIAL_RATING);
         setReview('');
         notifySuccess(PostNotificationMessage.Success);
@@ -97,8 +97,8 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
       .catch(() => {
         setSubmitIsDisabled(false);
         notifyError(PostNotificationMessage.Error);
-      })
-  }
+      });
+  };
 
   return (
     <form

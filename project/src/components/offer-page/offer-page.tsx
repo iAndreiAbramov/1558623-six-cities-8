@@ -22,11 +22,12 @@ function OfferPage(props: OfferPageTypes): JSX.Element {
   return (
     <div className="page">
       { isFetching === FetchStatus.InProgress && <SpinnerOffer /> }
-      { isFetching === FetchStatus.Success &&
-      <>
-        <PageHeader />
-        <OfferPageMain />
-      </>
+      {
+        isFetching === FetchStatus.Success &&
+        <>
+          <PageHeader />
+          <OfferPageMain />
+        </>
       }
       { isFetching === FetchStatus.Error && <NotFoundPage /> }
     </div>

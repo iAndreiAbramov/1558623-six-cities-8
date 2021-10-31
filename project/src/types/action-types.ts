@@ -3,7 +3,7 @@ import {
   initCityAction,
   requireAuthorization,
   requireLogout, setCurrentUser, setIsFavorite,
-  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments,
+  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments
 } from '../store/actions';
 import { StateTypes } from './state-types';
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';

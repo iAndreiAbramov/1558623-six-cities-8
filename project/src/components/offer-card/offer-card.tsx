@@ -25,8 +25,8 @@ type OfferCardTypes = {
 } & ConnectedProps<typeof offerCardConnector>
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleOfferClick } = props;
-  const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
+  const { data: offerData, onActiveCardChange, articleClass, imgWrapperClass, handleOfferClick } = props;
+  const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = offerData;
   const visualRating = getVisualRating(rating);
 
   const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
@@ -39,7 +39,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
     const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
     await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
       .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite)
+        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
       });
   };
 

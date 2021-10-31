@@ -66,5 +66,5 @@ export const setCurrentHotelComments = (currentHotelComments: CommentsFrontTypes
   type: ActionType.SetCurrentHotelComments,
   payload: {
     currentHotelComments,
-  }
+  },
 } as const);

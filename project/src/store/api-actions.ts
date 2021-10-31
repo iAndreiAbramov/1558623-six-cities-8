@@ -4,12 +4,11 @@ import {
   Cities,
   DEFAULT_USER_DATA,
   FetchStatus,
-  HttpStatusCode,
+  HttpStatusCode
 } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';
-import { CommentPostTypes } from '../types/comments-types';
 import { dropToken, setToken } from '../services/token';
 import { dropEmail, setEmail } from '../services/email';
 import {
@@ -19,8 +18,7 @@ import {
   setCurrentHotelComments,
   setCurrentUser,
   setFetchStatus,
-  setIsFavorite,
-  setNearOffersData,
+  setNearOffersData
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
@@ -67,8 +65,6 @@ export const getCommentsDataAction = (id: string): ThunkActionResult => (
       });
   }
 );
-
-
 
 export const getNearOffersAction = (id: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
