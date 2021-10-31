@@ -1,14 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { ActionTypes } from '../../types/action-types';
 import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
+import { connect, ConnectedProps } from 'react-redux';
+import { getOfferDataAction } from '../../store/api-actions';
 import { OfferDataTypes } from '../../types/offer-data-types';
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+  handleOfferClick: getOfferDataAction,
+}, dispatch);
+
+const favoritesPageCardConnector = connect(null, mapDispatchToProps);
+const FavoritesPageCardConnected = favoritesPageCardConnector(FavoritesPageCard);
 
 type FavoritesCardTypes = {
   data: OfferDataTypes,
-}
+} & ConnectedProps<typeof favoritesPageCardConnector>;
 
 function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
-  const { data } = props;
+  const { data, handleOfferClick } = props;
   const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = data;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
   const bookmarkButtonClass = isFavorite
@@ -24,7 +35,10 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
         </div>
       }
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={ `${ AppRoute.Offer }/${ id }` }>
+        <Link
+          to={ `${ AppRoute.Offer }/${ id }` }
+          onClick={ () => handleOfferClick(id) }
+        >
           <img className="place-card__image" src={ previewImage } width="150" height="110"
             alt="Place view"
           />
@@ -52,7 +66,12 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={ `${ AppRoute.Offer }/${ id }` }>{ title }</Link>
+          <Link
+            to={ `${ AppRoute.Offer }/${ id }` }
+            onClick={ () => handleOfferClick(id) }
+          >
+            { title }
+          </Link>
         </h2>
         <p className="place-card__type">{ type }</p>
       </div>
@@ -60,4 +79,5 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   );
 }
 
-export default FavoritesPageCard;
+export { FavoritesPageCard };
+export default FavoritesPageCardConnected;
