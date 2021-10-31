@@ -9,6 +9,7 @@ import { getOfferDataAction } from '../../store/api-actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { ActionTypes } from '../../types/action-types';
 import { adaptOfferToFront } from '../../utils/adapters';
+import browserHistory from '../../services/browser-history';
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   handleOfferClick: getOfferDataAction,
@@ -40,7 +41,8 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
     await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
       .then(({ data }) => {
         setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-      });
+      })
+      .catch(() => browserHistory.push(AppRoute.Login));
   };
 
   return (

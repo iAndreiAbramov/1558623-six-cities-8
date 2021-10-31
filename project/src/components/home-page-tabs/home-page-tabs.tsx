@@ -22,4 +22,4 @@ function HomePageTabs(): JSX.Element {
   );
 }
 
-export default HomePageTabs;
+export default React.memo(HomePageTabs);

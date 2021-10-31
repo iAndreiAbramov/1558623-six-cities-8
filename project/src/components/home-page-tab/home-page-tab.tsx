@@ -13,9 +13,10 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreato
   setActiveCity: initActiveCityAction,
 }, dispatch);
 
-const HomePageTabConnected = connect(mapStateToProps, mapDispatchToProps);
+const homePageTabConnector = connect(mapStateToProps, mapDispatchToProps);
+const HomePageTabConnected = homePageTabConnector(HomePageTab);
 
-type HomePageTabTypes = { name: string } & ConnectedProps<typeof HomePageTabConnected>;
+type HomePageTabTypes = { name: string } & ConnectedProps<typeof homePageTabConnector>;
 
 function HomePageTab(props: HomePageTabTypes): JSX.Element {
   const { name, activeCity, setActiveCity } = props;
@@ -33,4 +34,4 @@ function HomePageTab(props: HomePageTabTypes): JSX.Element {
 }
 
 export { HomePageTab };
-export default HomePageTabConnected(HomePageTab);
+export default HomePageTabConnected;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect, ConnectedProps } from 'react-redux';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { AppRoute } from '../../const';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
 import { ActionTypes } from '../../types/action-types';
+import { getEmail } from '../../services/email';
 import { getFavoritesDataAction, requestLogoutAction } from '../../store/api-actions';
 import { StateTypes } from '../../types/state-types';
-import { connect, ConnectedProps } from 'react-redux';
-import { getEmail } from '../../services/email';
 
 const mapStateToProps = (state: StateTypes) => ({
   userEmail: state.currentUser.email,
