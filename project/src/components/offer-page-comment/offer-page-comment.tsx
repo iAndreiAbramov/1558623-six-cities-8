@@ -1,21 +1,27 @@
 import React from 'react';
-import { CommentsDataTypes } from '../../types/comments-data-types';
+import { CommentsFrontTypes } from '../../types/comments-types';
 import { getVisualRating } from '../../utils/common-utils';
+import { MONTHS } from '../../const';
 
 type OfferPageCommentTypes = {
-  commentData: CommentsDataTypes,
+  commentData: CommentsFrontTypes,
 }
 
 function OfferPageComment(props: OfferPageCommentTypes): JSX.Element {
   const { commentData } = props;
   const { date, rating, user, comment } = commentData;
   const visualRating = getVisualRating(rating);
+  const dateObject = new Date(date);
+  const dateString = `${ MONTHS[dateObject.getMonth()] } ${ dateObject.getFullYear() }`;
+  const dateTimeString = `${ dateObject.getFullYear() }-${ dateObject.getMonth() + 1 }-${ dateObject.getDate() }`;
 
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={ user.avatarUrl } width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={ user.avatarUrl } width="54" height="54"
+            alt="Reviews avatar"
+          />
         </div>
         <span className="reviews__user-name">
           { user.name }
@@ -31,10 +37,7 @@ function OfferPageComment(props: OfferPageCommentTypes): JSX.Element {
         <p className="reviews__text">
           { comment }
         </p>
-        {
-          //todo: Привести атрибут dateTime в соответствие на реальных данных
-        }
-        <time className="reviews__time" dateTime="2019-04-24">{ date }</time>
+        <time className="reviews__time" dateTime={ dateTimeString }>{ dateString }</time>
       </div>
     </li>
   );

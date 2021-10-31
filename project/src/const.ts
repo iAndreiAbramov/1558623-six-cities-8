@@ -25,6 +25,16 @@ export enum FetchStatus {
   Error = 'ERROR',
 }
 
+export enum PostNotificationMessage {
+  Success = 'Your comment successfully posted!',
+  Error = 'Sorry, your comment wasn\'t posted!',
+}
+
+export enum IsFavoriteValue {
+  Favorite = '1',
+  NotFavorite = '0',
+}
+
 export const DEFAULT_USER_DATA = {
   avatarUrl: '../../public/img/avatar.svg',
   email: '',
@@ -32,6 +42,41 @@ export const DEFAULT_USER_DATA = {
   isPro: false,
   name: '',
 } as const;
+
+export const DEFAULT_HOTEL_DATA = {
+  bedrooms: 0,
+  city: {
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+    name: '',
+  },
+  description: '',
+  goods: [''],
+  host: {
+    avatarUrl: '',
+    id: '',
+    isPro: false,
+    name: '',
+  },
+  id: '',
+  images: [''],
+  isFavorite: false,
+  isPremium: false,
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  maxAdults: 0,
+  previewImage: '',
+  price: 0,
+  rating: 0,
+  title: '',
+  type: '',
+};
 
 export const Cities: CitiesTypes = {
   'Paris': {
@@ -87,9 +132,7 @@ export const Cities: CitiesTypes = {
 export const DEFAULT_CITY_NAME = 'Paris';
 
 export const PERCENTS_CAP = 100;
-export const MIN_RATING = 1;
 export const MAX_RATING = 5;
-export const RATING_DECIMALS = 1;
 
 export enum RatingPosition {
   Perfect = 4,
@@ -140,4 +183,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Favorite = '/favorite',
+  Comments = '/comments',
 }
+
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

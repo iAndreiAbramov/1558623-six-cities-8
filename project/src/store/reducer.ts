@@ -1,5 +1,12 @@
 import { ActionType, ActionTypes } from '../types/action-types';
-import { AuthorizationStatus, Cities, DEFAULT_CITY_NAME, DEFAULT_USER_DATA, FetchStatus } from '../const';
+import {
+  AuthorizationStatus,
+  Cities,
+  DEFAULT_CITY_NAME,
+  DEFAULT_HOTEL_DATA,
+  DEFAULT_USER_DATA,
+  FetchStatus
+} from '../const';
 import { StateTypes } from '../types/state-types';
 
 const initialState: StateTypes = {
@@ -13,13 +20,19 @@ const initialState: StateTypes = {
     },
   },
   offersData: [],
+  favoritesData: [],
   pointsForMap: [],
   authorization: AuthorizationStatus.Unknown,
+  //todo: Подумать как уйти от этих констант DEFAULT_...
   currentUser: DEFAULT_USER_DATA,
+  currentHotel: DEFAULT_HOTEL_DATA,
+  nearOffersData: [],
+  currentHotelComments: [],
 };
 
 export const reducer = (state: StateTypes = initialState, action: ActionTypes): StateTypes => {
   switch (action.type) {
+
     case ActionType.InitCity:
       return {
         ...state,
@@ -35,10 +48,10 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         pointsForMap: action.payload.pointsForMap,
       };
 
-    case ActionType.ToggleIsFetching:
+    case ActionType.SetFetchStatus:
       return {
         ...state,
-        fetchStatus: action.payload.isFetching,
+        fetchStatus: action.payload.fetchStatus,
       };
 
     case ActionType.RequireAuthorization:
@@ -60,10 +73,28 @@ export const reducer = (state: StateTypes = initialState, action: ActionTypes): 
         authorization: AuthorizationStatus.NoAuth,
       };
 
-    case ActionType.SetIsFavorite:
+    case ActionType.SetCurrentHotel:
       return {
         ...state,
-        // offersData: action.payload.offersData,
+        currentHotel: action.payload.currentHotel,
+      };
+
+    case ActionType.SetNearOffersData:
+      return {
+        ...state,
+        nearOffersData: action.payload.nearOffersData,
+      };
+
+    case ActionType.SetCurrentHotelComments:
+      return {
+        ...state,
+        currentHotelComments: action.payload.currentHotelComments,
+      };
+
+    case ActionType.SetFavoritesData:
+      return {
+        ...state,
+        favoritesData: action.payload.favoritesData,
       };
 
     default:

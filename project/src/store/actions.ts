@@ -1,8 +1,9 @@
 import { ActionType } from '../types/action-types';
-import { AuthorizationStatus } from '../const';
-import { OfferDataTypes } from '../types/offer-data-types';
+import { AuthorizationStatus, FetchStatus } from '../const';
 import { CityTypes, PointTypes } from '../types/state-types';
+import { CommentsFrontTypes } from '../types/comments-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
+import { OfferDataTypes } from '../types/offer-data-types';
 
 export const initCityAction = (
   cityData: CityTypes,
@@ -17,10 +18,10 @@ export const initCityAction = (
   },
 } as const);
 
-export const toggleIsFetchingAction = (isFetching: string) => ({
-  type: ActionType.ToggleIsFetching,
+export const setFetchStatus = (fetchStatus: FetchStatus) => ({
+  type: ActionType.SetFetchStatus,
   payload: {
-    isFetching,
+    fetchStatus,
   },
 } as const);
 
@@ -44,5 +45,33 @@ export const setCurrentUser = (userData: FrontUserDataTypes) => ({
   type: ActionType.SetCurrentUser,
   payload: {
     userData,
+  },
+} as const);
+
+export const setCurrentHotel = (currentHotel: OfferDataTypes) => ({
+  type: ActionType.SetCurrentHotel,
+  payload: {
+    currentHotel,
+  },
+} as const);
+
+export const setNearOffersData = (nearOffersData: OfferDataTypes[]) => ({
+  type: ActionType.SetNearOffersData,
+  payload: {
+    nearOffersData,
+  },
+} as const);
+
+export const setCurrentHotelComments = (currentHotelComments: CommentsFrontTypes[]) => ({
+  type: ActionType.SetCurrentHotelComments,
+  payload: {
+    currentHotelComments,
+  },
+} as const);
+
+export const setFavoritesData = (favoritesData: OfferDataTypes[]) => ({
+  type: ActionType.SetFavoritesData,
+  payload: {
+    favoritesData,
   },
 } as const);

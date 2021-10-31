@@ -1,19 +1,28 @@
 import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
-import { adaptBackToFront, adaptUserDataToFront } from '../utils/adapters';
+import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
-import { initCityAction, requireAuthorization, setCurrentUser, setIsFavorite, toggleIsFetchingAction } from './actions';
-import { ThunkActionResult } from '../types/action-types';
-import { UserLoginTypes } from '../types/user-data-types';
+import browserHistory from '../services/browser-history';
 import { dropToken, setToken } from '../services/token';
 import { dropEmail, setEmail } from '../services/email';
-import browserHistory from '../services/browser-history';
+import {
+  initCityAction,
+  requireAuthorization,
+  setCurrentHotel,
+  setCurrentHotelComments,
+  setCurrentUser,
+  setFavoritesData,
+  setFetchStatus,
+  setNearOffersData
+} from './actions';
+import { ThunkActionResult } from '../types/action-types';
+import { UserLoginTypes } from '../types/user-data-types';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    dispatch(toggleIsFetchingAction(FetchStatus.InProgress));
+    dispatch(setFetchStatus(FetchStatus.InProgress));
     await api.get<BackDataTypes[]>(APIRoute.Hotels)
       .then(({ data }) => {
-        const offersData = adaptBackToFront(data)
+        const offersData = adaptOffersToFront(data)
           .filter((offer) => offer.city.name === newCityName);
         const cityData = Cities[newCityName];
         const pointsForMap = offersData.map((item) => {
@@ -23,8 +32,54 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
         });
         dispatch(initCityAction(cityData, offersData, pointsForMap));
       })
-      .then(() => dispatch(toggleIsFetchingAction(FetchStatus.Success)))
-      .catch(() => dispatch(toggleIsFetchingAction(FetchStatus.Error)));
+      .then(() => dispatch(setFetchStatus(FetchStatus.Success)))
+      .catch(() => dispatch(setFetchStatus(FetchStatus.Error)));
+  }
+);
+
+export const getOfferDataAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(setFetchStatus(FetchStatus.InProgress));
+    await api.get(`${ APIRoute.Hotels }/${ id }`)
+      .then(({ data }) => {
+        dispatch(setCurrentHotel(adaptOfferToFront(data)));
+        dispatch(setFetchStatus(FetchStatus.Success));
+      })
+      .catch(() => {
+        dispatch(setFetchStatus(FetchStatus.Error));
+      });
+  }
+);
+
+export const getCommentsDataAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.get(`${ APIRoute.Comments }/${ id }`)
+      .then(({ data }) => {
+        dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
+      });
+  }
+);
+
+export const getNearOffersAction = (id: string): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    await api.get(`${ APIRoute.Hotels }/${ id }/nearby`)
+      .then(({ data }) => {
+        dispatch(setNearOffersData(adaptOffersToFront(data)));
+      });
+  }
+);
+
+export const getFavoritesDataAction = (): ThunkActionResult => (
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(setFetchStatus(FetchStatus.InProgress));
+    await api.get(APIRoute.Favorite )
+      .then(({ data }) => {
+        dispatch(setFavoritesData(adaptOffersToFront(data)));
+        dispatch(setFetchStatus(FetchStatus.Success));
+      })
+      .catch(() => {
+        dispatch(setFetchStatus(FetchStatus.Error));
+      });
   }
 );
 
@@ -32,7 +87,8 @@ export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(APIRoute.Login)
       .then(({ status }) => {
-        status && status !== HttpStatusCode.Unauthorised
+        status
+        && status !== HttpStatusCode.Unauthorised
         && dispatch(requireAuthorization(AuthorizationStatus.Auth));
       });
   });
@@ -44,8 +100,7 @@ export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
         setToken(data.token);
         setEmail(data.email);
-        const adaptedUserData = adaptUserDataToFront(data);
-        dispatch(setCurrentUser(adaptedUserData));
+        dispatch(setCurrentUser(adaptUserDataToFront(data)));
         browserHistory.push('/');
       });
   }
@@ -59,18 +114,6 @@ export const requestLogoutAction = (): ThunkActionResult => (
         dropToken();
         dropEmail();
         dispatch(setCurrentUser(DEFAULT_USER_DATA));
-      });
-  }
-);
-
-//todo: Это просто заготовка
-export const setIsFavoriteAction = (hotelId: string, isFavoriteValue: string): ThunkActionResult => (
-  async (dispatch, _getState, api): Promise<void> => {
-    // console.log(`${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`);
-    const favoriteUrl = `${ APIRoute.Favorite }/:${ hotelId }/:${ isFavoriteValue }`;
-    await api.post(favoriteUrl)
-      .then(({ data }) => {
-        dispatch(setIsFavorite(data));
       });
   }
 );

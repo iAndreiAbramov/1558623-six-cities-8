@@ -1,25 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { api } from '../../index';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { APIRoute, AppRoute, IsFavoriteValue } from '../../const';
 import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { getOfferDataAction } from '../../store/api-actions';
+import { connect, ConnectedProps } from 'react-redux';
+import { ActionTypes } from '../../types/action-types';
+import { adaptOfferToFront } from '../../utils/adapters';
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+  handleOfferClick: getOfferDataAction,
+}, dispatch);
+
+const offerCardConnector = connect(null, mapDispatchToProps);
+const OfferCardConnected = offerCardConnector(OfferCard);
 
 type OfferCardTypes = {
   data: OfferDataTypes,
   onActiveCardChange?: (newId: string) => void,
   articleClass: string,
   imgWrapperClass: string,
-  handleBookmarkClick: (id: string, isFavoriteValue: string) => void,
-}
+} & ConnectedProps<typeof offerCardConnector>
 
 function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data, onActiveCardChange, articleClass, imgWrapperClass, handleBookmarkClick } = props;
-  const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = data;
-  const isFavoriteValue = isFavorite ? '0' : '1';
+  const { data: offerData, onActiveCardChange, articleClass, imgWrapperClass, handleOfferClick } = props;
+  const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = offerData;
   const visualRating = getVisualRating(rating);
-  const bookmarkButtonClass = isFavorite
+
+  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
+
+  const bookmarkButtonClass = isFavoriteStatus
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
+
+  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
+    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
+    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
+      .then(({ data }) => {
+        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
+      });
+  };
 
   return (
     <article className={ `${ articleClass } place-card` }
@@ -33,7 +55,10 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
         </div>
       }
       <div className={ `${ imgWrapperClass } place-card__image-wrapper` }>
-        <Link to={ `${ AppRoute.Offer }/${ id }` }>
+        <Link
+          to={ `${ AppRoute.Offer }/${ id }` }
+          onClick={ () => handleOfferClick(id) }
+        >
           <img className="place-card__image" src={ previewImage } width="260" height="200"
             alt="Place view"
           />
@@ -48,7 +73,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           <button
             className={ bookmarkButtonClass }
             type="button"
-            onClick={ () => handleBookmarkClick(id, isFavoriteValue) }
+            onClick={ () => handleBookmarkClick(id) }
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
@@ -63,7 +88,12 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={ `${ AppRoute.Offer }/${ id }` }>{ title }</Link>
+          <Link
+            to={ `${ AppRoute.Offer }/${ id }` }
+            onClick={ () => handleOfferClick(id) }
+          >
+            { title }
+          </Link>
         </h2>
         <p className="place-card__type">{ type }</p>
       </div>
@@ -71,4 +101,5 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
   );
 }
 
-export default OfferCard;
+export { OfferCard };
+export default OfferCardConnected;

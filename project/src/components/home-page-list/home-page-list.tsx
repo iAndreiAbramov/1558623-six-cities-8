@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { ActionTypes } from '../../types/action-types';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
-import OfferCard from '../offer-card/offer-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { setIsFavoriteAction } from '../../store/api-actions';
-import Spinner from '../spinner/spinner';
+import SpinnerHome from '../spinner-home/spinner-home';
 import { StateTypes } from '../../types/state-types';
+import OfferCardConnected from '../offer-card/offer-card';
 
 const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,
   activeCity: state.activeCity.name,
 });
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  handleBookmarkClick: setIsFavoriteAction,
-}, dispatch);
 
-const homePageListConnect = connect(mapStateToProps, mapDispatchToProps);
+const homePageListConnect = connect(mapStateToProps);
 const HomePageListConnected = homePageListConnect(HomePageList);
 
 type HomePageListTypes = {
@@ -29,7 +23,7 @@ type HomePageListTypes = {
 } & ConnectedProps<typeof homePageListConnect>
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity, isFetching, handleBookmarkClick } = props;
+  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -54,13 +48,12 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const offerCards = sortedData.map((cardItem) => {
     const { id } = cardItem;
     return (
-      <OfferCard
+      <OfferCardConnected
         key={ id }
         data={ cardItem }
         onActiveCardChange={ onActiveCardChange }
         articleClass={ CardArticleClasses.MAIN_PAGE_LIST }
         imgWrapperClass={ CardImgWrapperClasses.MAIN_PAGE_LIST }
-        handleBookmarkClick={ handleBookmarkClick }
       />
     );
   });
@@ -76,7 +69,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
 
   return (
     <section className="cities__places places">
-      { isFetching === FetchStatus.InProgress && <Spinner /> }
+      { isFetching === FetchStatus.InProgress && <SpinnerHome /> }
       { isFetching === FetchStatus.Error && <FetchFailMessage /> }
       {
         isFetching === FetchStatus.Success

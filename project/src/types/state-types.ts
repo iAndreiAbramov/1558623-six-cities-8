@@ -1,6 +1,7 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, FetchStatus } from '../const';
 import { OfferDataTypes } from './offer-data-types';
 import { FrontUserDataTypes } from './user-data-types';
+import { CommentsFrontTypes } from './comments-types';
 
 export type CityTypes = {
   name: string,
@@ -31,10 +32,14 @@ export type CitiesTypes = {
 }
 
 export type StateTypes = {
-  fetchStatus: string,
+  fetchStatus: FetchStatus,
   activeCity: CityTypes,
   offersData: OfferDataTypes[],
+  favoritesData: OfferDataTypes[];
   pointsForMap: PointTypes[],
   authorization: AuthorizationStatus,
   currentUser: FrontUserDataTypes,
+  currentHotel: OfferDataTypes,
+  nearOffersData: OfferDataTypes[],
+  currentHotelComments: CommentsFrontTypes[],
 }
