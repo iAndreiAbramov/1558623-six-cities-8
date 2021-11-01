@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import OfferCardConnected from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
 import { StateTypes } from '../../types/state-types';
-import OfferCardConnected from '../offer-card/offer-card';
 
 const mapStateToProps = (state: StateTypes) => ({
   isFetching: state.fetchStatus,
@@ -58,9 +58,9 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
     );
   });
 
-  const handleDropdownClick = (): void => {
+  const handleDropdownClick = useCallback((): void => {
     setDropdownState((prevState: boolean) => !prevState);
-  };
+  }, []);
 
   const handleSortToggle = (option: string) => {
     setDropdownState((prevState: boolean) => !prevState);

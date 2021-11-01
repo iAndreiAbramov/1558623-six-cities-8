@@ -1,10 +1,10 @@
 import React from 'react';
-import PageHeaderLogo from '../page-header-logo/page-header-logo';
-import { StateTypes } from '../../types/state-types';
 import { connect, ConnectedProps } from 'react-redux';
-import PageHeaderUserNotLogged from '../page-header-user-not-logged/page-header-user-not-logged';
 import { AuthorizationStatus } from '../../const';
+import PageHeaderLogo from '../page-header-logo/page-header-logo';
+import PageHeaderUserNotLogged from '../page-header-user-not-logged/page-header-user-not-logged';
 import PageHeaderUserConnected from '../page-header-user/page-header-user';
+import { StateTypes } from '../../types/state-types';
 
 const mapStateToProps = (state: StateTypes) => ({
   authorizationStatus: state.authorization,

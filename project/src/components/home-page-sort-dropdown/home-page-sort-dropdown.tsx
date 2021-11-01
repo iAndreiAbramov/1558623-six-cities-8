@@ -21,4 +21,4 @@ function HomePageSortDropdown(props: HomePageSortDropdownTypes): JSX.Element {
   );
 }
 
-export default HomePageSortDropdown;
+export default React.memo(HomePageSortDropdown);

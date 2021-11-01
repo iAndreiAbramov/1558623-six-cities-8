@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { FetchStatus } from '../../const';
 import HomePageListConnected from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
@@ -39,6 +39,10 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
     refreshPageData(activeCityName);
   }, []);
 
+  const handleActiveCardChange = useCallback((newId: string): void => (
+    setActiveCardId(newId)
+  ), []);
+
   return (
     <main className={ mainClass }>
       <h1 className="visually-hidden">Cities</h1>
@@ -55,9 +59,7 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
             <>
               <HomePageListConnected
                 offersData={ offersData }
-                onActiveCardChange={ (newId: string): void => (
-                  setActiveCardId(newId)
-                ) }
+                onActiveCardChange={ handleActiveCardChange }
               />
               <HomePageMap
                 activeCardId={ activeCardId }
