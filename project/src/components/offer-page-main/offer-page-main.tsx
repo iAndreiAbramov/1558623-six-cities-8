@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
-import { APIRoute, AppRoute, AuthorizationStatus, IsFavoriteValue } from '../../const';
+import { APIRoute, AppRoute, AuthorizationStatus, IsFavoriteValue, MAX_IMAGES_NUMBER } from '../../const';
 import { api } from '../../index';
 import { adaptOfferToFront } from '../../utils/adapters';
 import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
@@ -76,7 +76,7 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        { images.length > 0 && <OfferPageGallery images={ images } /> }
+        { images.length > 0 && <OfferPageGallery images={ images.slice(0, MAX_IMAGES_NUMBER) } /> }
         <div className="property__container container">
           <div className="property__wrapper">
             {
