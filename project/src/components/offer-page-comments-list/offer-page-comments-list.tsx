@@ -24,7 +24,7 @@ function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
 
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{ commentsData.length }</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{ commentsList.length }</span></h2>
       <ul className="reviews__list">
         { commentsList }
       </ul>
