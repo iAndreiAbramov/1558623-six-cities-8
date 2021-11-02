@@ -11,7 +11,7 @@ type FavoritesCardTypes = {
   data: OfferDataTypes,
 };
 
-function FavoritesPageCardConnected(props: FavoritesCardTypes): JSX.Element {
+function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   const dispatch = useDispatch();
   const { data: offerData } = props;
   const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = offerData;
@@ -87,4 +87,4 @@ function FavoritesPageCardConnected(props: FavoritesCardTypes): JSX.Element {
   );
 }
 
-export default FavoritesPageCardConnected;
+export default FavoritesPageCard;

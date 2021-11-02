@@ -5,10 +5,10 @@ import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
 import { FetchStatus } from '../../const';
-import PageHeaderConnected from '../page-header/page-header';
+import PageHeader from '../page-header/page-header';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
 
-function FavoritesPageConnected(): JSX.Element {
+function FavoritesPage(): JSX.Element {
   const favoritesData = useSelector(getFavoritesData);
   const fetchStatus = useSelector(getFetchStatus);
   const isEmpty = favoritesData.length === 0;
@@ -23,7 +23,7 @@ function FavoritesPageConnected(): JSX.Element {
       {
         fetchStatus === FetchStatus.Success &&
         <>
-          <PageHeaderConnected />
+          <PageHeader />
           { pageContent }
           <FavoritesPageFooter />
         </>
@@ -32,4 +32,4 @@ function FavoritesPageConnected(): JSX.Element {
   );
 }
 
-export default FavoritesPageConnected;
+export default FavoritesPage;

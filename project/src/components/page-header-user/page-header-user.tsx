@@ -6,7 +6,7 @@ import { getCurrentUserData } from '../../store/selectors';
 import { getEmail } from '../../services/email';
 import { getFavoritesDataAction, requestLogoutAction } from '../../store/api-actions';
 
-function PageHeaderUserConnected(): JSX.Element {
+function PageHeaderUser(): JSX.Element {
   const userEmail = useSelector(getCurrentUserData).email;
   const dispatch = useDispatch();
   const email = userEmail ? userEmail : getEmail();
@@ -38,4 +38,4 @@ function PageHeaderUserConnected(): JSX.Element {
   );
 }
 
-export default PageHeaderUserConnected;
+export default PageHeaderUser;

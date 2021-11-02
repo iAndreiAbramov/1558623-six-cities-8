@@ -16,7 +16,7 @@ import {
 } from '../../const';
 import { setCurrentHotelComments } from '../../store/actions';
 
-function OfferPageNewCommentConnected(props: { id: string }): JSX.Element {
+function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
   const { id } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
@@ -202,4 +202,4 @@ function OfferPageNewCommentConnected(props: { id: string }): JSX.Element {
   );
 }
 
-export default OfferPageNewCommentConnected;
+export default OfferPageNewComment;

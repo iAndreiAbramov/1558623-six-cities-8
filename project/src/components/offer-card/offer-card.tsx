@@ -14,7 +14,7 @@ type OfferCardTypes = {
   imgWrapperClass: string,
 };
 
-function OfferCardConnected(props: OfferCardTypes): JSX.Element {
+function OfferCard(props: OfferCardTypes): JSX.Element {
   const dispatch = useDispatch();
   const { data: offerData, onActiveCardChange, articleClass, imgWrapperClass } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = offerData;
@@ -73,4 +73,4 @@ function OfferCardConnected(props: OfferCardTypes): JSX.Element {
   );
 }
 
-export default OfferCardConnected;
+export default OfferCard;

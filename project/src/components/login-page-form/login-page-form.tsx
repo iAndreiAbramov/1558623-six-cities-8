@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { requestLoginAction } from '../../store/api-actions';
 
-function LoginPageFormConnected(): JSX.Element {
+function LoginPageForm(): JSX.Element {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,4 +58,4 @@ function LoginPageFormConnected(): JSX.Element {
   );
 }
 
-export default LoginPageFormConnected;
+export default LoginPageForm;

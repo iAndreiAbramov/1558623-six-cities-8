@@ -6,7 +6,7 @@ import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import OfferCardConnected from '../offer-card/offer-card';
+import OfferCard from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
 
 type HomePageListTypes = {
@@ -14,7 +14,7 @@ type HomePageListTypes = {
   onActiveCardChange?: (newId: string) => void,
 };
 
-function HomePageListConnected(props: HomePageListTypes): JSX.Element {
+function HomePageList(props: HomePageListTypes): JSX.Element {
   const isFetching = useSelector(getFetchStatus);
   const activeCityName = useSelector(getActiveCity).name;
   const { offersData, onActiveCardChange } = props;
@@ -43,7 +43,7 @@ function HomePageListConnected(props: HomePageListTypes): JSX.Element {
   const offerCards = sortedData.map((cardItem) => {
     const { id } = cardItem;
     return (
-      <OfferCardConnected
+      <OfferCard
         key={ id }
         data={ cardItem }
         onActiveCardChange={ onActiveCardChange }
@@ -95,4 +95,4 @@ function HomePageListConnected(props: HomePageListTypes): JSX.Element {
   );
 }
 
-export default HomePageListConnected;
+export default HomePageList;

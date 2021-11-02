@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchStatus } from '../../const';
 import { getActiveCity, getFetchStatus, getOffersData, getPointsForMap } from '../../store/selectors';
-import HomePageListConnected from '../home-page-list/home-page-list';
+import HomePageList from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import HomePageEmpty from '../home-page-empty/home-page-empty';
 import { initActiveCityAction } from '../../store/api-actions';
 
-function HomePageMainConnected(): JSX.Element {
+function HomePageMain(): JSX.Element {
   const fetchStatus = useSelector(getFetchStatus);
   const offersData = useSelector(getOffersData);
   const activeCityName = useSelector(getActiveCity).name;
@@ -47,7 +47,7 @@ function HomePageMainConnected(): JSX.Element {
             offersData.length > 0
             &&
             <>
-              <HomePageListConnected
+              <HomePageList
                 offersData={ offersData }
                 onActiveCardChange={ handleActiveCardChange }
               />
@@ -64,4 +64,4 @@ function HomePageMainConnected(): JSX.Element {
   );
 }
 
-export default HomePageMainConnected;
+export default HomePageMain;

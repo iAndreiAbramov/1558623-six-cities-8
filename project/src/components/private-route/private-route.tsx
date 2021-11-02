@@ -8,7 +8,7 @@ type PrivateRouteTypes = RouteProps & {
   render: () => JSX.Element,
 };
 
-function PrivateRouteConnected(props: PrivateRouteTypes): JSX.Element {
+function PrivateRoute(props: PrivateRouteTypes): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const { path, exact, render } = props;
 
@@ -25,4 +25,4 @@ function PrivateRouteConnected(props: PrivateRouteTypes): JSX.Element {
   );
 }
 
-export default PrivateRouteConnected;
+export default PrivateRoute;

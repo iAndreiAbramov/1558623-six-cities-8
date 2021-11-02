@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import { getActiveCity } from '../../store/selectors';
 import { initActiveCityAction } from '../../store/api-actions';
 
-type HomePageTabTypes = { name: string };
-
-function HomePageTabConnected(props: HomePageTabTypes): JSX.Element {
+function HomePageTab(props: { name: string }): JSX.Element {
   const activeCityName= useSelector(getActiveCity).name;
   const dispatch = useDispatch();
   const { name } = props;
@@ -23,4 +21,4 @@ function HomePageTabConnected(props: HomePageTabTypes): JSX.Element {
   );
 }
 
-export default HomePageTabConnected;
+export default HomePageTab;

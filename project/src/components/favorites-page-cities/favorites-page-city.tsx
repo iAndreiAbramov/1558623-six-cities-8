@@ -1,5 +1,5 @@
 import React from 'react';
-import FavoritesPageCardConnected from '../favorites-page-card/favorites-page-card';
+import FavoritesPageCard from '../favorites-page-card/favorites-page-card';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type FavoritesCityTypes = {
@@ -10,7 +10,7 @@ type FavoritesCityTypes = {
 function FavoritesPageCity(props: FavoritesCityTypes): JSX.Element {
   const { cityName, data } = props;
   const cardsList = data.map((item) => (
-    <FavoritesPageCardConnected
+    <FavoritesPageCard
       key={ item.id }
       data={ item }
     />

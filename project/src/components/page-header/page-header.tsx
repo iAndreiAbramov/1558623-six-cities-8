@@ -4,9 +4,9 @@ import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/selectors';
 import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import PageHeaderUserNotLogged from '../page-header-user-not-logged/page-header-user-not-logged';
-import PageHeaderUserConnected from '../page-header-user/page-header-user';
+import PageHeaderUser from '../page-header-user/page-header-user';
 
-function PageHeaderConnected(): JSX.Element {
+function PageHeader(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
@@ -16,7 +16,7 @@ function PageHeaderConnected(): JSX.Element {
           <PageHeaderLogo />
           {
             authorizationStatus === AuthorizationStatus.Auth
-              ? <PageHeaderUserConnected />
+              ? <PageHeaderUser />
               : <PageHeaderUserNotLogged />
           }
         </div>
@@ -25,4 +25,4 @@ function PageHeaderConnected(): JSX.Element {
   );
 }
 
-export default PageHeaderConnected;
+export default PageHeader;

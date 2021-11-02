@@ -5,7 +5,7 @@ import { getAuthorizationStatus, getCurrentHotelComments } from '../../store/sel
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 
-function OfferPageReviewsConnected(props: { id: string }):JSX.Element {
+function OfferPageReviews(props: { id: string }):JSX.Element {
   const currentHotelComments = useSelector(getCurrentHotelComments);
   const authorization = useSelector(getAuthorizationStatus);
   const { id } = props;
@@ -24,4 +24,4 @@ function OfferPageReviewsConnected(props: { id: string }):JSX.Element {
   );
 }
 
-export default OfferPageReviewsConnected;
+export default OfferPageReviews;

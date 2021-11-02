@@ -11,9 +11,9 @@ import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
-import OfferPageReviewsConnected from '../offer-page-reviews/offer-page-reviews';
+import OfferPageReviews from '../offer-page-reviews/offer-page-reviews';
 
-function OfferPageMainConnected(): JSX.Element {
+function OfferPageMain(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
   const nearOffersData = useSelector(getNearOffersData);
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ function OfferPageMainConnected(): JSX.Element {
             <OfferPageHost
               host={ host }
             />
-            <OfferPageReviewsConnected
+            <OfferPageReviews
               id={ offerId }
             />
           </div>
@@ -104,4 +104,4 @@ function OfferPageMainConnected(): JSX.Element {
   );
 }
 
-export default OfferPageMainConnected;
+export default OfferPageMain;
