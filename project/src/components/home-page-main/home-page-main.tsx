@@ -7,14 +7,15 @@ import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import HomePageEmpty from '../home-page-empty/home-page-empty';
 import { initActiveCityAction } from '../../store/api-actions';
-import { StateTypes } from '../../types/state-types';
+import { getActiveCity, getFetchStatus, getOffersData, getPointsForMap } from '../../store/selectors';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
 
-const mapStateToProps = (state: StateTypes) => ({
-  fetchStatus: state.fetchStatus,
-  offersData: state.offersData,
-  activeCityName: state.activeCity.name,
-  activeCityLocation: state.activeCity.location,
-  pointsForMap: state.pointsForMap,
+const mapStateToProps = ( state: RootStateTypes) => ({
+  fetchStatus: getFetchStatus(state),
+  offersData: getOffersData(state),
+  activeCityName: getActiveCity(state).name,
+  activeCityLocation: getActiveCity(state).location,
+  pointsForMap: getPointsForMap(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   refreshPageData: initActiveCityAction,

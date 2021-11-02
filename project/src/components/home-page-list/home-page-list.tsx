@@ -7,11 +7,12 @@ import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggle
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferCardConnected from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
-import { StateTypes } from '../../types/state-types';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
+import { getActiveCity, getFetchStatus } from '../../store/selectors';
 
-const mapStateToProps = (state: StateTypes) => ({
-  isFetching: state.fetchStatus,
-  activeCity: state.activeCity.name,
+const mapStateToProps = (state: RootStateTypes) => ({
+  isFetching: getFetchStatus(state),
+  activeCityName: getActiveCity(state).name,
 });
 
 const homePageListConnect = connect(mapStateToProps);
@@ -23,7 +24,7 @@ type HomePageListTypes = {
 } & ConnectedProps<typeof homePageListConnect>
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
+  const { offersData, onActiveCardChange, activeCityName, isFetching } = props;
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -76,7 +77,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
         &&
         <>
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{ offersData.length } places to stay in { activeCity }</b>
+          <b className="places__found">{ offersData.length } places to stay in { activeCityName }</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <HomePageSortDropdown

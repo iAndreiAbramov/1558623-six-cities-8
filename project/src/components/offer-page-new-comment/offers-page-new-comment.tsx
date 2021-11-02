@@ -15,7 +15,6 @@ import { setCurrentHotelComments } from '../../store/actions';
 import { api } from '../../index';
 import { AxiosResponse } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({

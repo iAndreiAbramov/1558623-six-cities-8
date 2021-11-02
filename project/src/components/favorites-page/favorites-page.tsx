@@ -4,13 +4,14 @@ import FavoritesPageEmpty from '../favorites-page-empty/favorites-page-empty';
 import FavoritesPageFooter from '../favorites-page-footer/favorites-page-footer';
 import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
 import PageHeaderConnected from '../page-header/page-header';
-import { StateTypes } from '../../types/state-types';
 import { FetchStatus } from '../../const';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
+import { getFavoritesData, getFetchStatus } from '../../store/selectors';
 
-const mapStateToProps = (state: StateTypes) => ({
-  favoritesData: state.favoritesData,
-  fetchStatus: state.fetchStatus,
+const mapStateToProps = (state: RootStateTypes) => ({
+  favoritesData: getFavoritesData(state),
+  fetchStatus: getFetchStatus(state),
 });
 
 const favoritesPageConnector = connect(mapStateToProps);

@@ -15,14 +15,20 @@ import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
-import { StateTypes } from '../../types/state-types';
 import browserHistory from '../../services/browser-history';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
+import {
+  getAuthorizationStatus,
+  getCurrentHotel,
+  getCurrentHotelComments,
+  getNearOffersData
+} from '../../store/selectors';
 
-const mapStateToProps = (state: StateTypes) => ({
-  pageData: state.currentHotel,
-  nearOffersData: state.nearOffersData,
-  currentHotelComments: state.currentHotelComments,
-  authorization: state.authorization,
+const mapStateToProps = (state: RootStateTypes) => ({
+  pageData: getCurrentHotel(state),
+  nearOffersData: getNearOffersData(state),
+  currentHotelComments: getCurrentHotelComments(state),
+  authorization: getAuthorizationStatus(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   getOfferData: getOfferDataAction,

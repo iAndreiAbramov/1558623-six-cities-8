@@ -5,10 +5,11 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import OfferPageMain from '../offer-page-main/offer-page-main';
 import PageHeader from '../page-header/page-header';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
-import { StateTypes } from '../../types/state-types';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
+import { getFetchStatus } from '../../store/selectors';
 
-const mapStateToProps = (state: StateTypes) => ({
-  isFetching: state.fetchStatus,
+const mapStateToProps = (state: RootStateTypes) => ({
+  isFetching: getFetchStatus(state),
 });
 
 const offerPageConnector = connect(mapStateToProps);

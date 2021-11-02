@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import { ActionTypes } from '../../types/action-types';
 import { initActiveCityAction } from '../../store/api-actions';
-import { StateTypes } from '../../types/state-types';
+import { RootStateTypes } from '../../store/reducers/root-reducer';
+import { getActiveCity } from '../../store/selectors';
 
-const mapStateToProps = (state: StateTypes) => ({
-  activeCity: state.activeCity.name,
+const mapStateToProps = (state: RootStateTypes) => ({
+  activeCityName: getActiveCity(state).name,
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
   setActiveCity: initActiveCityAction,
@@ -19,8 +20,8 @@ const HomePageTabConnected = homePageTabConnector(HomePageTab);
 type HomePageTabTypes = { name: string } & ConnectedProps<typeof homePageTabConnector>;
 
 function HomePageTab(props: HomePageTabTypes): JSX.Element {
-  const { name, activeCity, setActiveCity } = props;
-  const tabClass = name.toLowerCase() === activeCity.toLowerCase()
+  const { name, activeCityName, setActiveCity } = props;
+  const tabClass = name.toLowerCase() === activeCityName.toLowerCase()
     ? 'locations__item-link tabs__item tabs__item--active'
     : 'locations__item-link tabs__items';
 
