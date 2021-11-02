@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { APIRoute, AppRoute, AuthorizationStatus, IsFavoriteValue, MAX_IMAGES_NUMBER } from '../../const';
-import { api } from '../../index';
-import { adaptOfferToFront } from '../../utils/adapters';
-import browserHistory from '../../services/browser-history';
+import { AuthorizationStatus, MAX_IMAGES_NUMBER } from '../../const';
 import {
   getAuthorizationStatus,
   getCurrentHotel,
@@ -20,6 +17,7 @@ import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
+import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
 
 function OfferPageMainConnected(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
@@ -43,22 +41,8 @@ function OfferPageMainConnected(): JSX.Element {
     id: pageData.id,
   };
 
-  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
-
-  const bookmarkButtonClass = isFavoriteStatus
-    ? 'property__bookmark-button property__bookmark-button--active button'
-    : 'property__bookmark-button button';
-
-  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
-    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
-    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
-      .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-      })
-      .catch(() => browserHistory.push(AppRoute.Login));
-  };
-
   const { id } = useParams() as { id: string };
+
   useEffect(() => {
     !offerId && dispatch(getOfferDataAction(id));
     dispatch(getNearOffersAction(id));
@@ -81,16 +65,10 @@ function OfferPageMainConnected(): JSX.Element {
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <button
-                className={ bookmarkButtonClass }
-                type="button"
-                onClick={ () => handleBookmarkClick(id) }
-              >
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark" />
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <OfferPageBookmark
+                isFavorite={ isFavorite }
+                offerId={ offerId }
+              />
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">

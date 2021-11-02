@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { getFetchStatus } from '../../store/selectors';
 import { FetchStatus } from '../../const';
 import NotFoundPage from '../not-found-page/not-found-page';
-import OfferPageMain from '../offer-page-main/offer-page-main';
+import OfferPageMainConnected from '../offer-page-main/offer-page-main';
 import PageHeader from '../page-header/page-header';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
+import PageHeaderConnected from '../page-header/page-header';
 
 function OfferPageConnected(): JSX.Element {
   const isFetching = useSelector(getFetchStatus);
@@ -16,8 +17,8 @@ function OfferPageConnected(): JSX.Element {
       {
         isFetching === FetchStatus.Success &&
         <>
-          <PageHeader />
-          <OfferPageMain />
+          <PageHeaderConnected />
+          <OfferPageMainConnected />
         </>
       }
       { isFetching === FetchStatus.Error && <NotFoundPage /> }

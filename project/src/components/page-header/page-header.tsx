@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/selectors';
 import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import PageHeaderUserNotLogged from '../page-header-user-not-logged/page-header-user-not-logged';
 import PageHeaderUserConnected from '../page-header-user/page-header-user';
-import { getAuthorizationStatus } from '../../store/selectors';
 
 function PageHeaderConnected(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
