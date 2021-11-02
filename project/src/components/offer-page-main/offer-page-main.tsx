@@ -1,33 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, MAX_IMAGES_NUMBER } from '../../const';
-import {
-  getAuthorizationStatus,
-  getCurrentHotel,
-  getCurrentHotelComments,
-  getNearOffersData
-} from '../../store/selectors';
+import { MAX_IMAGES_NUMBER } from '../../const';
+import { getCurrentHotel, getNearOffersData } from '../../store/selectors';
 import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
-import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
-import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
+import OfferPageReviewsConnected from '../offer-page-reviews/offer-page-reviews';
 
 function OfferPageMainConnected(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
   const nearOffersData = useSelector(getNearOffersData);
-  const currentHotelComments = useSelector(getCurrentHotelComments);
-  const authorization = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
-
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
-
   const visualRating = getVisualRating(rating);
 
   const nearbyPoints = nearOffersData.map((item) => ({
@@ -93,17 +83,12 @@ function OfferPageMainConnected(): JSX.Element {
               <span className="property__price-text">&nbsp;night</span>
             </div>
             { goods.length > 0 && <OfferPageGoods goods={ goods } /> }
-            <OfferPageHost host={ host } />
-            <section className="property__reviews reviews">
-              <OfferPageCommentsList
-                commentsData={ currentHotelComments }
-              />
-              {
-                authorization === AuthorizationStatus.Auth
-                &&
-                <OfferPageNewComment id={ id } />
-              }
-            </section>
+            <OfferPageHost
+              host={ host }
+            />
+            <OfferPageReviewsConnected
+              id={ offerId }
+            />
           </div>
         </div>
         <OfferPageMap
