@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { connect, ConnectedProps } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { APIRoute, AppRoute, AuthorizationStatus, IsFavoriteValue, MAX_IMAGES_NUMBER } from '../../const';
 import { api } from '../../index';
 import { adaptOfferToFront } from '../../utils/adapters';
+import browserHistory from '../../services/browser-history';
+import {
+  getAuthorizationStatus,
+  getCurrentHotel,
+  getCurrentHotelComments,
+  getNearOffersData
+} from '../../store/selectors';
 import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
@@ -14,35 +20,16 @@ import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
-import browserHistory from '../../services/browser-history';
-import { RootStateTypes } from '../../store/reducers/root-reducer';
-import {
-  getAuthorizationStatus,
-  getCurrentHotel,
-  getCurrentHotelComments,
-  getNearOffersData
-} from '../../store/selectors';
 
-const mapStateToProps = (state: RootStateTypes) => ({
-  pageData: getCurrentHotel(state),
-  nearOffersData: getNearOffersData(state),
-  currentHotelComments: getCurrentHotelComments(state),
-  authorization: getAuthorizationStatus(state),
-});
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  getOfferData: getOfferDataAction,
-  getCommentsData: getCommentsDataAction,
-  getNearbyOffers: getNearOffersAction,
-}, dispatch);
+function OfferPageMainConnected(): JSX.Element {
+  const pageData = useSelector(getCurrentHotel);
+  const nearOffersData = useSelector(getNearOffersData);
+  const currentHotelComments = useSelector(getCurrentHotelComments);
+  const authorization = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
 
-const offerPageMainConnector = connect(mapStateToProps, mapDispatchToProps);
-const OfferPageMainConnected = offerPageMainConnector(OfferPageMain);
-
-type OfferPageTypes = ConnectedProps<typeof offerPageMainConnector>;
-
-function OfferPageMain(props: OfferPageTypes): JSX.Element {
-  const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
+
   const visualRating = getVisualRating(rating);
 
   const nearbyPoints = nearOffersData.map((item) => ({
@@ -73,9 +60,9 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
 
   const { id } = useParams() as { id: string };
   useEffect(() => {
-    !offerId && getOfferData(id);
-    getNearbyOffers(id);
-    getCommentsData(id);
+    !offerId && dispatch(getOfferDataAction(id));
+    dispatch(getNearOffersAction(id));
+    dispatch(getCommentsDataAction(id));
   }, []);
 
   return (
@@ -154,5 +141,4 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
   );
 }
 
-export { OfferPageMain };
 export default OfferPageMainConnected;

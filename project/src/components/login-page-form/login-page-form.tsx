@@ -1,19 +1,9 @@
 import React, { FormEvent, useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { requestLoginAction } from '../../store/api-actions';
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  handleFormSubmit: requestLoginAction,
-}, dispatch);
-
-const loginPageFormConnector = connect(null, mapDispatchToProps);
-const LoginPageFormConnected = loginPageFormConnector(LoginPageForm);
-
-type LoginPageFormTypes = ConnectedProps<typeof loginPageFormConnector>;
-
-function LoginPageForm(props: LoginPageFormTypes): JSX.Element {
-  const { handleFormSubmit } = props;
+function LoginPageFormConnected(): JSX.Element {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -58,7 +48,7 @@ function LoginPageForm(props: LoginPageFormTypes): JSX.Element {
         onClick={
           (evt) => {
             evt.preventDefault();
-            handleFormSubmit({ email, password });
+            dispatch(requestLoginAction({ email, password }));
           }
         }
       >
@@ -68,5 +58,4 @@ function LoginPageForm(props: LoginPageFormTypes): JSX.Element {
   );
 }
 
-export { LoginPageForm };
 export default LoginPageFormConnected;

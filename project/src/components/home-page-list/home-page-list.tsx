@@ -1,30 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
+import { getActiveCity, getFetchStatus } from '../../store/selectors';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferCardConnected from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
-import { RootStateTypes } from '../../store/reducers/root-reducer';
-import { getActiveCity, getFetchStatus } from '../../store/selectors';
-
-const mapStateToProps = (state: RootStateTypes) => ({
-  isFetching: getFetchStatus(state),
-  activeCityName: getActiveCity(state).name,
-});
-
-const homePageListConnect = connect(mapStateToProps);
-const HomePageListConnected = homePageListConnect(HomePageList);
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
   onActiveCardChange?: (newId: string) => void,
-} & ConnectedProps<typeof homePageListConnect>
+};
 
-function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCityName, isFetching } = props;
+function HomePageListConnected(props: HomePageListTypes): JSX.Element {
+  const isFetching = useSelector(getFetchStatus);
+  const activeCityName = useSelector(getActiveCity).name;
+  const { offersData, onActiveCardChange } = props;
+
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -101,5 +95,4 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   );
 }
 
-export { HomePageList };
 export default HomePageListConnected;

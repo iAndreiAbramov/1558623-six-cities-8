@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { connect, ConnectedProps } from 'react-redux';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
 import { CommentPostTypes } from '../../types/comments-types';
 import {
@@ -17,19 +17,13 @@ import { AxiosResponse } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  setHotelComments: setCurrentHotelComments,
-}, dispatch);
-
-const offerPageNewCommentConnector = connect(null, mapDispatchToProps);
-const OfferPageNewCommentConnected = offerPageNewCommentConnector(OfferPageNewComment);
-
 type OfferPageNewCommentTypes = {
   id: string,
-} & ConnectedProps<typeof offerPageNewCommentConnector>
+};
 
-function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
-  const { id, setHotelComments } = props;
+function OfferPageNewCommentConnected(props: OfferPageNewCommentTypes): JSX.Element {
+  const dispatch = useDispatch();
+  const { id } = props;
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
@@ -88,7 +82,7 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
     };
     postNewComment(newReview, id)
       .then(({ data }) => {
-        setHotelComments(adaptCommentsToFront(data));
+        dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
         setRating(INITIAL_RATING);
         setReview('');
         notifySuccess(PostNotificationMessage.Success);
@@ -213,5 +207,4 @@ function OfferPageNewComment(props: OfferPageNewCommentTypes): JSX.Element {
   );
 }
 
-export { OfferPageNewComment };
 export default OfferPageNewCommentConnected;

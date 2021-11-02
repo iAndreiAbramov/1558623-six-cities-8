@@ -1,32 +1,27 @@
 import React, { useState } from 'react';
-import { api } from '../../index';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
-import { APIRoute, AppRoute, IsFavoriteValue } from '../../const';
-import { getVisualRating } from '../../utils/common-utils';
-import { OfferDataTypes } from '../../types/offer-data-types';
-import { getOfferDataAction } from '../../store/api-actions';
-import { connect, ConnectedProps } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { adaptOfferToFront } from '../../utils/adapters';
+import { api } from '../../index';
+import { APIRoute, AppRoute, IsFavoriteValue } from '../../const';
 import browserHistory from '../../services/browser-history';
-
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  handleOfferClick: getOfferDataAction,
-}, dispatch);
-
-const offerCardConnector = connect(null, mapDispatchToProps);
-const OfferCardConnected = offerCardConnector(OfferCard);
+import { getVisualRating } from '../../utils/common-utils';
+import { getOfferDataAction } from '../../store/api-actions';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferCardTypes = {
   data: OfferDataTypes,
   onActiveCardChange?: (newId: string) => void,
   articleClass: string,
   imgWrapperClass: string,
-} & ConnectedProps<typeof offerCardConnector>
+};
 
-function OfferCard(props: OfferCardTypes): JSX.Element {
-  const { data: offerData, onActiveCardChange, articleClass, imgWrapperClass, handleOfferClick } = props;
+function OfferCardConnected(props: OfferCardTypes): JSX.Element {
+  const { data: offerData, onActiveCardChange, articleClass, imgWrapperClass } = props;
   const { id, price, rating, title, previewImage, type, isPremium, isFavorite } = offerData;
+
+  const dispatch = useDispatch();
+
   const visualRating = getVisualRating(rating);
 
   const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
@@ -58,7 +53,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
       <div className={ `${ imgWrapperClass } place-card__image-wrapper` }>
         <Link
           to={ `${ AppRoute.Offer }/${ id }` }
-          onClick={ () => handleOfferClick(id) }
+          onClick={ () => dispatch(getOfferDataAction(id)) }
         >
           <img className="place-card__image" src={ previewImage } width="260" height="200"
             alt="Place view"
@@ -91,7 +86,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
         <h2 className="place-card__name">
           <Link
             to={ `${ AppRoute.Offer }/${ id }` }
-            onClick={ () => handleOfferClick(id) }
+            onClick={ () => dispatch(getOfferDataAction(id)) }
           >
             { title }
           </Link>
@@ -102,5 +97,4 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
   );
 }
 
-export { OfferCard };
 export default OfferCardConnected;

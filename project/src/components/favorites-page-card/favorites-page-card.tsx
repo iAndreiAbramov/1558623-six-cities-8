@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { adaptOfferToFront } from '../../utils/adapters';
+import { api } from '../../index';
 import { APIRoute, AppRoute, IsFavoriteValue, MAX_RATING, PERCENTS_CAP } from '../../const';
-import { connect, ConnectedProps } from 'react-redux';
 import { getFavoritesDataAction, getOfferDataAction } from '../../store/api-actions';
 import { OfferDataTypes } from '../../types/offer-data-types';
-import { api } from '../../index';
-import { adaptOfferToFront } from '../../utils/adapters';
-
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  handleOfferClick: getOfferDataAction,
-  refreshFavoritesData: getFavoritesDataAction,
-}, dispatch);
-
-const favoritesPageCardConnector = connect(null, mapDispatchToProps);
-const FavoritesPageCardConnected = favoritesPageCardConnector(FavoritesPageCard);
 
 type FavoritesCardTypes = {
   data: OfferDataTypes,
-} & ConnectedProps<typeof favoritesPageCardConnector>;
+};
 
-function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
-  const { data: offerData, handleOfferClick, refreshFavoritesData } = props;
+function FavoritesPageCardConnected(props: FavoritesCardTypes): JSX.Element {
+  const dispatch = useDispatch();
+  const { data: offerData } = props;
   const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = offerData;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
 
@@ -36,7 +28,7 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
     await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
       .then(({ data }) => {
         setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-        refreshFavoritesData();
+        dispatch(getFavoritesDataAction);
       });
   };
 
@@ -51,7 +43,7 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link
           to={ `${ AppRoute.Offer }/${ id }` }
-          onClick={ () => handleOfferClick(id) }
+          onClick={ () => dispatch(getOfferDataAction(id)) }
         >
           <img className="place-card__image" src={ previewImage } width="150" height="110"
             alt="Place view"
@@ -84,7 +76,7 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
         <h2 className="place-card__name">
           <Link
             to={ `${ AppRoute.Offer }/${ id }` }
-            onClick={ () => handleOfferClick(id) }
+            onClick={ () => dispatch(getOfferDataAction(id)) }
           >
             { title }
           </Link>
@@ -95,5 +87,4 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   );
 }
 
-export { FavoritesPageCard };
 export default FavoritesPageCardConnected;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { CommentsFrontTypes } from '../../types/comments-types';
 import { getMillisecondsFromDate } from '../../utils/common-utils';
-import OfferPageComment from '../offer-page-comment/offer-page-comment';
 import { MAX_COMMENTS_TO_SHOW } from '../../const';
+import OfferPageComment from '../offer-page-comment/offer-page-comment';
 
 export type OfferPageCommentsListTypes = {
   commentsData: CommentsFrontTypes[],
@@ -11,9 +11,9 @@ export type OfferPageCommentsListTypes = {
 function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
   const { commentsData } = props;
   const commentsList = commentsData
-    .sort((a, b) => (
-      getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
-    ))
+    // .sort((a, b) => (
+    //   getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
+    // ))
     .slice(-MAX_COMMENTS_TO_SHOW)
     .map((dataItem) => (
       <OfferPageComment
