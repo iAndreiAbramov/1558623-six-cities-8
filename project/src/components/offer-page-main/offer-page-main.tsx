@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ActionTypes } from '../../types/action-types';
 import { APIRoute, AppRoute, AuthorizationStatus, IsFavoriteValue, MAX_IMAGES_NUMBER } from '../../const';
 import { api } from '../../index';
 import { adaptOfferToFront } from '../../utils/adapters';
@@ -30,7 +29,7 @@ const mapStateToProps = (state: RootStateTypes) => ({
   currentHotelComments: getCurrentHotelComments(state),
   authorization: getAuthorizationStatus(state),
 });
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   getOfferData: getOfferDataAction,
   getCommentsData: getCommentsDataAction,
   getNearbyOffers: getNearOffersAction,

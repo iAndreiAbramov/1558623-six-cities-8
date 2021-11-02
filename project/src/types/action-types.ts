@@ -1,12 +1,6 @@
 import { AxiosInstance } from 'axios';
-import {
-  initCityAction,
-  requireAuthorization,
-  requireLogout, setCurrentUser, setIsFavorite,
-  setFetchStatus, setCurrentHotel, setNearOffersData, setCurrentHotelComments, setFavoritesData
-} from '../store/actions';
 import { StateTypes } from './state-types';
-import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { Action, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 
 export enum ActionType {
   InitCity = 'init/initCity',
@@ -21,18 +15,6 @@ export enum ActionType {
   SetCurrentHotelComments = 'offer/setCurrentHotelComments',
 }
 
-export type ActionTypes =
-  | ReturnType<typeof initCityAction>
-  | ReturnType<typeof setFetchStatus>
-  | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>
-  | ReturnType<typeof setIsFavorite>
-  | ReturnType<typeof setFavoritesData>
-  | ReturnType<typeof setCurrentUser>
-  | ReturnType<typeof setCurrentHotel>
-  | ReturnType<typeof setNearOffersData>
-  | ReturnType<typeof setCurrentHotelComments>;
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, Action>;
 
-export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateTypes, AxiosInstance, ActionTypes>;
-
-export type ThunkAppDispatch = ThunkDispatch<StateTypes, AxiosInstance, ActionTypes>;
+export type ThunkAppDispatch = ThunkDispatch<StateTypes, AxiosInstance, Action>;

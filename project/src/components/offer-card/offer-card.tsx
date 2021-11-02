@@ -7,11 +7,10 @@ import { getVisualRating } from '../../utils/common-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { getOfferDataAction } from '../../store/api-actions';
 import { connect, ConnectedProps } from 'react-redux';
-import { ActionTypes } from '../../types/action-types';
 import { adaptOfferToFront } from '../../utils/adapters';
 import browserHistory from '../../services/browser-history';
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   handleOfferClick: getOfferDataAction,
 }, dispatch);
 

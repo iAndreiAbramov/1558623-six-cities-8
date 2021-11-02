@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { AppRoute } from '../../const';
-import { ActionTypes } from '../../types/action-types';
 import { getCurrentUserData } from '../../store/selectors';
 import { getEmail } from '../../services/email';
 import { getFavoritesDataAction, requestLogoutAction } from '../../store/api-actions';
@@ -12,7 +11,7 @@ import { RootStateTypes } from '../../store/reducers/root-reducer';
 const mapStateToProps = (state: RootStateTypes) => ({
   userEmail: getCurrentUserData(state).email,
 });
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   handleLogoutClick: requestLogoutAction,
   handleFavoritesLinkClick: getFavoritesDataAction,
 }, dispatch);

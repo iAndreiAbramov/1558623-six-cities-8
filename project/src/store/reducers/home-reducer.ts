@@ -1,6 +1,7 @@
-import { ActionType, ActionTypes } from '../../types/action-types';
+import { createReducer } from '@reduxjs/toolkit';
 import { Cities, DEFAULT_CITY_NAME } from '../../const';
 import { CityTypes, PointTypes } from '../../types/state-types';
+import { initCityAction } from '../actions';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 export type InitialStateTypes = {
@@ -22,24 +23,18 @@ const initialState: InitialStateTypes = {
   pointsForMap: [],
 };
 
-export const homeReducer = (state = initialState, action: ActionTypes): InitialStateTypes => {
-  switch (action.type) {
-    case ActionType.InitCity:
-      return {
-        ...state,
-        activeCity: {
-          name: action.payload.cityData.name,
-          location: {
-            latitude: action.payload.cityData.location.latitude,
-            longitude: action.payload.cityData.location.longitude,
-            zoom: action.payload.cityData.location.zoom,
-          },
+export const homeReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(initCityAction, (state, action) => {
+      state.offersData = action.payload.offersData;
+      state.pointsForMap = action.payload.pointsForMap;
+      state.activeCity = {
+        name: action.payload.cityData.name,
+        location: {
+          latitude: action.payload.cityData.location.latitude,
+          longitude: action.payload.cityData.location.longitude,
+          zoom: action.payload.cityData.location.zoom,
         },
-        offersData: action.payload.offersData,
-        pointsForMap: action.payload.pointsForMap,
       };
-
-    default:
-      return state;
-  }
-};
+    });
+});

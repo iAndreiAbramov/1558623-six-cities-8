@@ -1,5 +1,6 @@
-import { ActionType, ActionTypes } from '../../types/action-types';
+import { createReducer } from '@reduxjs/toolkit';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { setFavoritesData } from '../actions';
 
 export type FavoritesStateTypes = {
   favoritesData: OfferDataTypes[];
@@ -9,14 +10,9 @@ const initialState: FavoritesStateTypes = {
   favoritesData: [],
 };
 
-export const favoritesReducer = (state = initialState, action: ActionTypes): FavoritesStateTypes => {
-  switch (action.type) {
-    case ActionType.SetFavoritesData:
-      return {
-        ...state,
-        favoritesData: action.payload.favoritesData,
-      };
-    default:
-      return state;
-  }
-};
+export const favoritesReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setFavoritesData, (state, action) => {
+      state.favoritesData = action.payload;
+    });
+});

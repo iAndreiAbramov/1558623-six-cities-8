@@ -1,3 +1,4 @@
+import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action-types';
 import { AuthorizationStatus, FetchStatus } from '../const';
 import { CityTypes, PointTypes } from '../types/state-types';
@@ -5,73 +6,71 @@ import { CommentsFrontTypes } from '../types/comments-types';
 import { FrontUserDataTypes } from '../types/user-data-types';
 import { OfferDataTypes } from '../types/offer-data-types';
 
-export const initCityAction = (
-  cityData: CityTypes,
-  offersData: OfferDataTypes[],
-  pointsForMap: PointTypes[],
-) => ({
-  type: ActionType.InitCity,
-  payload: {
-    cityData,
-    offersData,
-    pointsForMap,
-  },
-} as const);
+export const initCityAction = createAction(
+  ActionType.InitCity,
+  (cityData: CityTypes, offersData: OfferDataTypes[], pointsForMap: PointTypes[]) => ({
+    payload: {
+      cityData,
+      offersData,
+      pointsForMap,
+    },
+  }),
+);
 
-export const setFetchStatus = (fetchStatus: FetchStatus) => ({
-  type: ActionType.SetFetchStatus,
-  payload: {
-    fetchStatus,
-  },
-} as const);
+export const setFetchStatus = createAction(
+  ActionType.SetFetchStatus,
+  (fetchStatus: FetchStatus) => ({
+    payload: fetchStatus,
+  }),
+);
 
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
-  type: ActionType.RequireAuthorization,
-  payload: {
-    authStatus,
-  },
-} as const);
+export const requireAuthorization = createAction(
+  ActionType.RequireAuthorization,
+  (authStatus: AuthorizationStatus) => ({
+    payload: authStatus,
+  }),
+);
 
-export const requireLogout = () => ({
-  type: ActionType.RequireLogout,
-} as const);
+export const requireLogout = createAction(ActionType.RequireLogout);
 
-export const setIsFavorite = (offersData: OfferDataTypes[]) =>({
-  type: ActionType.SetIsFavorite,
-  payload: offersData,
-} as const);
+export const setCurrentUser = createAction(
+  ActionType.SetCurrentUser,
+  (userData: FrontUserDataTypes) => ({
+    payload: userData,
+  }),
+);
 
-export const setCurrentUser = (userData: FrontUserDataTypes) => ({
-  type: ActionType.SetCurrentUser,
-  payload: {
-    userData,
-  },
-} as const);
+export const setIsFavorite = createAction(
+  ActionType.SetIsFavorite,
+  (offersData: OfferDataTypes[]) => ({
+    payload: offersData,
+  }),
+);
 
-export const setCurrentHotel = (currentHotel: OfferDataTypes) => ({
-  type: ActionType.SetCurrentHotel,
-  payload: {
-    currentHotel,
-  },
-} as const);
+export const setCurrentHotel = createAction(
+  ActionType.SetCurrentHotel,
+  (currentHotel: OfferDataTypes) => ({
+    payload: currentHotel,
+  }),
+);
 
-export const setNearOffersData = (nearOffersData: OfferDataTypes[]) => ({
-  type: ActionType.SetNearOffersData,
-  payload: {
-    nearOffersData,
-  },
-} as const);
+export const setNearOffersData = createAction(
+  ActionType.SetNearOffersData,
+  (nearOffersData: OfferDataTypes[]) => ({
+    payload: nearOffersData,
+  }),
+);
 
-export const setCurrentHotelComments = (currentHotelComments: CommentsFrontTypes[]) => ({
-  type: ActionType.SetCurrentHotelComments,
-  payload: {
-    currentHotelComments,
-  },
-} as const);
+export const setCurrentHotelComments = createAction(
+  ActionType.SetCurrentHotelComments,
+  (currentHotelComments: CommentsFrontTypes[]) => ({
+    payload: currentHotelComments,
+  }),
+);
 
-export const setFavoritesData = (favoritesData: OfferDataTypes[]) => ({
-  type: ActionType.SetFavoritesData,
-  payload: {
-    favoritesData,
-  },
-} as const);
+export const setFavoritesData = createAction(
+  ActionType.SetFavoritesData,
+  (favoritesData: OfferDataTypes[]) => ({
+    payload: favoritesData,
+  }),
+);

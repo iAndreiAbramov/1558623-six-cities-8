@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { ActionTypes } from '../../types/action-types';
 import { APIRoute, AppRoute, IsFavoriteValue, MAX_RATING, PERCENTS_CAP } from '../../const';
 import { connect, ConnectedProps } from 'react-redux';
 import { getFavoritesDataAction, getOfferDataAction } from '../../store/api-actions';
@@ -9,7 +8,7 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import { api } from '../../index';
 import { adaptOfferToFront } from '../../utils/adapters';
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   handleOfferClick: getOfferDataAction,
   refreshFavoritesData: getFavoritesDataAction,
 }, dispatch);

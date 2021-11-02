@@ -1,7 +1,8 @@
-import { DEFAULT_HOTEL_DATA } from '../../const';
-import { ActionType, ActionTypes } from '../../types/action-types';
-import { OfferDataTypes } from '../../types/offer-data-types';
+import { createReducer } from '@reduxjs/toolkit';
 import { CommentsFrontTypes } from '../../types/comments-types';
+import { DEFAULT_HOTEL_DATA } from '../../const';
+import { OfferDataTypes } from '../../types/offer-data-types';
+import { setCurrentHotel, setCurrentHotelComments, setNearOffersData } from '../actions';
 
 export type OfferStateTypes = {
   currentHotel: OfferDataTypes,
@@ -15,27 +16,15 @@ const initialState: OfferStateTypes = {
   currentHotelComments: [],
 }
 
-export const offerReducer = (state = initialState, action: ActionTypes): OfferStateTypes => {
-  switch (action.type) {
-    case ActionType.SetCurrentHotel:
-      return {
-        ...state,
-        currentHotel: action.payload.currentHotel,
-      };
-
-    case ActionType.SetNearOffersData:
-      return {
-        ...state,
-        nearOffersData: action.payload.nearOffersData,
-      };
-
-    case ActionType.SetCurrentHotelComments:
-      return {
-        ...state,
-        currentHotelComments: action.payload.currentHotelComments,
-      };
-
-    default:
-      return state;
-  }
-}
+export const offerReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setCurrentHotel, (state, action) => {
+      state.currentHotel = action.payload;
+    })
+    .addCase(setNearOffersData, (state, action) => {
+      state.nearOffersData = action.payload;
+    })
+    .addCase(setCurrentHotelComments, (state, action) => {
+      state.currentHotelComments = action.payload;
+    });
+});

@@ -1,5 +1,6 @@
-import { ActionType, ActionTypes } from '../../types/action-types';
+import { createReducer } from '@reduxjs/toolkit';
 import { FetchStatus } from '../../const';
+import { setFetchStatus } from '../actions';
 
 export type AppStatusTypes = {
   fetchStatus: FetchStatus,
@@ -9,15 +10,10 @@ const initialState: AppStatusTypes = {
   fetchStatus: FetchStatus.InProgress,
 }
 
-export const appStatusReducer = (state= initialState, action: ActionTypes): AppStatusTypes => {
-  switch (action.type) {
-    case ActionType.SetFetchStatus:
-      return {
-        ...state,
-        fetchStatus: action.payload.fetchStatus,
-      };
-
-    default:
-      return state;
-  }
-}
+export const appStatusReducer = createReducer(initialState, (builder) => {
+    builder
+      .addCase(setFetchStatus, (state, action) => {
+        state.fetchStatus = action.payload
+      });
+  },
+);

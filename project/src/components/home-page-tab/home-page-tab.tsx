@@ -2,7 +2,6 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
-import { ActionTypes } from '../../types/action-types';
 import { initActiveCityAction } from '../../store/api-actions';
 import { RootStateTypes } from '../../store/reducers/root-reducer';
 import { getActiveCity } from '../../store/selectors';
@@ -10,7 +9,7 @@ import { getActiveCity } from '../../store/selectors';
 const mapStateToProps = (state: RootStateTypes) => ({
   activeCityName: getActiveCity(state).name,
 });
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   setActiveCity: initActiveCityAction,
 }, dispatch);
 
