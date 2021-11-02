@@ -11,9 +11,10 @@ export type OfferPageCommentsListTypes = {
 function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
   const { commentsData } = props;
   const commentsList = commentsData
-    // .sort((a, b) => (
-    //   getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
-    // ))
+    .slice()
+    .sort((a, b) => (
+        getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
+    ))
     .slice(-MAX_COMMENTS_TO_SHOW)
     .map((dataItem) => (
       <OfferPageComment
@@ -24,7 +25,8 @@ function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
 
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{ commentsList.length }</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{ commentsList.length }</span>
+      </h2>
       <ul className="reviews__list">
         { commentsList }
       </ul>
