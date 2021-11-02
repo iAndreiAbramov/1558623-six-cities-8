@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { connect, ConnectedProps, useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchStatus } from '../../const';
 import { getActiveCity, getFetchStatus, getOffersData, getPointsForMap } from '../../store/selectors';
 import HomePageListConnected from '../home-page-list/home-page-list';
@@ -28,7 +27,7 @@ function HomePageMainConnected(): JSX.Element {
 
   useEffect(() => {
     dispatch(initActiveCityAction(activeCityName));
-  }, []);
+  }, [activeCityName, dispatch]);
 
   const handleActiveCardChange = useCallback((newId: string): void => (
     setActiveCardId(newId)

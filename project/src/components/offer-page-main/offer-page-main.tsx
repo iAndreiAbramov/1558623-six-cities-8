@@ -37,7 +37,7 @@ function OfferPageMainConnected(): JSX.Element {
     !offerId && dispatch(getOfferDataAction(id));
     dispatch(getNearOffersAction(id));
     dispatch(getCommentsDataAction(id));
-  }, []);
+  }, [dispatch, id, offerId]);
 
   return (
     <main className="page__main page__main--property">

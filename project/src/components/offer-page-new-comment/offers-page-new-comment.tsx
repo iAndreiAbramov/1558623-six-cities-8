@@ -1,7 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { AxiosResponse } from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
+import { api } from '../../index';
 import { CommentPostTypes } from '../../types/comments-types';
 import {
   APIRoute,
@@ -12,16 +15,8 @@ import {
   RatingPosition
 } from '../../const';
 import { setCurrentHotelComments } from '../../store/actions';
-import { api } from '../../index';
-import { AxiosResponse } from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-type OfferPageNewCommentTypes = {
-  id: string,
-};
-
-function OfferPageNewCommentConnected(props: OfferPageNewCommentTypes): JSX.Element {
+function OfferPageNewCommentConnected(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
   const { id } = props;
   const [rating, setRating] = useState(INITIAL_RATING);

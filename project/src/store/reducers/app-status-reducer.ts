@@ -8,12 +8,11 @@ export type AppStatusTypes = {
 
 const initialState: AppStatusTypes = {
   fetchStatus: FetchStatus.InProgress,
-}
+};
 
 export const appStatusReducer = createReducer(initialState, (builder) => {
-    builder
-      .addCase(setFetchStatus, (state, action) => {
-        state.fetchStatus = action.payload
-      });
-  },
-);
+  builder
+    .addCase(setFetchStatus, (state, action) => {
+      state.fetchStatus = action.payload;
+    });
+});

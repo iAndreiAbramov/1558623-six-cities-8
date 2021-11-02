@@ -9,7 +9,7 @@ type OfferCardBookmarkTypes = {
   offerId: string,
 }
 
-function OfferCardBookmark(props: OfferCardBookmarkTypes) {
+function OfferCardBookmark(props: OfferCardBookmarkTypes): JSX.Element {
   const { isFavorite, offerId } = props;
   const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
 

@@ -28,7 +28,7 @@ function FavoritesPageCardConnected(props: FavoritesCardTypes): JSX.Element {
     await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
       .then(({ data }) => {
         setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-        dispatch(getFavoritesDataAction);
+        dispatch(getFavoritesDataAction());
       });
   };
 

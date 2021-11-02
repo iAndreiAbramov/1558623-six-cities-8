@@ -1,4 +1,4 @@
-import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode, } from '../const';
+import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';

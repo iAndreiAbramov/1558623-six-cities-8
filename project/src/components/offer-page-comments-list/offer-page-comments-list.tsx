@@ -13,7 +13,7 @@ function OfferPageCommentsList(props: OfferPageCommentsListTypes): JSX.Element {
   const commentsList = commentsData
     .slice()
     .sort((a, b) => (
-        getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
+      getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
     ))
     .slice(-MAX_COMMENTS_TO_SHOW)
     .map((dataItem) => (

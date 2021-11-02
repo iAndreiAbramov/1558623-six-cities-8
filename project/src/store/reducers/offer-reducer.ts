@@ -14,7 +14,7 @@ const initialState: OfferStateTypes = {
   currentHotel: DEFAULT_HOTEL_DATA,
   nearOffersData: [],
   currentHotelComments: [],
-}
+};
 
 export const offerReducer = createReducer(initialState, (builder) => {
   builder
