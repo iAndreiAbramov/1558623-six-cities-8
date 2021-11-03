@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
 import { api } from '../../index';
@@ -11,10 +11,11 @@ import {
   INITIAL_RATING,
   INITIAL_REVIEW_STATE,
   MIN_COMMENT_LENGTH,
-  PostNotificationMessage,
+  NotificationMessage,
   RatingPosition
 } from '../../const';
 import { setCurrentHotelComments } from '../../store/actions';
+import { notifyError, notifySuccess } from '../../utils/common-utils';
 
 function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
@@ -22,26 +23,6 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
-
-  const notifySuccess = (message: string) => toast.success(message, {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-
-  const notifyError = (message: string) => toast.error(message, {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
 
   useEffect(() => {
     if (rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH) {
@@ -80,11 +61,11 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
         dispatch(setCurrentHotelComments(adaptCommentsToFront(data)));
         setRating(INITIAL_RATING);
         setReview('');
-        notifySuccess(PostNotificationMessage.Success);
+        notifySuccess(NotificationMessage.PostSuccess);
       })
       .catch(() => {
         setSubmitIsDisabled(false);
-        notifyError(PostNotificationMessage.Error);
+        notifyError(NotificationMessage.PostError);
       });
   };
 
@@ -95,6 +76,7 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
       method="post"
       onSubmit={ handleFormSubmit }
     >
+      <ToastContainer />
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input
@@ -197,7 +179,6 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
           Submit
         </button>
       </div>
-      <ToastContainer />
     </form>
   );
 }
