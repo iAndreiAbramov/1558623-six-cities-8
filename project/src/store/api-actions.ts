@@ -1,4 +1,12 @@
-import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
+import {
+  APIRoute,
+  AuthorizationStatus,
+  Cities,
+  DEFAULT_USER_DATA,
+  FetchStatus,
+  HttpStatusCode,
+  NotificationMessage
+} from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';
@@ -16,6 +24,7 @@ import {
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
+import { notifyError } from '../utils/common-utils';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -102,7 +111,8 @@ export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult
         setEmail(data.email);
         dispatch(setCurrentUser(adaptUserDataToFront(data)));
         browserHistory.push('/');
-      });
+      })
+      .catch(() => notifyError(NotificationMessage.AuthError));
   }
 );
 

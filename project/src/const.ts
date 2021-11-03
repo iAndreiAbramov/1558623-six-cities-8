@@ -28,7 +28,7 @@ export enum FetchStatus {
 export enum NotificationMessage {
   PostSuccess = 'Your comment successfully posted!',
   PostError = 'Sorry, your comment wasn\'t posted!',
-  AuthError = 'Authorization failed. Email should be correct email address.',
+  AuthError = 'Authorization failed. Please check your email and password',
 }
 
 export enum IsFavoriteValue {
