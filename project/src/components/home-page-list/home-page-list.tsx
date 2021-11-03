@@ -8,6 +8,7 @@ import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggle
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferCard from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
+import { useSort } from '../../hooks/useSort';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
@@ -20,24 +21,11 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const { offersData, onActiveCardChange } = props;
 
   const [dropdownState, setDropdownState] = useState(false);
-  const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
+  const [sortOption, setSortOption] = useState(SortOptions.Popular);
   const [sortedData, setSortedData] = useState([...offersData]);
 
   useEffect(() => {
-    switch (sortOption) {
-      case SortOptions.PRICE_UP:
-        setSortedData(() => [...offersData].sort((a, b) => a.price - b.price));
-        break;
-      case SortOptions.PRICE_DOWN:
-        setSortedData(() => [...offersData].sort((a, b) => b.price - a.price));
-        break;
-      case SortOptions.RATING_DOWN:
-        setSortedData(() => [...offersData].sort((a, b) => b.rating - a.rating));
-        break;
-      default:
-        setSortedData([...offersData]);
-        break;
-    }
+    setSortedData(useSort([...offersData], sortOption));
   }, [offersData, sortOption]);
 
   const offerCards = sortedData.map((cardItem) => {
@@ -57,7 +45,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
     setDropdownState((prevState: boolean) => !prevState);
   }, []);
 
-  const handleSortToggle = (option: string) => {
+  const handleSortToggle = (option: SortOptions) => {
     setDropdownState((prevState: boolean) => !prevState);
     setSortOption(option);
   };

@@ -173,12 +173,12 @@ export const CardImgWrapperClasses = {
   NEARBY_LIST: 'near-places__image-wrapper',
 };
 
-export const SortOptions = {
-  POPULAR: 'Popular',
-  PRICE_UP: 'Price: low to high',
-  PRICE_DOWN: 'Price: high to low',
-  RATING_DOWN: 'Top rated first',
-};
+export enum SortOptions {
+  Popular = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  RatingDown = 'Top rated first',
+}
 
 export enum APIRoute {
   Hotels = '/hotels',
