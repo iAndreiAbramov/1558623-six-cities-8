@@ -145,6 +145,8 @@ export enum RatingPosition {
 export const INITIAL_RATING = [false, false, false, false, false];
 export const INITIAL_REVIEW_STATE = '';
 export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENTS_TO_SHOW = 10;
+export const MAX_IMAGES_NUMBER = 6;
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
 export const URL_MARKER_ACTIVE = './img/pin-active.svg';

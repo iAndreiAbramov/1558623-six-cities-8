@@ -1,41 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { bindActionCreators, Dispatch } from '@reduxjs/toolkit';
-import { connect, ConnectedProps } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ActionTypes } from '../../types/action-types';
-import { APIRoute, AuthorizationStatus, IsFavoriteValue } from '../../const';
-import { api } from '../../index';
-import { adaptOfferToFront } from '../../utils/adapters';
+import { MAX_IMAGES_NUMBER } from '../../const';
+import { getCurrentHotel, getNearOffersData } from '../../store/selectors';
 import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
-import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
 import OfferPageMap from '../offer-page-map/offer-page-map';
-import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
-import { StateTypes } from '../../types/state-types';
+import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
+import OfferPageReviews from '../offer-page-reviews/offer-page-reviews';
 
-const mapStateToProps = (state: StateTypes) => ({
-  pageData: state.currentHotel,
-  nearOffersData: state.nearOffersData,
-  currentHotelComments: state.currentHotelComments,
-  authorization: state.authorization,
-});
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => bindActionCreators({
-  getOfferData: getOfferDataAction,
-  getCommentsData: getCommentsDataAction,
-  getNearbyOffers: getNearOffersAction,
-}, dispatch);
-
-const offerPageMainConnector = connect(mapStateToProps, mapDispatchToProps);
-const OfferPageMainConnected = offerPageMainConnector(OfferPageMain);
-
-type OfferPageTypes = ConnectedProps<typeof offerPageMainConnector>;
-
-function OfferPageMain(props: OfferPageTypes): JSX.Element {
-  const { pageData, nearOffersData, currentHotelComments, authorization, getOfferData, getCommentsData, getNearbyOffers } = props;
+function OfferPageMain(): JSX.Element {
+  const pageData = useSelector(getCurrentHotel);
+  const nearOffersData = useSelector(getNearOffersData);
+  const dispatch = useDispatch();
   const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
   const visualRating = getVisualRating(rating);
 
@@ -50,31 +31,18 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
     id: pageData.id,
   };
 
-  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
-
-  const bookmarkButtonClass = isFavoriteStatus
-    ? 'property__bookmark-button property__bookmark-button--active button'
-    : 'property__bookmark-button button';
-
-  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
-    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
-    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
-      .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-      });
-  };
-
   const { id } = useParams() as { id: string };
+
   useEffect(() => {
-    !offerId && getOfferData(id);
-    getNearbyOffers(id);
-    getCommentsData(id);
-  }, []);
+    !offerId && dispatch(getOfferDataAction(id));
+    dispatch(getNearOffersAction(id));
+    dispatch(getCommentsDataAction(id));
+  }, [dispatch, id, offerId]);
 
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        { images.length > 0 && <OfferPageGallery images={ images } /> }
+        { images.length > 0 && <OfferPageGallery images={ images.slice(0, MAX_IMAGES_NUMBER) } /> }
         <div className="property__container container">
           <div className="property__wrapper">
             {
@@ -87,16 +55,10 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <button
-                className={ bookmarkButtonClass }
-                type="button"
-                onClick={ () => handleBookmarkClick(id) }
-              >
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark" />
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <OfferPageBookmark
+                isFavorite={ isFavorite }
+                offerId={ offerId }
+              />
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
@@ -121,17 +83,12 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
               <span className="property__price-text">&nbsp;night</span>
             </div>
             { goods.length > 0 && <OfferPageGoods goods={ goods } /> }
-            <OfferPageHost host={ host } />
-            <section className="property__reviews reviews">
-              <OfferPageCommentsList
-                commentsData={ currentHotelComments }
-              />
-              {
-                authorization === AuthorizationStatus.Auth
-                &&
-                <OfferPageNewComment id={ id } />
-              }
-            </section>
+            <OfferPageHost
+              host={ host }
+            />
+            <OfferPageReviews
+              id={ offerId }
+            />
           </div>
         </div>
         <OfferPageMap
@@ -147,5 +104,4 @@ function OfferPageMain(props: OfferPageTypes): JSX.Element {
   );
 }
 
-export { OfferPageMain };
-export default OfferPageMainConnected;
+export default OfferPageMain;

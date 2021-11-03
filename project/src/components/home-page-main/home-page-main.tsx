@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch, bindActionCreators } from '@reduxjs/toolkit';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchStatus } from '../../const';
-import HomePageListConnected from '../home-page-list/home-page-list';
+import { getActiveCity, getFetchStatus, getOffersData, getPointsForMap } from '../../store/selectors';
+import HomePageList from '../home-page-list/home-page-list';
 import HomePageMap from '../home-page-map/home-page-map';
 import HomePageTabs from '../home-page-tabs/home-page-tabs';
 import HomePageEmpty from '../home-page-empty/home-page-empty';
 import { initActiveCityAction } from '../../store/api-actions';
-import { StateTypes } from '../../types/state-types';
 
-const mapStateToProps = (state: StateTypes) => ({
-  fetchStatus: state.fetchStatus,
-  offersData: state.offersData,
-  activeCityName: state.activeCity.name,
-  activeCityLocation: state.activeCity.location,
-  pointsForMap: state.pointsForMap,
-});
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  refreshPageData: initActiveCityAction,
-}, dispatch);
+function HomePageMain(): JSX.Element {
+  const fetchStatus = useSelector(getFetchStatus);
+  const offersData = useSelector(getOffersData);
+  const activeCityName = useSelector(getActiveCity).name;
+  const activeCityLocation = useSelector(getActiveCity).location;
+  const pointsForMap = useSelector(getPointsForMap);
 
-const homePageMainConnector = connect(mapStateToProps, mapDispatchToProps);
-const HomePageMainConnected = homePageMainConnector(HomePageMain);
+  const dispatch = useDispatch();
 
-type HomePageMainTypes = ConnectedProps<typeof homePageMainConnector>;
-
-function HomePageMain(props: HomePageMainTypes): JSX.Element {
-  const { offersData, pointsForMap, activeCityLocation, activeCityName, fetchStatus, refreshPageData } = props;
   const [activeCardId, setActiveCardId] = useState('');
   const containerClass = offersData.length > 0
     ? 'cities__places-container container'
@@ -36,8 +26,12 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
     : 'page__main page__main--index page__main--index-empty';
 
   useEffect(() => {
-    refreshPageData(activeCityName);
-  }, []);
+    dispatch(initActiveCityAction(activeCityName));
+  }, [activeCityName, dispatch]);
+
+  const handleActiveCardChange = useCallback((newId: string): void => (
+    setActiveCardId(newId)
+  ), []);
 
   return (
     <main className={ mainClass }>
@@ -53,11 +47,9 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
             offersData.length > 0
             &&
             <>
-              <HomePageListConnected
+              <HomePageList
                 offersData={ offersData }
-                onActiveCardChange={ (newId: string): void => (
-                  setActiveCardId(newId)
-                ) }
+                onActiveCardChange={ handleActiveCardChange }
               />
               <HomePageMap
                 activeCardId={ activeCardId }
@@ -72,5 +64,4 @@ function HomePageMain(props: HomePageMainTypes): JSX.Element {
   );
 }
 
-export { HomePageMain };
-export default HomePageMainConnected;
+export default HomePageMain;

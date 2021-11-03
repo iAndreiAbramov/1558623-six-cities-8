@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
+import { getActiveCity, getFetchStatus } from '../../store/selectors';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import OfferCard from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
-import { StateTypes } from '../../types/state-types';
-import OfferCardConnected from '../offer-card/offer-card';
-
-const mapStateToProps = (state: StateTypes) => ({
-  isFetching: state.fetchStatus,
-  activeCity: state.activeCity.name,
-});
-
-const homePageListConnect = connect(mapStateToProps);
-const HomePageListConnected = homePageListConnect(HomePageList);
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
   onActiveCardChange?: (newId: string) => void,
-} & ConnectedProps<typeof homePageListConnect>
+};
 
 function HomePageList(props: HomePageListTypes): JSX.Element {
-  const { offersData, onActiveCardChange, activeCity, isFetching } = props;
+  const isFetching = useSelector(getFetchStatus);
+  const activeCityName = useSelector(getActiveCity).name;
+  const { offersData, onActiveCardChange } = props;
+
   const [dropdownState, setDropdownState] = useState(false);
   const [sortOption, setSortOption] = useState(SortOptions.POPULAR);
   const [sortedData, setSortedData] = useState([...offersData]);
@@ -48,7 +43,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const offerCards = sortedData.map((cardItem) => {
     const { id } = cardItem;
     return (
-      <OfferCardConnected
+      <OfferCard
         key={ id }
         data={ cardItem }
         onActiveCardChange={ onActiveCardChange }
@@ -58,9 +53,9 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
     );
   });
 
-  const handleDropdownClick = (): void => {
+  const handleDropdownClick = useCallback((): void => {
     setDropdownState((prevState: boolean) => !prevState);
-  };
+  }, []);
 
   const handleSortToggle = (option: string) => {
     setDropdownState((prevState: boolean) => !prevState);
@@ -76,7 +71,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
         &&
         <>
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{ offersData.length } places to stay in { activeCity }</b>
+          <b className="places__found">{ offersData.length } places to stay in { activeCityName }</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <HomePageSortDropdown
@@ -100,5 +95,4 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   );
 }
 
-export { HomePageList };
-export default HomePageListConnected;
+export default HomePageList;

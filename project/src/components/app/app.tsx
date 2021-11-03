@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import browserHistory from '../../services/browser-history';
-import FavoritesPageConnected from '../favorites-page/favorites-page';
+import FavoritesPage from '../favorites-page/favorites-page';
 import HomePage from '../home-page/home-page';
 import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
-import OfferPageConnected from '../offer-page/offer-page';
-import PrivateRouteConnected from '../private-route/private-route';
+import OfferPage from '../offer-page/offer-page';
+import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
@@ -21,16 +21,16 @@ function App(): JSX.Element {
           <LoginPage />
         </Route>
 
-        <PrivateRouteConnected
+        <PrivateRoute
           exact
           path={ AppRoute.Favorites }
           render={ () => (
-            <FavoritesPageConnected />
+            <FavoritesPage />
           ) }
         />
 
         <Route path={ AppRoute.OfferId } exact>
-          <OfferPageConnected />
+          <OfferPage />
         </Route>
 
         <Route>
