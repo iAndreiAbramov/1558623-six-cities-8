@@ -29,7 +29,7 @@ export enum NotificationMessage {
   PostSuccess = 'Your comment successfully posted!',
   PostError = 'Sorry, your comment wasn\'t posted!',
   AuthError = 'Authorization failed. Please check your email and password.',
-  ConnectionError = 'Sorry, action can\'t be fulfilled. Please check your network connection.',
+  ConnectionError = 'Sorry, action can\'t be performed. Please check your network connection.',
   Unauthorized = 'Please sign in to perform this action.',
 }
 

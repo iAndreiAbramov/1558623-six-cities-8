@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AuthorizationStatus, DEFAULT_CITY_NAME } from './const';
+import { AuthorizationStatus } from './const';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { checkAuthAction, initActiveCityAction } from './store/api-actions';
+import { checkAuthAction } from './store/api-actions';
 import { createApi } from './services/api';
 import { requireAuthorization } from './store/actions';
 import { rootReducer } from './store/reducers/root-reducer';
@@ -24,7 +24,6 @@ const store = configureStore({
 });
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
-(store.dispatch as ThunkAppDispatch)(initActiveCityAction(DEFAULT_CITY_NAME));
 
 ReactDOM.render(
   <React.StrictMode>

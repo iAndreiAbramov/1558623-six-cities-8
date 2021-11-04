@@ -27,7 +27,7 @@ function HomePageMain(): JSX.Element {
 
   useEffect(() => {
     dispatch(initActiveCityAction(activeCityName));
-  }, [activeCityName, dispatch]);
+  },[activeCityName, dispatch]);
 
   const handleActiveCardChange = useCallback((newId: string): void => (
     setActiveCardId(newId)
