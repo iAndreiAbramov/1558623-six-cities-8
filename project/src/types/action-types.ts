@@ -5,7 +5,6 @@ import { Action, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 export enum ActionType {
   InitCity = 'init/initCity',
   SetFetchStatus = 'data/setFetchStatus',
-  SetIsFavorite = 'data/setIsFavorite',
   SetFavoritesData = 'data/setFavorites',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',

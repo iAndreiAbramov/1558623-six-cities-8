@@ -1,5 +1,5 @@
 import React from 'react';
-import withHandleClick  from '../../hocs/withHandleClick';
+import withHandleClick from '../../hocs/with-handle-click';
 
 type OfferPageBookmarkTypes = {
   isFavorite: boolean,
@@ -7,7 +7,7 @@ type OfferPageBookmarkTypes = {
   handleBookmarkClick: ((offerId: string) => Promise<void>) | (() => null);
 }
 
-function OfferPageBookmark(props: OfferPageBookmarkTypes):JSX.Element {
+function OfferPageBookmark(props: OfferPageBookmarkTypes): JSX.Element {
   const { isFavorite, offerId, handleBookmarkClick } = props;
 
   const bookmarkButtonClass = isFavorite

@@ -152,17 +152,19 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENTS_TO_SHOW = 10;
 export const MAX_IMAGES_NUMBER = 6;
 
-export const URL_MARKER_DEFAULT = './img/pin.svg';
-export const URL_MARKER_ACTIVE = './img/pin-active.svg';
+export enum MapMarker {
+  Default = './img/pin.svg',
+  Active = './img/pin-active.svg',
+}
 
-export const DefaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+export const DEFAULT_CUSTOM_ICON = new Icon({
+  iconUrl: MapMarker.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-export const ActiveCustomIcon = new Icon({
-  iconUrl: URL_MARKER_ACTIVE,
+export const ACTIVE_CUSTOM_ICON = new Icon({
+  iconUrl: MapMarker.Active,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });

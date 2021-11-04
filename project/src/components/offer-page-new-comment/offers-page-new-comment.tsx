@@ -5,7 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
 import { api } from '../../index';
-import { CommentPostTypes } from '../../types/comments-types';
 import {
   APIRoute,
   INITIAL_RATING,
@@ -14,8 +13,9 @@ import {
   NotificationMessage,
   RatingPosition
 } from '../../const';
-import { setCurrentHotelComments } from '../../store/actions';
+import { CommentPostTypes } from '../../types/comments-types';
 import { notifyError, notifySuccess } from '../../utils/common-utils';
+import { setCurrentHotelComments } from '../../store/actions';
 
 function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();

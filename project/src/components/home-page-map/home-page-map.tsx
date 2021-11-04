@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
+import { ACTIVE_CUSTOM_ICON, DEFAULT_CUSTOM_ICON } from '../../const';
 import { CityLocationTypes, PointTypes } from '../../types/state-types';
 import { Marker } from 'leaflet';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 
 type HomePageMapProps = {
   activeCardId: string,
@@ -29,8 +29,8 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
         marker
           .setIcon(
             activeCardId && activeCardId === point.id
-              ? ActiveCustomIcon
-              : DefaultCustomIcon,
+              ? ACTIVE_CUSTOM_ICON
+              : DEFAULT_CUSTOM_ICON,
           )
           .addTo(map);
         markers.push(marker);

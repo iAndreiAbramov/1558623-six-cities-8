@@ -36,7 +36,7 @@ function OfferPageMain(): JSX.Element {
   useEffect(() => {
     !offerId && dispatch(getOfferDataAction(id));
     dispatch(getNearOffersAction(id));
-  }, []);
+  }, [dispatch, id, offerId]);
 
   return (
     <main className="page__main page__main--property">
@@ -102,7 +102,8 @@ function OfferPageMain(): JSX.Element {
         &&
         <OfferPageNearList
           nearOffersData={ nearOffersData }
-        /> }
+        />
+      }
     </main>
   );
 }

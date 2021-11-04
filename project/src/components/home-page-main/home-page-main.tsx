@@ -29,7 +29,7 @@ function HomePageMain(): JSX.Element {
     if (offersData === []) {
       dispatch(initActiveCityAction(activeCityName));
     }
-  }, []);
+  }, [activeCityName, dispatch, offersData]);
 
   const handleActiveCardChange = useCallback((newId: string): void => (
     setActiveCardId(newId)

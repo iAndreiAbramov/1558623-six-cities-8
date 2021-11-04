@@ -1,7 +1,7 @@
 import { BackDataTypes } from '../types/back-data-types';
 import { BackUserDataTypes, FrontUserDataTypes } from '../types/user-data-types';
-import { OfferDataTypes } from '../types/offer-data-types';
 import { CommentsBackTypes, CommentsFrontTypes } from '../types/comments-types';
+import { OfferDataTypes } from '../types/offer-data-types';
 
 export const adaptOfferToFront = (backData: BackDataTypes): OfferDataTypes => {
   const adaptedData = Object.assign(

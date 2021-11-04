@@ -1,11 +1,11 @@
 import React from 'react';
-import LoginPageForm from '../login-page-form/login-page-form';
-import PageHeaderLogo from '../page-header-logo/page-header-logo';
-import { getRandomArrayItem } from '../../utils/common-utils';
-import { Cities } from '../../const';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Cities } from '../../const';
+import LoginPageForm from '../login-page-form/login-page-form';
+import { getRandomArrayItem } from '../../utils/common-utils';
 import { initActiveCityAction } from '../../store/api-actions';
+import { Link } from 'react-router-dom';
+import PageHeaderLogo from '../page-header-logo/page-header-logo';
 
 function LoginPage(): JSX.Element {
   const randomCityName = getRandomArrayItem(Object.keys(Cities));

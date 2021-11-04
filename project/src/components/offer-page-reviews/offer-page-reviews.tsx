@@ -14,7 +14,7 @@ function OfferPageReviews(props: { id: string }): JSX.Element {
 
   useEffect(() => {
     dispatch(getCommentsDataAction(id));
-  }, [id, dispatch])
+  }, [id, dispatch]);
 
   return (
     <section className="property__reviews reviews">

@@ -1,5 +1,5 @@
 import React from 'react';
-import withHandleClick from '../../hocs/withHandleClick';
+import withHandleClick from '../../hocs/with-handle-click';
 
 export type OfferCardBookmarkTypes = {
   isFavorite: boolean,

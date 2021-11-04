@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { ActiveCustomIcon, DefaultCustomIcon } from '../../const';
 import { Marker } from 'leaflet';
-import useMap from '../../hooks/useMap';
+import { ACTIVE_CUSTOM_ICON, DEFAULT_CUSTOM_ICON } from '../../const';
 import { CityLocationTypes, PointTypes } from '../../types/state-types';
+import useMap from '../../hooks/use-map';
 
 type OfferPageMapTypes = {
   cityLocation: CityLocationTypes,
@@ -24,13 +24,13 @@ function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
           [point.latitude, point.longitude],
         );
         nearbyMarkers.push(nearbyMarker);
-        nearbyMarker.setIcon(DefaultCustomIcon).addTo(map);
+        nearbyMarker.setIcon(DEFAULT_CUSTOM_ICON).addTo(map);
       });
 
       const currentMarker = new Marker(
         [currentPoint.latitude, currentPoint.longitude],
       );
-      currentMarker.setIcon(ActiveCustomIcon).addTo(map);
+      currentMarker.setIcon(ACTIVE_CUSTOM_ICON).addTo(map);
 
       return () => {
         nearbyMarkers.forEach((marker: Marker) => marker.removeFrom(map));

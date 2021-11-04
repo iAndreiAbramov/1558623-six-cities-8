@@ -1,4 +1,5 @@
 import { MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
+import { ReactText } from 'react';
 import { toast } from 'react-toastify';
 import { OfferDataTypes } from '../types/offer-data-types';
 
@@ -19,7 +20,7 @@ export const getMillisecondsFromDate = (date: string): number => (
   Date.parse(date.split(' ').reverse().join('-'))
 );
 
-export const notifySuccess = (message: NotificationMessage) => toast.success(message, {
+export const notifySuccess = (message: NotificationMessage): ReactText => toast.success(message, {
   position: 'top-right',
   autoClose: 2000,
   hideProgressBar: false,
@@ -29,7 +30,7 @@ export const notifySuccess = (message: NotificationMessage) => toast.success(mes
   progress: undefined,
 });
 
-export const notifyError = (message: NotificationMessage) => toast.error(message, {
+export const notifyError = (message: NotificationMessage): ReactText => toast.error(message, {
   position: 'top-right',
   autoClose: 5000,
   hideProgressBar: false,
@@ -39,7 +40,7 @@ export const notifyError = (message: NotificationMessage) => toast.error(message
   progress: undefined,
 });
 
-export const notifyInfo = (message: NotificationMessage) => toast.info(message, {
+export const notifyInfo = (message: NotificationMessage): ReactText => toast.info(message, {
   position: 'top-right',
   autoClose: 2000,
   hideProgressBar: false,

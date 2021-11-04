@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { OfferDataTypes } from '../../types/offer-data-types';
+import React from 'react';
 import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 import OfferCard from '../offer-card/offer-card';
+import { OfferDataTypes } from '../../types/offer-data-types';
 
 type OfferPageNearListTypes = {
   nearOffersData: OfferDataTypes[],
