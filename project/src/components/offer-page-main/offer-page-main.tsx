@@ -58,6 +58,7 @@ function OfferPageMain(): JSX.Element {
               <OfferPageBookmark
                 isFavorite={ isFavorite }
                 offerId={ offerId }
+                handleBookmarkClick={ () => null }
               />
             </div>
             <div className="property__rating rating">

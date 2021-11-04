@@ -40,14 +40,6 @@ export const setCurrentUser = createAction(
   }),
 );
 
-//todo: Лишнее действие?
-export const setIsFavorite = createAction(
-  ActionType.SetIsFavorite,
-  (offersData: OfferDataTypes[]) => ({
-    payload: offersData,
-  }),
-);
-
 export const setCurrentHotel = createAction(
   ActionType.SetCurrentHotel,
   (currentHotel: OfferDataTypes) => ({

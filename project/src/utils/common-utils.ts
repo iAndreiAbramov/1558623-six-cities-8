@@ -1,4 +1,4 @@
-import { MAX_RATING, PERCENTS_CAP } from '../const';
+import { MAX_RATING, NotificationMessage, PERCENTS_CAP } from '../const';
 import { toast } from 'react-toastify';
 
 export const getRandomInteger = (min: number, max: number): number => {
@@ -28,7 +28,7 @@ export const notifySuccess = (message: string) => toast.success(message, {
   progress: undefined,
 });
 
-export const notifyError = (message: string) => toast.error(message, {
+export const notifyError = (message: NotificationMessage) => toast.error(message, {
   position: 'top-right',
   autoClose: 5000,
   hideProgressBar: false,

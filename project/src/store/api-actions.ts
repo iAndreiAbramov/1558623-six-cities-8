@@ -80,15 +80,11 @@ export const getNearOffersAction = (id: string): ThunkActionResult => (
 
 export const getFavoritesDataAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    dispatch(setFetchStatus(FetchStatus.InProgress));
     await api.get(APIRoute.Favorite )
       .then(({ data }) => {
         dispatch(setFavoritesData(adaptOffersToFront(data)));
-        dispatch(setFetchStatus(FetchStatus.Success));
       })
-      .catch(() => {
-        dispatch(setFetchStatus(FetchStatus.Error));
-      });
+      .catch(() => notifyError(NotificationMessage.ConnectionError));
   }
 );
 
