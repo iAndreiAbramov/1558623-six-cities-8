@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { requestLoginAction } from '../../store/api-actions';
-import { ToastContainer } from 'react-toastify';
 
 function LoginPageForm(): JSX.Element {
   const dispatch = useDispatch();
@@ -19,7 +18,6 @@ function LoginPageForm(): JSX.Element {
 
   return (
     <form className="login__form form" action="#" method="post">
-      <ToastContainer />
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
         <input

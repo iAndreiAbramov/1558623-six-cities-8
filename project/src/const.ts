@@ -6,7 +6,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Login = '/login',
   OfferId = '/offer/:id',
-  Offer = '/offer'
+  Offer = '/offer',
 }
 
 export enum AuthorizationStatus {
@@ -28,9 +28,10 @@ export enum FetchStatus {
 export enum NotificationMessage {
   PostSuccess = 'Your comment successfully posted!',
   PostError = 'Sorry, your comment wasn\'t posted!',
-  AuthError = 'Authorization failed. Please check your email and password.',
+  AuthError = 'Authorization failed. Please enter correct email and password.',
   ConnectionError = 'Sorry, action can\'t be performed. Please check your network connection.',
   Unauthorized = 'Please sign in to perform this action.',
+  SignIn = 'Sign in to get more functions',
 }
 
 export enum IsFavoriteValue {

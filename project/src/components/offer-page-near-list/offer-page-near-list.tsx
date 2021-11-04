@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import { CardArticleClasses, CardImgWrapperClasses } from '../../const';
 import OfferCard from '../offer-card/offer-card';

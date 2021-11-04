@@ -21,7 +21,7 @@ export const getMillisecondsFromDate = (date: string): number => (
 
 export const notifySuccess = (message: NotificationMessage) => toast.success(message, {
   position: 'top-right',
-  autoClose: 5000,
+  autoClose: 2000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
@@ -32,6 +32,16 @@ export const notifySuccess = (message: NotificationMessage) => toast.success(mes
 export const notifyError = (message: NotificationMessage) => toast.error(message, {
   position: 'top-right',
   autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+export const notifyInfo = (message: NotificationMessage) => toast.info(message, {
+  position: 'top-right',
+  autoClose: 2000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,

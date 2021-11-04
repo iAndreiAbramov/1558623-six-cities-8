@@ -1,12 +1,4 @@
-import {
-  APIRoute,
-  AuthorizationStatus,
-  Cities,
-  DEFAULT_USER_DATA,
-  FetchStatus,
-  HttpStatusCode,
-  NotificationMessage
-} from '../const';
+import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, NotificationMessage } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';
@@ -22,9 +14,9 @@ import {
   setFetchStatus,
   setNearOffersData
 } from './actions';
+import { notifyError, notifyInfo } from '../utils/common-utils';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
-import { notifyError } from '../utils/common-utils';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -91,10 +83,11 @@ export const getFavoritesDataAction = (): ThunkActionResult => (
 export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(APIRoute.Login)
-      .then(({ status }) => {
-        status
-        && status !== HttpStatusCode.Unauthorised
-        && dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      .then(() => {
+        dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      })
+      .catch(() => {
+        notifyInfo(NotificationMessage.SignIn);
       });
   });
 

@@ -26,8 +26,10 @@ function HomePageMain(): JSX.Element {
     : 'page__main page__main--index page__main--index-empty';
 
   useEffect(() => {
-    dispatch(initActiveCityAction(activeCityName));
-  },[activeCityName, dispatch]);
+    if (offersData === []) {
+      dispatch(initActiveCityAction(activeCityName));
+    }
+  }, []);
 
   const handleActiveCardChange = useCallback((newId: string): void => (
     setActiveCardId(newId)

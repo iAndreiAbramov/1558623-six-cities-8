@@ -1,9 +1,8 @@
 import React from 'react';
-import PageHeaderLogo from '../page-header-logo/page-header-logo';
 import LoginPageForm from '../login-page-form/login-page-form';
+import PageHeaderLogo from '../page-header-logo/page-header-logo';
 
 function LoginPage(): JSX.Element {
-
   return (
     <div className="page page--gray page--login">
       <header className="header">

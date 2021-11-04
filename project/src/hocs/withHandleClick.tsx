@@ -1,7 +1,7 @@
 import React, { ComponentType, JSXElementConstructor, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { api } from '../index';
-import { APIRoute, AppRoute, IsFavoriteValue, NotificationMessage } from '../const';
+import { APIRoute, AppRoute, HttpStatusCode, IsFavoriteValue, NotificationMessage } from '../const';
 import { adaptOfferToFront } from '../utils/adapters';
 import browserHistory from '../services/browser-history';
 import { getFavoritesDataAction } from '../store/api-actions';
@@ -26,8 +26,13 @@ function withHandleClick(
             dispatch(getFavoritesDataAction());
           }
         })
-        .catch(({ request }) => {
-          request && notifyError(NotificationMessage.ConnectionError);
+        .catch(({ response }) => {
+          if (response?.status === HttpStatusCode.Unauthorised) {
+            notifyError(NotificationMessage.Unauthorized);
+            browserHistory.push(AppRoute.Login);
+          } else {
+            notifyError(NotificationMessage.ConnectionError);
+          }
         });
     };
 
