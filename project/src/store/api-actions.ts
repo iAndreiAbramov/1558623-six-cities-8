@@ -47,6 +47,7 @@ export const getOfferDataAction = (id: string): ThunkActionResult => (
         dispatch(setFetchStatus(FetchStatus.Success));
       })
       .catch(() => {
+        notifyError(NotificationMessage.ConnectionError);
         dispatch(setFetchStatus(FetchStatus.Error));
       });
   }
@@ -79,7 +80,7 @@ export const getFavoritesDataAction = (): ThunkActionResult => (
         dispatch(setFetchStatus(FetchStatus.Success));
       })
       .catch(() => {
-        dispatch(setFetchStatus(FetchStatus.Success));
+        dispatch(setFetchStatus(FetchStatus.Error));
         notifyError(NotificationMessage.ConnectionError);
       });
   }
