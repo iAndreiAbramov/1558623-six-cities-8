@@ -13,7 +13,7 @@ function LoginPageForm(): JSX.Element {
   };
   const handlePasswordInput = (evt: FormEvent<HTMLInputElement>): void => {
     evt.preventDefault();
-    setPassword(evt.currentTarget.value);
+    setPassword(evt.currentTarget.value.trimLeft());
   };
 
   return (
