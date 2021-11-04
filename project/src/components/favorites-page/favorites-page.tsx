@@ -7,6 +7,7 @@ import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
 import { FetchStatus } from '../../const';
 import PageHeader from '../page-header/page-header';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
+import { ToastContainer } from 'react-toastify';
 
 function FavoritesPage(): JSX.Element {
   const favoritesData = useSelector(getFavoritesData);
@@ -23,6 +24,7 @@ function FavoritesPage(): JSX.Element {
       {
         fetchStatus === FetchStatus.Success &&
         <>
+          <ToastContainer />
           <PageHeader />
           { pageContent }
           <FavoritesPageFooter />

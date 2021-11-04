@@ -50,7 +50,7 @@ function LoginPageForm(): JSX.Element {
         onClick={
           (evt) => {
             evt.preventDefault();
-            dispatch(requestLoginAction({ email, password }))
+            dispatch(requestLoginAction({ email, password }));
           }
         }
       >

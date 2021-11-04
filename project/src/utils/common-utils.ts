@@ -1,5 +1,6 @@
-import { MAX_RATING, NotificationMessage, PERCENTS_CAP } from '../const';
+import { MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
 import { toast } from 'react-toastify';
+import { OfferDataTypes } from '../types/offer-data-types';
 
 export const getRandomInteger = (min: number, max: number): number => {
   let startValue = Math.ceil(Math.min(min, max));
@@ -18,7 +19,7 @@ export const getMillisecondsFromDate = (date: string): number => (
   Date.parse(date.split(' ').reverse().join('-'))
 );
 
-export const notifySuccess = (message: string) => toast.success(message, {
+export const notifySuccess = (message: NotificationMessage) => toast.success(message, {
   position: 'top-right',
   autoClose: 5000,
   hideProgressBar: false,
@@ -37,3 +38,16 @@ export const notifyError = (message: NotificationMessage) => toast.error(message
   draggable: true,
   progress: undefined,
 });
+
+export const getSortedData = (data: OfferDataTypes[], option: SortOptions): OfferDataTypes[] => {
+  switch (option) {
+    case SortOptions.PriceUp:
+      return [...data].sort((a, b) => a.price - b.price);
+    case SortOptions.PriceDown:
+      return [...data].sort((a, b) => b.price - a.price);
+    case SortOptions.RatingDown:
+      return [...data].sort((a, b) => b.rating - a.rating);
+    default:
+      return [...data];
+  }
+};

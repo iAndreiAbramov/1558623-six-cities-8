@@ -1,5 +1,5 @@
 import React from 'react';
-import { withHandleClick } from '../../hocs/withHandleClick';
+import withHandleClick  from '../../hocs/withHandleClick';
 
 type OfferPageBookmarkTypes = {
   isFavorite: boolean,

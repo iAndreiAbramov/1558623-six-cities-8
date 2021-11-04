@@ -34,8 +34,6 @@ export const createApi = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
         notifyError(NotificationMessage.Unauthorized);
         browserHistory.push(AppRoute.Login);
         return onUnauthorized();
-      } else {
-        notifyError(NotificationMessage.ConnectionError);
       }
 
       return Promise.reject(error);
