@@ -1,5 +1,5 @@
-import { MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
 import { ReactText } from 'react';
+import { MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
 import { toast } from 'react-toastify';
 import { OfferDataTypes } from '../types/offer-data-types';
 
@@ -17,7 +17,7 @@ export const getRandomArrayItem = <T>(array: T[]): T => array[getRandomInteger(0
 export const getVisualRating = (rating: number): string => `${ Math.round(rating) * PERCENTS_CAP / MAX_RATING }%`;
 
 export const getMillisecondsFromDate = (date: string): number => (
-  Date.parse(date.split(' ').reverse().join('-'))
+  Date.parse(date)
 );
 
 export const notifySuccess = (message: NotificationMessage): ReactText => toast.success(message, {
