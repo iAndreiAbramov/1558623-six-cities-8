@@ -138,7 +138,7 @@ export const offerFourth = {
   type: 'Flat',
 };
 
-export const offersMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;
+export const offersFrontMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;
 
 export const offersPopularMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;
 
@@ -151,4 +151,74 @@ export const offersByPriceUpMock = [offerSecond, offerThird, offerFourth, offerF
 export const offersByCitiesMock = {
   'Paris': [offerFirst, offerFourth],
   'Cologne': [offerSecond, offerThird],
+};
+
+export const offerBackFirst = {
+  bedrooms: 1,
+  city: {
+    location: {
+      latitude: 52,
+      longitude: 4,
+      zoom: 13,
+    },
+    name: 'Paris',
+  },
+  description: 'string',
+  goods: ['1', '2', '3'],
+  host: {
+    ['avatar_url']: 'someUrl',
+    id: '1',
+    ['is_pro']: true,
+    name: 'Vasya',
+  },
+  id: '1',
+  images: ['1', '2', '3'],
+  ['is_favorite']: false,
+  ['is_premium']: true,
+  location: {
+    latitude: 43,
+    longitude: 3,
+    zoom: 10,
+  },
+  ['max_adults']: 2,
+  ['preview_image']: 'someImg',
+  price: 400,
+  rating: 2.0,
+  title: 'Nice place',
+  type: 'Flat',
+};
+
+export const offerBackSecond = {
+  bedrooms: 1,
+  city: {
+    location: {
+      latitude: 52,
+      longitude: 4,
+      zoom: 13,
+    },
+    name: 'Cologne',
+  },
+  description: 'string',
+  goods: ['1', '2', '3'],
+  host: {
+    ['avatar_url']: 'someUrl',
+    id: '2',
+    ['is_pro']: true,
+    name: 'Vasya',
+  },
+  id: '1',
+  images: ['1', '2', '3'],
+  ['is_favorite']: false,
+  ['is_premium']: true,
+  location: {
+    latitude: 43,
+    longitude: 3,
+    zoom: 10,
+  },
+  ['max_adults']: 2,
+  ['preview_image']: 'someImg',
+  price: 100,
+  rating: 3.0,
+  title: 'Nice place',
+  type: 'Flat',
 };

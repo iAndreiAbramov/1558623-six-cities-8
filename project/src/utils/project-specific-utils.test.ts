@@ -5,7 +5,7 @@ import {
   offersByPriceDownMock,
   offersByPriceUpMock,
   offersByRatingDownMock,
-  offersMock,
+  offersFrontMock,
   offersPopularMock
 } from '../mocks/mock-offers';
 import { SortOptions } from '../const';
@@ -22,13 +22,13 @@ describe('Function getVisualRating', () => {
 
 describe('Function getSortedOffers', () => {
   it('should return an array as OfferDataTypes[], sorted in accordance to sort option as SortOptions', () => {
-    expect(getSortedOffers(offersMock.slice(), SortOptions.Popular))
+    expect(getSortedOffers(offersFrontMock.slice(), SortOptions.Popular))
       .toEqual(offersPopularMock);
-    expect(getSortedOffers(offersMock.slice(), SortOptions.PriceDown))
+    expect(getSortedOffers(offersFrontMock.slice(), SortOptions.PriceDown))
       .toEqual(offersByPriceDownMock);
-    expect(getSortedOffers(offersMock.slice(), SortOptions.PriceUp))
+    expect(getSortedOffers(offersFrontMock.slice(), SortOptions.PriceUp))
       .toEqual(offersByPriceUpMock);
-    expect(getSortedOffers(offersMock.slice(), SortOptions.RatingDown))
+    expect(getSortedOffers(offersFrontMock.slice(), SortOptions.RatingDown))
       .toEqual(offersByRatingDownMock);
   });
 });
@@ -42,7 +42,7 @@ describe('Function sortCommentsByDate', () => {
 
 describe('Function getOffersByCities', () => {
   it('should return an object as OffersByCitiesTypes', () => {
-    expect(getOffersByCities(offersMock.slice()))
+    expect(getOffersByCities(offersFrontMock.slice()))
       .toEqual(offersByCitiesMock);
   });
 });
