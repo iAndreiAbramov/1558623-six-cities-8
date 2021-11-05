@@ -1,8 +1,9 @@
 import React from 'react';
 import { CommentsFrontTypes } from '../../types/comments-types';
-import { getMillisecondsFromDate, sortCommentsByDate } from '../../utils/common-utils';
+import { getMillisecondsFromDate} from '../../utils/common-utils';
 import { MAX_COMMENTS_TO_SHOW } from '../../const';
 import OfferPageComment from '../offer-page-comment/offer-page-comment';
+import { sortCommentsByDate } from '../../utils/project-specific-utils';
 
 export type OfferPageCommentsListTypes = {
   commentsData: CommentsFrontTypes[],

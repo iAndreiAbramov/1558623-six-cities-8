@@ -5,8 +5,8 @@ import { APIRoute, AppRoute, HttpStatusCode, IsFavoriteValue, NotificationMessag
 import { adaptOfferToFront } from '../utils/adapters';
 import browserHistory from '../services/browser-history';
 import { getFavoritesDataAction } from '../store/api-actions';
-import { notifyError } from '../utils/common-utils';
 import { OfferCardBookmarkTypes } from '../components/offer-card-bookmark/offer-card-bookmark';
+import { notifyError } from '../utils/project-specific-utils';
 
 function withHandleClick(
   Component: JSXElementConstructor<OfferCardBookmarkTypes>,

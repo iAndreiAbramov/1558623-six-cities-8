@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppRoute } from '../../const';
-import { getVisualRating } from '../../utils/common-utils';
 import { getOfferDataAction } from '../../store/api-actions';
 import OfferCardBookmark from '../offer-card-bookmark/offer-card-bookmark';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import { getVisualRating } from '../../utils/project-specific-utils';
 
 type OfferCardTypes = {
   data: OfferDataTypes,

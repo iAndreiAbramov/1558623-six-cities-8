@@ -14,9 +14,9 @@ import {
   setFetchStatus,
   setNearOffersData
 } from './actions';
-import { notifyError, notifyInfo } from '../utils/common-utils';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
+import { notifyError, notifyInfo } from '../utils/project-specific-utils';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {

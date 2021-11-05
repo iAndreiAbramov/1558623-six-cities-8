@@ -14,8 +14,8 @@ import {
   RatingPosition
 } from '../../const';
 import { CommentPostTypes } from '../../types/comments-types';
-import { notifyError, notifySuccess } from '../../utils/common-utils';
 import { setCurrentHotelComments } from '../../store/actions';
+import { notifyError, notifySuccess } from '../../utils/project-specific-utils';
 
 function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
