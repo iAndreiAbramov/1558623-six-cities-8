@@ -1,9 +1,11 @@
+import { defaultComments, sortedComments } from '../mocks/mock-comments';
 import {
   getMillisecondsFromDate,
   getRandomArrayItem,
   getRandomInteger,
   getSortedData,
-  getVisualRating
+  getVisualRating,
+  sortCommentsByDate
 } from './common-utils';
 import {
   offersByPriceDownMock,
@@ -11,7 +13,7 @@ import {
   offersByRatingDownMock,
   offersMock,
   offersPopularMock
-} from '../mocks/offers';
+} from '../mocks/mock-offers';
 import { SortOptions } from '../const';
 
 describe('Function: getRandomInteger', () => {
@@ -57,5 +59,12 @@ describe('Function getSortedData', () => {
       .toEqual(offersByPriceUpMock);
     expect(getSortedData(offersMock.slice(), SortOptions.RatingDown))
       .toEqual(offersByRatingDownMock);
+  });
+});
+
+describe('Function sortCommentsByDate', () => {
+  it('should sort array of comments as CommentsFrontTypes[] by date in order from old to new', () => {
+    expect(sortCommentsByDate(defaultComments))
+      .toEqual(sortedComments);
   });
 });

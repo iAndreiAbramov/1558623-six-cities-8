@@ -1,4 +1,4 @@
-export const offer = {
+const offer = {
   bedrooms: 1,
   city: {
     location: {
