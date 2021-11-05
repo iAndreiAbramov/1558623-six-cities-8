@@ -1,4 +1,4 @@
-const offer = {
+export const offerFirst = {
   bedrooms: 1,
   city: {
     location: {
@@ -27,26 +27,116 @@ const offer = {
   },
   maxAdults: 2,
   previewImage: 'someImg',
-  price: 200,
-  rating: 3,
+  price: 400,
+  rating: 2.0,
   title: 'Nice place',
   type: 'Flat',
 };
 
-const offerFirst = Object.assign({}, offer);
-const offerSecond = Object.assign({}, offer);
-const offerThird = Object.assign({}, offer);
-const offerFourth = Object.assign({}, offer);
+export const offerSecond = {
+  bedrooms: 1,
+  city: {
+    location: {
+      latitude: 52,
+      longitude: 4,
+      zoom: 13,
+    },
+    name: 'Cologne',
+  },
+  description: 'string',
+  goods: ['1', '2', '3'],
+  host: {
+    avatarUrl: 'someUrl',
+    id: '2',
+    isPro: true,
+    name: 'Vasya',
+  },
+  id: '1',
+  images: ['1', '2', '3'],
+  isFavorite: false,
+  isPremium: true,
+  location: {
+    latitude: 43,
+    longitude: 3,
+    zoom: 10,
+  },
+  maxAdults: 2,
+  previewImage: 'someImg',
+  price: 100,
+  rating: 3.0,
+  title: 'Nice place',
+  type: 'Flat',
+};
 
-offerFirst.rating = 2.0;
-offerSecond.rating = 3.0;
-offerThird.rating = 4.0;
-offerFourth.rating = 5.0;
+export const offerThird = {
+  bedrooms: 1,
+  city: {
+    location: {
+      latitude: 52,
+      longitude: 4,
+      zoom: 13,
+    },
+    name: 'Cologne',
+  },
+  description: 'string',
+  goods: ['1', '2', '3'],
+  host: {
+    avatarUrl: 'someUrl',
+    id: '1',
+    isPro: true,
+    name: 'Vasya',
+  },
+  id: '3',
+  images: ['1', '2', '3'],
+  isFavorite: false,
+  isPremium: true,
+  location: {
+    latitude: 43,
+    longitude: 3,
+    zoom: 10,
+  },
+  maxAdults: 2,
+  previewImage: 'someImg',
+  price: 200,
+  rating: 4.0,
+  title: 'Nice place',
+  type: 'Flat',
+};
 
-offerFirst.price = 400;
-offerSecond.price = 100;
-offerThird.price = 200;
-offerFourth.price = 300;
+export const offerFourth = {
+  bedrooms: 1,
+  city: {
+    location: {
+      latitude: 52,
+      longitude: 4,
+      zoom: 13,
+    },
+    name: 'Paris',
+  },
+  description: 'string',
+  goods: ['1', '2', '3'],
+  host: {
+    avatarUrl: 'someUrl',
+    id: '4',
+    isPro: true,
+    name: 'Vasya',
+  },
+  id: '1',
+  images: ['1', '2', '3'],
+  isFavorite: false,
+  isPremium: true,
+  location: {
+    latitude: 43,
+    longitude: 3,
+    zoom: 10,
+  },
+  maxAdults: 2,
+  previewImage: 'someImg',
+  price: 300,
+  rating: 5.0,
+  title: 'Nice place',
+  type: 'Flat',
+};
 
 export const offersMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;
 
@@ -57,3 +147,8 @@ export const offersByRatingDownMock = [offerFourth, offerThird, offerSecond, off
 export const offersByPriceDownMock = [offerFirst, offerFourth, offerThird, offerSecond] as const;
 
 export const offersByPriceUpMock = [offerSecond, offerThird, offerFourth, offerFirst] as const;
+
+export const offersByCitiesMock = {
+  'Paris': [offerFirst, offerFourth],
+  'Cologne': [offerSecond, offerThird],
+};

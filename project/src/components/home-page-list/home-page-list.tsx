@@ -8,7 +8,7 @@ import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggle
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferCard from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
-import { getSortedData } from '../../utils/project-specific-utils';
+import { getSortedOffers } from '../../utils/project-specific-utils';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
@@ -25,7 +25,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const [sortedData, setSortedData] = useState([...offersData]);
 
   useEffect(() => {
-    setSortedData(getSortedData([...offersData], sortOption));
+    setSortedData(getSortedOffers([...offersData], sortOption));
   }, [offersData, sortOption]);
 
   const offerCards = sortedData.map((cardItem) => {

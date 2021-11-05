@@ -6,23 +6,9 @@ import { OffersByCitiesTypes } from '../types/offer-sprecific-utils-types';
 import { ReactText } from 'react';
 import { toast } from 'react-toastify';
 
-export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes => {
-  const offersByCities: OffersByCitiesTypes = {};
-  data.forEach((item) => {
-    const city: string = item.city.name;
-    if (city in offersByCities) {
-      offersByCities[city].push(item);
-    } else {
-      offersByCities[city] = [item];
-    }
-  });
-
-  return offersByCities;
-};
-
 export const getVisualRating = (rating: number): string => `${ Math.round(rating) * PERCENTS_CAP / MAX_RATING }%`;
 
-export const getSortedData = (data: OfferDataTypes[], option: SortOptions): OfferDataTypes[] => {
+export const getSortedOffers = (data: OfferDataTypes[], option: SortOptions): OfferDataTypes[] => {
   switch (option) {
     case SortOptions.PriceUp:
       return [...data].sort((a, b) => a.price - b.price);
@@ -43,6 +29,20 @@ export const sortCommentsByDate = <T extends CommentsFrontTypes>(comments: T[]):
     ))
     .slice(-MAX_COMMENTS_TO_SHOW)
 );
+
+export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes => {
+  const offersByCities: OffersByCitiesTypes = {};
+  data.forEach((item) => {
+    const city: string = item.city.name;
+    if (city in offersByCities) {
+      offersByCities[city].push(item);
+    } else {
+      offersByCities[city] = [item];
+    }
+  });
+
+  return offersByCities;
+};
 
 export const notifySuccess = (message: NotificationMessage): ReactText => toast.success(message, {
   position: 'top-right',

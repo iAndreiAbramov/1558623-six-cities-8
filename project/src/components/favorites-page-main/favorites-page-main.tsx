@@ -10,6 +10,7 @@ type FavoritesMainTypes = {
 function FavoritesPageMain(props: FavoritesMainTypes): JSX.Element {
   const { favoritesData } = props;
   const offersByCities = getOffersByCities(favoritesData);
+  console.log(offersByCities);
   const citiesList = Object.entries(offersByCities)
     .sort((a, b) =>  b[0] > a[0] ? -1 : 1)
     .map((cityData) => {
