@@ -8,10 +8,12 @@ import LoginPage from '../login-page/login-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
+import { ToastContainer } from 'react-toastify';
 
 function App(): JSX.Element {
   return (
     <Router history={ browserHistory }>
+      <ToastContainer />
       <Switch>
         <Route path={ AppRoute.Home } exact>
           <HomePage />

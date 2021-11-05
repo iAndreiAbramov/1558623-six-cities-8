@@ -1,30 +1,18 @@
-import React, { useState } from 'react';
-import { APIRoute, AppRoute, IsFavoriteValue } from '../../const';
-import { api } from '../../index';
-import { adaptOfferToFront } from '../../utils/adapters';
-import browserHistory from '../../services/browser-history';
+import React from 'react';
+import withHandleClick from '../../hocs/with-handle-click';
 
 type OfferPageBookmarkTypes = {
   isFavorite: boolean,
   offerId: string,
+  handleBookmarkClick: ((offerId: string) => Promise<void>) | (() => null);
 }
 
-function OfferPageBookmark(props: OfferPageBookmarkTypes):JSX.Element {
-  const { isFavorite, offerId } = props;
-  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
+function OfferPageBookmark(props: OfferPageBookmarkTypes): JSX.Element {
+  const { isFavorite, offerId, handleBookmarkClick } = props;
 
-  const bookmarkButtonClass = isFavoriteStatus
+  const bookmarkButtonClass = isFavorite
     ? 'property__bookmark-button property__bookmark-button--active button'
     : 'property__bookmark-button button';
-
-  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
-    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
-    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
-      .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-      })
-      .catch(() => browserHistory.push(AppRoute.Login));
-  };
 
   return (
     <button
@@ -40,4 +28,4 @@ function OfferPageBookmark(props: OfferPageBookmarkTypes):JSX.Element {
   );
 }
 
-export default OfferPageBookmark;
+export default withHandleClick(OfferPageBookmark);

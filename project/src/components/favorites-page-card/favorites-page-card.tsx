@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { adaptOfferToFront } from '../../utils/adapters';
-import { api } from '../../index';
-import { APIRoute, AppRoute, IsFavoriteValue, MAX_RATING, PERCENTS_CAP } from '../../const';
-import { getFavoritesDataAction, getOfferDataAction } from '../../store/api-actions';
+import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
+import { getOfferDataAction } from '../../store/api-actions';
+import OfferCardBookmark from '../offer-card-bookmark/offer-card-bookmark';
 import { OfferDataTypes } from '../../types/offer-data-types';
 
 type FavoritesCardTypes = {
@@ -16,21 +15,6 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
   const { data: offerData } = props;
   const { price, rating, id, type, title, previewImage, isFavorite, isPremium } = offerData;
   const visualRating = `${ rating * PERCENTS_CAP / MAX_RATING }%`;
-
-  const [isFavoriteStatus, setIsFavoriteStatus] = useState(isFavorite);
-
-  const bookmarkButtonClass = isFavoriteStatus
-    ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-    : 'place-card__bookmark-button button';
-
-  const handleBookmarkClick = async (hotelId: string): Promise<void> => {
-    const isFavoriteValue = isFavoriteStatus ? IsFavoriteValue.NotFavorite : IsFavoriteValue.Favorite;
-    await api.post(`${ APIRoute.Favorite }/${ hotelId }/${ isFavoriteValue }`)
-      .then(({ data }) => {
-        setIsFavoriteStatus(adaptOfferToFront(data).isFavorite);
-        dispatch(getFavoritesDataAction());
-      });
-  };
 
   return (
     <article className="favorites__card place-card">
@@ -56,16 +40,11 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
             <b className="place-card__price-value">&euro;{ price }</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={ bookmarkButtonClass }
-            type="button"
-            onClick={ () => handleBookmarkClick(id) }
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <OfferCardBookmark
+            isFavorite={ isFavorite }
+            offerId={ id }
+            handleBookmarkClick={ () => null }
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

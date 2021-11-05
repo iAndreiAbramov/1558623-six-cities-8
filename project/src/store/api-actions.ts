@@ -1,4 +1,4 @@
-import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
+import { APIRoute, AuthorizationStatus, Cities, DEFAULT_USER_DATA, FetchStatus, NotificationMessage } from '../const';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront, adaptUserDataToFront } from '../utils/adapters';
 import { BackDataTypes } from '../types/back-data-types';
 import browserHistory from '../services/browser-history';
@@ -14,6 +14,7 @@ import {
   setFetchStatus,
   setNearOffersData
 } from './actions';
+import { notifyError, notifyInfo } from '../utils/common-utils';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
 
@@ -46,6 +47,7 @@ export const getOfferDataAction = (id: string): ThunkActionResult => (
         dispatch(setFetchStatus(FetchStatus.Success));
       })
       .catch(() => {
+        notifyError(NotificationMessage.ConnectionError);
         dispatch(setFetchStatus(FetchStatus.Error));
       });
   }
@@ -79,6 +81,7 @@ export const getFavoritesDataAction = (): ThunkActionResult => (
       })
       .catch(() => {
         dispatch(setFetchStatus(FetchStatus.Error));
+        notifyError(NotificationMessage.ConnectionError);
       });
   }
 );
@@ -86,10 +89,11 @@ export const getFavoritesDataAction = (): ThunkActionResult => (
 export const checkAuthAction = (): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     await api.get(APIRoute.Login)
-      .then(({ status }) => {
-        status
-        && status !== HttpStatusCode.Unauthorised
-        && dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      .then(() => {
+        dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      })
+      .catch(() => {
+        notifyInfo(NotificationMessage.SignIn);
       });
   });
 
@@ -102,7 +106,8 @@ export const requestLoginAction = (loginInfo: UserLoginTypes): ThunkActionResult
         setEmail(data.email);
         dispatch(setCurrentUser(adaptUserDataToFront(data)));
         browserHistory.push('/');
-      });
+      })
+      .catch(() => notifyError(NotificationMessage.AuthError));
   }
 );
 

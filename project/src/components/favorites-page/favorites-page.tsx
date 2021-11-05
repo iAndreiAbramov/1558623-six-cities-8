@@ -7,6 +7,7 @@ import FavoritesPageMain from '../favorites-page-main/favorites-page-main';
 import { FetchStatus } from '../../const';
 import PageHeader from '../page-header/page-header';
 import SpinnerOffer from '../spinner-offer/spinner-offer';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function FavoritesPage(): JSX.Element {
   const favoritesData = useSelector(getFavoritesData);
@@ -27,6 +28,9 @@ function FavoritesPage(): JSX.Element {
           { pageContent }
           <FavoritesPageFooter />
         </>
+      }
+      {
+        fetchStatus === FetchStatus.Error && <NotFoundPage />
       }
     </div>
   );

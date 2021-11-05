@@ -51,6 +51,7 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
           <OfferCardBookmark
             isFavorite={ isFavorite }
             offerId={ id }
+            handleBookmarkClick={ () => null }
           />
         </div>
         <div className="place-card__rating rating">

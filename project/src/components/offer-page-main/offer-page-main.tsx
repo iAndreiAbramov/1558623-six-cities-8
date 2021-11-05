@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { MAX_IMAGES_NUMBER } from '../../const';
 import { getCurrentHotel, getNearOffersData } from '../../store/selectors';
-import { getCommentsDataAction, getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
+import { getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
 import { getVisualRating } from '../../utils/common-utils';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
@@ -36,7 +36,6 @@ function OfferPageMain(): JSX.Element {
   useEffect(() => {
     !offerId && dispatch(getOfferDataAction(id));
     dispatch(getNearOffersAction(id));
-    dispatch(getCommentsDataAction(id));
   }, [dispatch, id, offerId]);
 
   return (
@@ -58,6 +57,7 @@ function OfferPageMain(): JSX.Element {
               <OfferPageBookmark
                 isFavorite={ isFavorite }
                 offerId={ offerId }
+                handleBookmarkClick={ () => null }
               />
             </div>
             <div className="property__rating rating">
@@ -87,7 +87,7 @@ function OfferPageMain(): JSX.Element {
               host={ host }
             />
             <OfferPageReviews
-              id={ offerId }
+              id={ id }
             />
           </div>
         </div>
@@ -97,9 +97,13 @@ function OfferPageMain(): JSX.Element {
           currentPoint={ currentPoint }
         />
       </section>
-      <OfferPageNearList
-        nearOffersData={ nearOffersData }
-      />
+      {
+        nearOffersData.length > 0
+        &&
+        <OfferPageNearList
+          nearOffersData={ nearOffersData }
+        />
+      }
     </main>
   );
 }

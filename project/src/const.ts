@@ -6,7 +6,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Login = '/login',
   OfferId = '/offer/:id',
-  Offer = '/offer'
+  Offer = '/offer',
 }
 
 export enum AuthorizationStatus {
@@ -25,9 +25,13 @@ export enum FetchStatus {
   Error = 'ERROR',
 }
 
-export enum PostNotificationMessage {
-  Success = 'Your comment successfully posted!',
-  Error = 'Sorry, your comment wasn\'t posted!',
+export enum NotificationMessage {
+  PostSuccess = 'Your comment successfully posted!',
+  PostError = 'Sorry, your comment wasn\'t posted!',
+  AuthError = 'Authorization failed. Please enter correct email and password.',
+  ConnectionError = 'Sorry, action can\'t be performed. Please check your network connection.',
+  Unauthorized = 'Please sign in to perform this action.',
+  SignIn = 'Sign in to get more functions',
 }
 
 export enum IsFavoriteValue {
@@ -148,17 +152,19 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENTS_TO_SHOW = 10;
 export const MAX_IMAGES_NUMBER = 6;
 
-export const URL_MARKER_DEFAULT = './img/pin.svg';
-export const URL_MARKER_ACTIVE = './img/pin-active.svg';
+export enum MapMarker {
+  Default = './img/pin.svg',
+  Active = './img/pin-active.svg',
+}
 
-export const DefaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+export const DEFAULT_CUSTOM_ICON = new Icon({
+  iconUrl: MapMarker.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-export const ActiveCustomIcon = new Icon({
-  iconUrl: URL_MARKER_ACTIVE,
+export const ACTIVE_CUSTOM_ICON = new Icon({
+  iconUrl: MapMarker.Active,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
@@ -173,12 +179,12 @@ export const CardImgWrapperClasses = {
   NEARBY_LIST: 'near-places__image-wrapper',
 };
 
-export const SortOptions = {
-  POPULAR: 'Popular',
-  PRICE_UP: 'Price: low to high',
-  PRICE_DOWN: 'Price: high to low',
-  RATING_DOWN: 'Top rated first',
-};
+export enum SortOptions {
+  Popular = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  RatingDown = 'Top rated first',
+}
 
 export enum APIRoute {
   Hotels = '/hotels',
