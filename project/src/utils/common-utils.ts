@@ -1,7 +1,8 @@
 import { ReactText } from 'react';
-import { MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
+import { MAX_COMMENTS_TO_SHOW, MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
 import { toast } from 'react-toastify';
 import { OfferDataTypes } from '../types/offer-data-types';
+import { CommentsFrontTypes } from '../types/comments-types';
 
 export const getRandomInteger = (min: number, max: number): number => {
   let startValue = Math.ceil(Math.min(min, max));
@@ -62,3 +63,12 @@ export const getSortedData = (data: OfferDataTypes[], option: SortOptions): Offe
       return [...data];
   }
 };
+
+export const sortCommentsByDate = <T extends CommentsFrontTypes>(comments: T[]): T[] => (
+  comments
+    .slice()
+    .sort((a, b) => (
+      getMillisecondsFromDate(a.date) - getMillisecondsFromDate(b.date)
+    ))
+    .slice(-MAX_COMMENTS_TO_SHOW)
+);
