@@ -135,6 +135,7 @@ export const Cities: CitiesTypes = {
 };
 
 export const DEFAULT_CITY_NAME = 'Paris';
+export const TEST_CITY_NAME = 'Cologne';
 
 export const PERCENTS_CAP = 100;
 export const MAX_RATING = 5;
