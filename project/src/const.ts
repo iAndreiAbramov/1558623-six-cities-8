@@ -23,6 +23,7 @@ export enum FetchStatus {
   InProgress = 'IN_PROGRESS',
   Success = 'SUCCESS',
   Error = 'ERROR',
+  Default = 'SUCCESS',
 }
 
 export enum NotificationMessage {

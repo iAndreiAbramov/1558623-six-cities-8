@@ -7,7 +7,7 @@ export type AppStatusTypes = {
 }
 
 const initialState: AppStatusTypes = {
-  fetchStatus: FetchStatus.InProgress,
+  fetchStatus: FetchStatus.Default,
 };
 
 export const appStatusReducer = createReducer(initialState, (builder) => {
