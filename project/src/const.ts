@@ -16,6 +16,7 @@ export enum AuthorizationStatus {
 }
 
 export enum HttpStatusCode {
+  Ok = 200,
   Unauthorised = 401,
 }
 

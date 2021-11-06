@@ -2,7 +2,7 @@ import { CommentsFrontTypes } from '../types/comments-types';
 import { getMillisecondsFromDate } from './common-utils';
 import { MAX_COMMENTS_TO_SHOW, MAX_RATING, NotificationMessage, PERCENTS_CAP, SortOptions } from '../const';
 import { OfferDataTypes } from '../types/offer-data-types';
-import { OffersByCitiesTypes } from '../types/offer-sprecific-utils-types';
+import { OffersByCitiesTypes } from '../types/project-sprecific-utils-types';
 import { ReactText } from 'react';
 import { toast } from 'react-toastify';
 

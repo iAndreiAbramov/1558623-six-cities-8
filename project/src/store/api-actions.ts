@@ -93,6 +93,7 @@ export const checkAuthAction = (): ThunkActionResult => (
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
       })
       .catch(() => {
+        dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
         notifyInfo(NotificationMessage.SignIn);
       });
   });
