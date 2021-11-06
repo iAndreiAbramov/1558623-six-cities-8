@@ -3,7 +3,7 @@ import { OfferDataTypes } from '../../types/offer-data-types';
 import { setFavoritesData } from '../actions';
 
 export type FavoritesStateTypes = {
-  favoritesData: OfferDataTypes[];
+  favoritesData: OfferDataTypes[] | [];
 }
 
 const initialState: FavoritesStateTypes = {
