@@ -1,18 +1,18 @@
 export const userFront = {
-  avatarUrl: 'someUrl',
-  email: 'someEmail',
-  id: '1',
+  avatarUrl: 'fakeUrl',
+  email: 'fakeEmail',
+  id: 'fakeId',
   isPro: true,
-  name: 'Maria',
+  name: 'fakeName',
 };
 
 export const userBack = {
-  ['avatar_url']: 'someUrl',
-  email: 'someEmail',
-  id: '1',
+  ['avatar_url']: 'fakeUrl',
+  email: 'fakeEmail',
+  id: 'fakeId',
   ['is_pro']: true,
-  name: 'Maria',
-  token: 'xcs',
+  name: 'fakeName',
+  token: 'secret',
 };
 
 

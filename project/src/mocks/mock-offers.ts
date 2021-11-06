@@ -222,3 +222,5 @@ export const offerBackSecond = {
   title: 'Nice place',
   type: 'Flat',
 };
+
+export const offersBackMock = [offerBackFirst, offerBackSecond];
