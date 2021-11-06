@@ -15,8 +15,8 @@ const initialState: UserTypes = {
 
 export const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(requireAuthorization, (state) => {
-      state.authorization = AuthorizationStatus.Auth;
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorization = action.payload;
     })
     .addCase(setCurrentUser, (state, action) => {
       state.currentUserData = action.payload;

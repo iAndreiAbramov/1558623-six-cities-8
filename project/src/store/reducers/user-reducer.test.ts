@@ -12,6 +12,7 @@ describe('Reducer: userReducer', () => {
       },
       {
         type: ActionType.RequireAuthorization,
+        payload: AuthorizationStatus.Auth,
       },
     ))
       .toEqual(
