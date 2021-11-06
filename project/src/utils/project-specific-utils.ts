@@ -5,6 +5,7 @@ import { OfferDataTypes } from '../types/offer-data-types';
 import { OffersByCitiesTypes } from '../types/project-sprecific-utils-types';
 import { ReactText } from 'react';
 import { toast } from 'react-toastify';
+import { PointTypes } from '../types/state-types';
 
 export const getVisualRating = (rating: number): string => `${ Math.round(rating) * PERCENTS_CAP / MAX_RATING }%`;
 
@@ -43,6 +44,15 @@ export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes =
 
   return offersByCities;
 };
+
+//todo Добавить тест для этой функции
+export const getPointsFromOffers = (offersData: OfferDataTypes[]): PointTypes[] => (
+  offersData.map((item) => {
+    const { id } = item;
+    const { latitude, longitude } = item.location;
+    return { latitude, longitude, id };
+  })
+);
 
 export const notifySuccess = (message: NotificationMessage): ReactText => toast.success(message, {
   position: 'top-right',

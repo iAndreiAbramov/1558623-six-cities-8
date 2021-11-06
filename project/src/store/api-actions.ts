@@ -16,7 +16,7 @@ import {
 } from './actions';
 import { ThunkActionResult } from '../types/action-types';
 import { UserLoginTypes } from '../types/user-data-types';
-import { notifyError, notifyInfo } from '../utils/project-specific-utils';
+import { getPointsFromOffers, notifyError, notifyInfo } from '../utils/project-specific-utils';
 
 export const initActiveCityAction = (newCityName: string): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -26,11 +26,7 @@ export const initActiveCityAction = (newCityName: string): ThunkActionResult => 
         const offersData = adaptOffersToFront(data)
           .filter((offer) => offer.city.name === newCityName);
         const cityData = Cities[newCityName];
-        const pointsForMap = offersData.map((item) => {
-          const { id } = item;
-          const { latitude, longitude } = item.location;
-          return { latitude, longitude, id };
-        });
+        const pointsForMap = getPointsFromOffers(offersData);
         dispatch(initCityAction(cityData, offersData, pointsForMap));
       })
       .then(() => dispatch(setFetchStatus(FetchStatus.Success)))
