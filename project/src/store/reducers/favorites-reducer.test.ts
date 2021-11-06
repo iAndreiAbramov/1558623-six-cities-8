@@ -3,7 +3,7 @@ import { favoritesReducer } from './favorites-reducer';
 import { offersFrontMock } from '../../mocks/mock-offers';
 
 describe('Reducer: favoritesReducer', () => {
-  it('should return passed state', () => {
+  it('should set passed state', () => {
     expect(favoritesReducer(
       { favoritesData: [] },
       {
@@ -14,7 +14,7 @@ describe('Reducer: favoritesReducer', () => {
       .toEqual({ favoritesData: offersFrontMock });
   });
 
-  it('should return current state if unknown action passed', () => {
+  it('should not change state if unknown action passed', () => {
     expect(favoritesReducer(
       { favoritesData: offersFrontMock.slice() },
       {

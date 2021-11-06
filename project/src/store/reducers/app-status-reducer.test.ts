@@ -3,7 +3,7 @@ import { appStatusReducer } from './app-status-reducer';
 import { FetchStatus } from '../../const';
 
 describe('Reducer appStatusReducer', () => {
-  it('should return initial state if action passes the same state', () => {
+  it('should not change state if action passes the same state', () => {
     expect(appStatusReducer(
       { fetchStatus: FetchStatus.Default },
       {
@@ -14,7 +14,7 @@ describe('Reducer appStatusReducer', () => {
       .toEqual({ fetchStatus: FetchStatus.Default });
   });
 
-  it('should return initial state if action passes unknown state', () => {
+  it('should not change fetch status', () => {
     expect(appStatusReducer(
       { fetchStatus: FetchStatus.Default },
       {
@@ -24,7 +24,7 @@ describe('Reducer appStatusReducer', () => {
       .toEqual({ fetchStatus: FetchStatus.Default });
   });
 
-  it('should return error', () => {
+  it('should set fetch status to Error', () => {
     expect(appStatusReducer(
       { fetchStatus: FetchStatus.Default },
       {

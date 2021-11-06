@@ -12,7 +12,7 @@ describe('Reducer: userReducer', () => {
       },
       {
         type: ActionType.RequireAuthorization,
-      }
+      },
     ))
       .toEqual(
         {
@@ -30,7 +30,7 @@ describe('Reducer: userReducer', () => {
       },
       {
         type: ActionType.Unknown,
-      }
+      },
     ))
       .toEqual(
         {
@@ -48,7 +48,7 @@ describe('Reducer: userReducer', () => {
       },
       {
         type: ActionType.RequireLogout,
-      }
+      },
     ))
       .toEqual(
         {
@@ -66,7 +66,7 @@ describe('Reducer: userReducer', () => {
       },
       {
         type: ActionType.Unknown,
-      }
+      },
     ))
       .toEqual(
         {
@@ -85,14 +85,14 @@ describe('Reducer: userReducer', () => {
       {
         type: ActionType.SetCurrentUser,
         payload: userFront,
-      }
+      },
     ))
       .toEqual(
         {
           authorization: AuthorizationStatus.Auth,
           currentUserData: userFront,
-        }
-      )
+        },
+      );
   });
 
   it('should not set current user data', () => {
@@ -104,13 +104,13 @@ describe('Reducer: userReducer', () => {
       {
         type: ActionType.Unknown,
         payload: userFront,
-      }
+      },
     ))
       .toEqual(
         {
           authorization: AuthorizationStatus.Auth,
           currentUserData: DEFAULT_USER_DATA,
-        }
-      )
+        },
+      );
   });
 });

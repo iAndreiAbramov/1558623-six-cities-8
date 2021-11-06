@@ -4,35 +4,39 @@ import { homeReducer } from './home-reducer';
 import { offersFrontMock } from '../../mocks/mock-offers';
 import { pointsMock } from '../../mocks/mock-points';
 
+const initialState = {
+  activeCity: {
+    name: Cities[DEFAULT_CITY_NAME].name,
+    location: {
+      latitude: Cities[DEFAULT_CITY_NAME].location.latitude,
+      longitude: Cities[DEFAULT_CITY_NAME].location.longitude,
+      zoom: Cities[DEFAULT_CITY_NAME].location.zoom,
+    },
+  },
+  offersData: [],
+  pointsForMap: [],
+};
+
+const actionPayload = {
+  offersData: offersFrontMock,
+  pointsForMap: pointsMock,
+  cityData: {
+    name: Cities[TEST_CITY_NAME].name,
+    location: {
+      latitude: Cities[TEST_CITY_NAME].location.latitude,
+      longitude: Cities[TEST_CITY_NAME].location.longitude,
+      zoom: Cities[TEST_CITY_NAME].location.zoom,
+    },
+  },
+}
+
 describe('Reducer homeReducer', () => {
   it('should set current city data', () => {
     expect(homeReducer(
-      {
-        activeCity: {
-          name: Cities[DEFAULT_CITY_NAME].name,
-          location: {
-            latitude: Cities[DEFAULT_CITY_NAME].location.latitude,
-            longitude: Cities[DEFAULT_CITY_NAME].location.longitude,
-            zoom: Cities[DEFAULT_CITY_NAME].location.zoom,
-          },
-        },
-        offersData: [],
-        pointsForMap: [],
-      },
+      initialState,
       {
         type: ActionType.InitCity,
-        payload: {
-          offersData: offersFrontMock,
-          pointsForMap: pointsMock,
-          cityData: {
-            name: Cities[TEST_CITY_NAME].name,
-            location: {
-              latitude: Cities[TEST_CITY_NAME].location.latitude,
-              longitude: Cities[TEST_CITY_NAME].location.longitude,
-              zoom: Cities[TEST_CITY_NAME].location.zoom,
-            },
-          },
-        }
+        payload: actionPayload,
       },
     ))
       .toEqual(
@@ -53,32 +57,10 @@ describe('Reducer homeReducer', () => {
 
   it('should not set current city data', () => {
     expect(homeReducer(
-      {
-        activeCity: {
-          name: Cities[DEFAULT_CITY_NAME].name,
-          location: {
-            latitude: Cities[DEFAULT_CITY_NAME].location.latitude,
-            longitude: Cities[DEFAULT_CITY_NAME].location.longitude,
-            zoom: Cities[DEFAULT_CITY_NAME].location.zoom,
-          },
-        },
-        offersData: [],
-        pointsForMap: [],
-      },
+      initialState,
       {
         type: ActionType.Unknown,
-        payload: {
-          offersData: offersFrontMock,
-          pointsForMap: pointsMock,
-          cityData: {
-            name: Cities[TEST_CITY_NAME].name,
-            location: {
-              latitude: Cities[TEST_CITY_NAME].location.latitude,
-              longitude: Cities[TEST_CITY_NAME].location.longitude,
-              zoom: Cities[TEST_CITY_NAME].location.zoom,
-            },
-          },
-        }
+        payload: actionPayload,
       },
     ))
       .toEqual(

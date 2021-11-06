@@ -4,14 +4,16 @@ import { DEFAULT_HOTEL_DATA } from '../../const';
 import { offerFirst, offersFrontMock } from '../../mocks/mock-offers';
 import { offerReducer } from './offer-reducer';
 
+const initialState = {
+  currentHotel: DEFAULT_HOTEL_DATA,
+  nearOffersData: [],
+  currentHotelComments: [],
+};
+
 describe('Reducer: offerReducer', () => {
   it('should set current offer data', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.SetCurrentHotel,
         payload: offerFirst,
@@ -28,11 +30,7 @@ describe('Reducer: offerReducer', () => {
 
   it('should not set current offer data', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.Unknown,
         payload: offerFirst,
@@ -49,11 +47,7 @@ describe('Reducer: offerReducer', () => {
 
   it('should set near offers data', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.SetNearOffersData,
         payload: offersFrontMock,
@@ -70,15 +64,11 @@ describe('Reducer: offerReducer', () => {
 
   it('should not set near offers data', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.Unknown,
         payload: offersFrontMock,
-      }
+      },
     ))
       .toEqual(
         {
@@ -91,11 +81,7 @@ describe('Reducer: offerReducer', () => {
 
   it('should set current hotel comments', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.SetCurrentHotelComments,
         payload: defaultComments,
@@ -112,11 +98,7 @@ describe('Reducer: offerReducer', () => {
 
   it('should not set current hotel comments', () => {
     expect(offerReducer(
-      {
-        currentHotel: DEFAULT_HOTEL_DATA,
-        nearOffersData: [],
-        currentHotelComments: [],
-      },
+      initialState,
       {
         type: ActionType.Unknown,
         payload: defaultComments,

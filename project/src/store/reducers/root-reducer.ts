@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
+import { appStatusReducer } from './app-status-reducer';
 import { favoritesReducer } from './favorites-reducer';
 import { homeReducer } from './home-reducer';
 import { offerReducer } from './offer-reducer';
-import { appStatusReducer } from './app-status-reducer';
 import { userReducer } from './user-reducer';
 
 export enum NameSpace {
