@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import {
-  APIRoute,
+  APIRoute, AppRoute,
   AuthorizationStatus,
   Cities,
   DEFAULT_USER_DATA,
@@ -39,12 +39,26 @@ import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront } from '../
 import { userBack, userFront } from '../mocks/mock-user-data';
 import { defaultBackComments } from '../mocks/mock-comments';
 import { getPointsFromOffers } from '../utils/project-specific-utils';
+import App from '../components/app/app';
 
 describe('Async actions', () => {
   const onFakeUnauthorized = jest.fn();
   const api = createApi(onFakeUnauthorized());
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
+
+  const fakeHistory = {
+    location: {
+      pathname: '',
+    },
+    push: (path: string): void => {
+      fakeHistory.location.pathname = path;
+    },
+  };
+
+  beforeEach(() => {
+    fakeHistory.location.pathname = '';
+  });
 
   const mockStore = configureMockStore<
     StateTypes,
@@ -104,6 +118,7 @@ describe('Async actions', () => {
     Storage.prototype.setItem = jest.fn();
 
     await store.dispatch(requestLoginAction(fakeUserCredentials));
+    await fakeHistory.push(AppRoute.Home);
 
     expect(store.getActions()).toEqual([
       requireAuthorization(AuthorizationStatus.Auth),
@@ -113,6 +128,7 @@ describe('Async actions', () => {
     expect(Storage.prototype.setItem).toBeCalledTimes(2);
     expect(Storage.prototype.setItem).toBeCalledWith('six-sities-token', 'secret');
     expect(Storage.prototype.setItem).toBeCalledWith('six-sities-email', 'fakeEmail');
+    expect(fakeHistory.location.pathname).toBe(AppRoute.Home);
   });
 
   it('requestLogoutAction should dispatch it\'s sequence of actions', async () => {
