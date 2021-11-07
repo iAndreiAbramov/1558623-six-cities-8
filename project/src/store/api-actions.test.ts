@@ -1,11 +1,22 @@
 import { Action } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { APIRoute, AuthorizationStatus, DEFAULT_USER_DATA, FetchStatus, HttpStatusCode } from '../const';
+import {
+  APIRoute,
+  AuthorizationStatus,
+  Cities,
+  DEFAULT_USER_DATA,
+  FetchStatus,
+  HttpStatusCode,
+  TEST_CITY_NAME
+} from '../const';
 import { UserLoginTypes } from '../types/user-data-types';
 import {
-  checkAuthAction, getCommentsDataAction,
+  checkAuthAction,
+  getCommentsDataAction,
   getFavoritesDataAction,
-  getNearOffersAction, getOfferDataAction,
+  getNearOffersAction,
+  getOfferDataAction,
+  initActiveCityAction,
   requestLoginAction,
   requestLogoutAction
 } from './api-actions';
@@ -13,7 +24,9 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createApi } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import {
-  requireAuthorization, setCurrentHotel,
+  initCityAction,
+  requireAuthorization,
+  setCurrentHotel,
   setCurrentHotelComments,
   setCurrentUser,
   setFavoritesData,
@@ -24,7 +37,8 @@ import { StateTypes } from '../types/state-types';
 import { offerBackFirst, offersBackMock } from '../mocks/mock-offers';
 import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront } from '../utils/adapters';
 import { userBack, userFront } from '../mocks/mock-user-data';
-import { defaultBackComments, defaultComments } from '../mocks/mock-comments';
+import { defaultBackComments } from '../mocks/mock-comments';
+import { getPointsFromOffers } from '../utils/project-specific-utils';
 
 describe('Async actions', () => {
   const onFakeUnauthorized = jest.fn();
@@ -198,6 +212,41 @@ describe('Async actions', () => {
       .networkError();
 
     await store.dispatch(getOfferDataAction(fakeId));
+
+    expect(store.getActions()).toEqual([
+      setFetchStatus(FetchStatus.InProgress),
+      setFetchStatus(FetchStatus.Error),
+    ]);
+  });
+
+  it('initActiveCityAction should dispatch it\'s sequence of actions', async () => {
+    const store = mockStore();
+    const fakeCity = Cities[TEST_CITY_NAME];
+    mockAPI
+      .onGet(APIRoute.Hotels)
+      .reply(HttpStatusCode.Ok, offersBackMock);
+
+    const offersData = adaptOffersToFront(offersBackMock)
+      .filter((offer) => offer.city.name === fakeCity.name);
+    const pointsForMap = getPointsFromOffers(offersData)
+
+    await store.dispatch(initActiveCityAction(fakeCity.name));
+
+    expect(store.getActions()).toEqual([
+      setFetchStatus(FetchStatus.InProgress),
+      initCityAction(fakeCity, offersData, pointsForMap),
+      setFetchStatus(FetchStatus.Success),
+    ]);
+  });
+
+  it('initActiveCityAction should set correct fetch status on error', async () => {
+    const store = mockStore();
+    const fakeCity = Cities[TEST_CITY_NAME];
+    mockAPI
+      .onGet(APIRoute.Hotels)
+      .networkError();
+
+    await store.dispatch(initActiveCityAction(fakeCity.name));
 
     expect(store.getActions()).toEqual([
       setFetchStatus(FetchStatus.InProgress),

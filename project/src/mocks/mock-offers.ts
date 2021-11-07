@@ -1,13 +1,8 @@
+import { Cities } from '../const';
+
 export const offerFirst = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Paris',
-  },
+  city: Cities['Paris'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
@@ -21,9 +16,9 @@ export const offerFirst = {
   isFavorite: false,
   isPremium: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13,
   },
   maxAdults: 2,
   previewImage: 'someImg',
@@ -35,14 +30,7 @@ export const offerFirst = {
 
 export const offerSecond = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Cologne',
-  },
+  city: Cities['Cologne'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
@@ -51,14 +39,14 @@ export const offerSecond = {
     isPro: true,
     name: 'Vasya',
   },
-  id: '1',
+  id: '2',
   images: ['1', '2', '3'],
   isFavorite: false,
   isPremium: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 50.938361,
+    longitude: 6.959974,
+    zoom: 13,
   },
   maxAdults: 2,
   previewImage: 'someImg',
@@ -70,19 +58,12 @@ export const offerSecond = {
 
 export const offerThird = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Cologne',
-  },
+  city: Cities['Cologne'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
     avatarUrl: 'someUrl',
-    id: '1',
+    id: '3',
     isPro: true,
     name: 'Vasya',
   },
@@ -91,9 +72,9 @@ export const offerThird = {
   isFavorite: false,
   isPremium: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 50.938361,
+    longitude: 6.959974,
+    zoom: 13,
   },
   maxAdults: 2,
   previewImage: 'someImg',
@@ -105,14 +86,7 @@ export const offerThird = {
 
 export const offerFourth = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Paris',
-  },
+  city: Cities['Paris'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
@@ -126,9 +100,9 @@ export const offerFourth = {
   isFavorite: false,
   isPremium: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13,
   },
   maxAdults: 2,
   previewImage: 'someImg',
@@ -155,14 +129,7 @@ export const offersByCitiesMock = {
 
 export const offerBackFirst = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Paris',
-  },
+  city: Cities['Paris'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
@@ -176,9 +143,9 @@ export const offerBackFirst = {
   ['is_favorite']: false,
   ['is_premium']: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13,
   },
   ['max_adults']: 2,
   ['preview_image']: 'someImg',
@@ -190,14 +157,7 @@ export const offerBackFirst = {
 
 export const offerBackSecond = {
   bedrooms: 1,
-  city: {
-    location: {
-      latitude: 52,
-      longitude: 4,
-      zoom: 13,
-    },
-    name: 'Cologne',
-  },
+  city: Cities['Cologne'],
   description: 'string',
   goods: ['1', '2', '3'],
   host: {
@@ -206,14 +166,14 @@ export const offerBackSecond = {
     ['is_pro']: true,
     name: 'Vasya',
   },
-  id: '1',
+  id: '2',
   images: ['1', '2', '3'],
   ['is_favorite']: false,
   ['is_premium']: true,
   location: {
-    latitude: 43,
-    longitude: 3,
-    zoom: 10,
+    latitude: 50.938361,
+    longitude: 6.959974,
+    zoom: 13,
   },
   ['max_adults']: 2,
   ['preview_image']: 'someImg',
