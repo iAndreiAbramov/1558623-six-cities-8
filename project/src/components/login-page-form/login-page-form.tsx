@@ -28,6 +28,7 @@ function LoginPageForm(): JSX.Element {
           required
           value={ email }
           onInput={ handleLoginInput }
+          data-testid="email"
         />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
@@ -40,6 +41,7 @@ function LoginPageForm(): JSX.Element {
           required
           value={ password }
           onInput={ handlePasswordInput }
+          data-testid="password"
         />
       </div>
       <button

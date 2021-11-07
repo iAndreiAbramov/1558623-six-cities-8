@@ -7,16 +7,14 @@ import NotFoundPage from './not-found-page';
 describe('Component: notFoundPage', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <Router history={ history }>
         <NotFoundPage />
       </Router>
     );
 
-    const textElement = getByText('Requested page not found.');
-    const linkElement = getByText('Return to main page');
-
-    expect(textElement).toBeInTheDocument();
-    expect(linkElement).toBeInTheDocument();
+    expect(getByText(/Requested page not found/)).toBeInTheDocument();
+    expect(getByText(/Return to main page/)).toBeInTheDocument();
+    expect(getByRole('link')).toBeInTheDocument();
   });
 });
