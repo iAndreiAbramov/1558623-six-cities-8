@@ -45,7 +45,6 @@ export const getOffersByCities = (data: OfferDataTypes[]): OffersByCitiesTypes =
   return offersByCities;
 };
 
-//todo Добавить тест для этой функции
 export const getPointsFromOffers = (offersData: OfferDataTypes[]): PointTypes[] => (
   offersData.map((item) => {
     const { id } = item;

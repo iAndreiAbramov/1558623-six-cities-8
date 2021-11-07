@@ -1,12 +1,19 @@
 import { defaultComments, sortedComments } from '../mocks/mock-comments';
-import { getOffersByCities, getSortedOffers, getVisualRating, sortCommentsByDate } from './project-specific-utils';
 import {
+  getOffersByCities,
+  getPointsFromOffers,
+  getSortedOffers,
+  getVisualRating,
+  sortCommentsByDate
+} from './project-specific-utils';
+import {
+  pointsMock,
   offersByCitiesMock,
   offersByPriceDownMock,
   offersByPriceUpMock,
   offersByRatingDownMock,
   offersFrontMock,
-  offersPopularMock
+  offersPopularMock, offerFirst, offerSecond
 } from '../mocks/mock-offers';
 import { SortOptions } from '../const';
 
@@ -44,5 +51,12 @@ describe('Function getOffersByCities', () => {
   it('should return an object as OffersByCitiesTypes', () => {
     expect(getOffersByCities(offersFrontMock.slice()))
       .toEqual(offersByCitiesMock);
+  });
+});
+
+describe('Function getPointsFromOffers', () => {
+  it('should return an object as PointTypes[] with correct data', () => {
+    expect(getPointsFromOffers([offerFirst, offerSecond]))
+      .toEqual(pointsMock);
   });
 });
