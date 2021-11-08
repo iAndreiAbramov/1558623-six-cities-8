@@ -10,7 +10,7 @@ describe('Component: notFoundPage', () => {
     const { getByText, getByRole } = render(
       <Router history={ history }>
         <NotFoundPage />
-      </Router>
+      </Router>,
     );
 
     expect(getByText(/Requested page not found/)).toBeInTheDocument();

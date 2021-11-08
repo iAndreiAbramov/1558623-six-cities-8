@@ -18,20 +18,25 @@ const store = mockStore({
     activeCity: Cities[DEFAULT_CITY_NAME],
     offersData: offersFrontMock,
     pointsForMap: pointsMock,
-  }
+  },
 });
 
 const fakeApp = (
-    <Provider store={ store }>
-      <Router history={ history }>
-        <App />
-      </Router>
-    </Provider>
+  <Provider store={ store }>
+    <Router history={ history }>
+      <App />
+    </Router>
+  </Provider>
 );
 
 describe('Component App:', () => {
   it('should render home page when user is on route "/"', () => {
     history.push(AppRoute.Home);
     render(fakeApp);
+
+    expect(screen.getByTestId('header-container')).toBeInTheDocument();
+    expect(screen.getByTestId('tabs-container')).toBeInTheDocument();
+    expect(screen.getByTestId('list-container')).toBeInTheDocument();
+    expect(screen.getByTestId('map-container')).toBeInTheDocument();
   });
 });

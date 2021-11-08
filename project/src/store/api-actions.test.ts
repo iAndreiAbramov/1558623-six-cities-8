@@ -1,7 +1,8 @@
 import { Action } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import {
-  APIRoute, AppRoute,
+  APIRoute,
+  AppRoute,
   AuthorizationStatus,
   Cities,
   DEFAULT_USER_DATA,
@@ -39,7 +40,6 @@ import { adaptCommentsToFront, adaptOffersToFront, adaptOfferToFront } from '../
 import { userBack, userFront } from '../mocks/mock-user-data';
 import { defaultBackComments } from '../mocks/mock-comments';
 import { getPointsFromOffers } from '../utils/project-specific-utils';
-import App from '../components/app/app';
 
 describe('Async actions', () => {
   const onFakeUnauthorized = jest.fn();
@@ -244,7 +244,7 @@ describe('Async actions', () => {
 
     const offersData = adaptOffersToFront(offersBackMock)
       .filter((offer) => offer.city.name === fakeCity.name);
-    const pointsForMap = getPointsFromOffers(offersData)
+    const pointsForMap = getPointsFromOffers(offersData);
 
     await store.dispatch(initActiveCityAction(fakeCity.name));
 

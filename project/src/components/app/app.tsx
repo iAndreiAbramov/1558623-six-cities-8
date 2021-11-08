@@ -10,31 +10,31 @@ import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
-      <Switch>
-        <Route path={ AppRoute.Home } exact>
-          <HomePage />
-        </Route>
+    <Switch>
+      <Route path={ AppRoute.Home } exact>
+        <HomePage />
+      </Route>
 
-        <Route path={ AppRoute.Login } exact>
-          <LoginPage />
-        </Route>
+      <Route path={ AppRoute.Login } exact>
+        <LoginPage />
+      </Route>
 
-        <PrivateRoute
-          exact
-          path={ AppRoute.Favorites }
-          render={ () => (
-            <FavoritesPage />
-          ) }
-        />
+      <PrivateRoute
+        exact
+        path={ AppRoute.Favorites }
+        render={ () => (
+          <FavoritesPage />
+        ) }
+      />
 
-        <Route path={ AppRoute.OfferId } exact>
-          <OfferPage />
-        </Route>
+      <Route path={ AppRoute.OfferId } exact>
+        <OfferPage />
+      </Route>
 
-        <Route>
-          <NotFoundPage />
-        </Route>
-      </Switch>
+      <Route>
+        <NotFoundPage />
+      </Route>
+    </Switch>
   );
 }
 

@@ -28,7 +28,7 @@ const actionPayload = {
       zoom: Cities[TEST_CITY_NAME].location.zoom,
     },
   },
-}
+};
 
 describe('Reducer homeReducer', () => {
   it('should set current city data', () => {

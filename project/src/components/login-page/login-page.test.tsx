@@ -6,19 +6,25 @@ import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import LoginPage from './login-page';
+import { Cities, DEFAULT_CITY_NAME } from '../../const';
 
 const history = createMemoryHistory();
 
 const mockStore = configureMockStore();
+const store = mockStore({
+  HOME: {
+    activeCity: Cities[DEFAULT_CITY_NAME],
+  }
+});
 
 describe('Component LoginPage', () => {
   it('should render the LoginPage when user navigates to "/login"', () => {
     render(
-      <Provider store={ mockStore() }>
+      <Provider store={ store }>
         <Router history={ history }>
           <LoginPage />
         </Router>
-      </Provider>
+      </Provider>,
     );
 
     history.push('/login');
