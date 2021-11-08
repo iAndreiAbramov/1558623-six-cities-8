@@ -12,7 +12,7 @@ function HomePageTabs(): JSX.Element {
   ));
 
   return (
-    <div className="tabs">
+    <div className="tabs" data-testid="tabs-container">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           { tabs }

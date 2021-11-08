@@ -12,6 +12,9 @@ import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
 import OfferPageReviews from '../offer-page-reviews/offer-page-reviews';
 import { getVisualRating } from '../../utils/project-specific-utils';
+import withHandleClick from '../../hocs/with-handle-click';
+
+const OfferPageBookmarkWrapped = withHandleClick(OfferPageBookmark);
 
 function OfferPageMain(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
@@ -54,7 +57,7 @@ function OfferPageMain(): JSX.Element {
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <OfferPageBookmark
+              <OfferPageBookmarkWrapped
                 isFavorite={ isFavorite }
                 offerId={ offerId }
                 handleBookmarkClick={ () => null }

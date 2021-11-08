@@ -1,5 +1,5 @@
 import React from 'react';
-import FavoritesPageCity from '../favorites-page-cities/favorites-page-city';
+import FavoritesPageCity from '../favorites-page-city/favorites-page-city';
 import { getOffersByCities } from '../../utils/project-specific-utils';
 import { OfferDataTypes } from '../../types/offer-data-types';
 

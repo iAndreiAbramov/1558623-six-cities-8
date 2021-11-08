@@ -5,6 +5,9 @@ import { AppRoute, MAX_RATING, PERCENTS_CAP } from '../../const';
 import { getOfferDataAction } from '../../store/api-actions';
 import OfferCardBookmark from '../offer-card-bookmark/offer-card-bookmark';
 import { OfferDataTypes } from '../../types/offer-data-types';
+import withHandleClick from '../../hocs/with-handle-click';
+
+const OfferCardBookmarkWrapped = withHandleClick(OfferCardBookmark);
 
 type FavoritesCardTypes = {
   data: OfferDataTypes,
@@ -40,7 +43,7 @@ function FavoritesPageCard(props: FavoritesCardTypes): JSX.Element {
             <b className="place-card__price-value">&euro;{ price }</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <OfferCardBookmark
+          <OfferCardBookmarkWrapped
             isFavorite={ isFavorite }
             offerId={ id }
             handleBookmarkClick={ () => null }

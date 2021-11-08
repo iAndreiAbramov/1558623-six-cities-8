@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { AuthorizationStatus, DEFAULT_CITY_NAME } from './const';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import { Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
 import browserHistory from './services/browser-history';
@@ -11,7 +13,6 @@ import { createApi } from './services/api';
 import { requireAuthorization } from './store/actions';
 import { rootReducer } from './store/reducers/root-reducer';
 import { ThunkAppDispatch } from './types/action-types';
-import { Router } from 'react-router-dom';
 
 export const api = createApi(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),

@@ -1,7 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
 import { api } from '../../index';
@@ -76,7 +74,6 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
       method="post"
       onSubmit={ handleFormSubmit }
     >
-      <ToastContainer />
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input
