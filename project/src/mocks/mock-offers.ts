@@ -95,7 +95,7 @@ export const offerFourth = {
     isPro: true,
     name: 'Vasya',
   },
-  id: '1',
+  id: '4',
   images: ['1', '2', '3'],
   isFavorite: false,
   isPremium: true,

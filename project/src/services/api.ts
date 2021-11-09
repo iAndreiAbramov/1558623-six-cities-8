@@ -37,3 +37,23 @@ export const createApi = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
 
   return api;
 };
+
+export const createFreeApi = (): AxiosInstance => {
+  const api = axios.create({
+    baseURL: BASE_URL,
+    timeout: REQUEST_TIMEOUT,
+  });
+
+  api.interceptors.request.use(
+    (requestConfig: AxiosRequestConfig) => {
+      const token = getToken();
+      if (token) {
+        requestConfig.headers['x-token'] = token;
+      }
+
+      return requestConfig;
+    },
+  );
+
+  return api;
+};
