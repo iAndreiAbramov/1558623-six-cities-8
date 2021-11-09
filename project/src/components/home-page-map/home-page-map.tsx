@@ -40,7 +40,7 @@ function HomePageMap(props: HomePageMapProps): JSX.Element {
   });
 
   return (
-    <div className="cities__right-section" data-testid="map-container">
+    <div className="cities__right-section" data-testid="home-map">
       <section
         className="cities__map map"
         ref={ mapRef }

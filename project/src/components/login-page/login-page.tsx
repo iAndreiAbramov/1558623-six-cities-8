@@ -12,14 +12,14 @@ function LoginPage(): JSX.Element {
   const dispatch = useDispatch();
   return (
     <div className="page page--gray page--login">
-      <header className="header">
+      <header className="header" data-testid="login-header">
         <div className="container">
           <div className="header__wrapper">
             <PageHeaderLogo />
           </div>
         </div>
       </header>
-      <main className="page__main page__main--login">
+      <main className="page__main page__main--login" data-testid="login-main">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>

@@ -42,7 +42,7 @@ function OfferPageMain(): JSX.Element {
   }, [dispatch, id, offerId]);
 
   return (
-    <main className="page__main page__main--property">
+    <main className="page__main page__main--property" data-testid="offer-main">
       <section className="property">
         { images.length > 0 && <OfferPageGallery images={ images.slice(0, MAX_IMAGES_NUMBER) } /> }
         <div className="property__container container">

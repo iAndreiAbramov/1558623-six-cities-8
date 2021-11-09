@@ -14,8 +14,9 @@ function PageHeaderLogo(): JSX.Element {
         to={ AppRoute.Home }
         className="header__logo-link header__logo-link--active"
         onClick={ () => dispatch(initActiveCityAction(activeCityName)) }
+        data-testid="header-logo"
       >
-        <img className="header__logo" src="./img/logo.svg" alt="6 cities logo" width="81" height="41" />
+        <img className="header__logo" src="./img/logo.svg" alt="6 cities logo" width="81" height="41"/>
       </Link>
     </div>
   );

@@ -51,7 +51,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   };
 
   return (
-    <section className="cities__places places" data-testid="list-container">
+    <section className="cities__places places" data-testid="home-list">
       { isFetching === FetchStatus.InProgress && <SpinnerHome /> }
       { isFetching === FetchStatus.Error && <FetchFailMessage /> }
       {

@@ -1,32 +1,17 @@
 import React from 'react';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
-import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { createFakeAppWithStore } from '../../utils/testing-utils';
+import { fakeStoreWithNoAuth } from '../../mocks/mock-store';
 import LoginPage from './login-page';
-import { Cities, DEFAULT_CITY_NAME } from '../../const';
 
 const history = createMemoryHistory();
-
-const mockStore = configureMockStore();
-const store = mockStore({
-  HOME: {
-    activeCity: Cities[DEFAULT_CITY_NAME],
-  }
-});
+const fakeApp = createFakeAppWithStore(LoginPage, fakeStoreWithNoAuth, history);
 
 describe('Component LoginPage', () => {
   it('should render the LoginPage when user navigates to "/login"', () => {
-    render(
-      <Provider store={ store }>
-        <Router history={ history }>
-          <LoginPage />
-        </Router>
-      </Provider>,
-    );
-
+    render(fakeApp);
     history.push('/login');
 
     const emailInput = screen.getByTestId(/email/i);

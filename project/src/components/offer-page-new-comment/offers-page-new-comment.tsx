@@ -2,7 +2,6 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 import { adaptCommentsToFront } from '../../utils/adapters';
-import { api } from '../../index';
 import {
   APIRoute,
   INITIAL_RATING,
@@ -14,6 +13,7 @@ import {
 import { CommentPostTypes } from '../../types/comments-types';
 import { setCurrentHotelComments } from '../../store/actions';
 import { notifyError, notifySuccess } from '../../utils/project-specific-utils';
+import { createFreeApi } from '../../services/api';
 
 function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
   const [rating, setRating] = useState(INITIAL_RATING);
   const [review, setReview] = useState(INITIAL_REVIEW_STATE);
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
+  const freeAPI = createFreeApi();
 
   useEffect(() => {
     if (rating.every((item) => !item) || review.length < MIN_COMMENT_LENGTH) {
@@ -44,7 +45,7 @@ function OfferPageNewComment(props: { id: string }): JSX.Element {
   };
 
   const postNewComment = async (comment: CommentPostTypes, offerId: string): Promise<AxiosResponse> => (
-    await api.post(`${ APIRoute.Comments }/${ offerId }`, comment)
+    await freeAPI.post(`${ APIRoute.Comments }/${ offerId }`, comment)
   );
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {

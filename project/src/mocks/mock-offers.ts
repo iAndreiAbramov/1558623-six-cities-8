@@ -113,6 +113,7 @@ export const offerFourth = {
 };
 
 export const offersFrontMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;
+export const nearOffersMock = [offerSecond, offerThird, offerFourth] as const;
 
 export const pointsMock = [
   { latitude: 48.85661, longitude: 2.351499, id: '1' },

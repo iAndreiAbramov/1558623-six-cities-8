@@ -10,7 +10,7 @@ function PageHeader(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
-    <header className="header" data-testid="header-container">
+    <header className="header" data-testid="header">
       <div className="container">
         <div className="header__wrapper">
           <PageHeaderLogo />

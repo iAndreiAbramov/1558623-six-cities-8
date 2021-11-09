@@ -1,46 +1,38 @@
 import React from 'react';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
-import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import { Router, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { Cities, DEFAULT_CITY_NAME } from '../../const';
+import App from '../app/app';
+import { AppRoute } from '../../const';
+import { createFakeAppWithStore } from '../../utils/testing-utils';
+import { fakeStoreWithAuth } from '../../mocks/mock-store';
 import PageHeaderLogo from './page-header-logo';
 
-const history = createMemoryHistory();
-const mockStore = configureMockStore();
-const store = mockStore({
-  HOME: {
-    activeCity: Cities[DEFAULT_CITY_NAME],
-  }
-});
-
-const headerLogo = (
-  <Provider store={ store }>
-    <Router history={ history }>
-      <Route path="/" exact>
-        <h1>This is main page</h1>
-      </Route>
-      <Route>
-        <PageHeaderLogo />
-      </Route>
-    </Router>
-  </Provider>);
-
 describe('Component PageHeaderLogo', () => {
-  it('should render correctly', () => {
-    const { getByAltText, getByRole } = render(headerLogo);
+  const history = createMemoryHistory();
 
+  it('should render correctly', () => {
+    const fakeApp = createFakeAppWithStore(PageHeaderLogo, fakeStoreWithAuth, history);
+    const { getByAltText, getByRole, getByTestId } = render(fakeApp);
+
+    expect(getByTestId('header-logo')).toBeInTheDocument();
     expect(getByAltText('6 cities logo')).toBeInTheDocument();
     expect(getByRole('link')).toBeInTheDocument();
   });
 
-  it('should redirect to main page on click', () => {
-    render(headerLogo);
+  it('should redirect to main page on click', async () => {
+    const fakeApp = createFakeAppWithStore(App, fakeStoreWithAuth, history);
+    render(fakeApp);
+    history.push(AppRoute.Favorites);
 
-    expect(screen.getByText(/This is main page/i)).not.toBeInTheDocument();
-    userEvent.click(screen.getByRole('link'));
-    expect(screen.getByText(/This is main page/i)).toBeInTheDocument();
-  })
+    expect(screen.queryByTestId('home-tabs')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('home-list')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('home-map')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId('header-logo'));
+
+    expect(screen.queryByTestId('home-tabs')).toBeInTheDocument();
+    expect(screen.queryByTestId('home-list')).toBeInTheDocument();
+    expect(screen.queryByTestId('home-map')).toBeInTheDocument();
+  });
 });
