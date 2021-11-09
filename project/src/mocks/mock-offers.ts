@@ -157,7 +157,7 @@ export const offerBackFirst = {
   ['preview_image']: 'someImg',
   price: 400,
   rating: 2.0,
-  title: 'Nice place',
+  title: 'Nice place first',
   type: 'Flat',
 };
 
@@ -185,8 +185,8 @@ export const offerBackSecond = {
   ['preview_image']: 'someImg',
   price: 100,
   rating: 3.0,
-  title: 'Nice place',
-  type: 'Flat',
+  title: 'Nice place second',
+  type: 'House',
 };
 
 export const offersBackMock = [offerBackFirst, offerBackSecond];

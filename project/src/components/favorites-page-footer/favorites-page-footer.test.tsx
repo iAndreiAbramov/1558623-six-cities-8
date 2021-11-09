@@ -1,21 +1,18 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
 import { Route, Router, Switch } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import FavoritesPageFooter from './favorites-page-footer';
+import HomePage from '../home-page/home-page';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { fakeStoreWithAuth } from '../../mocks/mock-store';
-import FavoritesPageCity from './favorites-page-city';
-import HomePage from '../home-page/home-page';
-import { offerSecond, offerThird } from '../../mocks/mock-offers';
-import { TEST_CITY_NAME } from '../../const';
 
-describe('Component: FavoritesPageCard', () => {
+describe('Component: FavoritesPageFooter', () => {
   const history = createMemoryHistory();
   const mockStore = configureMockStore();
   const store = mockStore(fakeStoreWithAuth);
-  const dataMock = [offerSecond, offerThird];
   const fakeApp = (
     <Provider store={ store }>
       <Router history={ history }>
@@ -24,38 +21,32 @@ describe('Component: FavoritesPageCard', () => {
             <HomePage />
           </Route>
           <Route>
-            <FavoritesPageCity
-              cityName={ TEST_CITY_NAME }
-              data={ dataMock }
-            />
+            <FavoritesPageFooter />
           </Route>
         </Switch>
       </Router>
     </Provider>);
 
-  it('should render passed data correctly', () => {
-    render(
-      <Provider store={ store }>
-        <Router history={ history }>
-          <FavoritesPageCity
-            cityName={ TEST_CITY_NAME }
-            data={ dataMock }
-          />
-        </Router>
-      </Provider>);
-    expect(screen.getByTestId('favorites-home-link')).toBeInTheDocument();
+  it('should render correctly', () => {
+    const { getByRole, getByAltText } = render(
+      <Router history={ history }>
+        <FavoritesPageFooter />
+      </Router>
+    );
+    expect(getByRole('link')).toBeInTheDocument();
+    expect(getByAltText(/6 cities logo/i)).toBeInTheDocument();
   });
 
-  it('should redirect to main page on click', () => {
-    const { getByTestId } = render(fakeApp);
-    const FAKE_URL = '/fake';
+  it('should redurect to main page on click', () => {
+    const { getByRole } = render(fakeApp);
+    const FAKE_URL = '/fakeUrl';
     history.push(FAKE_URL);
 
     expect(screen.queryByTestId('home-tabs')).not.toBeInTheDocument();
     expect(screen.queryByTestId('home-list')).not.toBeInTheDocument();
     expect(screen.queryByTestId('home-map')).not.toBeInTheDocument();
 
-    userEvent.click(getByTestId('favorites-home-link'));
+    userEvent.click(getByRole('link'));
 
     expect(screen.getByTestId('home-tabs')).toBeInTheDocument();
     expect(screen.getByTestId('home-list')).toBeInTheDocument();
