@@ -53,7 +53,7 @@ export const offerSecond = {
   price: 100,
   rating: 3.0,
   title: 'Nice place second',
-  type: 'Flat',
+  type: 'House',
 };
 
 export const offerThird = {
@@ -81,7 +81,7 @@ export const offerThird = {
   price: 200,
   rating: 4.0,
   title: 'Nice place third',
-  type: 'Flat',
+  type: 'Palace',
 };
 
 export const offerFourth = {
@@ -109,7 +109,7 @@ export const offerFourth = {
   price: 300,
   rating: 5.0,
   title: 'Nice place fourth',
-  type: 'Flat',
+  type: 'Hotel',
 };
 
 export const offersFrontMock = [offerFirst, offerSecond, offerThird, offerFourth] as const;

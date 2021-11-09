@@ -15,6 +15,8 @@ describe('Component FavoritesPageMain', () => {
   it('should render passed offers', () => {
     const titles = offersFrontMock.map((item) => item.title);
     const prices = offersFrontMock.map((item) => item.price);
+    const types = offersFrontMock.map((item) => item.type);
+
     render(
       <Provider store={ store }>
         <Router history={ history }>
@@ -22,12 +24,16 @@ describe('Component FavoritesPageMain', () => {
         </Router>
       </Provider>
     );
+
     expect(screen.getByTestId('favorites-main')).toBeInTheDocument();
     titles.forEach((title) => {
       expect(screen.getByText(title)).toBeInTheDocument();
     });
     prices.forEach((price) => {
       expect(screen.getByText(new RegExp(price.toString()))).toBeInTheDocument();
+    });
+    types.forEach((type) => {
+      expect(screen.getByText(new RegExp(type.toString()))).toBeInTheDocument();
     });
   });
 });
