@@ -6,7 +6,6 @@ describe('Component: SpinnerOffer', () => {
   it('should render correctly', () => {
     const { getByText } = render(<SpinnerHome />);
 
-    expect(getByText('Please wait. Loading in progress.'))
-      .toBeInTheDocument();
+    expect(getByText(/Please wait. Loading in progress/i)).toBeInTheDocument();
   });
 });

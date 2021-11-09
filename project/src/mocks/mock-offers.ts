@@ -24,7 +24,7 @@ export const offerFirst = {
   previewImage: 'someImg',
   price: 400,
   rating: 2.0,
-  title: 'Nice place',
+  title: 'Nice place first',
   type: 'Flat',
 };
 
@@ -52,7 +52,7 @@ export const offerSecond = {
   previewImage: 'someImg',
   price: 100,
   rating: 3.0,
-  title: 'Nice place',
+  title: 'Nice place second',
   type: 'Flat',
 };
 
@@ -80,7 +80,7 @@ export const offerThird = {
   previewImage: 'someImg',
   price: 200,
   rating: 4.0,
-  title: 'Nice place',
+  title: 'Nice place third',
   type: 'Flat',
 };
 
@@ -108,7 +108,7 @@ export const offerFourth = {
   previewImage: 'someImg',
   price: 300,
   rating: 5.0,
-  title: 'Nice place',
+  title: 'Nice place fourth',
   type: 'Flat',
 };
 
