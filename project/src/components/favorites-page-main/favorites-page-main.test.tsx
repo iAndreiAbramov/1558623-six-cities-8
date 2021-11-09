@@ -7,11 +7,11 @@ import { Router } from 'react-router-dom';
 import FavoritesPageMain from './favorites-page-main';
 import { offersFrontMock } from '../../mocks/mock-offers';
 
-const mockStore = configureMockStore();
-const store = mockStore();
-const history = createMemoryHistory();
-
 describe('Component FavoritesPageMain', () => {
+  const mockStore = configureMockStore();
+  const store = mockStore();
+  const history = createMemoryHistory();
+
   it('should render passed offers', () => {
     const titles = offersFrontMock.map((item) => item.title);
     const prices = offersFrontMock.map((item) => item.price);
