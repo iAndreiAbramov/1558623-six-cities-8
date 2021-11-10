@@ -3,6 +3,7 @@ import { StateTypes } from './state-types';
 import { Action, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 
 export enum ActionType {
+  Unknown = 'common/unknown',
   InitCity = 'init/initCity',
   SetFetchStatus = 'data/setFetchStatus',
   SetFavoritesData = 'data/setFavorites',

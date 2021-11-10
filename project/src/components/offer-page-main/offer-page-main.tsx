@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { MAX_IMAGES_NUMBER } from '../../const';
 import { getCurrentHotel, getNearOffersData } from '../../store/selectors';
 import { getNearOffersAction, getOfferDataAction } from '../../store/api-actions';
-import { getVisualRating } from '../../utils/common-utils';
+import { getVisualRating } from '../../utils/project-specific-utils';
 import OfferPageGallery from '../offer-page-gallery/offer-page-gallery';
 import OfferPageGoods from '../offer-page-goods/offer-page-goods';
 import OfferPageHost from '../offer-page-host/offer-page-host';
@@ -12,6 +12,9 @@ import OfferPageMap from '../offer-page-map/offer-page-map';
 import OfferPageNearList from '../offer-page-near-list/offer-page-near-list';
 import OfferPageBookmark from '../offer-page-bookmark/offer-page-bookmark';
 import OfferPageReviews from '../offer-page-reviews/offer-page-reviews';
+import withHandleClick from '../../hocs/with-handle-click';
+
+const OfferPageBookmarkWrapped = withHandleClick(OfferPageBookmark);
 
 function OfferPageMain(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
@@ -39,7 +42,7 @@ function OfferPageMain(): JSX.Element {
   }, [dispatch, id, offerId]);
 
   return (
-    <main className="page__main page__main--property">
+    <main className="page__main page__main--property" data-testid="offer-main">
       <section className="property">
         { images.length > 0 && <OfferPageGallery images={ images.slice(0, MAX_IMAGES_NUMBER) } /> }
         <div className="property__container container">
@@ -54,7 +57,7 @@ function OfferPageMain(): JSX.Element {
               <h1 className="property__name">
                 Beautiful &amp; luxurious studio at great location
               </h1>
-              <OfferPageBookmark
+              <OfferPageBookmarkWrapped
                 isFavorite={ isFavorite }
                 offerId={ offerId }
                 handleBookmarkClick={ () => null }

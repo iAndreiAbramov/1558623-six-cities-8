@@ -1,5 +1,4 @@
 import React from 'react';
-import withHandleClick from '../../hocs/with-handle-click';
 
 export type OfferCardBookmarkTypes = {
   isFavorite: boolean,
@@ -28,4 +27,4 @@ function OfferCardBookmark(props: OfferCardBookmarkTypes): JSX.Element {
   );
 }
 
-export default withHandleClick(OfferCardBookmark);
+export default OfferCardBookmark;

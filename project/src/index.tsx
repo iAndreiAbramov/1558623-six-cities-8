@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { AuthorizationStatus, DEFAULT_CITY_NAME } from './const';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import { Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
+import browserHistory from './services/browser-history';
 import { checkAuthAction, initActiveCityAction } from './store/api-actions';
 import { createApi } from './services/api';
 import { requireAuthorization } from './store/actions';
@@ -29,7 +33,10 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={ store }>
-      <App />
+      <Router history={ browserHistory }>
+        <ToastContainer />
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

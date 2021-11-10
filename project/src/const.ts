@@ -16,6 +16,8 @@ export enum AuthorizationStatus {
 }
 
 export enum HttpStatusCode {
+  Ok = 200,
+  NoContent = 204,
   Unauthorised = 401,
 }
 
@@ -23,7 +25,10 @@ export enum FetchStatus {
   InProgress = 'IN_PROGRESS',
   Success = 'SUCCESS',
   Error = 'ERROR',
+  Default = 'SUCCESS',
 }
+
+export const FETCH_FAIL_MESSAGE = 'Failed to get data from server. Please check your network connection and try to reload the page.';
 
 export enum NotificationMessage {
   PostSuccess = 'Your comment successfully posted!',
@@ -134,6 +139,7 @@ export const Cities: CitiesTypes = {
 };
 
 export const DEFAULT_CITY_NAME = 'Paris';
+export const TEST_CITY_NAME = 'Cologne';
 
 export const PERCENTS_CAP = 100;
 export const MAX_RATING = 5;

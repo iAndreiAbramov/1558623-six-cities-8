@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CardArticleClasses, CardImgWrapperClasses, FetchStatus, SortOptions } from '../../const';
 import { getActiveCity, getFetchStatus } from '../../store/selectors';
-import { getSortedData } from '../../utils/common-utils';
 import FetchFailMessage from '../fetch-fail-message/fetch-fail-message';
 import HomePageSortDropdown from '../home-page-sort-dropdown/home-page-sort-dropdown';
 import HomePageSortToggler from '../home-page-sort-toggler/home-page-sort-toggler';
 import { OfferDataTypes } from '../../types/offer-data-types';
 import OfferCard from '../offer-card/offer-card';
 import SpinnerHome from '../spinner-home/spinner-home';
+import { getSortedOffers } from '../../utils/project-specific-utils';
 
 type HomePageListTypes = {
   offersData: OfferDataTypes[],
@@ -25,7 +25,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   const [sortedData, setSortedData] = useState([...offersData]);
 
   useEffect(() => {
-    setSortedData(getSortedData([...offersData], sortOption));
+    setSortedData(getSortedOffers([...offersData], sortOption));
   }, [offersData, sortOption]);
 
   const offerCards = sortedData.map((cardItem) => {
@@ -51,7 +51,7 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
   };
 
   return (
-    <section className="cities__places places">
+    <section className="cities__places places" data-testid="home-list">
       { isFetching === FetchStatus.InProgress && <SpinnerHome /> }
       { isFetching === FetchStatus.Error && <FetchFailMessage /> }
       {

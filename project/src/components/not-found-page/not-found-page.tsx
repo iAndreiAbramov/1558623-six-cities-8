@@ -5,7 +5,7 @@ import './not-found-page.css';
 
 function NotFoundPage(): JSX.Element {
   return (
-    <div className="not-found-message-wrapper">
+    <div className="not-found-message-wrapper" data-testid="not-found-page-wrapper">
       <p className="not-found-title">
         Error 404.
       </p>
