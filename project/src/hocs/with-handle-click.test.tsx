@@ -2,12 +2,12 @@ import React from 'react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import { fakeStoreWithAuth } from '../mocks/mock-store';
+import { mockStoreWithAuth } from '../mocks/mock-store';
 import withHandleClick from './with-handle-click';
 
 describe('HOC: withHandleClick', () => {
   const mockStore = configureMockStore();
-  const store = mockStore(fakeStoreWithAuth);
+  const store = mockStore(mockStoreWithAuth);
   const TEST_ID = '4';
   const TEST_IS_FAVORITE = false;
 

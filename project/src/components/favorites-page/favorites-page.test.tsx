@@ -1,14 +1,14 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import FavoritesPage from './favorites-page';
 import { FetchStatus } from '../../const';
 
 describe('Component: FavoritesPage', () => {
   const history = createMemoryHistory();
   it('should render list of favorite hotels if it is not empty', () => {
-    const fakeApp = createFakeAppWithStore(FavoritesPage, fakeStoreWithAuth, history);
+    const fakeApp = createFakeAppWithStore(FavoritesPage, mockStoreWithAuth, history);
     render(fakeApp);
 
     expect(screen.getByTestId('header')).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Component: FavoritesPage', () => {
   });
 
   it('should render template for empty page if favorites list is empty', () => {
-    const fakeStore = fakeStoreWithAuth;
+    const fakeStore = mockStoreWithAuth;
     fakeStore.FAVORITES.favoritesData = [];
     const fakeApp = createFakeAppWithStore(FavoritesPage, fakeStore, history);
     render(fakeApp);
@@ -29,7 +29,7 @@ describe('Component: FavoritesPage', () => {
   });
 
   it('should render a spinner if fetch status is in progress', () => {
-    const fakeStore = fakeStoreWithAuth;
+    const fakeStore = mockStoreWithAuth;
     fakeStore.STATUS.fetchStatus = FetchStatus.InProgress;
     const fakeApp = createFakeAppWithStore(FavoritesPage, fakeStore, history);
     render(fakeApp);

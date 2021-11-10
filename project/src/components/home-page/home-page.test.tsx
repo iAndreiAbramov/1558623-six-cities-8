@@ -1,13 +1,13 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import HomePage from './home-page';
 
 describe('Component: HomePage', () => {
   const history = createMemoryHistory();
   it('should render correctly', () => {
-    const fakeApp = createFakeAppWithStore(HomePage, fakeStoreWithAuth, history);
+    const fakeApp = createFakeAppWithStore(HomePage, mockStoreWithAuth, history);
     render(fakeApp);
 
     expect(screen.getByTestId('home-tabs')).toBeInTheDocument();

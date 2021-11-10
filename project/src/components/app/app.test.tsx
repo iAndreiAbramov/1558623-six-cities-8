@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import App from './app';
 import { AppRoute } from '../../const';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 
 const history = createMemoryHistory();
-const fakeApp = createFakeAppWithStore(App, fakeStoreWithAuth, history);
+const fakeApp = createFakeAppWithStore(App, mockStoreWithAuth, history);
 
 describe('Component App:', () => {
   it('should render home page when user is on route "/"', () => {

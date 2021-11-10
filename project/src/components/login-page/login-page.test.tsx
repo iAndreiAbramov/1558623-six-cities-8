@@ -2,11 +2,11 @@ import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithNoAuth } from '../../mocks/mock-store';
+import { mockStoreWithNoAuth } from '../../mocks/mock-store';
 import LoginPage from './login-page';
 
 const history = createMemoryHistory();
-const fakeApp = createFakeAppWithStore(LoginPage, fakeStoreWithNoAuth, history);
+const fakeApp = createFakeAppWithStore(LoginPage, mockStoreWithNoAuth, history);
 
 describe('Component LoginPage', () => {
   it('should render the LoginPage when user navigates to "/login"', () => {

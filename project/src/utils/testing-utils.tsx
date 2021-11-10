@@ -6,11 +6,11 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createApi } from '../services/api';
-import { FakeStateTypes } from '../mocks/mock-store';
+import { MockStoreTypes } from '../mocks/mock-store';
 
 export const createFakeAppWithStore = (
   Component: JSXElementConstructor<any>,
-  fakeStore: FakeStateTypes,
+  fakeStore: MockStoreTypes,
   fakeHistory: ReturnType<typeof createMemoryHistory>,
 ): JSX.Element => {
 
@@ -18,9 +18,9 @@ export const createFakeAppWithStore = (
   const api = createApi(onFakeUnauthorized());
   const middlewares = [thunk.withExtraArgument(api)];
 
-  const mockStore = configureMockStore<FakeStateTypes,
+  const mockStore = configureMockStore<MockStoreTypes,
     Action,
-    ThunkDispatch<FakeStateTypes, typeof api, Action>>(middlewares);
+    ThunkDispatch<MockStoreTypes, typeof api, Action>>(middlewares);
 
   const store = mockStore(fakeStore);
 

@@ -1,14 +1,14 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import { FetchStatus } from '../../const';
 import HomePageMain from './home-page-main';
 
 describe('Component: HomePageMain', () => {
   const history = createMemoryHistory();
   it('should render list of offers if it is not empty', () => {
-    const fakeApp = createFakeAppWithStore(HomePageMain, fakeStoreWithAuth, history);
+    const fakeApp = createFakeAppWithStore(HomePageMain, mockStoreWithAuth, history);
     render(fakeApp);
 
     expect(screen.queryByText(/No places to stay available/i)).not.toBeInTheDocument();
@@ -16,7 +16,7 @@ describe('Component: HomePageMain', () => {
   });
 
   it('should render a spinner if fetch status is in progress', () => {
-    const fakeStore = fakeStoreWithAuth;
+    const fakeStore = mockStoreWithAuth;
     fakeStore.STATUS.fetchStatus = FetchStatus.InProgress;
     const fakeApp = createFakeAppWithStore(HomePageMain, fakeStore, history);
     render(fakeApp);
@@ -25,7 +25,7 @@ describe('Component: HomePageMain', () => {
   });
 
   it('should render HomePageEmpty component if list of offers is empty and fetch status is success', () => {
-    const fakeStore = fakeStoreWithAuth;
+    const fakeStore = mockStoreWithAuth;
     fakeStore.HOME.offersData = [];
     fakeStore.STATUS.fetchStatus = FetchStatus.Success;
     const fakeApp = createFakeAppWithStore(HomePageMain, fakeStore, history);

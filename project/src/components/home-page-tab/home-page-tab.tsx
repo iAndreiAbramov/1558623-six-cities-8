@@ -12,9 +12,11 @@ function HomePageTab(props: { name: string }): JSX.Element {
     ? 'locations__item-link tabs__item tabs__item--active'
     : 'locations__item-link tabs__items';
 
+  const handleTabClick = () => dispatch(initActiveCityAction(name));
+
   return (
     <Link className={ tabClass } to="/">
-      <span onClick={ () => dispatch(initActiveCityAction(name)) }>
+      <span onClick={ handleTabClick }>
         { name }
       </span>
     </Link>
