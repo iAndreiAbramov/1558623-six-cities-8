@@ -2,8 +2,8 @@ import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { mockStoreWithNoAuth } from '../../mocks/mock-store';
 import LoginPageForm from './login-page-form';
+import { mockStoreWithNoAuth } from '../../mocks/mock-store';
 
 const history = createMemoryHistory();
 const fakeApp = createFakeAppWithStore(LoginPageForm, mockStoreWithNoAuth, history);
