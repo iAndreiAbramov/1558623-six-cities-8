@@ -20,11 +20,5 @@ describe('Component LoginPage', () => {
     expect(emailInput).toHaveAttribute('type', 'email');
     expect(passwordInput).toHaveAttribute('type', 'password');
     expect(submitButton).toHaveAttribute('type', 'submit');
-
-    userEvent.type(emailInput, 'fake-login@fake.com');
-    userEvent.type(passwordInput, 'fake-password');
-
-    expect(emailInput).toHaveValue('fake-login@fake.com');
-    expect(passwordInput).toHaveValue('fake-password');
   });
 });

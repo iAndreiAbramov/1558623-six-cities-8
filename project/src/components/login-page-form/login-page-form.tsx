@@ -15,6 +15,10 @@ function LoginPageForm(): JSX.Element {
     evt.preventDefault();
     setPassword(evt.currentTarget.value.trimLeft());
   };
+  const handleButtonClick = (evt: FormEvent) => {
+    evt.preventDefault();
+    dispatch(requestLoginAction({ email, password }));
+  };
 
   return (
     <form className="login__form form" action="#" method="post">
@@ -47,12 +51,7 @@ function LoginPageForm(): JSX.Element {
       <button
         className="login__submit form__submit button"
         type="submit"
-        onClick={
-          (evt) => {
-            evt.preventDefault();
-            dispatch(requestLoginAction({ email, password }));
-          }
-        }
+        onClick={ handleButtonClick }
       >
         Sign in
       </button>
