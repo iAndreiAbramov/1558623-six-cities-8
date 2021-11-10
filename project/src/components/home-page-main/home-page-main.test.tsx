@@ -1,10 +1,9 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
-import { createFakeAppWithStore } from '../../utils/testing-utils';
-import HomePageMain from './home-page-main';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
 import { render, screen } from '@testing-library/react';
+import { createFakeAppWithStore } from '../../utils/testing-utils';
+import { fakeStoreWithAuth } from '../../mocks/mock-store';
 import { FetchStatus } from '../../const';
+import HomePageMain from './home-page-main';
 
 describe('Component: HomePageMain', () => {
   const history = createMemoryHistory();

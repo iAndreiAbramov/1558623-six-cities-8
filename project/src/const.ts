@@ -28,6 +28,8 @@ export enum FetchStatus {
   Default = 'SUCCESS',
 }
 
+export const FETCH_FAIL_MESSAGE = 'Failed to get data from server. Please check your network connection and try to reload the page.';
+
 export enum NotificationMessage {
   PostSuccess = 'Your comment successfully posted!',
   PostError = 'Sorry, your comment wasn\'t posted!',

@@ -23,8 +23,7 @@ describe('Component: OfferCard', () => {
             imgWrapperClass={ 'test-wrapper-class' }
           />
         </Router>
-      </Provider>
-    );
+      </Provider>);
 
     expect(screen.getByText(title)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(price.toString()))).toBeInTheDocument();

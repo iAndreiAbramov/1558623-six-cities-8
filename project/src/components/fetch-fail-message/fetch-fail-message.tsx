@@ -1,4 +1,5 @@
 import React from 'react';
+import { FETCH_FAIL_MESSAGE } from '../../const';
 
 function FetchFailMessage(): JSX.Element {
   return (
@@ -10,7 +11,7 @@ function FetchFailMessage(): JSX.Element {
       lineHeight: '1.4',
     } }
     >
-      Failed to get data from server. Please check your network connection and try to reload the page.
+      { FETCH_FAIL_MESSAGE }
     </span>
   );
 }

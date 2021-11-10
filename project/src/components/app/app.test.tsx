@@ -1,4 +1,3 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import App from './app';
@@ -47,7 +46,7 @@ describe('Component App:', () => {
   });
 
   it('should render not found page when user is on incorrect route', () => {
-    const incorrectRoute = '/incorrect'
+    const incorrectRoute = '/incorrect';
     history.push(incorrectRoute);
     render(fakeApp);
 

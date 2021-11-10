@@ -19,8 +19,7 @@ describe('Component: FavoritesPageCard', () => {
         <Router history={ history }>
           <FavoritesPageCard data={ offerFirst } />
         </Router>
-      </Provider>
-    );
+      </Provider>);
 
     expect(screen.getByText(title)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(price.toString()))).toBeInTheDocument();

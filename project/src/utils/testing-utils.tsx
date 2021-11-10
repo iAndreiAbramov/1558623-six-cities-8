@@ -1,4 +1,4 @@
-import React, { FunctionComponent, JSXElementConstructor } from 'react';
+import React, { JSXElementConstructor } from 'react';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
@@ -11,7 +11,7 @@ import { FakeStateTypes } from '../mocks/mock-store';
 export const createFakeAppWithStore = (
   Component: JSXElementConstructor<any>,
   fakeStore: FakeStateTypes,
-  fakeHistory: ReturnType<typeof createMemoryHistory>
+  fakeHistory: ReturnType<typeof createMemoryHistory>,
 ): JSX.Element => {
 
   const onFakeUnauthorized = jest.fn();
@@ -31,4 +31,4 @@ export const createFakeAppWithStore = (
       </Router>
     </Provider>
   );
-}
+};

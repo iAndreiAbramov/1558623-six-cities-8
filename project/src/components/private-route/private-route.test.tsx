@@ -1,4 +1,3 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import App from '../app/app';

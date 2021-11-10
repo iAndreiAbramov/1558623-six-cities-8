@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
+import { Route, Router, Switch } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { fakeStoreWithAuth } from '../../mocks/mock-store';
 import FavoritesPageFooter from './favorites-page-footer';
 import HomePage from '../home-page/home-page';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
 
 describe('Component: FavoritesPageFooter', () => {
   const history = createMemoryHistory();
@@ -31,8 +31,7 @@ describe('Component: FavoritesPageFooter', () => {
     const { getByRole, getByAltText } = render(
       <Router history={ history }>
         <FavoritesPageFooter />
-      </Router>
-    );
+      </Router>);
     expect(getByRole('link')).toBeInTheDocument();
     expect(getByAltText(/6 cities logo/i)).toBeInTheDocument();
   });

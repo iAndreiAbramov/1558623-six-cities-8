@@ -22,8 +22,7 @@ describe('Component FavoritesPageMain', () => {
         <Router history={ history }>
           <FavoritesPageMain favoritesData={ offersFrontMock.slice() } />
         </Router>
-      </Provider>
-    );
+      </Provider>);
 
     expect(screen.getByTestId('favorites-main')).toBeInTheDocument();
     titles.forEach((title) => {
