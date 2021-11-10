@@ -45,10 +45,10 @@ function HomePageList(props: HomePageListTypes): JSX.Element {
     setDropdownState((prevState: boolean) => !prevState);
   }, []);
 
-  const handleSortToggle = (option: SortOptions) => {
+  const handleSortToggle = useCallback((option: SortOptions) => {
     setDropdownState((prevState: boolean) => !prevState);
     setSortOption(option);
-  };
+  }, []);
 
   return (
     <section className="cities__places places" data-testid="home-list">
