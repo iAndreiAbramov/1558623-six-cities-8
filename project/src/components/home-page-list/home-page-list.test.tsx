@@ -1,6 +1,6 @@
 import React from 'react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import createMemoryHistory from 'history/createMemoryHistory';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';

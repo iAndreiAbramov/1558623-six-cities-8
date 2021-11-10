@@ -97,7 +97,7 @@ export const offerFourth = {
   },
   id: '4',
   images: ['1', '2', '3'],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: true,
   location: {
     latitude: 48.85661,
