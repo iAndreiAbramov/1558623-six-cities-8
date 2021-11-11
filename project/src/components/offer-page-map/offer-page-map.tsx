@@ -40,7 +40,11 @@ function OfferPageMap(props: OfferPageMapTypes): JSX.Element {
   });
 
   return (
-    <section className="property__map map" ref={ offerMapRef } />
+    <section
+      className="property__map map"
+      ref={ offerMapRef }
+      data-testid="offer-map"
+    />
   );
 }
 

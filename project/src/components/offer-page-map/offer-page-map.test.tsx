@@ -1,22 +1,26 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Cities, TEST_CITY_NAME } from '../../const';
-import HomePageMap from './home-page-map';
+import OfferPageMap from './offer-page-map';
 import { pointsMock } from '../../mocks/mock-points';
 
-describe('Component: HomePageMap', () => {
-  const TEST_ID = '1';
+describe('Component: OfferPageMap', () => {
   const TEST_LOCATION = Cities[TEST_CITY_NAME].location;
+  const NUMBER_OF_NEARBY_POINTS = 3;
+  const CURRENT_POINT_NUMBER = 3;
 
   it('should render and contain copyright links', () => {
+    const nearbyPoints = pointsMock.slice(0, NUMBER_OF_NEARBY_POINTS);
+    const currentPoint = pointsMock[CURRENT_POINT_NUMBER];
+
     const { getByTestId, getAllByRole } = render(
-      <HomePageMap
-        activeCardId={ TEST_ID }
+      <OfferPageMap
         cityLocation={ TEST_LOCATION }
-        pointsForMap={ pointsMock }
+        nearbyPoints={ nearbyPoints }
+        currentPoint={ currentPoint }
       />);
 
-    expect(getByTestId('home-map')).toBeInTheDocument();
+    expect(getByTestId('offer-map')).toBeInTheDocument();
     expect(getAllByRole('link')).toHaveLength(3);
   });
 });
