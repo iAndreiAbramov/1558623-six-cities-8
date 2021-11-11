@@ -1,7 +1,7 @@
 import React from 'react';
 import { CommentsFrontTypes } from '../../types/comments-types';
-import { MONTHS } from '../../const';
 import { getVisualRating } from '../../utils/project-specific-utils';
+import { MONTHS } from '../../const';
 
 type OfferPageCommentTypes = {
   commentData: CommentsFrontTypes,
