@@ -11,9 +11,9 @@ import {
   RatingPosition
 } from '../../const';
 import { CommentPostTypes } from '../../types/comments-types';
-import { setCurrentHotelComments } from '../../store/actions';
 import { notifyError, notifySuccess } from '../../utils/project-specific-utils';
 import { createFreeApi } from '../../services/api';
+import { setCurrentHotelComments } from '../../store/actions';
 
 function OfferPageNewComment(props: { id: string }): JSX.Element {
   const dispatch = useDispatch();
