@@ -4,7 +4,7 @@ import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus, getCurrentHotelComments } from '../../store/selectors';
 import { getCommentsDataAction } from '../../store/api-actions';
 import OfferPageCommentsList from '../offer-page-comments-list/offer-page-comments-list';
-import OfferPageNewComment from '../offer-page-new-comment/offers-page-new-comment';
+import OfferPageNewComment from '../offer-page-new-comment/offer-page-new-comment';
 
 function OfferPageReviews(props: { id: string }): JSX.Element {
   const currentHotelComments = useSelector(getCurrentHotelComments);
