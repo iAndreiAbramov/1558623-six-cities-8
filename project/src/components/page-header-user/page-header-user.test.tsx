@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Redux from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
@@ -14,10 +15,13 @@ import PageHeaderUser from './page-header-user';
 
 describe('Component: PageHeaderUser', () => {
   const history = createMemoryHistory();
+  const onUnauthorized = jest.fn();
+  const api = createApi(onUnauthorized);
+  const middlewares = [thunk.withExtraArgument(api)];
+  const mockStore = configureMockStore(middlewares);
+  const store = mockStore(mockStoreWithAuth);
 
   it('should render correctly', () => {
-    const mockStore = configureMockStore();
-    const store = mockStore(mockStoreWithAuth);
     const { getAllByRole, getByText } = render(
       <Provider store={ store }>
         <Router history={ history }>
@@ -31,11 +35,9 @@ describe('Component: PageHeaderUser', () => {
   });
 
   it('should redirect to favorites page', () => {
-    const onUnauthorized = jest.fn();
-    const api = createApi(onUnauthorized);
-    const middlewares = [thunk.withExtraArgument(api)];
-    const mockStore = configureMockStore(middlewares);
-    const store = mockStore(mockStoreWithAuth);
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
     history.push('/fake');
 
     const { getAllByRole } = render(
@@ -53,14 +55,15 @@ describe('Component: PageHeaderUser', () => {
     userEvent.click(getAllByRole('link')[0]);
 
     expect(screen.getByTestId('favorites-main')).toBeInTheDocument();
+    expect(dispatch).toBeCalledTimes(1);
+
+    useDispatch.mockRestore();
   });
 
-  it('should redirect to home page on logout', () => {
-    const onUnauthorized = jest.fn();
-    const api = createApi(onUnauthorized);
-    const middlewares = [thunk.withExtraArgument(api)];
-    const mockStore = configureMockStore(middlewares);
-    const store = mockStore(mockStoreWithAuth);
+  it('should redirect to home page on logout', async () => {
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
     history.push('/fake');
 
     const { getAllByRole } = render(
@@ -80,5 +83,8 @@ describe('Component: PageHeaderUser', () => {
     expect(screen.getByTestId('home-tabs')).toBeInTheDocument();
     expect(screen.getByTestId('home-list')).toBeInTheDocument();
     expect(screen.getByTestId('home-map')).toBeInTheDocument();
+    expect(dispatch).toBeCalledTimes(1);
+
+    useDispatch.mockRestore();
   });
 });
