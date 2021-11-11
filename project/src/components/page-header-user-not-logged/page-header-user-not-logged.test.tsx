@@ -35,8 +35,7 @@ describe('Component: PageHeaderUserNotLogged', () => {
             <LoginPage />
           </Route>
         </Router>
-      </Provider>
-    );
+      </Provider>);
 
     userEvent.click(getByRole('link'));
 

@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactChildren } from 'react';
+import React from 'react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import { Provider, useSelector } from 'react-redux';

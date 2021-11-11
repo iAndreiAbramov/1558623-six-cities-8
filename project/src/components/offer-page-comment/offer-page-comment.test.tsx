@@ -4,7 +4,7 @@ import { commentFirst } from '../../mocks/mock-comments';
 import { MONTHS } from '../../const';
 import OfferPageComment from './offer-page-comment';
 
-describe('Component: ', () => {
+describe('Component:', () => {
   it('should correctly render passed data', () => {
     const { date, user, comment } = commentFirst;
     const dateObject = new Date(date);

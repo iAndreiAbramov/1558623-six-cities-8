@@ -23,7 +23,7 @@ export interface AuxProps {
   children: ReactChild | ReactChildren;
 }
 
-describe('Selector: ', () => {
+describe('Selector:', () => {
   const mockStore = configureMockStore();
   const store = mockStore(mockStoreWithAuth);
   const wrapper = ({ children }: AuxProps) => (<Provider store={ store }>{ children }</Provider>);

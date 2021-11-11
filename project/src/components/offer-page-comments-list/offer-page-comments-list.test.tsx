@@ -16,6 +16,6 @@ describe('Component: OfferPageCommentsList', () => {
     defaultComments.forEach((item) => {
       const { comment } = item;
       expect(getAllByText(comment)).toHaveLength(defaultComments.length);
-    })
+    });
   });
 });
