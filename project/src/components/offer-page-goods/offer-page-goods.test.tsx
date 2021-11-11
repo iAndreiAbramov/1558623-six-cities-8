@@ -13,6 +13,6 @@ describe('Component: OfferPageGoods', () => {
     expect(getByText(/What.* inside/i)).toBeInTheDocument();
     goods.forEach((item) => {
       expect(getByText(item)).toBeInTheDocument();
-    })
+    });
   });
 });
