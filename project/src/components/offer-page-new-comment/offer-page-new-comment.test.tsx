@@ -1,6 +1,6 @@
 import React from 'react';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { mockStoreWithAuth } from '../../mocks/mock-store';
@@ -43,7 +43,6 @@ describe('Component: OfferPageNewComment', () => {
   });
 
   it('should enable submit button if conditions are met', () => {
-
     const { getByRole, getAllByRole } = render(
       <Provider store={ store }>
         <OfferPageNewComment id={ TEST_ID } />);
