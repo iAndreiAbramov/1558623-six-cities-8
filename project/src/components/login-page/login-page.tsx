@@ -27,10 +27,13 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="/">
-                <span
-                  onClick={ () => dispatch(initActiveCityAction(randomCityName)) }
-                >
+              <Link
+                className="locations__item-link"
+                to="/"
+                onClick={ () => dispatch(initActiveCityAction(randomCityName)) }
+                data-testid="random-link"
+              >
+                <span>
                   { randomCityName }
                 </span>
               </Link>

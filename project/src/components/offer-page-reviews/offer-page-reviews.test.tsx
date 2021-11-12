@@ -6,6 +6,7 @@ import { render, screen } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import { createApi } from '../../services/api';
 import { mockStoreWithAuth, mockStoreWithNoAuth } from '../../mocks/mock-store';
+import userEvent from '@testing-library/user-event';
 
 describe('Component: OfferPageReviews', () => {
   const onUnauthorized = jest.fn();
@@ -13,6 +14,8 @@ describe('Component: OfferPageReviews', () => {
   const middlewares = [thunk.withExtraArgument(api)];
   const mockStore = configureMockStore(middlewares);
   const TEST_ID = '1';
+  const TEST_COMMENT_LONG = 'This is test comment and it\'s length is more than 50 symbols';
+  const TEST_CHECKBOX = 4;
 
   it('should render comments list if it is not empty', () => {
     const store = mockStore(mockStoreWithAuth);
@@ -61,5 +64,28 @@ describe('Component: OfferPageReviews', () => {
       </Provider>);
 
     expect(screen.queryByLabelText(/Your review/i)).not.toBeInTheDocument();
+  });
+
+  it('should render new comment after it was submited', async () => {
+    const store = mockStore(mockStoreWithAuth);
+    const { rerender } = await render(
+      <Provider store={ store }>
+        <OfferPageReviews
+          id={ TEST_ID }
+        />
+      </Provider>);
+
+    userEvent.type(screen.getByRole('textbox'), TEST_COMMENT_LONG);
+    userEvent.click(screen.getAllByRole('radio')[TEST_CHECKBOX]);
+    userEvent.click(screen.getByRole('button'));
+
+    rerender(
+      <Provider store={ store }>
+        <OfferPageReviews
+          id={ TEST_ID }
+        />
+      </Provider>);
+
+    expect(screen.getByText(TEST_COMMENT_LONG)).toBeInTheDocument();
   });
 });
