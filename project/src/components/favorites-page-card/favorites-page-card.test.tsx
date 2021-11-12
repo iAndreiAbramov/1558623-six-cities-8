@@ -3,11 +3,11 @@ import * as Redux from 'react-redux';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import { offerFirst } from '../../mocks/mock-offers';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import FavoritesPageCard from './favorites-page-card';
-import userEvent from '@testing-library/user-event';
 
 describe('Component: FavoritesPageCard', () => {
   const mockStore = configureMockStore();
@@ -44,6 +44,6 @@ describe('Component: FavoritesPageCard', () => {
     userEvent.click(firstLink);
     userEvent.click(secondLink);
 
-    expect(dispatch).toBeCalledTimes(2);
+    expect(useDispatch).toBeCalledTimes(2);
   });
 });

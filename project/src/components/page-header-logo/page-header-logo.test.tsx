@@ -1,4 +1,5 @@
 import { createMemoryHistory } from 'history';
+import * as Redux from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../app/app';
@@ -33,5 +34,18 @@ describe('Component PageHeaderLogo', () => {
     expect(screen.queryByTestId('home-tabs')).toBeInTheDocument();
     expect(screen.queryByTestId('home-list')).toBeInTheDocument();
     expect(screen.queryByTestId('home-map')).toBeInTheDocument();
+  });
+
+  it('should dispatch an action on click', () => {
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
+
+    const fakeApp = createFakeAppWithStore(App, mockStoreWithAuth, history);
+    render(fakeApp);
+
+    userEvent.click(screen.getByTestId('header-logo'));
+
+    expect(dispatch).toBeCalledTimes(1);
   });
 });
