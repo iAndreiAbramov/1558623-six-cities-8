@@ -24,10 +24,13 @@ function FavoritesPageCity(props: FavoritesCityTypes): JSX.Element {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to="/" data-testid='favorites-home-link'>
-            <span
-              onClick={ () => dispatch(initActiveCityAction(cityName)) }
-            >
+          <Link
+            className="locations__item-link"
+            to="/"
+            data-testid='favorites-home-link'
+            onClick={ () => dispatch(initActiveCityAction(cityName)) }
+          >
+            <span>
               { cityName }
             </span>
           </Link>
