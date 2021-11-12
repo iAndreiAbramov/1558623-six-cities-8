@@ -4,14 +4,14 @@ import userEvent from '@testing-library/user-event';
 import App from '../app/app';
 import { AppRoute } from '../../const';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import PageHeaderLogo from './page-header-logo';
 
 describe('Component PageHeaderLogo', () => {
   const history = createMemoryHistory();
 
   it('should render correctly', () => {
-    const fakeApp = createFakeAppWithStore(PageHeaderLogo, fakeStoreWithAuth, history);
+    const fakeApp = createFakeAppWithStore(PageHeaderLogo, mockStoreWithAuth, history);
     const { getByAltText, getByRole, getByTestId } = render(fakeApp);
 
     expect(getByTestId('header-logo')).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('Component PageHeaderLogo', () => {
   });
 
   it('should redirect to main page on click', async () => {
-    const fakeApp = createFakeAppWithStore(App, fakeStoreWithAuth, history);
+    const fakeApp = createFakeAppWithStore(App, mockStoreWithAuth, history);
     render(fakeApp);
     history.push(AppRoute.Favorites);
 

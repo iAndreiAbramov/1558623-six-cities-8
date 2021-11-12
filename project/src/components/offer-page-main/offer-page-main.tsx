@@ -20,7 +20,7 @@ function OfferPageMain(): JSX.Element {
   const pageData = useSelector(getCurrentHotel);
   const nearOffersData = useSelector(getNearOffersData);
   const dispatch = useDispatch();
-  const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId } = pageData;
+  const { isFavorite, isPremium, host, price, rating, bedrooms, maxAdults, type, images, goods, city, id: offerId, title } = pageData;
   const visualRating = getVisualRating(rating);
 
   const nearbyPoints = nearOffersData.map((item) => ({
@@ -55,7 +55,7 @@ function OfferPageMain(): JSX.Element {
             }
             <div className="property__name-wrapper">
               <h1 className="property__name">
-                Beautiful &amp; luxurious studio at great location
+                { title }
               </h1>
               <OfferPageBookmarkWrapped
                 isFavorite={ isFavorite }

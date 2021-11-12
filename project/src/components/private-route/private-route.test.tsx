@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import App from '../app/app';
 import { AppRoute } from '../../const';
 import { createFakeAppWithStore } from '../../utils/testing-utils';
-import { fakeStoreWithNoAuth } from '../../mocks/mock-store';
+import { mockStoreWithNoAuth } from '../../mocks/mock-store';
 
 const history = createMemoryHistory();
-const fakeApp = createFakeAppWithStore(App, fakeStoreWithNoAuth, history);
+const fakeApp = createFakeAppWithStore(App, mockStoreWithNoAuth, history);
 
 describe('Component: PrivateRoute', () => {
   it('should perform redirect from "/favorites" to "/login"', () => {

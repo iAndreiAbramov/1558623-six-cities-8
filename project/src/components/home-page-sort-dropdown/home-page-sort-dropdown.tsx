@@ -12,6 +12,7 @@ function HomePageSortDropdown(props: HomePageSortDropdownTypes): JSX.Element {
       onClick={ clickHandler }
       className="places__sorting-type"
       tabIndex={ 0 }
+      data-testid="home-list-sort-dropdown"
     >
       { sortOption }
       <svg className="places__sorting-arrow" width="7" height="4">

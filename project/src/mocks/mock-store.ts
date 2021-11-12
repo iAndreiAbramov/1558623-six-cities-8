@@ -5,7 +5,7 @@ import { OfferDataTypes } from '../types/offer-data-types';
 import { CityTypes, PointTypes } from '../types/state-types';
 import { CommentsFrontTypes } from '../types/comments-types';
 
-export type FakeStateTypes = {
+export type MockStoreTypes = {
   FAVORITES: {
     favoritesData: OfferDataTypes[],
   },
@@ -28,7 +28,7 @@ export type FakeStateTypes = {
   },
 }
 
-export const fakeStoreWithAuth: FakeStateTypes = {
+export const mockStoreWithAuth: MockStoreTypes = {
   STATUS: { fetchStatus: FetchStatus.Success },
   USER: {
     authorization: AuthorizationStatus.Auth,
@@ -51,7 +51,7 @@ export const fakeStoreWithAuth: FakeStateTypes = {
   },
 };
 
-export const fakeStoreWithNoAuth: FakeStateTypes = {
+export const mockStoreWithNoAuth: MockStoreTypes = {
   STATUS: { fetchStatus: FetchStatus.Success },
   USER: {
     authorization: AuthorizationStatus.NoAuth,

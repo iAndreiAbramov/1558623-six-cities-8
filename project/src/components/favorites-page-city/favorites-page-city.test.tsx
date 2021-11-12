@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import FavoritesPageCity from './favorites-page-city';
 import HomePage from '../home-page/home-page';
 import { offerSecond, offerThird } from '../../mocks/mock-offers';
@@ -14,7 +14,7 @@ import { TEST_CITY_NAME } from '../../const';
 describe('Component: FavoritesPageCard', () => {
   const history = createMemoryHistory();
   const mockStore = configureMockStore();
-  const store = mockStore(fakeStoreWithAuth);
+  const store = mockStore(mockStoreWithAuth);
   const dataMock = [offerSecond, offerThird];
   const fakeApp = (
     <Provider store={ store }>

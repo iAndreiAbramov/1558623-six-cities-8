@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { fakeStoreWithAuth } from '../../mocks/mock-store';
+import { mockStoreWithAuth } from '../../mocks/mock-store';
 import FavoritesPageFooter from './favorites-page-footer';
 import HomePage from '../home-page/home-page';
 
 describe('Component: FavoritesPageFooter', () => {
   const history = createMemoryHistory();
   const mockStore = configureMockStore();
-  const store = mockStore(fakeStoreWithAuth);
+  const store = mockStore(mockStoreWithAuth);
   const fakeApp = (
     <Provider store={ store }>
       <Router history={ history }>
