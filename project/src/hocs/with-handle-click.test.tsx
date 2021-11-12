@@ -1,6 +1,6 @@
 import React from 'react';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import { mockStoreWithAuth } from '../mocks/mock-store';
 import withHandleClick from './with-handle-click';

@@ -25,7 +25,9 @@ function OfferCard(props: OfferCardTypes): JSX.Element {
   const visualRating = getVisualRating(rating);
 
   return (
-    <article className={ `${ articleClass } place-card` }
+    <article
+      data-testid='offer-card'
+      className={ `${ articleClass } place-card` }
       onMouseEnter={ () => onActiveCardChange && onActiveCardChange(id) }
       onMouseLeave={ () => onActiveCardChange && onActiveCardChange('') }
     >
