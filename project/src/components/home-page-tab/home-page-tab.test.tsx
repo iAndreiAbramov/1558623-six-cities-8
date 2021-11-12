@@ -1,12 +1,14 @@
 import React from 'react';
+import * as Redux from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import HomePageTab from './home-page-tab';
 import { mockStoreWithAuth } from '../../mocks/mock-store';
 import { Provider } from 'react-redux';
 import { TEST_CITY_NAME } from '../../const';
+import userEvent from '@testing-library/user-event';
 
 describe('Component: HomePageTab', () => {
   const history = createMemoryHistory();
@@ -25,5 +27,16 @@ describe('Component: HomePageTab', () => {
   it('should render correctly', () => {
     const { getByText } = render(fakeApp);
     expect(getByText(TEST_CITY_NAME)).toBeInTheDocument();
+  });
+
+  it('should dispatch an action on click', () => {
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
+    render(fakeApp);
+
+    userEvent.click(screen.getByRole('link'));
+
+    expect(dispatch).toBeCalledTimes(1);
   });
 });
