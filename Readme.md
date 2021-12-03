@@ -1,6 +1,6 @@
 # Проект «6 Cities»
 
-[--> Проект размещен по этой ссылке на хостинге vercel <--](https://1558623-six-cities-8-ai5d3gowp-iandreiabramov.vercel.app/)
+[--> Проект размещен по этой ссылке на хостинге vercel <--](https://1558623-six-cities-8.vercel.app/)
 
 Настоящий проект выполнен в рамках курса "React. Разработка сложных клиентских приложений" от HTML Academy.
 
