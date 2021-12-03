@@ -6,6 +6,8 @@
 
 Цель проекта - разработка SPA с использованием React-Redux-Typescript.
 
+[-->Проект размещен по этой ссылке<--](https://iandreiabramov.github.io/)
+
 Для тестирования применялась связка JEST-RTL (React Testing Library).
 
 В итоге был реализован следующий функционал:
