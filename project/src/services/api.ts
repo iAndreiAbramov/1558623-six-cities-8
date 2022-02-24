@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 import { getToken } from './token';
 import { HttpStatusCode } from '../const';
 
-const BASE_URL = 'https://8.react.pages.academy/six-cities';
+const BASE_URL = 'https://9.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
 type UnauthorizedCallback = () => void;
